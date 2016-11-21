@@ -24,4 +24,9 @@ public class User {
 		}
 		return departureFlightInfo;
 	}
+	ArrivalFlightInfo[] searchArrivalFlightInfo(String city, String flightNumber, String airline)
+	{
+		ArrivalFlightInfo[] arrivalFlightInfos = null;
+		return arrivalFlightInfos;
+	}
 }
