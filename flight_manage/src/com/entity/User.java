@@ -9,31 +9,44 @@ public class User {
 	{
 		DepartureFlightInfo[] departureFlightInfo = null;
 		if(flightNumber!=null){//查询该航班号的离港航班信息
+			/*
+			 * DepartureFlightInfo[] searchDepartureFlightInfo0(String flightnumber);
+			 * 数据库操作：查询航班号为flightnumber的离港航班信息
+			 * 形参为航班号，返回类型为DepartureFlightInfo对象数组
+			 * 
+			 */
+			//departureFlightInfo=searchDepartureFlightInfo0(flightnumber); 
 			return departureFlightInfo;
 		}
 		else{
 			if(city!=null&&airline!=null){//查询目的地为该city，航空公司为该airline的离港航班信息
 				/*
-				 * DepartureFlightInfo[] departureFlightInfo=search1(String city,String airline); 
+				 * DepartureFlightInfo[] searchDepartureFlightInfo1(String city,String airline);
 				 * 数据库操作：查询 目的地为该city，航空公司为该airline的离港航班信息
 				 * 形参为目的地和航空公司，返回类型为DepartureFlightInfo对象数组
-				 */				
+				 * 
+				 */	
+				//departureFlightInfo=searchDepartureFlightInfo1(city,airline); 
 				return departureFlightInfo;
 			}
 			if(city==null&&airline!=null){//查询航空公司为该airline的离港航班信息
 				/*
-				 * DepartureFlightInfo[] departureFlightInfo=search2(String airline); 
+				 * DepartureFlightInfo[] searchDepartureFlightInfo2(String airline); 
 				 * 数据库操作：查询航空公司为该airline的离港航班信息
 				 * 形参为航空公司，返回类型为DepartureFlightInfo对象数组
+				 *  
 				 */
+				//departureFlightInfo=searchDepartureFlightInfo2(airline);
 				return departureFlightInfo;
 			}
 			if(city!=null&&airline==null){//查询目的地为该city的离港航班信息
 				/*
-				 * DepartureFlightInfo[] departureFlightInfo=search3(String city); 
+				 * DepartureFlightInfo[] searchDepartureFlightInfo3(String city); 
 				 * 数据库操作：查询目的地为该city的离港航班信息
 				 * 形参为目的地，返回类型为DepartureFlightInfo对象数组
+				 * 
 				 */
+				//departureFlightInfo=searchDepartureFlightInfo3(city); 
 				return departureFlightInfo;
 			}
 		}
@@ -44,34 +57,49 @@ public class User {
 	{
 		ArrivalFlightInfo[] arrivalFlightInfo = null;
 		if(flightNumber!=null){//查询该航班号的到港航班信息
+			/*
+			 * ArrivalFlightInfo[] searchArrivalFlightInfo0(String flightnumber); 
+			 * 数据库操作：查询航班号为flightnumber的到港航班信息
+			 * 形参为航班号，返回类型为ArrivalFlightInfo对象数组
+			 * 
+			 */
+			//arrivalFlightInfo=searchArrivalFlightInfo0(flightnumber);
 			return arrivalFlightInfo;
 		}
 		else{
 			if(city!=null&&airline!=null){//查询出发地为该city，航空公司为该airline的到港航班信息
 				/*
-				 * ArrivalFlightInfo[] arrivalFlightInfo=search1(String city,String airline); 
+				 * ArrivalFlightInfo[] searchArrivalFlightInfo1(String city,String airline); 
 				 * 数据库操作：查询 出发地为该city，航空公司为该airline的到港航班信息
 				 * 形参为出发地和航空公司，返回类型为ArrivalFlightInfo对象数组
-				 */				
+				 * 
+				 */		
+				//arrivalFlightInfo=searchArrivalFlightInfo1(city,airline);
 				return arrivalFlightInfo;
 			}
 			if(city==null&&airline!=null){//查询航空公司为该airline的到港航班信息
 				/*
-				 * ArrivalFlightInfo[] arrivalFlightInfo=search2(String airline); 
+				 * ArrivalFlightInfo[] searchArrivalFlightInfo2(String airline); 
 				 * 数据库操作：查询航空公司为该airline的到港航班信息
 				 * 形参为航空公司，返回类型为ArrivalFlightInfo对象数组
+				 * 
 				 */
+				//arrivalFlightInfo=searchArrivalFlightInfo2(airline); 
 				return arrivalFlightInfo;
 			}
 			if(city!=null&&airline==null){//查询出发地为该city的到港航班信息
 				/*
-				 * ArrivalFlightInfo[] arrivalFlightInfo=search3(String city); 
+				 * ArrivalFlightInfo[] searchArrivalFlightInfo3(String city); 
 				 * 数据库操作：查询出发地为该city的到港航班信息
 				 * 形参为出发地，返回类型为ArrivalFlightInfo对象数组
+				 * 
 				 */
+				//arrivalFlightInfo=searchArrivalFlightInfo3(city); 
 				return arrivalFlightInfo;
 			}
 		}
 		return arrivalFlightInfo;
 	}
+	
+	
 }

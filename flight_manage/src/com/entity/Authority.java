@@ -7,4 +7,8 @@ package com.entity;
 public class Authority {
 	String name;
 	String remark;
+	public Authority(String name,String remark) {
+		this.name = name;
+		this.remark = remark;
+	}
 }
