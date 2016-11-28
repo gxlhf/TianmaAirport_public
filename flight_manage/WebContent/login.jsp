@@ -89,7 +89,7 @@
         <div class="col-md-8" id="sidebar">
         </div>
         <div class="col-md-4" id="content">
-          <form role="form" class="form-login">
+          <form role="form" class="form-login" action="login">
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
