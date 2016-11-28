@@ -4,7 +4,7 @@
 
 @media (min-width: 992px) {
 	#login-underDiv {
-		background: url(../img/loginBg.jpg) 25% 30px no-repeat;
+		background: url(../img/LoginBG.jpg) 25% 30px no-repeat;
 		background-color: #fafaf8;
 		padding: 25px;
 	}
