@@ -21,7 +21,7 @@ public class Admin extends User {
 	String phone;
 	String department;
 	String position;
-	Admin(String empno, String name, int sex, String email, Role role, String mobile, String phone,
+	public Admin(String empno, String name, int sex, String email, Role role, String mobile, String phone,
 			String department, String position) {
 		this.empno = empno;
 		this.name = name;
