@@ -1,0 +1,35 @@
+#content {
+	/* max-width: 360px; */
+}
+
+@media (min-width: 992px) {
+	#login-underDiv {
+		background: url(../img/loginBg.jpg) 25% 30px no-repeat;
+		background-color: #fafaf8;
+		padding: 25px;
+	}
+	#content {
+		height: 420px;
+		padding-left: 45px !important;
+		padding-right: 45px !important;
+	}
+}
+
+@media (min-width: 768px) {
+}
+@media (max-width: 769px) {
+	
+}
+
+
+.form-inline {
+	width: 100%;
+}
+.form-inline > input {
+	background: url(../img/captcha.jpg) 25% 30px no-repeat;
+}
+#captcha-group > img { /*验证码格式*/
+	position: absolute;
+	height: 34px;
+}
+
