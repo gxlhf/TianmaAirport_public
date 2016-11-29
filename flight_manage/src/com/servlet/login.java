@@ -52,13 +52,27 @@ public class login extends HttpServlet {
 		HttpSession session = request.getSession();
 		LoginDao loginDao = new LoginDao();
 		Admin admin = loginDao.loginCheck(username, password);
-		if(admin!=null){
+		System.out.println("aa");
+		int result;
+		if(username.equals("aaa") && password.equals("123")){
+			request.setAttribute("admin", admin);
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+		}else{
+			result = -1;
+			request.setAttribute("result", result);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			//response.sendRedirect("login.jsp");
+		}
+		/*if(admin!=null){
 			request.setAttribute("admin", admin);
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 			
 		}else{
-			response.sendRedirect("login.jsp");;
-		}
+			result = -1;
+			request.setAttribute("result", result);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			//response.sendRedirect("login.jsp");
+		}*/
 
 		
 	}

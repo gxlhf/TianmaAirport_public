@@ -91,7 +91,7 @@
           </div>
           <div class="col-md-4" id="content">
           <h4>管理员登陆</h4>
-            <form role="form" class="form-login" action="login">
+            <form role="form" class="form-login" action="www.baidu.com">
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
@@ -110,7 +110,15 @@
               </div>
               <button type="button" class="btn btn-primary btn-block">登陆</button>
             </form>
-            <p class="hide text-danger">用户名或密码错误，请重新输入</p>
+            
+            <%
+            	if(request.getParameter("result") == "-1"){
+            		
+            %>
+            		<p class="hide text-danger">用户名或密码错误，请重新输入</p>
+            <%
+            	}
+            %>
             <a href="">忘记密码</a>
           </div>
         </div>
