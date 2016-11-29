@@ -43,10 +43,10 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle curmenu" data-toggle="dropdown" data-hover="dropdown">用户和角色管理</a>
               <ul class="dropdown-menu" role="menu">
-                <li class="curmenu">
+                <li>
                   <a href="#">用户管理</a>
                 </li>
-                <li>
+                <li class="curmenu">
                   <a href="#">角色管理</a>
                 </li>
               </ul>
@@ -116,10 +116,10 @@
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
-                <li role="presentation" class="second-menu-cur">
+                <li role="presentation">
                   <a href="#">用户管理</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="second-menu-cur">
                   <a href="#">角色管理</a>
                 </li>
               </ul>
@@ -135,91 +135,114 @@
               <a href="#">用户与角色管理</a>
             </li>
             <li>
-              <a href="#">用户管理</a>
+              <a href="#">角色管理</a>
             </li>
-            <li class="active">新增用户</li>
+            <li class="active">修改角色</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="user-id" class="col-sm-2 control-label">员工号：</label>
+              <label for="rolename" class="col-sm-2 control-label">角色名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-id">
+                <input type="text" class="form-control" name="search-id" placeholder="航班信息管理员">
               </div>
             </div>
             <div class="form-group">
-              <label for="user-name" class="col-sm-2 control-label">姓名：</label>
+              <label for="search-name" class="col-sm-2 control-label">描述：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-name">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="user-sex" class="col-sm-2 control-label">性别：</label>
-              <div class="col-sm-6">
-                <select class="form-control" name="user-sex">
-                  <option>不限</option>
-                  <option>男</option>
-                  <option>女</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="user-pos" class="col-sm-2 control-label">职位：</label>
-              <div class="col-sm-6">
-                <select class="form-control" name="user-pos">
-                  <option>不限</option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="user-roles" class="col-sm-2 control-label">角色：</label>
-              <div class="col-sm-6">
-                <select class="form-control" name="user-roles">
-                  <option>不限</option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="user-phone" class="col-sm-2 control-label">电话：</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-phone">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="user-tel" class="col-sm-2 control-label">手机号：</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-tel">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="user-email" class="col-sm-2 control-label">电子邮箱：</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-email">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="user-password" class="col-sm-2 control-label">登录密码：</label>
-              <div class="col-sm-6">
-                <input type="password" class="form-control" name="user-password">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="user-password-check" class="col-sm-2 control-label">密码确认：</label>
-              <div class="col-sm-6">
-                <input type="password" class="form-control" name="user-password-check">
+                <textarea class="form-control" name="search-name" rows="3">主要负责管理航班</textarea>
               </div>
             </div>
             <div class="form-group">
               <div class="col-sm-2"></div>
             </div>
           </form>
+          <table class="table table-hover select-table">
+            <thead>
+              <tr>
+                <th>
+                  <span class="glyphicon glyphicon-check th-check"></span>
+                </th>
+                <th>可分配权限</th>
+                <th>
+                  <span class="glyphicon glyphicon-check th-check"></span>
+                </th>
+                <th>已分配权限</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-id="10001">
+                <td>
+                  <span class="glyphicon glyphicon-check"></span>
+                </td>
+                <td>用户管理</td>
+                <td>
+                  <span class="glyphicon"></span>
+                </td>
+                <td>用户管理</td>
+              </tr>
+              <tr data-id="10002">
+                <td>
+                  <span class="glyphicon"></span>
+                </td>
+                <td>角色、权限管理</td>
+                <td>
+                  <span class="glyphicon"></span>
+                </td>
+                <td></td>
+              </tr>
+              <tr data-id="10003">
+                <td>
+                  <span class="glyphicon"></span>
+                </td>
+                <td>航班信息管理</td>
+                <td>
+                  <span class="glyphicon"></span>
+                </td>
+                <td></td>
+              </tr>
+              <tr data-id="10003">
+                <td>
+                  <span class="glyphicon"></span>
+                </td>
+                <td>机场设施管理</td>
+                <td>
+                  <span class="glyphicon"></span>
+                </td>
+                <td></td>
+              </tr>
+              <tr data-id="10003">
+                <td>
+                  <span class="glyphicon"></span>
+                </td>
+                <td>物业设施管理</td>
+                <td>
+                  <span class="glyphicon"></span>
+                </td>
+                <td></td>
+              </tr>
+              <tr data-id="10003">
+                <td>
+                  <input type="checkbox">全选&nbsp;</td>
+                <td>
+                  <button class="btn btn-primary">添加选中权限</button>
+                </td>
+                <td>
+                  <input type="checkbox">全部删除&nbsp;</td>
+                <td>
+                  <button class="btn btn-danger">删除选中权限</button>
+                </td>
+              </tr>
+              <tr class="hidden">
+                <td>
+                  <input type="text" name="selected-option">
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="">新增</a>
+              <a class="btn btn-primary" href="">修改</a>
               <a class="btn btn-success" href="">取消</a>
             </div>
           </div>
