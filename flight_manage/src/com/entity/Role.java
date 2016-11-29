@@ -5,10 +5,36 @@
  */
 package com.entity;
 import java.util.*;
+import com.dao.*;
 public class Role {
 	String name;
 	String description;
 	Map<String,Boolean> authorityMap;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Map<String, Boolean> getAuthorityMap() {
+		return authorityMap;
+	}
+
+	public void setAuthorityMap(Map<String, Boolean> authorityMap) {
+		this.authorityMap = authorityMap;
+	}
+
 	public Role(String name) {
 		this.name = name;
 		/*
@@ -16,13 +42,14 @@ public class Role {
 		 * 数据库操作：查询角色名为name的角色描述
 		 * 形参为角色名称，返回值为角色描述
 		 */
-		//this.description = roleDescriptionSearch(name);
+		RoleDao roleDao = new RoleDao();
+		this.description = roleDao.roleDescriptionSearch(name);
 		/*
 		 * Map<String,Boolean> roleAuthorityMapSearch(String name);
 		 * 数据库操作：查询角色名为name的角色包含的权限
 		 * 形参为角色名称，返回值为Map<String,Boolean>
 		 */
-		//this.authorityMap = roleAuthorityMapSearch(name);
+		this.authorityMap = roleDao.roleAuthorityMapSearch(name);
 		
 	}
 }
