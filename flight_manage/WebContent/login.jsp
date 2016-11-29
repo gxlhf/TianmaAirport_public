@@ -108,7 +108,7 @@
                 <input name="captcha" class="form-control" type="text" placeholder="验证码">
                 <img src="img/captcha.jpg">
               </div>
-              <button type="button" class="btn btn-primary btn-block">登陆</button>
+              <button type="submit" class="btn btn-primary btn-block">登陆</button>
             </form>
             <p class="hide text-danger">用户名或密码错误，请重新输入</p>
             <a href="">忘记密码</a>
