@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/adminPage.css">
+    <link rel="stylesheet" type="text/css" href="../css/CharacterEdit.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
@@ -139,12 +140,11 @@
             </li>
             <li class="active">修改角色</li>
           </ol>
-          <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <label for="rolename" class="col-sm-2 control-label">角色名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id" placeholder="航班信息管理员">
+                <input type="text" class="form-control" name="search-id" value="航班信息管理员">
               </div>
             </div>
             <div class="form-group">
@@ -156,94 +156,115 @@
             <div class="form-group">
               <div class="col-sm-2"></div>
             </div>
+            <div class="container">
+              <div class="col-md-6">
+                <table class="table table-hover select-table" id="left-side-table">
+                  <thead>
+                    <tr>
+                      <th>
+                        <span class="glyphicon glyphicon-check th-check"></span>
+                      </th>
+                      <th>可分配权限</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-id="10001">
+                      <td>
+                        <span class="glyphicon"></span>
+                      </td>
+                      <td>用户管理</td>
+                    </tr>
+                    <tr data-id="10002">
+                      <td>
+                        <span class="glyphicon"></span>
+                      </td>
+                      <td>角色、权限管理</td>
+                    </tr>
+                    <tr data-id="10003">
+                      <td>
+                        <span class="glyphicon"></span>
+                      </td>
+                      <td>航班信息管理</td>
+                    </tr>
+                    <tr data-id="10003">
+                      <td>
+                        <span class="glyphicon"></span>
+                      </td>
+                      <td>机场设施管理</td>
+                    </tr>
+                    <tr data-id="10003">
+                      <td>
+                        <span class="glyphicon"></span>
+                      </td>
+                      <td>物业设施管理</td>
+                    </tr>
+                    <tr data-id="10003">
+                      <td>
+                      </td>
+                      <td>
+                        <button type="button" id="btn-add" class="btn btn-success">添加选中权限</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>  
+              </div> 
+              <div class="col-md-6">
+                <table class="table table-hover select-table" id="right-side-table">
+                  <thead>
+                    <tr>
+                      <th>
+                        <span class="glyphicon glyphicon-check th-check"></span>
+                      </th>
+                      <th>已分配权限</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-id="10001">
+                      <td>
+                        <span class="glyphicon"></span>
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr data-id="10002">
+                      <td>
+                        <span class="glyphicon"></span>
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr data-id="10003">
+                      <td>
+                        <span class="glyphicon"></span>
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr data-id="10003">
+                      <td>
+                        <span class="glyphicon"></span>
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr data-id="10003">
+                      <td>
+                        <span class="glyphicon"></span>
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr data-id="10003">
+                      <td>
+                      </td>
+                      <td>
+                        <button type="button" id="btn-remove" class="btn btn-danger">删除选中权限</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>  
+              </div> 
+            </div>
           </form>
-          <table class="table table-hover select-table">
-            <thead>
-              <tr>
-                <th>
-                  <span class="glyphicon glyphicon-check th-check"></span>
-                </th>
-                <th>可分配权限</th>
-                <th>
-                  <span class="glyphicon glyphicon-check th-check"></span>
-                </th>
-                <th>已分配权限</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr data-id="10001">
-                <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td>
-                <td>用户管理</td>
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>用户管理</td>
-              </tr>
-              <tr data-id="10002">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>角色、权限管理</td>
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td></td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>航班信息管理</td>
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td></td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>机场设施管理</td>
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td></td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>物业设施管理</td>
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td></td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <input type="checkbox">全选&nbsp;</td>
-                <td>
-                  <button class="btn btn-primary">添加选中权限</button>
-                </td>
-                <td>
-                  <input type="checkbox">全部删除&nbsp;</td>
-                <td>
-                  <button class="btn btn-danger">删除选中权限</button>
-                </td>
-              </tr>
-              <tr class="hidden">
-                <td>
-                  <input type="text" name="selected-option">
-                </td>
-              </tr>
-            </tbody>
-          </table>
           <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="">修改</a>
-              <a class="btn btn-success" href="">取消</a>
+              <a class="btn btn-primary" href="#">修改</a>
+              <a class="btn btn-success" href="#">取消</a>
             </div>
           </div>
         </div>
@@ -264,9 +285,9 @@
     <!-- 尾部结束 -->
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/CharacterEdit.js"></script>
     <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script type="text/javascript" src="../js/public.js"></script>
     <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
   
 
