@@ -26,10 +26,15 @@
 	width: 100%;
 }
 .form-inline > input {
-	background: url(../img/captcha.jpg) 25% 30px no-repeat;
+	background: url(../img/captcha.jpg) 25% 30px no-repeat !important;
 }
 #captcha-group > img { /*验证码格式*/
 	position: absolute;
+	right: 20px;
+	margin-top: -34px;
 	height: 34px;
+	border: 1px solid #ccc;
+    border-radius: 0px 4px 4px 0px;
+    cursor: pointer;
 }
 
