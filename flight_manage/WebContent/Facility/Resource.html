@@ -41,9 +41,9 @@
         <div class="collapse navbar-collapse navbar-collapse-lower" id="header">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle curmenu" data-toggle="dropdown" data-hover="dropdown">用户和角色管理</a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">用户和角色管理</a>
               <ul class="dropdown-menu" role="menu">
-                <li class="curmenu">
+                <li>
                   <a href="#">用户管理</a>
                 </li>
                 <li>
@@ -69,9 +69,9 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">机场设施管理</a>
+              <a href="#" class="dropdown-toggle  curmenu" data-toggle="dropdown" data-hover="dropdown">机场设施管理</a>
               <ul class="dropdown-menu" role="menu">
-                <li>
+                <li class="curmenu">
                   <a href="#">机场资源</a>
                 </li>
                 <li>
@@ -112,15 +112,15 @@
         <div class="col-md-2" id="sidebar">
           <ul class="nav nav-pills nav-stacked" role="tablist">
             <li role="presentation" class="first-menu">
-              <strong>用户与角色管理</strong>
+              <strong>机场设施管理</strong>
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
-                <li role="presentation">
-                  <a href="#">用户管理</a>
-                </li>
                 <li role="presentation" class="second-menu-cur">
-                  <a href="#">角色管理</a>
+                  <a href="#">机场资源</a>
+                </li>
+                <li role="presentation">
+                  <a href="#">物业设施</a>
                 </li>
               </ul>
             </li>
@@ -129,19 +129,27 @@
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">主页</a>
+              <a href="#">机场设施管理</a>
             </li>
-            <li>
-              <a href="#">用户与角色管理</a>
-            </li>
-            <li class="active">角色管理</li>
+            <li class="active">机场资源</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">角色名称：</label>
+              <label for="search-id" class="col-sm-2 control-label">资源名称：</label>
               <div class="col-sm-6">
                 <input type="text" class="form-control" name="search-id">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="search-sex" class="col-sm-2 control-label">资源分类：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="search-sex">
+                  <option>不限</option>
+                  <option>行李转盘</option>
+                  <option>登机门</option>
+                  <option>值机柜台</option>
+                </select>
               </div>
             </div>
             <div class="form-group">
@@ -158,8 +166,9 @@
                   <span class="glyphicon glyphicon-check th-check"></span>
                 </th>
                 <th>序号</th>
-                <th>角色名称</th>
-                <th>描述</th>
+                <th>资源名称</th>
+                <th>位置</th>
+                <th>备注</th>
               </tr>
             </thead>
             <tbody>
@@ -168,7 +177,8 @@
                   <span class="glyphicon glyphicon-check"></span>
                 </td>
                 <td>1</td>
-                <td>系统管理员</td>
+                <td>行李转盘</td>
+                <td>B1出口</td>
                 <td>主要负责用户管理，权限分配等工作</td>
               </tr>
               <tr data-id="10002">
@@ -177,6 +187,7 @@
                 </td>
                 <td>2</td>
                 <td>航班信息管理员</td>
+                <td>1</td>
                 <td>主要负责管理航班</td>
               </tr>
               <tr data-id="10003">
@@ -185,6 +196,7 @@
                 </td>
                 <td>3</td>
                 <td>机场信息管理员</td>
+                <td>1</td>
                 <td>主要负责管理机场设施</td>
               </tr>
               <tr data-id="10003">
@@ -193,6 +205,7 @@
                 </td>
                 <td>4</td>
                 <td>新闻发布员</td>
+                <td>1</td>
                 <td>主要负责管理新闻</td>
               </tr>
               <tr data-id="10003">
@@ -201,6 +214,7 @@
                 </td>
                 <td>...</td>
                 <td>李静</td>
+                <td>1</td>
                 <td>女</td>
               </tr>
             </tbody>

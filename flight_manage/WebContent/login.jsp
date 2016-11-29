@@ -85,29 +85,34 @@
 
     <!-- 内容开始 -->
     <div class="container-fluid" id="login-underDiv">
-      <div class="row">
-        <div class="col-md-8" id="sidebar">
-        </div>
-        <div class="col-md-4" id="content">
-          <form role="form" class="form-login" action="login">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                <input name="username" class="form-control" type="text" placeholder="用户名">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8" id="sidebar">
+          </div>
+          <div class="col-md-4" id="content">
+          <h4>管理员登陆</h4>
+            <form role="form" class="form-login" action="login">
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                  <input name="username" class="form-control" type="text" placeholder="用户名">
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
-                <input name="password" class="form-control" type="password" placeholder="密码">
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
+                  <input name="password" class="form-control" type="password" placeholder="密码">
+                </div>
               </div>
-            </div>
-            <div class="form-group" id="captcha-group">
-              <input name="captcha" class="form-control" type="text" placeholder="验证码">
-              <img src="img/captcha.jpg">
-            </div>
-            <input class="form-control" type="submit" name="提交">
-          </form>
+              <div class="form-group" id="captcha-group">
+                <input name="captcha" class="form-control" type="text" placeholder="验证码">
+                <img src="img/captcha.jpg">
+              </div>
+              <button type="button" class="btn btn-primary btn-block">登陆</button>
+            </form>
+            <p class="hide text-danger">用户名或密码错误，请重新输入</p>
+            <a href="">忘记密码</a>
+          </div>
         </div>
       </div>
     </div>
