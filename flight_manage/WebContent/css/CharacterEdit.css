@@ -1,5 +1,14 @@
+@media (max-width: 470px) {
+	#mult-select-table {
+		padding: 0px !important;
+	}
+	.col-xs-6 {
+		padding: 2px !important;
+	}
+}
+
 td:first-child, th:first-child {
-	width: 40px;
+	width: 30px;
 	padding-right: 5px;
 }
 

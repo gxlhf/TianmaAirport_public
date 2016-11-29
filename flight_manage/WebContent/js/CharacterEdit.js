@@ -94,7 +94,7 @@ $(function () {
 	//绑定全选事件
 	$('th > span').click(function () {
 		console.log($(this).parents('table').find('tbody > tr'));
-		$(this).parents('table').find('tbody > tr').click();
+		$(this).parents('table').find('tbody > tr .glyphicon').addClass('glyphicon-check');
 	});
 
 
