@@ -108,7 +108,7 @@
                 <input name="captcha" class="form-control" type="text" placeholder="验证码">
                 <img src="img/captcha.jpg">
               </div>
-              <button type="button" class="btn btn-primary btn-block">登陆</button>
+              <button type="submit" class="btn btn-primary btn-block">登陆</button>
             </form>
             
             <%
