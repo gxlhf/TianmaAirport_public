@@ -1,7 +1,7 @@
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>航班信息 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/adminPage.css">
@@ -148,7 +148,7 @@
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">新闻标题：</label>
+              <label for="news-title" class="col-sm-2 control-label">新闻标题：</label>
               <div class="col-sm-6">
                 <input type="text" class="form-control" name="search-id">
               </div>
@@ -162,15 +162,15 @@
                 <input type="radio" name="news-classified">物业资源&nbsp;*</div>
             </div>
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">发布人：</label>
+              <label for="news-outname" class="col-sm-2 control-label">发布人：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="news-outname">
               </div>
             </div>
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">新闻正文：</label>
+              <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="search-id"></textarea>
+                <textarea class="form-control" name="news-context"></textarea>
               </div>
             </div>
             <div class="form-group">
@@ -192,19 +192,19 @@
                   <a href="">删除</a>
                 </td>
               </tr>
-              <tr data-id="10001">
+              <tr data-id="10002">
                 <td>附件二</td>
                 <td>
                   <a href="">删除</a>
                 </td>
               </tr>
-              <tr data-id="10001">
+              <tr data-id="10003">
                 <td>附件三</td>
                 <td>
                   <a href="">删除</a>
                 </td>
               </tr>
-              <tr data-id="10001">
+              <tr data-id="10004">
                 <td>上传新附件：</td>
                 <td>
                   <input name="" type="file">
