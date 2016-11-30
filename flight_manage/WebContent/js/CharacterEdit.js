@@ -96,6 +96,16 @@ $(function () {
 		console.log($(this).parents('table').find('tbody > tr'));
 		$(this).parents('table').find('tbody > tr .glyphicon').addClass('glyphicon-check');
 	});
-
-
+	//输入已分配的权限
+	$('#btn-save').click(function () {
+		var select_elem = $('#right-side-table td:nth-child(2):not(:empty)');
+		console.log(select_elem);
+		for (var i = 0; i < select_elem.length - 1; i++) {
+			var lastVal = $('[name="rolePriv"]').val();
+			if (lastVal != '') {
+				lastVal += ',';
+			}
+			$('[name="rolePriv"]').val(lastVal + $(select_elem[i]).text());
+		}
+	});
 });
