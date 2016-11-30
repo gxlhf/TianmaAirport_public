@@ -1,13 +1,61 @@
+body {
+	background: white !important;
+}
+
 nav {
 	margin-bottom: 0px !important;
 }
-footer{
-	border-top: 0px;
-	margin-top: 0px;
-}
-
 
 .carousel-control {
 	width: 3% !important;
+	min-width: 30px;
 	background-image: none !important;
+}
+
+#main-div {
+	box-shadow: none;
+	background: white !important;
+}
+
+footer {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	border-top: 0px;
+	margin-top: 0px;	
+}
+
+
+.carousel-inner {
+	width: 100%;
+}
+
+@media (min-width: 768px){
+	.carousel-inner > div {
+		background-position: 28% 0%;
+		/* background-size: cover; */
+		background-repeat: no-repeat no-repeat;
+		height: 410px;
+	}
+}
+@media (max-width: 767px){
+	.carousel-inner > div {
+		background-position: 31% 0%;
+		background-size: cover;
+		background-repeat: no-repeat no-repeat;
+		height: 270px;
+	}
+}
+.carousel-inner > div:nth-child(1) {
+	background-image: url(../img/indexImg1.jpg);
+}
+.carousel-inner > div:nth-child(2) {
+	background-image: url(../img/indexImg2.jpg);
+}
+.carousel-inner > div:nth-child(3) {
+	background-image: url(../img/indexImg3.jpg);
+}
+.carousel-inner > div:nth-child(4) {
+	background-image: url(../img/indexImg4.jpg);
 }
