@@ -78,6 +78,7 @@ public class login extends HttpServlet {
 		}*/
 		if(admin!=null){
 			request.setAttribute("admin", admin);
+//			System.out.println(admin.getRole().getName());
 			if(admin.getRole().getAuthorityMap().get("用户管理") == true){
 				request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request, response);
 			}else if(admin.getRole().getAuthorityMap().get("角色管理") == true){

@@ -11,12 +11,13 @@ public class RoleDao {
     static ResultSet ret = null;
 	public String roleDescriptionSearch(String name){
 		String description = null;
-		sql = "SELECT * FROM Actor WHERE Actor.A_name='"+name+"'";//SQL语句  
+		sql = "SELECT * FROM `actor` WHERE actor.A_name='"+name+"'";//SQL语句  
         db1= new db_connection(sql);//创建db_connection对象  
         try {  
         	ret = db1.pst.executeQuery();//执行语句，得到结果集  
             while(ret.next()){
-        	description=ret.getString("A_describe");
+            	description=ret.getString("A_describe");
+//            	System.out.println(description);
             }
             ret.close();  
             db1.close();//关闭连接  
