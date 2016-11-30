@@ -51,13 +51,13 @@ public class login extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
-	//	LoginDao loginDao = new LoginDao();
-		//Admin admin = loginDao.loginCheck(username, password);
+		LoginDao loginDao = new LoginDao();
+		Admin admin = loginDao.loginCheck(username, password);
 		String result;
-		if(username.equals("aaa") && password.equals("123")){
+		/*if(username.equals("aaa") && password.equals("123")){
 		//	request.setAttribute("admin", admin);
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
-			/*if(admin.getRole().getAuthorityMap().get("用户管理")){
+			if(admin.getRole().getAuthorityMap().get("用户管理")){
 				request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request, response);
 			}else if(admin.getRole().getAuthorityMap().get("角色管理")){
 				request.getRequestDispatcher("/Role/RoleAdmin.jsp").forward(request,response );
@@ -69,23 +69,35 @@ public class login extends HttpServlet {
 				request.getRequestDispatcher("/News/Intro.jsp").forward(request, response);
 			}else {
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
-			}*/
+			}
+		}else{
+			result ="登陆失败，请重新登陆";
+			request.setAttribute("result", result);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			//response.sendRedirect("login.jsp");
+		}*/
+		if(admin!=null){
+			request.setAttribute("admin", admin);
+			if(admin.getRole().getAuthorityMap().get("用户管理") == true){
+				request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request, response);
+			}else if(admin.getRole().getAuthorityMap().get("角色管理") == true){
+				request.getRequestDispatcher("/Role/RoleAdmin.jsp").forward(request,response );
+			}else if(admin.getRole().getAuthorityMap().get("航班信息管理") == true){
+				request.getRequestDispatcher("/Flight/FlightInfoCheck.jsp").forward(request, response);
+			}else if(admin.getRole().getAuthorityMap().get("机场设施管理") == true){
+				request.getRequestDispatcher("/Facility/Resouce.jsp").forward(request, response);
+			}else if(admin.getRole().getAuthorityMap().get("新闻管理") == true){
+				request.getRequestDispatcher("/News/Intro.jsp").forward(request, response);
+			}else {
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
+			}
+			
 		}else{
 			result ="登陆失败，请重新登陆";
 			request.setAttribute("result", result);
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 			//response.sendRedirect("login.jsp");
 		}
-		/*if(admin!=null){
-			request.setAttribute("admin", admin);
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
-			
-		}else{
-			result = -1;
-			request.setAttribute("result", result);
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
-			//response.sendRedirect("login.jsp");
-		}*/
 
 		
 	}

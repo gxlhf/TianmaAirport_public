@@ -144,13 +144,13 @@
             <div class="form-group">
               <label for="rolename" class="col-sm-2 control-label">角色名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id" value="航班信息管理员">
+                <input type="text" class="form-control" name="roleName" value="航班信息管理员">
               </div>
             </div>
             <div class="form-group">
               <label for="search-name" class="col-sm-2 control-label">描述：</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="search-name" rows="3">主要负责管理航班</textarea>
+                <textarea class="form-control" name="roleDesc" rows="3">主要负责管理航班</textarea>
               </div>
             </div>
             <div class="container" id="mult-select-table">
@@ -175,7 +175,7 @@
                       <td>
                         <span class="glyphicon"></span>
                       </td>
-                      <td>角色、权限管理</td>
+                      <td>角色管理</td>
                     </tr>
                     <tr data-id="10003">
                       <td>
@@ -257,18 +257,66 @@
                 </table>  
               </div> 
             </div>
-          </form>
-          <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="#">修改</a>
-              <a class="btn btn-success" href="#">取消</a>
+            <input class="hide" type="text" name="rolePriv">
+            <div class="col-sm-6 btn-modify">
+              <div class="btn-group btn-group-justified">
+                <a data-toggle="modal" data-target="#ensureBox" id="btn-save" class="btn btn-success" href="#">修改</a>
+                <a id="btn-cancel" class="btn btn-primary" href="#">取消</a>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
         <span class="glyphicon glyphicon-chevron-up"></span>
       </div>
+
+      <!-- 确认信息弹框开始 -->
+      <div id="ensureBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- <div class="modal-header"> -->
+              <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button> -->
+              <!-- <h4 class="modal-title" id="myModalLabel">确认需要保存的信息</h4> -->
+            <!-- </div> -->
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4>以下是即将保存的信息，请确认。<br></h4>
+              <strong class="text-danger">提交修改后将无法撤销</strong>
+
+              <hr>
+
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">角色名称</label>
+                  <div class="col-xs-9">
+                    <p id="roleName-ensure" class="form-control-static">321</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">描述</label>
+                  <div class="col-xs-9">
+                    <p id="roleDesc-ensure" class="form-control-static">321</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">权限</label>
+                  <div class="col-xs-9">
+                    <p id="rolePriv-ensure" class="form-control-static">123</p>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-primary">保存</button>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 确认信息弹框结束 -->
     </div>
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
@@ -283,6 +331,7 @@
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/CharacterEdit.js"></script>
+    <script src="../js/ensureBox.js"></script>
     <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>

@@ -1,7 +1,7 @@
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>机场设施管理 - 物业管理 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/adminPage.css">
@@ -69,20 +69,20 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">机场设施管理</a>
+              <a href="#" class="dropdown-toggle  curmenu" data-toggle="dropdown" data-hover="dropdown">机场设施管理</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
                   <a href="#">机场资源</a>
                 </li>
-                <li>
+                <li class="curmenu">
                   <a href="#">物业设施</a>
                 </li>
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle  curmenu" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
               <ul class="dropdown-menu" role="menu">
-                <li class="curmenu">
+                <li>
                   <a href="#m1">机场介绍</a>
                 </li>
                 <li>
@@ -112,24 +112,15 @@
         <div class="col-md-2" id="sidebar">
           <ul class="nav nav-pills nav-stacked" role="tablist">
             <li role="presentation" class="first-menu">
-              <strong>新闻中心</strong>
+              <strong>机场设施管理</strong>
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
-                <li role="presentation" class="second-menu-cur">
-                  <a href="#">机场介绍</a>
-                </li>
-                <li role="presentation">
-                  <a href="#">航班信息</a>
-                </li>
                 <li role="presentation">
                   <a href="#">机场资源</a>
                 </li>
-                <li role="presentation">
-                  <a href="#">物业资源</a>
-                </li>
-                <li role="presentation">
-                  <a href="#">发布新闻</a>
+                <li role="presentation" class="second-menu-cur">
+                  <a href="#">物业设施</a>
                 </li>
               </ul>
             </li>
@@ -138,59 +129,72 @@
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">新闻中心</a>
+              <a href="#">机场设施管理</a>
             </li>
-            <li class="active">机场介绍</li>
+            <li>
+              <a href="#">物业设施</a>
+            </li>
+            <li class="active">新增</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <h2 class="text-center text-muted">机场介绍</h2>
+              <label for="facility-name" class="col-sm-2 control-label">设施名称：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="facility-name">
+              </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-2 control-label" id="out-time">发布时间：</label>
-              <label for="out-ti" class="col-sm-2 control-label">2016-1-1</label>
+              <label for="facility-site" class="col-sm-2 control-label">位置：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="facility-site">
+              </div>
             </div>
             <div class="form-group">
-              <hr border="2" color="grey">
+              <label for="facility-phone" class="col-sm-2 control-label">电话：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="facility-phone">
+              </div>
             </div>
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">新闻正文：</label>
-              <div class="col-sm-6">自本机场成立至今，已有很多月</div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-2"></div>
-              <div class="col-sm-6"></div>
+              <label for="facility-extra" class="col-sm-2 control-label">备注：</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="facility-extra"></textarea>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-6"></div>
+              </div>
+              <div class="col-sm-6 btn-modify">
+                <div class="btn-group btn-group-justified">
+                  <a class="btn btn-primary" href="">新增</a>
+                  <a class="btn btn-success" href="">取消</a>
+                </div>
+              </div>
             </div>
           </form>
-          <div></div>
-          <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="">修改</a>
-            </div>
-          </div>
+        </div>
+        <div id="backToTop-btn" onclick="scroll(0,0)">
+          <span class="glyphicon glyphicon-chevron-up"></span>
         </div>
       </div>
-      <div id="backToTop-btn" onclick="scroll(0,0)">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-      </div>
+      <!-- 内容结束 -->
+      <!-- 尾部开始 -->
+      <footer class="container-fluid">
+        <p class="text-center">
+          <a href="#">About Us</a>·
+          <a href="#">Site Map</a>·
+          <a href="#">Privacy Policy</a>·
+          <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      </footer>
+      <!-- 尾部结束 -->
+      <script src="../js/jquery-3.1.1.min.js"></script>
+      <script src="../js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+      <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+      <script type="text/javascript" src="../js/public.js"></script>
+      <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
     </div>
-    <!-- 内容结束 -->
-    <!-- 尾部开始 -->
-    <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
-    </footer>
-    <!-- 尾部结束 -->
-    <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script type="text/javascript" src="../js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
   
 
 </body></html>

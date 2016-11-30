@@ -1,7 +1,7 @@
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>机场设施管理 - 机场资源 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/adminPage.css">
@@ -71,10 +71,10 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle  curmenu" data-toggle="dropdown" data-hover="dropdown">机场设施管理</a>
               <ul class="dropdown-menu" role="menu">
-                <li>
+                <li class="curmenu">
                   <a href="#">机场资源</a>
                 </li>
-                <li class="curmenu">
+                <li>
                   <a href="#">物业设施</a>
                 </li>
               </ul>
@@ -116,10 +116,10 @@
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
-                <li role="presentation">
+                <li role="presentation" class="second-menu-cur">
                   <a href="#">机场资源</a>
                 </li>
-                <li role="presentation" class="second-menu-cur">
+                <li role="presentation">
                   <a href="#">物业设施</a>
                 </li>
               </ul>
@@ -132,34 +132,38 @@
               <a href="#">机场设施管理</a>
             </li>
             <li>
-              <a href="#">物业设施</a>
+              <a href="#">机场资源</a>
             </li>
             <li class="active">新增</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">设施名称：</label>
+              <label for="resource-type" class="col-sm-2 control-label">资源分类：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <select class="form-control" name="resource-type">
+                  <option>行李转盘</option>
+                  <option>登机门</option>
+                  <option>值机柜台</option>
+                </select>
               </div>
             </div>
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">位置：</label>
+              <label for="resource-name" class="col-sm-2 control-label">资源名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="resource-name">
               </div>
             </div>
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">电话：</label>
+              <label for="resource-site" class="col-sm-2 control-label">位置：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="resource-site">
               </div>
             </div>
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">备注：</label>
+              <label for="resource-extra" class="col-sm-2 control-label">备注：</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="external"></textarea>
+                <textarea class="form-control" name="resource-extra"></textarea>
               </div>
               <div class="form-group">
                 <div class="col-sm-2"></div>

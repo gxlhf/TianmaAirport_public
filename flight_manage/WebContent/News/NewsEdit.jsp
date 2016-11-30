@@ -1,7 +1,7 @@
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>航班信息 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/adminPage.css">
@@ -143,33 +143,80 @@
             <li>
               <a href="#">航班信息</a>
             </li>
-            <li class="active">最新航班</li>
+            <li class="active">修改</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <h2 class="text-center text-muted">最新航班（新闻标题）</h2>
+              <label for="news-title" class="col-sm-2 control-label">新闻标题：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="search-id">
+              </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-2 control-label" id="out-time">发布时间：</label>
-              <label for="out-ti" class="col-sm-2 control-label">2016-1-1</label>
+              <label for="search-name" class="col-sm-2 control-label">新闻类别：</label>
+              <div class="col-sm-6">
+                <input type="radio" name="news-classified">机场介绍
+                <input type="radio" name="news-classified" checked="">航班信息
+                <input type="radio" name="news-classified">机场资源
+                <input type="radio" name="news-classified">物业资源&nbsp;*</div>
             </div>
             <div class="form-group">
-              <hr border="2" color="grey">
+              <label for="news-outname" class="col-sm-2 control-label">发布人：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="news-outname">
+              </div>
             </div>
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">新闻正文：</label>
-              <div class="col-sm-6">一飞冲天啦！！！！！哇！！！！</div>
+              <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="news-context"></textarea>
+              </div>
             </div>
             <div class="form-group">
               <div class="col-sm-2"></div>
               <div class="col-sm-6"></div>
             </div>
           </form>
+          <table class="table table-hover select-table">
+            <thead>
+              <tr>
+                <th>附件</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-id="10001">
+                <td>附件1</td>
+                <td>
+                  <a href="">删除</a>
+                </td>
+              </tr>
+              <tr data-id="10002">
+                <td>附件二</td>
+                <td>
+                  <a href="">删除</a>
+                </td>
+              </tr>
+              <tr data-id="10003">
+                <td>附件三</td>
+                <td>
+                  <a href="">删除</a>
+                </td>
+              </tr>
+              <tr data-id="10004">
+                <td>上传新附件：</td>
+                <td>
+                  <input name="" type="file">
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <div></div>
           <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
               <a class="btn btn-primary" href="">修改</a>
+              <a class="btn btn-success" href="">取消</a>
             </div>
           </div>
         </div>
@@ -190,7 +237,7 @@
     <!-- 尾部结束 -->
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
     <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>

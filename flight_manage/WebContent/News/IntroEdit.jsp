@@ -1,7 +1,7 @@
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>机场介绍 - 修改 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/adminPage.css">
@@ -69,9 +69,9 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle  curmenu" data-toggle="dropdown" data-hover="dropdown">机场设施管理</a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">机场设施管理</a>
               <ul class="dropdown-menu" role="menu">
-                <li class="curmenu">
+                <li>
                   <a href="#">机场资源</a>
                 </li>
                 <li>
@@ -80,9 +80,9 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
+              <a href="#" class="dropdown-toggle  curmenu" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
               <ul class="dropdown-menu" role="menu">
-                <li>
+                <li class="curmenu">
                   <a href="#m1">机场介绍</a>
                 </li>
                 <li>
@@ -112,15 +112,24 @@
         <div class="col-md-2" id="sidebar">
           <ul class="nav nav-pills nav-stacked" role="tablist">
             <li role="presentation" class="first-menu">
-              <strong>机场设施管理</strong>
+              <strong>新闻中心</strong>
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <li role="presentation" class="second-menu-cur">
+                  <a href="#">机场介绍</a>
+                </li>
+                <li role="presentation">
+                  <a href="#">航班信息</a>
+                </li>
+                <li role="presentation">
                   <a href="#">机场资源</a>
                 </li>
                 <li role="presentation">
-                  <a href="#">物业设施</a>
+                  <a href="#">物业资源</a>
+                </li>
+                <li role="presentation">
+                  <a href="#">发布新闻</a>
                 </li>
               </ul>
             </li>
@@ -129,111 +138,85 @@
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">机场设施管理</a>
+              <a href="#">新闻中心</a>
             </li>
-            <li class="active">机场资源</li>
+            <li>
+              <a href="#">机场介绍</a>
+            </li>
+            <li class="active">修改</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">资源名称：</label>
+              <label for="news-title" class="col-sm-2 control-label">新闻标题：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="news-title">
               </div>
             </div>
             <div class="form-group">
-              <label for="search-sex" class="col-sm-2 control-label">资源分类：</label>
+              <label for="search-name" class="col-sm-2 control-label">新闻类别：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="search-sex">
-                  <option>不限</option>
-                  <option>行李转盘</option>
-                  <option>登机门</option>
-                  <option>值机柜台</option>
-                </select>
+                <input type="radio" name="news-classified" checked="">机场介绍
+                <input type="radio" name="news-classified">航班信息
+                <input type="radio" name="news-classified">机场资源
+                <input type="radio" name="news-classified">物业资源&nbsp;*</div>
+            </div>
+            <div class="form-group">
+              <label for="news-outname" class="col-sm-2 control-label">发布人：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="news-outname">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="news-context"></textarea>
               </div>
             </div>
             <div class="form-group">
               <div class="col-sm-2"></div>
-              <div class="col-sm-6">
-                <button type="submit" class="col-sm-12 btn btn-primary">查询</button>
-              </div>
+              <div class="col-sm-6"></div>
             </div>
           </form>
           <table class="table table-hover select-table">
             <thead>
               <tr>
-                <th>
-                  <span class="glyphicon glyphicon-check th-check"></span>
-                </th>
-                <th>序号</th>
-                <th>资源名称</th>
-                <th>位置</th>
-                <th>备注</th>
+                <th>附件</th>
+                <th>操作</th>
               </tr>
             </thead>
             <tbody>
               <tr data-id="10001">
+                <td>附件1</td>
                 <td>
-                  <span class="glyphicon glyphicon-check"></span>
+                  <a href="">删除</a>
                 </td>
-                <td>1</td>
-                <td>行李转盘</td>
-                <td>B1出口</td>
-                <td>主要负责用户管理，权限分配等工作</td>
               </tr>
               <tr data-id="10002">
+                <td>附件二</td>
                 <td>
-                  <span class="glyphicon"></span>
+                  <a href="">删除</a>
                 </td>
-                <td>2</td>
-                <td>航班信息管理员</td>
-                <td>1</td>
-                <td>主要负责管理航班</td>
               </tr>
               <tr data-id="10003">
+                <td>附件三</td>
                 <td>
-                  <span class="glyphicon"></span>
+                  <a href="">删除</a>
                 </td>
-                <td>3</td>
-                <td>机场信息管理员</td>
-                <td>1</td>
-                <td>主要负责管理机场设施</td>
               </tr>
-              <tr data-id="10003">
+              <tr data-id="10004">
+                <td>上传新附件：</td>
                 <td>
-                  <span class="glyphicon"></span>
+                  <input name="" type="file">
                 </td>
-                <td>4</td>
-                <td>新闻发布员</td>
-                <td>1</td>
-                <td>主要负责管理新闻</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>...</td>
-                <td>李静</td>
-                <td>1</td>
-                <td>女</td>
               </tr>
             </tbody>
           </table>
-          <div>
-            <ul class="pager">
-              <li class="previous">
-                <a href="#">← 上一页</a>
-              </li>
-              <li class="next">
-                <a href="#">下一页 →</a>
-              </li>
-            </ul>
-          </div>
+          <div></div>
           <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
               <a class="btn btn-primary" href="">修改</a>
-              <a class="btn btn-danger" href="">删除</a>
-              <a class="btn btn-success" href="">新增</a>
+              <a class="btn btn-success" href="">取消</a>
             </div>
           </div>
         </div>
