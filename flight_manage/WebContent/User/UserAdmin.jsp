@@ -1,13 +1,17 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>用户与角色管理- 用户管理 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <link rel="stylesheet" href="../flight_manage/css/main.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="../flight_manage/css/adminPage.css">
-    <link rel="stylesheet" href="../flight_manage/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../flight_manage/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="<%=basePath%>/flight_manage/css/main.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/flight_manage/css/adminPage.css">
+    <link rel="stylesheet" href="<%=basePath%>/flight_manage/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=basePath%>/flight_manage/css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
   </head><body>
     <!-- 头部开始 -->
@@ -22,7 +26,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">
-            <img class="navbar-logo" src="../flight_manage/img/logo.png">
+            <img class="navbar-logo" src="<%=basePath%>/flight_manage/img/logo.png">
           </a>
         </div>
         <div class="col-md-8 pull-right" id="personal-info">
@@ -900,11 +904,11 @@
         <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
-    <script src="../flight_manage/js/jquery-3.1.1.min.js"></script>
-    <script src="../flight_manage/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../flight_manage/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="../flight_manage/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script type="text/javascript" src="../flight_manage/js/public.js"></script>
+    <script src="<%=basePath%>/flight_manage/js/jquery-3.1.1.min.js"></script>
+    <script src="<%=basePath%>/flight_manage/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/flight_manage/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/flight_manage/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/flight_manage/js/public.js"></script>
     <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
   
 
