@@ -80,17 +80,17 @@ public class login extends HttpServlet {
 			request.setAttribute("admin", admin);
 //			System.out.println(admin.getRole().getName());
 			if(admin.getRole().getAuthorityMap().get("用户管理")!=null&&admin.getRole().getAuthorityMap().get("用户管理") == true){
-				request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request, response);
+				request.getRequestDispatcher("User/UserAdmin.jsp").forward(request, response);
 			}else if(admin.getRole().getAuthorityMap().get("角色管理")!=null&&admin.getRole().getAuthorityMap().get("角色管理") == true){
-				request.getRequestDispatcher("/Role/RoleAdmin.jsp").forward(request,response );
+				request.getRequestDispatcher("Role/RoleAdmin.jsp").forward(request,response );
 			}else if(admin.getRole().getAuthorityMap().get("航班信息管理")!=null&&admin.getRole().getAuthorityMap().get("航班信息管理") == true){
-				request.getRequestDispatcher("/Flight/FlightInfoCheck.jsp").forward(request, response);
+				request.getRequestDispatcher("Flight/FlightInfoCheck.jsp").forward(request, response);
 			}else if(admin.getRole().getAuthorityMap().get("机场设施管理")!=null&&admin.getRole().getAuthorityMap().get("机场设施管理") == true){
-				request.getRequestDispatcher("/Facility/Resouce.jsp").forward(request, response);
+				request.getRequestDispatcher("Facility/Resouce.jsp").forward(request, response);
 			}else if(admin.getRole().getAuthorityMap().get("新闻管理")!=null&&admin.getRole().getAuthorityMap().get("新闻管理") == true){
-				request.getRequestDispatcher("/News/Intro.jsp").forward(request, response);
+				request.getRequestDispatcher("News/Intro.jsp").forward(request, response);
 			}else {
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 			
 		}else{

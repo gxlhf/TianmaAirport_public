@@ -1,4 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
   "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,10 +12,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>登陆 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <link rel="stylesheet" href="css/main.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="css/login.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css" >
-    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"><!-- 支持时间控件 -->
+    <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/login.css">
+    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css"><!-- 支持时间控件 -->
   </head>
   <!-- The structure of this file is exactly the same as 2col_rightNav.html;
    the only difference between the two is the stylesheet they use -->
@@ -29,7 +33,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">
-            <img class="navbar-logo" src="img/logo.png">
+            <img class="navbar-logo" src="<%=basePath%>/img/logo.png">
           </a>
         </div>
 
@@ -129,11 +133,11 @@
     </footer>
     <!-- 尾部结束 -->
 
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script type="text/javascript" src="js/public.js"></script>
+    <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
+    <script src="<%=basePath%>/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
     <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&location=changsha"></script>
   </body>
 </html>
