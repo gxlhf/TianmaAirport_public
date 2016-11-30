@@ -2,7 +2,7 @@
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>新闻中心-航班信息- 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/adminPage.css">
@@ -146,21 +146,21 @@
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">新闻标题：</label>
+              <label for="news-title" class="col-sm-2 control-label">新闻标题：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="news-title">
               </div>
             </div>
             <div class="form-group">
-              <label for="search-pos" class="col-sm-2 control-label">发布时间：</label>
+              <label for="news-outtime" class="col-sm-2 control-label">发布时间：</label>
               <div class="col-sm-6">
-                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="search-time">
+                <input type="text" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="news-outtime">
               </div>
             </div>
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">发布人：</label>
+              <label for="news-outname" class="col-sm-2 control-label">发布人：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="news-outname">
               </div>
             </div>
             <div class="form-group">
@@ -197,7 +197,7 @@
                 <td>2016-1-1</td>
                 <td>李静</td>
               </tr>
-              <tr data-id="10001">
+              <tr data-id="10002">
                 <td>
                   <span class="glyphicon glyphicon-check"></span>
                 </td>
@@ -208,7 +208,7 @@
                 <td>2016-1-1</td>
                 <td>李静</td>
               </tr>
-              <tr data-id="10001">
+              <tr data-id="10003">
                 <td>
                   <span class="glyphicon glyphicon-check"></span>
                 </td>
@@ -219,7 +219,7 @@
                 <td>2016-1-1</td>
                 <td>李静</td>
               </tr>
-              <tr data-id="10001">
+              <tr data-id="10004">
                 <td>
                   <span class="glyphicon glyphicon-check"></span>
                 </td>
@@ -230,7 +230,7 @@
                 <td>2016-1-1</td>
                 <td>李静</td>
               </tr>
-              <tr data-id="10001">
+              <tr data-id="10005">
                 <td>
                   <span class="glyphicon glyphicon-check"></span>
                 </td>

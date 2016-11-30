@@ -2,7 +2,7 @@
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>用户与角色管理- 用户管理 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../flight_manage/css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../flight_manage/css/adminPage.css">
@@ -140,15 +140,15 @@
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">员工号：</label>
+              <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="user-id">
               </div>
             </div>
             <div class="form-group">
-              <label for="search-name" class="col-sm-2 control-label">姓名：</label>
+              <label for="user-name" class="col-sm-2 control-label">姓名：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-name">
+                <input type="text" class="form-control" name="user-name">
               </div>
             </div>
             <div class="form-group">
@@ -186,7 +186,7 @@
             <div class="form-group">
               <label for="search-pos" class="col-sm-2 control-label">时间日期：</label>
               <div class="col-sm-6">
-                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="search-time">
+                <input type="text" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="search-time">
               </div>
             </div>
             <div class="form-group">
