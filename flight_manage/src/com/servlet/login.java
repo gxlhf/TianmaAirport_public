@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.*;
 
 import com.entity.Admin;
-import com.entity.Role;
+import com.dao.*;
 
 
 /**
@@ -50,12 +50,29 @@ public class login extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
-		if(username.equals("aaa")&&password.equals("123456")){
+		LoginDao loginDao = new LoginDao();
+		Admin admin = loginDao.loginCheck(username, password);
+		System.out.println("aa");
+		int result;
+		if(username.equals("aaa") && password.equals("123")){
+			request.setAttribute("admin", admin);
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+		}else{
+			result = -1;
+			request.setAttribute("result", result);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			//response.sendRedirect("login.jsp");
+		}
+		/*if(admin!=null){
+			request.setAttribute("admin", admin);
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 			
 		}else{
-			response.sendRedirect("login.jsp");;
-		}
+			result = -1;
+			request.setAttribute("result", result);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			//response.sendRedirect("login.jsp");
+		}*/
 
 		
 	}

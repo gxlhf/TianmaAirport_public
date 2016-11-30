@@ -41,12 +41,12 @@
         <div class="collapse navbar-collapse navbar-collapse-lower" id="header">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle curmenu" data-toggle="dropdown" data-hover="dropdown">用户和角色管理</a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">用户和角色管理</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
                   <a href="#">用户管理</a>
                 </li>
-                <li class="curmenu">
+                <li>
                   <a href="#">角色管理</a>
                 </li>
               </ul>
@@ -69,12 +69,12 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">机场设施管理</a>
+              <a href="#" class="dropdown-toggle  curmenu" data-toggle="dropdown" data-hover="dropdown">机场设施管理</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
                   <a href="#">机场资源</a>
                 </li>
-                <li>
+                <li class="curmenu">
                   <a href="#">物业设施</a>
                 </li>
               </ul>
@@ -112,15 +112,15 @@
         <div class="col-md-2" id="sidebar">
           <ul class="nav nav-pills nav-stacked" role="tablist">
             <li role="presentation" class="first-menu">
-              <strong>用户与角色管理</strong>
+              <strong>机场设施管理</strong>
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <li role="presentation">
-                  <a href="#">用户管理</a>
+                  <a href="#">机场资源</a>
                 </li>
                 <li role="presentation" class="second-menu-cur">
-                  <a href="#">角色管理</a>
+                  <a href="#">物业设施</a>
                 </li>
               </ul>
             </li>
@@ -129,32 +129,23 @@
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">主页</a>
+              <a href="#">机场设施管理</a>
             </li>
-            <li>
-              <a href="#">用户与角色管理</a>
-            </li>
-            <li>
-              <a href="#">角色管理</a>
-            </li>
-            <li class="active">修改角色</li>
+            <li class="active">物业设施</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="rolename" class="col-sm-2 control-label">角色名称：</label>
+              <label for="search-id" class="col-sm-2 control-label">设施名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id" placeholder="航班信息管理员">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="search-name" class="col-sm-2 control-label">描述：</label>
-              <div class="col-sm-6">
-                <textarea class="form-control" name="search-name" rows="3">主要负责管理航班</textarea>
+                <input type="text" class="form-control" name="search-id">
               </div>
             </div>
             <div class="form-group">
               <div class="col-sm-2"></div>
+              <div class="col-sm-6">
+                <button type="submit" class="col-sm-12 btn btn-primary">查询</button>
+              </div>
             </div>
           </form>
           <table class="table table-hover select-table">
@@ -163,11 +154,10 @@
                 <th>
                   <span class="glyphicon glyphicon-check th-check"></span>
                 </th>
-                <th>可分配权限</th>
-                <th>
-                  <span class="glyphicon glyphicon-check th-check"></span>
-                </th>
-                <th>已分配权限</th>
+                <th>序号</th>
+                <th>设施名称</th>
+                <th>位置</th>
+                <th>备注</th>
               </tr>
             </thead>
             <tbody>
@@ -175,75 +165,64 @@
                 <td>
                   <span class="glyphicon glyphicon-check"></span>
                 </td>
-                <td>用户管理</td>
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>用户管理</td>
+                <td>1</td>
+                <td>邮局01</td>
+                <td>B1出口</td>
+                <td>主要负责用户管理，权限分配等工作</td>
               </tr>
               <tr data-id="10002">
                 <td>
                   <span class="glyphicon"></span>
                 </td>
-                <td>角色、权限管理</td>
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td></td>
+                <td>2</td>
+                <td>航班信息管理员</td>
+                <td>1</td>
+                <td>主要负责管理航班</td>
               </tr>
               <tr data-id="10003">
                 <td>
                   <span class="glyphicon"></span>
                 </td>
-                <td>航班信息管理</td>
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td></td>
+                <td>3</td>
+                <td>机场信息管理员</td>
+                <td>1</td>
+                <td>主要负责管理机场设施</td>
               </tr>
               <tr data-id="10003">
                 <td>
                   <span class="glyphicon"></span>
                 </td>
-                <td>机场设施管理</td>
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td></td>
+                <td>4</td>
+                <td>新闻发布员</td>
+                <td>1</td>
+                <td>主要负责管理新闻</td>
               </tr>
               <tr data-id="10003">
                 <td>
                   <span class="glyphicon"></span>
                 </td>
-                <td>物业设施管理</td>
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td></td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <input type="checkbox">全选&nbsp;</td>
-                <td>
-                  <button class="btn btn-primary">添加选中权限</button>
-                </td>
-                <td>
-                  <input type="checkbox">全部删除&nbsp;</td>
-                <td>
-                  <button class="btn btn-danger">删除选中权限</button>
-                </td>
-              </tr>
-              <tr class="hidden">
-                <td>
-                  <input type="text" name="selected-option">
-                </td>
+                <td>...</td>
+                <td>李静</td>
+                <td>1</td>
+                <td>女</td>
               </tr>
             </tbody>
           </table>
+          <div>
+            <ul class="pager">
+              <li class="previous">
+                <a href="#">← 上一页</a>
+              </li>
+              <li class="next">
+                <a href="#">下一页 →</a>
+              </li>
+            </ul>
+          </div>
           <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
               <a class="btn btn-primary" href="">修改</a>
-              <a class="btn btn-success" href="">取消</a>
+              <a class="btn btn-danger" href="">删除</a>
+              <a class="btn btn-success" href="">新增</a>
             </div>
           </div>
         </div>

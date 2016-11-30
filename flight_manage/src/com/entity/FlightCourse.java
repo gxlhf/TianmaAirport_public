@@ -17,4 +17,57 @@ public class FlightCourse {
 	String from;
 	String to;
 	String[] stop;
+	public FlightCourse(boolean internationalOrLocal, boolean arrivalOrDeparture, String flightNumber, String airline,
+			String from, String to, String[] stop) {
+		this.internationalOrLocal = internationalOrLocal;
+		this.arrivalOrDeparture = arrivalOrDeparture;
+		this.flightNumber = flightNumber;
+		this.airline = airline;
+		this.from = from;
+		this.to = to;
+		this.stop = stop;
+	}
+	public boolean isInternationalOrLocal() {
+		return internationalOrLocal;
+	}
+	public void setInternationalOrLocal(boolean internationalOrLocal) {
+		this.internationalOrLocal = internationalOrLocal;
+	}
+	public boolean isArrivalOrDeparture() {
+		return arrivalOrDeparture;
+	}
+	public void setArrivalOrDeparture(boolean arrivalOrDeparture) {
+		this.arrivalOrDeparture = arrivalOrDeparture;
+	}
+	public String getFlightNumber() {
+		return flightNumber;
+	}
+	public void setFlightNumber(String flightNumber) {
+		this.flightNumber = flightNumber;
+	}
+	public String getAirline() {
+		return airline;
+	}
+	public void setAirline(String airline) {
+		this.airline = airline;
+	}
+	public String getFrom() {
+		return from;
+	}
+	public void setFrom(String from) {
+		this.from = from;
+	}
+	public String getTo() {
+		return to;
+	}
+	public void setTo(String to) {
+		this.to = to;
+	}
+	public String[] getStop() {
+		return stop;
+	}
+	public void setStop(String[] stop) {
+		this.stop = stop;
+	}
+	
 }
