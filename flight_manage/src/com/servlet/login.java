@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.*;
 
 import com.entity.Admin;
+import com.entity.Role;
 import com.dao.*;
 
 
@@ -33,7 +34,7 @@ public class login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		processRequest(request,response);
+		response.sendRedirect("/flight_manage/login.jsp");
 	}
 	
 	/**
@@ -52,11 +53,22 @@ public class login extends HttpServlet {
 		HttpSession session = request.getSession();
 		LoginDao loginDao = new LoginDao();
 		Admin admin = loginDao.loginCheck(username, password);
-		System.out.println("aa");
 		int result;
 		if(username.equals("aaa") && password.equals("123")){
 			request.setAttribute("admin", admin);
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			if(admin.getRole().getAuthorityMap().get("用户管理")){
+				request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request, response);
+			}else if(admin.getRole().getAuthorityMap().get("角色管理")){
+				request.getRequestDispatcher("/Role/RoleAdmin.jsp").forward(request,response );
+			}else if(admin.getRole().getAuthorityMap().get("航班信息管理")){
+				request.getRequestDispatcher("/Flight/FlightInfoCheck.jsp").forward(request, response);
+			}else if(admin.getRole().getAuthorityMap().get("机场设施管理")){
+				request.getRequestDispatcher("/Facility/Resouce.jsp").forward(request, response);
+			}else if(admin.getRole().getAuthorityMap().get("新闻管理")){
+				request.getRequestDispatcher("/News/Intro.jsp").forward(request, response);
+			}else {
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
+			}
 		}else{
 			result = -1;
 			request.setAttribute("result", result);
