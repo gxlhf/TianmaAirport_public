@@ -1,0 +1,13 @@
+nav {
+	margin-bottom: 0px !important;
+}
+footer{
+	border-top: 0px;
+	margin-top: 0px;
+}
+
+
+.carousel-control {
+	width: 3% !important;
+	background-image: none !important;
+}
