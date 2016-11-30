@@ -1,7 +1,7 @@
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>机场设施管理 - 物业管理 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/adminPage.css">
@@ -136,9 +136,9 @@
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">设施名称：</label>
+              <label for="facility-name" class="col-sm-2 control-label">设施名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="facility-name">
               </div>
             </div>
             <div class="form-group">
@@ -188,7 +188,7 @@
                 <td>1</td>
                 <td>主要负责管理机场设施</td>
               </tr>
-              <tr data-id="10003">
+              <tr data-id="10004">
                 <td>
                   <span class="glyphicon"></span>
                 </td>

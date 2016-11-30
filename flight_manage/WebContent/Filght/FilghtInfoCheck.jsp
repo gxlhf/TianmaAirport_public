@@ -1,7 +1,7 @@
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>航班信息 - 国内到港 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/adminPage.css">
@@ -142,15 +142,15 @@
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">航班号：</label>
+              <label for="flight-id" class="col-sm-2 control-label">航班号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="flight-id">
               </div>
             </div>
             <div class="form-group">
-              <label for="search-pos" class="col-sm-2 control-label">始发地：</label>
+              <label for="init-site" class="col-sm-2 control-label">始发地：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="search-pos">
+                <select class="form-control" name="init-site">
                   <option>不限</option>
                   <option>机场地勤人员</option>
                   <option>信息技术员</option>
@@ -158,9 +158,9 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="search-pos" class="col-sm-2 control-label">航空公司：</label>
+              <label for="airCompany-name" class="col-sm-2 control-label">航空公司：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="search-pos">
+                <select class="form-control" name="airCompany-name">
                   <option>不限</option>
                   <option>机场地勤人员</option>
                   <option>信息技术员</option>
@@ -230,7 +230,7 @@
                 <td>1</td>
                 <td>1</td>
               </tr>
-              <tr data-id="10003">
+              <tr data-id="10004">
                 <td>
                   <span class="glyphicon"></span>
                 </td>
@@ -243,7 +243,7 @@
                 <td>1</td>
                 <td>1</td>
               </tr>
-              <tr data-id="10003">
+              <tr data-id="10005">
                 <td>
                   <span class="glyphicon"></span>
                 </td>

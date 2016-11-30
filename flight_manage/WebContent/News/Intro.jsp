@@ -1,7 +1,7 @@
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>机场介绍 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/adminPage.css">
@@ -155,7 +155,7 @@
               <hr border="2" color="grey">
             </div>
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">新闻正文：</label>
+              <label for="newsContent" class="col-sm-2 control-label">新闻正文：</label>
               <div class="col-sm-6">自本机场成立至今，已有很多月</div>
             </div>
             <div class="form-group">

@@ -1,7 +1,7 @@
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>新闻详情 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/adminPage.css">
@@ -152,7 +152,7 @@
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label" id="out-time">发布时间：</label>
-              <label for="out-ti" class="col-sm-2 control-label">2016-1-1</label>
+              <label for="out-time" class="col-sm-2 control-label">2016-1-1</label>
             </div>
             <div class="form-group">
               <hr border="2" color="grey">
