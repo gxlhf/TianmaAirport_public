@@ -50,7 +50,7 @@ public class PrivFilter implements Filter {
 		//System.out.println("start");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = (req).getSession();
-		String user=(String) session.getAttribute("user");
+		String user=(String) session.getAttribute("empno");
 		Boolean[] priv={(Boolean) session.getAttribute("priv0"),(Boolean) session.getAttribute("priv1"),(Boolean) session.getAttribute("priv2"),(Boolean) session.getAttribute("priv3"),(Boolean) session.getAttribute("priv4")};
 		String url = req.getRequestURI().substring(
 				req.getContextPath().length());

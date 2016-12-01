@@ -78,7 +78,7 @@ public class login extends HttpServlet {
 		}*/
 		if(admin!=null){
 			request.setAttribute("admin", admin);
-			session.setAttribute("user", admin.getEmpno());
+			session.setAttribute("empno", admin.getEmpno());
 			session.setAttribute("priv0", admin.getRole().getAuthorityMap().get("机场设施管理"));
 			session.setAttribute("priv1", admin.getRole().getAuthorityMap().get("航班信息管理"));
 			session.setAttribute("priv2", admin.getRole().getAuthorityMap().get("新闻管理"));
