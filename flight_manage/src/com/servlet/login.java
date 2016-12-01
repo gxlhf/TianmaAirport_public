@@ -78,6 +78,12 @@ public class login extends HttpServlet {
 		}*/
 		if(admin!=null){
 			request.setAttribute("admin", admin);
+			session.setAttribute("user", admin.getEmpno());
+			session.setAttribute("priv0", admin.getRole().getAuthorityMap().get("机场设施管理"));
+			session.setAttribute("priv1", admin.getRole().getAuthorityMap().get("航班信息管理"));
+			session.setAttribute("priv2", admin.getRole().getAuthorityMap().get("新闻管理"));
+			session.setAttribute("priv3", admin.getRole().getAuthorityMap().get("角色管理"));
+			session.setAttribute("priv4", admin.getRole().getAuthorityMap().get("用户管理"));
 //			System.out.println(admin.getRole().getName());
 			if(admin.getRole().getAuthorityMap().get("用户管理")!=null&&admin.getRole().getAuthorityMap().get("用户管理") == true){
 				request.getRequestDispatcher("User/UserAdmin.jsp").forward(request, response);
@@ -96,7 +102,7 @@ public class login extends HttpServlet {
 		}else{
 			result ="登陆失败，请重新登陆";
 			request.setAttribute("result", result);
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 			//response.sendRedirect("login.jsp");
 		}
 
