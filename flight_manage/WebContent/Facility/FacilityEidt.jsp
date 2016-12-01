@@ -47,17 +47,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-collapse-lower" id="header">
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">用户和角色管理</a>
-              <ul class="dropdown-menu" role="menu">
-                <li>
-                  <a href="#">用户管理</a>
-                </li>
-                <li>
-                  <a href="#">角色管理</a>
-                </li>
-              </ul>
-            </li>
+          <%
+          	if(session.getAttribute("priv3")!=null||session.getAttribute("priv4")!=null){
+          		if(session.getAttribute("priv4")==null)
+          			out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>用户和角色管理</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='#'>角色管理</a></li></ul></li>");
+          		if(session.getAttribute("priv3")==null)
+          			out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>用户和角色管理</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='#'>用户管理</a></li></ul></li>");
+          		else
+          			out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>用户和角色管理</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='#'>用户管理</a></li><li><a href='#'>角色管理</a></li></ul></li>");
+          	}
+          		
+          %>
+            
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
@@ -75,17 +76,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
               </ul>
             </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle  curmenu" data-toggle="dropdown" data-hover="dropdown">机场设施管理</a>
-              <ul class="dropdown-menu" role="menu">
-                <li>
-                  <a href="#">机场资源</a>
-                </li>
-                <li class="curmenu">
-                  <a href="#">物业设施</a>
-                </li>
-              </ul>
-            </li>
+            <%
+            	if(session.getAttribute("priv0")!=null)
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='#'>机场资源</a></li><li><a href='#'>物业设施</a></li></ul></li>");
+            	else
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='#'>物业设施</a></li></ul></li>");
+            		
+            %>
+            
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
               <ul class="dropdown-menu" role="menu">
@@ -101,9 +99,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li>
                   <a href="#m4">物业资源</a>
                 </li>
-                <li>
-                  <a href="#m5">发布新闻</a>
-                </li>
+                <%
+                	if(session.getAttribute("priv2")!=null)
+                		out.println("<li><a href='#m5'>发布新闻</a></li>");
+                %>
+                
               </ul>
             </li>
           </ul>

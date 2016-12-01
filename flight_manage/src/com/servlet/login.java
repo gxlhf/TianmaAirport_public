@@ -92,7 +92,7 @@ public class login extends HttpServlet {
 			}else if(admin.getRole().getAuthorityMap().get("航班信息管理")!=null&&admin.getRole().getAuthorityMap().get("航班信息管理") == true){
 				request.getRequestDispatcher("Flight/FlightInfoCheck.jsp").forward(request, response);
 			}else if(admin.getRole().getAuthorityMap().get("机场设施管理")!=null&&admin.getRole().getAuthorityMap().get("机场设施管理") == true){
-				request.getRequestDispatcher("Facility/Resouce.jsp").forward(request, response);
+				request.getRequestDispatcher("Facility/Resource.jsp").forward(request, response);
 			}else if(admin.getRole().getAuthorityMap().get("新闻管理")!=null&&admin.getRole().getAuthorityMap().get("新闻管理") == true){
 				request.getRequestDispatcher("News/Intro.jsp").forward(request, response);
 			}else {
