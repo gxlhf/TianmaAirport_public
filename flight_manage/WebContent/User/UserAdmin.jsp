@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,10 +8,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>用户与角色管理- 用户管理 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <link rel="stylesheet" href="<%=basePath%>/flight_manage/css/main.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>/flight_manage/css/adminPage.css">
-    <link rel="stylesheet" href="<%=basePath%>/flight_manage/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=basePath%>/flight_manage/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/adminPage.css">
+    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
   </head><body>
     <!-- 头部开始 -->
@@ -26,20 +26,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">
-            <img class="navbar-logo" src="<%=basePath%>/flight_manage/img/logo.png">
+            <img class="navbar-logo" src="<%=basePath%>/img/logo.png">
           </a>
         </div>
         <div class="col-md-8 pull-right" id="personal-info">
           <ul class="list-inline">
             <li id="weather">正在获取天气...</li>
-            <li id="cur-user">
-              <span class="glyphicon glyphicon-user"></span>李静 | 已登录</li>
-            <li>
-              <a class="text-info" href="#">修改个人信息</a>
-            </li>
-            <li>
-              <a class="text-danger" href="#">退出</a>
-            </li>
+            <% 
+            Admin admin=(Admin)request.getAttribute("admin");
+			if(admin!=null){
+        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
+        		out.println("<li><a class='text-info' href='#'>修改个人信息</a></li>");
+        		out.println("<li><a class='text-danger' href='#'>退出</a></li>");
+			}else{
+				out.println("<li><a class='text-info' href='/flight_manage/login.jsp'>登陆</a></li>");
+			}
+            %>
           </ul>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -904,11 +906,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
-    <script src="<%=basePath%>/flight_manage/js/jquery-3.1.1.min.js"></script>
-    <script src="<%=basePath%>/flight_manage/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/flight_manage/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/flight_manage/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/flight_manage/js/public.js"></script>
+    <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
+    <script src="<%=basePath%>/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
     <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
   
 

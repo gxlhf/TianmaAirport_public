@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -32,14 +32,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-8 pull-right" id="personal-info">
           <ul class="list-inline">
             <li id="weather">正在获取天气...</li>
-            <li id="cur-user">
-              <span class="glyphicon glyphicon-user"></span>李静 | 已登录</li>
-            <li>
-              <a class="text-info" href="#">修改个人信息</a>
-            </li>
-            <li>
-              <a class="text-danger" href="#">退出</a>
-            </li>
+            <% 
+            Admin admin=(Admin)request.getAttribute("admin");
+			if(admin!=null){
+        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
+        		out.println("<li><a class='text-info' href='#'>修改个人信息</a></li>");
+        		out.println("<li><a class='text-danger' href='#'>退出</a></li>");
+			}else{
+				out.println("<li><a class='text-info' href='/flight_manage/login.jsp'>登陆</a></li>");
+			}
+            %>
           </ul>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
