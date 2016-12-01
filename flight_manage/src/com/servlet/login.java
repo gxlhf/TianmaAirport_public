@@ -78,14 +78,16 @@ public class login extends HttpServlet {
 		}*/
 		if(admin!=null){
 			request.setAttribute("admin", admin);
+			session.setAttribute("admin", admin);
 			session.setAttribute("empno", admin.getEmpno());
 			session.setAttribute("priv0", admin.getRole().getAuthorityMap().get("机场设施管理"));
 			session.setAttribute("priv1", admin.getRole().getAuthorityMap().get("航班信息管理"));
 			session.setAttribute("priv2", admin.getRole().getAuthorityMap().get("新闻管理"));
 			session.setAttribute("priv3", admin.getRole().getAuthorityMap().get("角色管理"));
 			session.setAttribute("priv4", admin.getRole().getAuthorityMap().get("用户管理"));
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 //			System.out.println(admin.getRole().getName());
-			if(admin.getRole().getAuthorityMap().get("用户管理")!=null&&admin.getRole().getAuthorityMap().get("用户管理") == true){
+			/*if(admin.getRole().getAuthorityMap().get("用户管理")!=null&&admin.getRole().getAuthorityMap().get("用户管理") == true){
 				request.getRequestDispatcher("User/UserAdmin.jsp").forward(request, response);
 			}else if(admin.getRole().getAuthorityMap().get("角色管理")!=null&&admin.getRole().getAuthorityMap().get("角色管理") == true){
 				request.getRequestDispatcher("Role/RoleAdmin.jsp").forward(request,response );
@@ -97,7 +99,7 @@ public class login extends HttpServlet {
 				request.getRequestDispatcher("News/Intro.jsp").forward(request, response);
 			}else {
 				request.getRequestDispatcher("index.jsp").forward(request, response);
-			}
+			}*/
 			
 		}else{
 			result ="登陆失败，请重新登陆";

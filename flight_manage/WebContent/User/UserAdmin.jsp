@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <ul class="list-inline">
             <li id="weather">正在获取天气...</li>
             <% 
-            Admin admin=(Admin)request.getAttribute("admin");
+            Admin admin=(Admin)session.getAttribute("admin");
 			if(admin!=null){
         		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
         		out.println("<li><a class='text-info' href='#'>修改个人信息</a></li>");
