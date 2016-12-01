@@ -33,6 +33,7 @@ public class RoleDao {
         try {  
         	ret = db1.pst.executeQuery();//执行语句，得到结果集  
         	while(ret.next()){
+        		System.out.println(ret.getString("P_name"));
         		authorityMap.put(ret.getString("P_name"), true);
         	}
         	ret.close();  

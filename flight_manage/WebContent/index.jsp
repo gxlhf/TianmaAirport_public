@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           			out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>用户和角色管理</a><ul class='dropdown-menu' role='menu'><li><a href='#'>角色管理</a></li></ul></li>");
           		if(session.getAttribute("priv3")==null)
           			out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>用户和角色管理</a><ul class='dropdown-menu' role='menu'><li><a href='#'>用户管理</a></li></ul></li>");
-          		else
+          		if(session.getAttribute("priv3")!=null&&session.getAttribute("priv4")!=null)
           			out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>用户和角色管理</a><ul class='dropdown-menu' role='menu'><li><a href='#'>用户管理</a></li><li><a href='#'>角色管理</a></li></ul></li>");
           	}
           		
