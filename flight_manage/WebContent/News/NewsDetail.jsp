@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             %>
             
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
+              <a href="#" class="dropdown-toggle curmenu" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
                   <a href="<%=basePath%>News/Intro.jsp">机场介绍</a>
@@ -125,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li role="presentation" class="second-menu-cur">
                   <a href="<%=basePath%>News/Intro.jsp">机场介绍</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="second-menu-cur">
                   <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
                 </li>
                 <li role="presentation">

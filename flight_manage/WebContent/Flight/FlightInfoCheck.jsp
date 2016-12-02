@@ -61,9 +61,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           %>
             
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
+              <a href="#" class="dropdown-toggle curmenu" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
-                <li>
+                <li class="curmenu">
                   <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内到港</a>
                 </li>
                 <li>
