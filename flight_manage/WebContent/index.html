@@ -121,12 +121,36 @@
             <span class="glyphicon glyphicon-chevron-right"></span>
             <span class="sr-only">Next</span>
           </a>
+
+          <div class="container" id="box-flight">
+            <div class="col-xs-4 col-xs-offset-7" id="box-search">
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="col-xs-6" role="presentation" class="active">
+                  <a class="text-center" href="#departure" role="tab" data-toggle="tab">离港</a>
+                </li>
+                <li class="col-xs-6" role="presentation">
+                  <a class="text-center" href="#arrival" role="tab" data-toggle="tab">到港</a>
+                </li>
+              </ul>
+
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="departure">
+                  <div class="container-fluid">
+                    <form class="form-inline" action="" type="post" role="form">
+                      <input type="text" name="key" class="form-control" placeholder="航班号或目的地">
+                      <button type="submit" class="btn btn-default">查询</button>
+                    </form>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="arrival">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="backToTop-btn" onclick="scroll(0,0)">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-      </div>
-      <div class="push"></div>
     </div>
     <!-- 内容结束 -->
 

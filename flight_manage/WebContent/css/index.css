@@ -18,6 +18,7 @@ nav {
 }
 
 footer {
+	background-color: white;
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
@@ -33,10 +34,14 @@ footer {
 
 @media (min-width: 768px){
 	.carousel-inner > div {
-		background-position: 28% 0%;
-		/* background-size: cover; */
-		background-repeat: no-repeat no-repeat;
-		height: 410px;
+		background-position: 50% 30%;
+	    background-size: cover;
+	    background-repeat: no-repeat no-repeat;
+		height: 500px;
+	}
+	#box-flight {
+		position: relative;
+		top: -210px;
 	}
 }
 @media (max-width: 767px){
@@ -44,18 +49,30 @@ footer {
 		background-position: 31% 0%;
 		background-size: cover;
 		background-repeat: no-repeat no-repeat;
-		height: 270px;
+		height: 500px;
+	}
+	#box-flight {
+		position: relative;
+		top: -270px;
 	}
 }
 .carousel-inner > div:nth-child(1) {
-	background-image: url(../img/indexImg1.jpg);
+	background-image: url(../img/1.jpg);
 }
 .carousel-inner > div:nth-child(2) {
-	background-image: url(../img/indexImg2.jpg);
+	background-image: url(../img/2.jpg);
 }
 .carousel-inner > div:nth-child(3) {
-	background-image: url(../img/indexImg3.jpg);
+	background-image: url(../img/3.jpg);
 }
 .carousel-inner > div:nth-child(4) {
-	background-image: url(../img/indexImg4.jpg);
+	background-image: url(../img/4.jpg);
+}
+#box-search {
+	background: white;
+	padding: 0px;
+}
+#box-search li {
+	padding: 0px;
+	
 }
