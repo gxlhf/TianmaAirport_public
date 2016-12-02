@@ -78,7 +78,7 @@ public class login extends HttpServlet {
 		}*/
 		if(admin!=null){
 			request.setAttribute("admin", admin);
-			System.out.println(admin.getRole().getAuthorityMap());
+//			System.out.println(admin.getRole().getAuthorityMap());
 			session.setAttribute("admin", admin);
 			session.setAttribute("empno", admin.getEmpno());
 			session.setAttribute("priv0", admin.getRole().getAuthorityMap().get("机场设施管理"));
