@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <ul class="list-inline">
             <li id="weather">正在获取天气...</li>
             <% 
-            Admin admin=(Admin)request.getAttribute("admin");
+            Admin admin=(Admin)session.getAttribute("admin");
 			if(admin!=null){
         		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
         		out.println("<li><a class='text-info' href='#'>修改个人信息</a></li>");
@@ -63,38 +63,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="#">国内到港</a>
+                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内到港</a>
                 </li>
                 <li>
-                  <a href="#">国内离港</a>
+                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内离港</a>
                 </li>
                 <li>
-                  <a href="#">国际到港</a>
+                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际到港</a>
                 </li>
                 <li>
-                  <a href="#">国际离港</a>
+                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际离港</a>
                 </li>
               </ul>
             </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">机场设施管理</a>
-              <ul class="dropdown-menu" role="menu">
-                <li>
-                  <a href="#">机场资源</a>
-                </li>
-                <li>
-                  <a href="#">物业设施</a>
-                </li>
-              </ul>
-            </li>
+            <%
+            	if(session.getAttribute("priv0")!=null)
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            	else
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='#'>物业设施</a></li></ul></li>");
+            		
+            %>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="#m1">机场介绍</a>
+                  <a href="<%=basePath%>News/Intro.jsp">机场介绍</a>
                 </li>
                 <li>
-                  <a href="#m2">航班信息</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
                 </li>
                 <li>
                   <a href="#m3">机场资源</a>
@@ -102,9 +98,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li>
                   <a href="#m4">物业资源</a>
                 </li>
-                <li>
-                  <a href="#m5">发布新闻</a>
-                </li>
+                <%
+                	if(session.getAttribute("priv2")!=null)
+                		out.println("<li><a href='#m5'>发布新闻</a></li>");
+                %>
               </ul>
             </li>
           </ul>

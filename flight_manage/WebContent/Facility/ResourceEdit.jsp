@@ -6,9 +6,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-    <title>用户与角色管理- 用户管理 - 天马机场</title>
-
+    <title>机场设施管理 - 机场资源 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/adminPage.css">
@@ -120,15 +118,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-2" id="sidebar">
           <ul class="nav nav-pills nav-stacked" role="tablist">
             <li role="presentation" class="first-menu">
-              <strong>用户与角色管理</strong>
+              <strong>机场设施管理</strong>
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <li role="presentation" class="second-menu-cur">
-                  <a href="#">用户管理</a>
+                  <a href="#">机场资源</a>
                 </li>
                 <li role="presentation">
-                  <a href="#">角色管理</a>
+                  <a href="#">物业设施</a>
                 </li>
               </ul>
             </li>
@@ -137,122 +135,76 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">主页</a>
+              <a href="#">机场设施管理</a>
             </li>
             <li>
-              <a href="#">用户与角色管理</a>
+              <a href="#">机场资源</a>
             </li>
-            <li>
-              <a href="#">用户管理</a>
-            </li>
-            <li class="active">用户修改</li>
+            <li class="active">新增</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="user-id" class="col-sm-2 control-label">员工号：</label>
+              <label for="resource-type" class="col-sm-2 control-label">资源分类：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-id" disabled="disabled">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="user-name" class="col-sm-2 control-label">姓名：</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-name">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="user-sex" class="col-sm-2 control-label">性别：</label>
-              <div class="col-sm-6">
-                <select class="form-control" name="user-sex">
-                  <option>不限</option>
-                  <option>男</option>
-                  <option>女</option>
+                <select class="form-control" name="resource-type">
+                  <option>行李转盘</option>
+                  <option>登机门</option>
+                  <option>值机柜台</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
-              <label for="user-pos" class="col-sm-2 control-label">职位：</label>
+              <label for="resource-name" class="col-sm-2 control-label">资源名称：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="user-pos">
-                  <option>不限</option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option>
-                </select>
+                <input type="text" class="form-control" name="resource-name">
               </div>
             </div>
             <div class="form-group">
-              <label for="user-roles" class="col-sm-2 control-label">角色：</label>
+              <label for="resource-site" class="col-sm-2 control-label">位置：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="user-roles">
-                  <option>不限</option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option>
-                </select>
+                <input type="text" class="form-control" name="resource-site">
               </div>
             </div>
             <div class="form-group">
-              <label for="user-phone" class="col-sm-2 control-label">电话：</label>
+              <label for="resource-extra" class="col-sm-2 control-label">备注：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-phone">
+                <textarea class="form-control" name="resource-extra"></textarea>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="user-tel" class="col-sm-2 control-label">手机号：</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-tel">
+              <div class="form-group">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-6"></div>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="user-email" class="col-sm-2 control-label">电子邮箱：</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-email">
+              <div class="col-sm-6 btn-modify">
+                <div class="btn-group btn-group-justified">
+                  <a class="btn btn-primary" href="">新增</a>
+                  <a class="btn btn-success" href="">取消</a>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="user-password" class="col-sm-2 control-label">登录密码：</label>
-              <div class="col-sm-6">
-                <input type="password" class="form-control" name="user-password">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="user-password-check" class="col-sm-2 control-label">密码确认：</label>
-              <div class="col-sm-6">
-                <input type="password" class="form-control" name="user-password-check">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-2"></div>
             </div>
           </form>
-          <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="">修改</a>
-              <a class="btn btn-success" href="">取消</a>
-            </div>
-          </div>
+        </div>
+        <div id="backToTop-btn" onclick="scroll(0,0)">
+          <span class="glyphicon glyphicon-chevron-up"></span>
         </div>
       </div>
-      <div id="backToTop-btn" onclick="scroll(0,0)">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-      </div>
+      <!-- 内容结束 -->
+      <!-- 尾部开始 -->
+      <footer class="container-fluid">
+        <p class="text-center">
+          <a href="#">About Us</a>·
+          <a href="#">Site Map</a>·
+          <a href="#">Privacy Policy</a>·
+          <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      </footer>
+      <!-- 尾部结束 -->
+      <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
+      <script src="<%=basePath%>/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
+      <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+      <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
+      <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
     </div>
-    <!-- 内容结束 -->
-    <!-- 尾部开始 -->
-    <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
-    </footer>
-    <!-- 尾部结束 -->
-    <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
-    <script src="<%=basePath%>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
   
 
 </body></html>
