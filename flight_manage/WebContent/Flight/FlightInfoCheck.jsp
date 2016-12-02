@@ -278,7 +278,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="">修改</a>
+              <a class="btn btn-primary" href="<%=basePath%>Flight/FlightInfoEdit.jsp">修改</a>
               <a class="btn btn-danger" href="">删除</a>
               <a class="btn btn-success" href="">新增</a>
             </div>

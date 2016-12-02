@@ -1,8 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebContent/Facility/Facility.jsp=UTF-8
-encoding//WebContent/Facility/FacilityEidt.jsp=UTF-8
+encoding//WebContent/Facility/FacilityEdit.jsp=UTF-8
 encoding//WebContent/Facility/Resource.jsp=UTF-8
-encoding//WebContent/Facility/ResourceEidt.jsp=UTF-8
+encoding//WebContent/Facility/ResourceEdit.jsp=UTF-8
 encoding//WebContent/News/Intro.jsp=UTF-8
 encoding//WebContent/News/IntroEdit.jsp=UTF-8
 encoding//WebContent/News/NewsDetail.jsp=UTF-8
