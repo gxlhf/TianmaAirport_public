@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="<%=basePath%>index.jsp">
             <img class="navbar-logo" src="<%=basePath%>/img/logo.png">
           </a>
         </div>
@@ -91,14 +91,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
                 </li>
                 <li>
-                  <a href="#m3">机场资源</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
                 </li>
                 <li>
-                  <a href="#m4">物业资源</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li><a href='#m5'>发布新闻</a></li>");
+                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
                 %>
               </ul>
             </li>
@@ -119,12 +119,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
-                <li role="presentation">
-                  <a href="#">用户管理</a>
-                </li>
-                <li role="presentation" class="second-menu-cur">
-                  <a href="#">角色管理</a>
-                </li>
+                <%
+              if(session.getAttribute("priv4")==null)
+            	  out.println("<li role='presentation'><a href='"+basePath+"Role/RoleAdmin.jsp'>角色管理</a></li>");
+              if(session.getAttribute("priv3")==null)
+            	  out.println("<li role='presentation'><a href='"+basePath+"User/UserAdmin.jsp'>用户管理</a></li>");
+              if(session.getAttribute("priv3")!=null&&session.getAttribute("priv4")!=null)
+            	  out.println("<li role='presentation'><a href='"+basePath+"User/UserAdmin.jsp'>用户管理</a></li><li role='presentation'><a href='"+basePath+"Role/RoleAdmin.jsp'>角色管理</a></li>");
+              %>
               </ul>
             </li>
           </ul>

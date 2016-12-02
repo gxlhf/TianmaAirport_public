@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="<%=basePath%>index.jsp">
             <img class="navbar-logo" src="<%=basePath%>/img/logo.png">
           </a>
         </div>
@@ -93,14 +93,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
                 </li>
                 <li>
-                  <a href="#m3">机场资源</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
                 </li>
                 <li>
-                  <a href="#m4">物业资源</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li><a href='#m5'>发布新闻</a></li>");
+                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
                 %>
                 
               </ul>
@@ -123,20 +123,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <li role="presentation" class="second-menu-cur">
-                  <a href="#">机场介绍</a>
+                  <a href="<%=basePath%>News/Intro.jsp">机场介绍</a>
                 </li>
                 <li role="presentation">
-                  <a href="#">航班信息</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
                 </li>
                 <li role="presentation">
-                  <a href="#">机场资源</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
                 </li>
                 <li role="presentation">
-                  <a href="#">物业资源</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
                 </li>
-                <li role="presentation">
-                  <a href="#">发布新闻</a>
-                </li>
+                <%
+                	if(session.getAttribute("priv2")!=null)
+                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                %>
+                
               </ul>
             </li>
           </ul>
@@ -172,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div></div>
           <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="">修改</a>
+              <a class="btn btn-primary" href="<%=basePath%>News/IntroEdit.jsp">修改</a>
             </div>
           </div>
         </div>
