@@ -91,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li>
                   <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
-                <li class="curmenu">
+                <li>
                   <a href="<%=basePath%>Public/News/NewsList.jsp">航班信息</a>
                 </li>
                 <li>

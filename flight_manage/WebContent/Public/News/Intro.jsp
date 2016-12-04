@@ -1,7 +1,6 @@
 <%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
-System.out.println(path);
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <html><head>
