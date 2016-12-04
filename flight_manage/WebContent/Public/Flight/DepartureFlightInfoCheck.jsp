@@ -3,17 +3,19 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<html><head>
+<html>
+<head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>机场设施管理 - 物业管理 - 天马机场</title>
+    <title>航班信息 - 国内离港 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/adminPage.css">
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
-  </head><body>
+  </head>
+  <body>
     <!-- 头部开始 -->
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
@@ -59,27 +61,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           %>
             
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
+              <a href="#" class="dropdown-toggle curmenu" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国内到港</a>
+                </li>
+                <li class="curmenu">
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国内离港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内离港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国际到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际到港</a>
-                </li>
-                <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国际离港</a>
                 </li>
               </ul>
             </li>
             <%
             	if(session.getAttribute("priv0")!=null)
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Facility/Resource.jsp'>机场资源</a></li><li class='curmenu'><a href='"+basePath+"Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             	else
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li class='curmenu'><a href='#'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             		
             %>
             
@@ -87,16 +89,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="<%=basePath%>News/Intro.jsp">机场介绍</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">机场介绍</a>
+                </li>
+                <li class="curmenu">
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">航班信息</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">机场资源</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
-                </li>
-                <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
@@ -118,15 +120,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-2" id="sidebar">
           <ul class="nav nav-pills nav-stacked" role="tablist">
             <li role="presentation" class="first-menu">
-              <strong>机场设施管理</strong>
+              <strong>航班信息</strong>
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <li role="presentation">
-                  <a href="#">机场资源</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国内到港</a>
                 </li>
                 <li role="presentation" class="second-menu-cur">
-                  <a href="#">物业设施</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国内离港</a>
+                </li>
+                <li role="presentation">
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国际到港</a>
+                </li>
+                <li role="presentation">
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国际离港</a>
                 </li>
               </ul>
             </li>
@@ -135,16 +143,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">机场设施管理</a>
+              <a href="#">航班信息</a>
             </li>
-            <li class="active">物业设施</li>
+            <li class="active">国内离港</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="facility-name" class="col-sm-2 control-label">设施名称：</label>
+              <label for="flight-id" class="col-sm-2 control-label">航班号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="facility-name">
+                <input type="text" class="form-control" name="flight-id">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="init-site" class="col-sm-2 control-label">目的地：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="to-site">
+                  <option>不限</option>
+                  <option>机场地勤人员</option>
+                  <option>信息技术员</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="airCompany-name" class="col-sm-2 control-label">航空公司：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="airCompany-name">
+                  <option>不限</option>
+                  <option>机场地勤人员</option>
+                  <option>信息技术员</option>
+                </select>
               </div>
             </div>
             <div class="form-group">
@@ -157,60 +185,111 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <table class="table table-hover select-table">
             <thead>
               <tr>
-                <th>
+                <%
+              if(session.getAttribute("priv1")!=null){
+            	  out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
+              }else{
+            	  out.println("<th></th>");
+              }
+              %>
+                <!-- <th>
                   <span class="glyphicon glyphicon-check th-check"></span>
-                </th>
-                <th>序号</th>
-                <th>设施名称</th>
-                <th>位置</th>
-                <th>备注</th>
+                </th> -->
+                <th>航班号</th>
+                <th>始发地</th>
+                <th>经停地</th>
+                <th>目的地</th>
+                <th>离港时间</th>
+                <th>值机柜台</th>
+                <th>登机门</th>
+                <th>航空公司</th>
               </tr>
             </thead>
             <tbody>
               <tr data-id="10001">
-                <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td>
-                <td>1</td>
-                <td>邮局01</td>
-                <td>B1出口</td>
+                <%
+                if(session.getAttribute("priv1")!=null){
+                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
+                }else{
+              	  out.println("<td></td>");
+                }
+                %>
+                <td>系统管理员</td>
                 <td>主要负责用户管理，权限分配等工作</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
               </tr>
               <tr data-id="10002">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>2</td>
+                <%
+                if(session.getAttribute("priv1")!=null){
+                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
+                }else{
+              	  out.println("<td></td>");
+                }
+                %>
                 <td>航班信息管理员</td>
-                <td>1</td>
                 <td>主要负责管理航班</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
               </tr>
               <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>3</td>
+                <%
+                if(session.getAttribute("priv1")!=null){
+                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
+                }else{
+              	  out.println("<td></td>");
+                }
+                %>
                 <td>机场信息管理员</td>
-                <td>1</td>
                 <td>主要负责管理机场设施</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
               </tr>
               <tr data-id="10004">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>4</td>
+                <%
+                if(session.getAttribute("priv1")!=null){
+                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
+                }else{
+              	  out.println("<td></td>");
+                }
+                %>
                 <td>新闻发布员</td>
-                <td>1</td>
                 <td>主要负责管理新闻</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>...</td>
-                <td>李静</td>
                 <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              <tr data-id="10005">
+                <%
+                if(session.getAttribute("priv1")!=null){
+                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
+                }else{
+              	  out.println("<td></td>");
+                }
+                %>
+                <td>李静</td>
                 <td>女</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
               </tr>
             </tbody>
           </table>
@@ -224,13 +303,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </li>
             </ul>
           </div>
-          <div class="col-sm-6 btn-modify">
+          <%
+          if(session.getAttribute("priv1")!=null){
+        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"Flight/FlightEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+          }
+          %>
+          <%-- <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
               <a class="btn btn-primary" href="<%=basePath%>Facility/FacilityEdit.jsp">修改</a>
               <a class="btn btn-danger" href="">删除</a>
               <a class="btn btn-success" href="">新增</a>
             </div>
-          </div>
+          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
@@ -254,5 +338,3 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
     <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
   
-
-</body></html>

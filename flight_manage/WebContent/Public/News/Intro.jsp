@@ -1,12 +1,13 @@
 <%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
+System.out.println(path);
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>新闻详情 - 天马机场</title>
+    <title>机场介绍 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/adminPage.css">
@@ -62,41 +63,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国内到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国内离港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国际到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国际离港</a>
                 </li>
               </ul>
             </li>
             <%
             	if(session.getAttribute("priv0")!=null)
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             	else
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='#'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             		
             %>
             
             <li class="dropdown">
               <a href="#" class="dropdown-toggle curmenu" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
               <ul class="dropdown-menu" role="menu">
-                <li>
-                  <a href="<%=basePath%>News/Intro.jsp">机场介绍</a>
+                <li class="curmenu">
+                  <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">航班信息</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">机场资源</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
@@ -123,21 +124,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <li role="presentation" class="second-menu-cur">
-                  <a href="<%=basePath%>News/Intro.jsp">机场介绍</a>
-                </li>
-                <li role="presentation" class="second-menu-cur">
-                  <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
+                  <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
                 <li role="presentation">
-                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">航班信息</a>
                 </li>
                 <li role="presentation">
-                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">机场资源</a>
+                </li>
+                <li role="presentation">
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
                 		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
                 %>
+                
               </ul>
             </li>
           </ul>
@@ -147,26 +149,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <a href="#">新闻中心</a>
             </li>
-            <li>
-              <a href="#">航班信息</a>
-            </li>
-            <li class="active">最新航班</li>
+            <li class="active">机场介绍</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <h2 class="text-center text-muted">最新航班（新闻标题）</h2>
+              <h2 class="text-center text-muted">机场介绍</h2>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label" id="out-time">发布时间：</label>
-              <label for="out-time" class="col-sm-2 control-label">2016-1-1</label>
+              <label for="out-ti" class="col-sm-2 control-label">2016-1-1</label>
             </div>
             <div class="form-group">
               <hr border="2" color="grey">
             </div>
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">新闻正文：</label>
-              <div class="col-sm-6">一飞冲天啦！！！！！哇！！！！</div>
+              <label for="newsContent" class="col-sm-2 control-label">新闻正文：</label>
+              <div class="col-sm-6">自本机场成立至今，已有很多月</div>
             </div>
             <div class="form-group">
               <div class="col-sm-2"></div>
@@ -174,11 +173,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
           </form>
           <div></div>
-          <div class="col-sm-6 btn-modify">
+          <%
+          if(session.getAttribute("priv2")!=null){
+        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"News/IntroEdit.jsp'>修改</a></div></div>");
+          }
+          %>
+          <%-- <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="">修改</a>
+              <a class="btn btn-primary" href="<%=basePath%>News/IntroEdit.jsp">修改</a>
             </div>
-          </div>
+          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">

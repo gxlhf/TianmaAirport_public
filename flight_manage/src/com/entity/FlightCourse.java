@@ -5,7 +5,7 @@
  * airline:航空公司
  * from:始发地
  * to:到达地
- * stop:经停地，数组
+ * stop:经停地
  */
 package com.entity;
 

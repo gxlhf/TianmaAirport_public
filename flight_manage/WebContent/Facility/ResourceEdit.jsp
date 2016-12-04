@@ -62,24 +62,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国内到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国内离港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国际到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国际离港</a>
                 </li>
               </ul>
             </li>
             <%
             	if(session.getAttribute("priv0")!=null)
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='"+basePath+"Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             	else
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='#'>乘机指引</a></li><li><a href='#'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='#'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             		
             %>
             
@@ -87,16 +87,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="<%=basePath%>News/Intro.jsp">机场介绍</a>
+                  <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
+                </li>
+                <li class="curmenu">
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">航班信息</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">机场资源</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
-                </li>
-                <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
@@ -118,7 +118,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-2" id="sidebar">
           <ul class="nav nav-pills nav-stacked" role="tablist">
             <li role="presentation" class="first-menu">
-              <strong>机场设施管理</strong>
+              <%
+            if(session.getAttribute("priv0")!=null){
+            	out.println("<strong>机场设施管理</strong>");
+            }else{
+            	out.println("<strong>乘机指南</strong>");
+            }
+            %>
+              <!-- <strong>机场设施管理</strong> -->
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
