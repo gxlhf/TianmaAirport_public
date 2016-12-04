@@ -18,12 +18,14 @@ nav {
 }
 
 footer {
-	position: absolute;
+	background-color: transparent;
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
 	border-top: 0px;
-	margin-top: 0px;	
+	margin-top: 0px;
+	padding-bottom: 5px;
+	padding-top: 10px;	
 }
 
 
@@ -33,29 +35,100 @@ footer {
 
 @media (min-width: 768px){
 	.carousel-inner > div {
-		background-position: 28% 0%;
-		/* background-size: cover; */
-		background-repeat: no-repeat no-repeat;
-		height: 410px;
+		background-position: 50% 30%;
+	    background-size: cover;
+	    background-repeat: no-repeat no-repeat;
+		height: 500px;
+	}
+	#box-flight {
+		position: absolute;
+	    bottom: 120px;
+	    right: 15%;
+	    width: 440px;
+	}
+	.form-control {
+		width: 75% !important;
+	}
+	.form-inline > .btn {
+		width: 22% !important;
 	}
 }
 @media (max-width: 767px){
 	.carousel-inner > div {
-		background-position: 31% 0%;
+		background-position: 50% 50%;
 		background-size: cover;
 		background-repeat: no-repeat no-repeat;
-		height: 270px;
+		height: 500px;
+	}
+	#box-flight {
+		position: absolute;
+	    bottom: 80px;
+	    width: 100%;
+	}
+	#box-search {
+		margin-left: 10%;
+		width: 80% !important;
+	}
+	.form-control {
+		width: 75% !important;
+	}
+	.carousel-control > span {
+		font-size: 15px;
 	}
 }
 .carousel-inner > div:nth-child(1) {
-	background-image: url(../img/indexImg1.jpg);
+	background-image: url(../img/1.jpg);
 }
 .carousel-inner > div:nth-child(2) {
-	background-image: url(../img/indexImg2.jpg);
+	background-image: url(../img/2.jpg);
 }
 .carousel-inner > div:nth-child(3) {
-	background-image: url(../img/indexImg3.jpg);
+	background-image: url(../img/3.jpg);
 }
 .carousel-inner > div:nth-child(4) {
-	background-image: url(../img/indexImg4.jpg);
+	background-image: url(../img/4.jpg);
+}
+#box-flight {
+	background: transparent;
+}
+#box-search {
+	background: transparent;
+	padding: 0px;
+}
+#box-search > ul {
+	border-width: 0;
+	background: rgba(255, 255, 255, 0.6);
+	border-radius: 4px 4px 0px 0px;
+}
+#box-search li {
+	background: ;
+	margin-right: 0px;
+	border-width: 0px;
+	border-radius: 4px 4px 0px 0px;
+}
+#box-search > ul > li > a {
+	border-width: 0px;
+	margin-right: 0px;
+	/* border-color: #000; */
+}
+#box-search > ul > li > .active {
+	background: white !important;
+	border-width: 0px;
+	margin-right: 0px;
+	border-radius: 4px 5px 0px 0px;
+}
+#box-search > .tab-content {
+	background: white;
+	border-radius: 0px 0px 4px 4px;
+}
+#box-search li {
+	padding: 0px;
+}
+
+
+.form-inline {
+	padding: 8px;
+}
+.form-control {
+	display: inline !important;
 }
