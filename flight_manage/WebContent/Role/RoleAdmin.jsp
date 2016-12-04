@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           		if(session.getAttribute("priv3")==null)
           			out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>用户和角色管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"User/UserAdmin.jsp'>用户管理</a></li></ul></li>");
           		if(session.getAttribute("priv3")!=null&&session.getAttribute("priv4")!=null)
-          			out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>用户和角色管理</a><ul class='dropdown-menu' role='menu'><li ><a href='"+basePath+"User/UserAdmin.jsp'>用户管理</a></li><li class="curmenu"><a href='"+basePath+"Role/RoleAdmin.jsp'>角色管理</a></li></ul></li>");
+          			out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>用户和角色管理</a><ul class='dropdown-menu' role='menu'><li ><a href='"+basePath+"User/UserAdmin.jsp'>用户管理</a></li><li class='curmenu'><a href='"+basePath+"Role/RoleAdmin.jsp'>角色管理</a></li></ul></li>");
           	}
           		
           %>
@@ -121,11 +121,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <%
               if(session.getAttribute("priv4")==null)
-            	  out.println("<li role='presentation' class="second-menu-cur"><a href='"+basePath+"Role/RoleAdmin.jsp'>角色管理</a></li>");
+            	  out.println("<li role='presentation' class='second-menu-cur'><a href='"+basePath+"Role/RoleAdmin.jsp'>角色管理</a></li>");
               if(session.getAttribute("priv3")==null)
             	  out.println("<li role='presentation'><a href='"+basePath+"User/UserAdmin.jsp'>用户管理</a></li>");
               if(session.getAttribute("priv3")!=null&&session.getAttribute("priv4")!=null)
-            	  out.println("<li role='presentation'><a href='"+basePath+"User/UserAdmin.jsp'>用户管理</a></li><li role='presentation' class="second-menu-cur"><a href='"+basePath+"Role/RoleAdmin.jsp'>角色管理</a></li>");
+            	  out.println("<li role='presentation'><a href='"+basePath+"User/UserAdmin.jsp'>用户管理</a></li><li role='presentation' class='second-menu-cur'><a href='"+basePath+"Role/RoleAdmin.jsp'>角色管理</a></li>");
               %>
               </ul>
             </li>
