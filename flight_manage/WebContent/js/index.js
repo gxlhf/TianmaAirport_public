@@ -3,4 +3,4 @@ $(window).resize(function () {
 });
 $(function () {
 	$('.item').height($(window).height() - $('nav').height());
-})
+});
