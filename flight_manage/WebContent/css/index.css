@@ -18,7 +18,8 @@ nav {
 }
 
 footer {
-	background-color: white;
+	background-color: transparent;
+	color: white;
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
@@ -46,14 +47,19 @@ footer {
 }
 @media (max-width: 767px){
 	.carousel-inner > div {
-		background-position: 31% 0%;
+		background-position: 50% 50%;
 		background-size: cover;
 		background-repeat: no-repeat no-repeat;
 		height: 500px;
 	}
 	#box-flight {
-		position: relative;
-		top: -270px;
+		position: absolute;
+	    bottom: 100px;
+	    width: 100%;
+	}
+	#box-search {
+		margin-left: 10%;
+		width: 80% !important;
 	}
 }
 .carousel-inner > div:nth-child(1) {
@@ -74,5 +80,7 @@ footer {
 }
 #box-search li {
 	padding: 0px;
-	
+}
+.form-control {
+	display: inline !important;
 }
