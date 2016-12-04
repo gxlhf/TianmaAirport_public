@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="<%=basePath%>index.jsp">
             <img class="navbar-logo" src="<%=basePath%>/img/logo.png">
           </a>
         </div>
@@ -59,9 +59,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           %>
             
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
+              <a href="#" class="dropdown-toggle curmenu" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
-                <li>
+                <li class="curmenu">
                   <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内到港</a>
                 </li>
                 <li>
@@ -93,14 +93,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
                 </li>
                 <li>
-                  <a href="#m3">机场资源</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
                 </li>
                 <li>
-                  <a href="#m4">物业资源</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li><a href='#m5'>发布新闻</a></li>");
+                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
                 %>
                 
               </ul>
@@ -123,16 +123,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <li role="presentation" class="second-menu-cur">
-                  <a href="#">国内到港</a>
+                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内到港</a>
                 </li>
                 <li role="presentation">
-                  <a href="#">国内离港</a>
+                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内离港</a>
                 </li>
                 <li role="presentation">
-                  <a href="#">国际到港</a>
+                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际到港</a>
                 </li>
                 <li role="presentation">
-                  <a href="#">国际离港</a>
+                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际离港</a>
                 </li>
               </ul>
             </li>
@@ -225,9 +225,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </form>
           <div></div>
           <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="">新增</a>
+            <div class="btn-group btn-group-justified">      
               <a class="btn btn-success" href="">新增</a>
+              <a class="btn btn-primary" href="">取消</a>
             </div>
           </div>
         </div>

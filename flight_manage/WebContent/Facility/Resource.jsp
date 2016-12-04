@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="<%=basePath%>index.jsp">
             <img class="navbar-logo" src="<%=basePath%>/img/logo.png">
           </a>
         </div>
@@ -77,9 +77,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
             <%
             	if(session.getAttribute("priv0")!=null)
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li class="curmenu"><a href='"+basePath+"Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             	else
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='#'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li class="curmenu"><a href='#'>乘机指引</a></li><li><a href='#'>物业设施</a></li></ul></li>");
             		
             %>
             
@@ -93,14 +93,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
                 </li>
                 <li>
-                  <a href="#m3">机场资源</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
                 </li>
                 <li>
-                  <a href="#m4">物业资源</a>
+                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li><a href='#m5'>发布新闻</a></li>");
+                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
                 %>
                 
               </ul>
