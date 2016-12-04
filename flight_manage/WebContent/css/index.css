@@ -19,14 +19,13 @@ nav {
 
 footer {
 	background-color: transparent;
-	color: white;
-	position: absolute;
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
 	border-top: 0px;
 	margin-top: 0px;
-	padding-bottom: 5px;	
+	padding-bottom: 5px;
+	padding-top: 10px;	
 }
 
 
@@ -44,7 +43,14 @@ footer {
 	#box-flight {
 		position: absolute;
 	    bottom: 120px;
-	    width: 100%;
+	    right: 15%;
+	    width: 440px;
+	}
+	.form-control {
+		width: 75% !important;
+	}
+	.form-inline > .btn {
+		width: 22% !important;
 	}
 }
 @media (max-width: 767px){
@@ -56,12 +62,15 @@ footer {
 	}
 	#box-flight {
 		position: absolute;
-	    bottom: 120px;
+	    bottom: 80px;
 	    width: 100%;
 	}
 	#box-search {
 		margin-left: 10%;
 		width: 80% !important;
+	}
+	.form-control {
+		width: 75% !important;
 	}
 	.carousel-control > span {
 		font-size: 15px;
@@ -122,5 +131,4 @@ footer {
 }
 .form-control {
 	display: inline !important;
-	width: 75% !important;
 }
