@@ -61,16 +61,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国内到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=local">国内到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国内离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=local">国内离港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国际到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=international">国际到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国际离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=international">国际离港</a>
                 </li>
               </ul>
             </li>
@@ -88,13 +88,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">航班信息</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=flightInformation">航班信息</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">机场资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=airportResource">机场资源</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">物业资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=facilityResource">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)

@@ -2,12 +2,24 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String area;
+if(request.getParameter("area")==null||(!request.getParameter("area").equals("international")&&!request.getParameter("area").equals("local")))
+	area = "local";
+else
+	area = request.getParameter("area");
 %>
 <html>
 <head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>航班信息 - 国内到港 - 天马机场</title>
+    <title>
+    <%
+    if(area.equals("local"))
+    	out.println("航班信息 - 国内到港 - 天马机场");
+    else
+    	out.println("航班信息 - 国际到港 - 天马机场");
+    %>
+    </title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/adminPage.css">
@@ -63,17 +75,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="dropdown">
               <a href="#" class="dropdown-toggle curmenu" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
-                <li class="curmenu">
-                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国内到港</a>
+                <%
+                if(area.equals("local"))
+                	out.println("<li class='curmenu'>");
+                else
+                	out.println("<li>");
+                %>
+                <!-- <li class="curmenu"> -->
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=local">国内到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国内离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=local">国内离港</a>
+                </li>
+                <%
+                if(area.equals("international"))
+                	out.println("<li class='curmenu'>");
+                else
+                	out.println("<li>");
+                %>
+                <!-- <li> -->
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=international">国际到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国际到港</a>
-                </li>
-                <li>
-                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国际离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=international">国际离港</a>
                 </li>
               </ul>
             </li>
@@ -92,13 +116,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">航班信息</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=flightInformation">航班信息</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">机场资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=airportResource">机场资源</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">物业资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=facilityResource">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
@@ -124,17 +148,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
-                <li role="presentation" class="second-menu-cur">
-                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国内到港</a>
+                <%
+                if(area.equals("local"))
+                	out.println("<li role='presentation' class='second-menu-cur'>");
+                else
+                	out.println("<li role='presentation'>");
+                %>
+                <!-- <li role="presentation" class="second-menu-cur"> -->
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=local">国内到港</a>
                 </li>
                 <li role="presentation">
-                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国内离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=local">国内离港</a>
+                </li>
+                <%
+                if(area.equals("international"))
+                	out.println("<li role='presentation' class='second-menu-cur'>");
+                else
+                	out.println("<li role='presentation'>");
+                %>
+                <!-- <li role="presentation"> -->
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=international">国际到港</a>
                 </li>
                 <li role="presentation">
-                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国际到港</a>
-                </li>
-                <li role="presentation">
-                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国际离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=international">国际离港</a>
                 </li>
               </ul>
             </li>
@@ -145,7 +181,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <a href="#">航班信息</a>
             </li>
-            <li class="active">国内到港</li>
+            <li class="active">
+            <%
+            if(area.equals("local"))
+            	out.println("国内到港");
+            else
+            	out.println("国际到港");
+            %>
+            </li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
