@@ -191,7 +191,7 @@ else
             </li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
+          <form class="form-horizontal" role="form" action="<%=basePath%>ArrivalFlightSearch">
             <div class="form-group">
               <label for="flight-id" class="col-sm-2 control-label">航班号：</label>
               <div class="col-sm-6">
@@ -212,9 +212,9 @@ else
               <label for="airCompany-name" class="col-sm-2 control-label">航空公司：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="airCompany-name">
-                  <option>不限</option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option>
+                  <option value="中国南方航空公司">中国南方航空公司</option>
+                  <option value="海南航空公司">海南航空公司</option>
+                  <option value="中国东方航空公司">中国东方航空公司</option>
                 </select>
               </div>
             </div>
@@ -248,34 +248,54 @@ else
               </tr>
             </thead>
             <tbody>
-              <tr data-id="10001">
-                <%
+            <%
+            ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
+            for(ArrivalFlightInfo output:arrivalFlightInfos)
+            {
+            	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+            	if(session.getAttribute("priv1")!=null){
+                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                }else{
+              	  out.println("<td></td>");
+                }
+            	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+            	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+            	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+            	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+            	out.println("<td>"+output.getTime()+"</td>");
+            	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+            	out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+				out.println("</tr>");            
+            }
+            %>
+              <!-- <tr data-id="10001"> -->
+                <%-- <%
                 if(session.getAttribute("priv1")!=null){
                 	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
                 }else{
               	  out.println("<td></td>");
                 }
-                %>
+                %> --%>
                 <!-- <td>
                   <span class="glyphicon glyphicon-check"></span>
                 </td> -->
-                <td>系统管理员</td>
+                <!-- <td>系统管理员</td>
                 <td>主要负责用户管理，权限分配等工作</td>
                 <td>1</td>
                 <td>1</td>
                 <td>1</td>
                 <td>1</td>
                 <td>1</td>
-              </tr>
+              </tr> -->
               <tr data-id="10002">
-                <%
+                <%-- <%
                 if(session.getAttribute("priv1")!=null){
                 	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
                 }else{
               	  out.println("<td></td>");
                 }
-                %>
-                <!-- <td>
+                %> --%>
+                <%-- <!-- <td>
                   <span class="glyphicon glyphicon-check"></span>
                 </td> -->
                 <td>航班信息管理员</td>
@@ -342,7 +362,7 @@ else
                 <td>1</td>
                 <td>1</td>
                 <td>1</td>
-              </tr>
+              </tr> --%>
             </tbody>
           </table>
           <div>

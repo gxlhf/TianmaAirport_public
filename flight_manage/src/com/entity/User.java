@@ -6,7 +6,7 @@ import com.dao.*;
 
 public class User {
 	//离港航班信息查询函数，输入三个参数依次为目的地、航班号、航空公司，返回一个DepartureFlightInfo对象数组
-	DepartureFlightInfo[] searchDepartureFlightInfo(String city, String flightNumber, String airline)
+	public DepartureFlightInfo[] searchDepartureFlightInfo(String city, String flightNumber, String airline)
 	{
 		DepartureFlightInfo[] departureFlightInfo = null;
 		UserDao userDao = new UserDao();
@@ -55,7 +55,7 @@ public class User {
 		return departureFlightInfo;
 	}
 	//到港航班信息查询函数，输入三个参数依次为出发地、航班号、航空公司，返回一个ArrivalFlightInfo对象数组
-	ArrivalFlightInfo[] searchArrivalFlightInfo(String city, String flightNumber, String airline)
+	public ArrivalFlightInfo[] searchArrivalFlightInfo(String city, String flightNumber, String airline)
 	{
 		ArrivalFlightInfo[] arrivalFlightInfo = null;
 		UserDao userDao = new UserDao();
