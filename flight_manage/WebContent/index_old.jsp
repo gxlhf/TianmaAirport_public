@@ -3,17 +3,25 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<html><head>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- DW6 -->
+  <head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>新闻详情 - 天马机场</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>首页 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/adminPage.css">
-    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css">
-    <!-- 支持时间控件 -->
-  </head><body>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/index.css">
+    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css"><!-- 支持时间控件 -->
+  </head>
+  <!-- The structure of this file is exactly the same as 2col_rightNav.html;
+   the only difference between the two is the stylesheet they use -->
+  <body>
+
     <!-- 头部开始 -->
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
@@ -62,41 +70,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国内到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国内离港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国际到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国际离港</a>
                 </li>
               </ul>
             </li>
             <%
             	if(session.getAttribute("priv0")!=null)
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             	else
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='#'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             		
             %>
             
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle curmenu" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="<%=basePath%>News/Intro.jsp">机场介绍</a>
+                  <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">航班信息</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">机场资源</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
@@ -112,95 +120,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!-- /.container-fluid -->
     </nav>
     <!-- 头部结束 -->
+
     <!-- 内容开始 -->
-    <div class="container" id="main-div">
+    <div class="container-fluid" id="main-div">
       <div class="row">
-        <div class="col-md-2" id="sidebar">
-          <ul class="nav nav-pills nav-stacked" role="tablist">
-            <li role="presentation" class="first-menu">
-              <strong>新闻中心</strong>
-            </li>
-            <li>
-              <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
-                <li role="presentation" class="second-menu-cur">
-                  <a href="<%=basePath%>News/Intro.jsp">机场介绍</a>
-                </li>
-                <li role="presentation" class="second-menu-cur">
-                  <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
-                </li>
-                <li role="presentation">
-                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
-                </li>
-                <li role="presentation">
-                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
-                </li>
-                <%
-                	if(session.getAttribute("priv2")!=null)
-                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
-                %>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-10" id="content">
-          <ol class="breadcrumb">
-            <li>
-              <a href="#">新闻中心</a>
-            </li>
-            <li>
-              <a href="#">航班信息</a>
-            </li>
-            <li class="active">最新航班</li>
-          </ol>
-          <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
-              <h2 class="text-center text-muted">最新航班（新闻标题）</h2>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label" id="out-time">发布时间：</label>
-              <label for="out-time" class="col-sm-2 control-label">2016-1-1</label>
-            </div>
-            <div class="form-group">
-              <hr border="2" color="grey">
-            </div>
-            <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">新闻正文：</label>
-              <div class="col-sm-6">一飞冲天啦！！！！！哇！！！！</div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-2"></div>
-              <div class="col-sm-6"></div>
-            </div>
-          </form>
-          <div></div>
-          <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="">修改</a>
-            </div>
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <!-- <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          </ol> -->
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+<!--               <img src="img/indexImg1.jpg" alt="...">
+ -->            </div>
+            <div class="item">
+<!--               <img src="img/indexImg2.jpg" alt="...">
+ -->            </div>
+            <div class="item">
+<!--               <img src="img/indexImg3.jpg" alt="...">
+ -->            </div>
+            <div class="item">
+<!--               <img src="img/indexImg4.jpg" alt="...">
+ -->            </div>
           </div>
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
         <span class="glyphicon glyphicon-chevron-up"></span>
       </div>
+      <div class="push"></div>
     </div>
     <!-- 内容结束 -->
+
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      <p class="text-center"> <a href="#">About Us</a> · <a href="#">Site Map</a> · <a href="#">Privacy Policy</a> · <a href="#">Contact Us</a> · &copy;2016 软件1401班第三组 </p>
     </footer>
     <!-- 尾部结束 -->
+
     <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
-    <script src="<%=basePath%>/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
-  
-
-</body></html>
+    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&location=changsha"></script>
+  </body>
+</html>

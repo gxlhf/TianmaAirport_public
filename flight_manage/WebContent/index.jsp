@@ -12,11 +12,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>首页 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/adminPage.css">
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/index.css">
-    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css"><!-- 支持时间控件 -->
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"><!-- 支持时间控件 -->
   </head>
   <!-- The structure of this file is exactly the same as 2col_rightNav.html;
    the only difference between the two is the stylesheet they use -->
@@ -37,6 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <img class="navbar-logo" src="<%=basePath%>/img/logo.png">
           </a>
         </div>
+
+
         <div class="col-md-8 pull-right" id="personal-info">
           <ul class="list-inline">
             <li id="weather">正在获取天气...</li>
@@ -51,8 +52,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             %>
           </ul>
         </div>
+
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-collapse-lower" id="header">
+        <div class="container-fluid collapse navbar-collapse navbar-collapse-lower" id="header">
           <ul class="nav navbar-nav navbar-right">
           <%
           	if(session.getAttribute("priv3")!=null||session.getAttribute("priv4")!=null){
@@ -70,24 +72,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国内到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国内离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国内离港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国际到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Flight/FlightInfoCheck.jsp">国际离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国际离港</a>
                 </li>
               </ul>
             </li>
             <%
             	if(session.getAttribute("priv0")!=null)
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             	else
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='#'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             		
             %>
             
@@ -95,16 +97,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">新闻中心</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="<%=basePath%>News/Intro.jsp">机场介绍</a>
+                  <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">航班信息</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">航班信息</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">机场资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">机场资源</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>News/NewsList.jsp">物业资源</a>
+                  <a href="<%=basePath%>Public/News/NewsList.jsp">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
@@ -114,10 +116,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </ul>
             </li>
           </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container-fluid -->
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
     </nav>
     <!-- 头部结束 -->
 
@@ -157,12 +157,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="glyphicon glyphicon-chevron-right"></span>
             <span class="sr-only">Next</span>
           </a>
+
+          <div class="container" id="box-flight">
+            <div id="box-search">
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="col-xs-6 active" role="presentation">
+                  <a class="text-center" href="#departure" role="tab" data-toggle="tab">离港</a>
+                </li>
+                <li class="col-xs-6" role="presentation">
+                  <a class="text-center" href="#arrival" role="tab" data-toggle="tab">到港</a>
+                </li>
+              </ul>
+
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="departure">
+                  <form class="form-inline" action="" type="post" role="form">
+                    <input type="text" name="key" class="form-control" placeholder="航班号或城市">
+                    <input type="text" class="hide" name="key_type">
+                    <input type="text" class="hide" name="flight_type">
+                    <button type="submit" class="btn btn-default">查询</button>
+                  </form>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="arrival">
+                  <form class="form-inline" action="" type="post" role="form">
+                    <input type="text" name="key" class="form-control" placeholder="航班号或城市">
+                    <input type="text" class="hide" name="key_type">
+                    <input type="text" class="hide" name="flight_type">
+                    <button type="submit" class="btn btn-default">查询</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="backToTop-btn" onclick="scroll(0,0)">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-      </div>
-      <div class="push"></div>
     </div>
     <!-- 内容结束 -->
 
@@ -172,11 +202,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </footer>
     <!-- 尾部结束 -->
 
-    <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
-    <script src="<%=basePath%>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&location=changsha"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
   </body>
 </html>

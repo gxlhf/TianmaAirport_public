@@ -5,7 +5,7 @@
  * airline:航空公司
  * from:始发地
  * to:到达地
- * stop:经停地，数组
+ * stop:经停地
  */
 package com.entity;
 
@@ -16,9 +16,9 @@ public class FlightCourse {
 	String airline;
 	String from;
 	String to;
-	String[] stop;
+	String stop;
 	public FlightCourse(boolean internationalOrLocal, boolean arrivalOrDeparture, String flightNumber, String airline,
-			String from, String to, String[] stop) {
+			String from, String to, String stop) {
 		this.internationalOrLocal = internationalOrLocal;
 		this.arrivalOrDeparture = arrivalOrDeparture;
 		this.flightNumber = flightNumber;
@@ -63,10 +63,10 @@ public class FlightCourse {
 	public void setTo(String to) {
 		this.to = to;
 	}
-	public String[] getStop() {
+	public String getStop() {
 		return stop;
 	}
-	public void setStop(String[] stop) {
+	public void setStop(String stop) {
 		this.stop = stop;
 	}
 	
