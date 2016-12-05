@@ -124,12 +124,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 内容开始 -->
     <div class="container-fluid" id="main-div">
       <div class="row">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <div id="carousel-background" class="carousel slide" data-ride="carousel" data-keyboard="false">
           <!-- Indicators -->
           <!-- <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            <li data-target="#carousel-background" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-background" data-slide-to="1"></li>
+            <li data-target="#carousel-background" data-slide-to="2"></li>
           </ol> -->
 
           <!-- Wrapper for slides -->
@@ -149,11 +149,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
 
           <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+          <a class="left carousel-control" href="#carousel-background" role="button" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+          <a class="right carousel-control" href="#carousel-background" role="button" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
             <span class="sr-only">Next</span>
           </a>
@@ -175,16 +175,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div role="tabpanel" class="tab-pane active" id="departure">
                   <form class="form-inline" action="" type="post" role="form">
                     <input type="text" name="key" class="form-control" placeholder="航班号或城市">
-                    <input type="text" class="hide" name="key_type">
-                    <input type="text" class="hide" name="flight_type">
+                    <input type="text" class="hide" name="is_flightNo">
+                    <input type="text" class="hide" name="flight_type" value="departure">
                     <button type="submit" class="btn btn-default">查询</button>
                   </form>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="arrival">
                   <form class="form-inline" action="" type="post" role="form">
                     <input type="text" name="key" class="form-control" placeholder="航班号或城市">
-                    <input type="text" class="hide" name="key_type">
-                    <input type="text" class="hide" name="flight_type">
+                    <input type="text" class="hide" name="is_flightNo">
+                    <input type="text" class="hide" name="flight_type" value="arrival">
                     <button type="submit" class="btn btn-default">查询</button>
                   </form>
                 </div>
