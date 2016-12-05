@@ -15,6 +15,13 @@
   <servlet-mapping>
     <servlet-name>logout</servlet-name>
     <url-pattern>/logout</url-pattern>
+   <servlet>
+    <servlet-name>PostTest</servlet-name>
+    <servlet-class>com.servlet.PostTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostTest</servlet-name>
+    <url-pattern>/PostTest</url-pattern>
   </servlet-mapping>
   <filter>
     <description>
