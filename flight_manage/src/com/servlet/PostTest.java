@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class PostTest
  */
-@WebServlet("/PostTest")
+//@WebServlet("/PostTest")
 public class PostTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +35,7 @@ public class PostTest extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("Receive Get.");
 	}
 
 	/**

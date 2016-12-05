@@ -150,11 +150,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">新增用户</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form action="../PostTest" method="post" class="form-horizontal" role="form">
-            <!-- <div class="form-group has-feedback">
+          <form action="../PostTest" method="post" class="form-horizontal" role="form" data-toggle="validator">
+            <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
-              <div class="col-sm-6">
+              <div class="col-sm-6 has-feedback">
                 <input type="text" class="form-control" name="user-id" pattern="\d{4}" data-error="请填写4位员工号*" required>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
               </div>
               <div class="help-block with-errors">*</div>
             </div>
@@ -163,8 +164,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <input type="text" class="form-control" name="user-name" data-error="*" required>
               </div>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
               <div class="help-block with-errors">*</div>
-            </div> -->
+            </div>
             <div class="form-group">
               <label for="user-sex" class="col-sm-2 control-label">性别：</label>
               <div class="col-sm-6">
@@ -230,7 +232,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
-                <a class="btn btn-success" href="#" onclick="console.log($(this).parents('form'));$(this).parents('form').submit();">修改</a>
+                <a class="btn btn-success" onclick="console.log($(this).parents('form'));$(this).parents('form').submit();">修改</a>
                 <a class="btn btn-primary" href="#">取消</a>
               </div>
             </div>
