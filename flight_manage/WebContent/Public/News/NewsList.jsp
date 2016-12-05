@@ -2,11 +2,23 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String type;
+if(request.getParameter("type")==null||(!request.getParameter("type").equals("flightInformation")&&!request.getParameter("type").equals("airportResource")&&!request.getParameter("type").equals("facilityResource")))
+	type = "flightInformation";
+else
+	type = request.getParameter("type");
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>新闻中心-航班信息- 天马机场</title>
+    <title><%
+    if(type.equals("flightInformation"))
+    	out.println("新闻中心-航班信息- 天马机场");
+    if(type.equals("airportResource"))
+    	out.println("新闻中心-机场资源- 天马机场");
+    else
+    	out.println("新闻中心-物业资源- 天马机场");
+    %></title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/adminPage.css">
@@ -62,16 +74,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">航班信息</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国内到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=local">国内到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国内离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=local">国内离港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp">国际到港</a>
+                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=international">国际到港</a>
                 </li>
                 <li>
-                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp">国际离港</a>
+                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=international">国际离港</a>
                 </li>
               </ul>
             </li>
@@ -89,14 +101,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li>
                   <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
-                <li>
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">航班信息</a>
+                <%
+                if(type.equals("flightInformation"))
+                	out.println("<li class='curmenu'>");
+                else
+                	out.println("<li>");
+                %>
+                <!-- <li> -->
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=flightInformation">航班信息</a>
                 </li>
-                <li>
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">机场资源</a>
+                <%
+                if(type.equals("airportResource"))
+                	out.println("<li class='curmenu'>");
+                else
+                	out.println("<li>");
+                %>
+                <!-- <li> -->
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=airportResource">机场资源</a>
                 </li>
-                <li>
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">物业资源</a>
+                <%
+                if(type.equals("facilityResource"))
+                	out.println("<li class='curmenu'>");
+                else
+                	out.println("<li>");
+                %>
+                <!-- <li> -->
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=facilityResource">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
@@ -125,14 +155,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li role="presentation" >
                   <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
-                <li role="presentation  class="second-menu-cur">
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">航班信息</a>
+                <%
+                if(type.equals("flightInformation"))
+                	out.println("<li role='presentation' class='second-menu-cur'>");
+                else
+                	out.println("<li role='presentation'>");
+                %>
+                <!-- <li role="presentation" class="second-menu-cur"> -->
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=flightInformation">航班信息</a>
                 </li>
-                <li role="presentation">
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">机场资源</a>
+                <%
+                if(type.equals("airportResource"))
+                	out.println("<li role='presentation' class='second-menu-cur'>");
+                else
+                	out.println("<li role='presentation'>");
+                %>
+                <!-- <li role="presentation" class="second-menu-cur"> -->
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=airportResource">机场资源</a>
                 </li>
-                <li role="presentation">
-                  <a href="<%=basePath%>Public/News/NewsList.jsp">物业资源</a>
+                <%
+                if(type.equals("facilityResource"))
+                	out.println("<li role='presentation' class='second-menu-cur'>");
+                else
+                	out.println("<li role='presentation'>");
+                %>
+                <!-- <li role="presentation" class="second-menu-cur"> -->
+                  <a href="<%=basePath%>Public/News/NewsList.jsp?type=facilityResource">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
@@ -147,7 +195,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <a href="#">新闻中心</a>
             </li>
-            <li class="active">航班信息</li>
+            <li class="active"><%
+            if(type.equals("flightInformation"))
+            	out.println("航班信息");
+            if(type.equals("airportResource"))
+            	out.println("机场资源");
+            if(type.equals("facilityResource"))
+            	out.println("物业资源");
+            %></li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form">
