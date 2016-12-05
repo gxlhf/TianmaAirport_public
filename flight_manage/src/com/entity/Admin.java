@@ -122,18 +122,18 @@ public class Admin extends User {
 		return result;
 	}
 	
-	//查询角色函数，输入参数为角色名称，返回一个Role对象数组；若无权限操作，则返回含有一个Role对象的对象数组，其name成员值为-1；
-	Role[] searchRole(String name)
+	//查询角色函数，输入参数为角色名称，返回一个Role对象；若无权限操作，则返回含有一个Role对象的对象数组，其name成员值为-1；
+	Role searchRole(String name)
 	{
-		Role[] role = null;
+		Role role = null;
 		if(!authorityValidate("searchRole")){  //无权限操作
-			role = new Role[1];
-			role[0].name = "-1";
+			/*role = new Role[1];
+			role[0].name = "-1";*/
 		}
 		/*
 		 * Role[] searchR(String name);
 		 * 数据库操作：查询角色名称为该name的角色信息
-		 * 形参为角色名称，返回类型为Role对象数组
+		 * 形参为角色名称，返回类型为Role对象
 		 */
 		//role=searchR(name);		
 		return role;
