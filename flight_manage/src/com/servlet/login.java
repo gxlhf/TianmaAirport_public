@@ -80,7 +80,7 @@ public class login extends HttpServlet {
 			request.setAttribute("admin", admin);
 //			System.out.println(admin.getRole().getAuthorityMap());
 			session.setAttribute("admin", admin);
-			session.setAttribute("empno", admin.getEmpno());
+//			session.setAttribute("empno", admin.getEmpno());
 			session.setAttribute("priv0", admin.getRole().getAuthorityMap().get("机场设施管理"));
 			session.setAttribute("priv1", admin.getRole().getAuthorityMap().get("航班信息管理"));
 			session.setAttribute("priv2", admin.getRole().getAuthorityMap().get("新闻管理"));
