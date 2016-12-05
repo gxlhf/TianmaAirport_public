@@ -8,18 +8,24 @@
     <servlet-name>login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
-  
-   <filter>
-		<description>
+   <servlet>
+    <servlet-name>PostTest</servlet-name>
+    <servlet-class>com.servlet.PostTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostTest</servlet-name>
+    <url-pattern>/PostTest</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <description>
 		</description>
-		<display-name>
+    <display-name>
 		PrivFilter</display-name>
-		<filter-name>PrivFilter</filter-name>
-		<filter-class>com.servlet.PrivFilter</filter-class>
-	</filter>
-		<filter-mapping>
-		<filter-name>PrivFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-  
+    <filter-name>PrivFilter</filter-name>
+    <filter-class>com.servlet.PrivFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>PrivFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>

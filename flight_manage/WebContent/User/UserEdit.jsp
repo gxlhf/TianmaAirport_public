@@ -147,26 +147,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <a href="#">用户管理</a>
             </li>
-            <li class="active">用户修改</li>
+            <li class="active">新增用户</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
+          <form action="../PostTest" method="post" class="form-horizontal" role="form">
+            <!-- <div class="form-group has-feedback">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-id" disabled="disabled">
+                <input type="text" class="form-control" name="user-id" pattern="\d{4}" data-error="请填写4位员工号*" required>
               </div>
+              <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-name" class="col-sm-2 control-label">姓名：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-name">
+                <input type="text" class="form-control" name="user-name" data-error="*" required>
               </div>
-            </div>
+              <div class="help-block with-errors">*</div>
+            </div> -->
             <div class="form-group">
               <label for="user-sex" class="col-sm-2 control-label">性别：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="user-sex">
+                <select class="form-control" name="user-sex" >
                   <option>不限</option>
                   <option>男</option>
                   <option>女</option>
@@ -210,29 +212,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <input type="text" class="form-control" name="user-email">
               </div>
+              <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-password" class="col-sm-2 control-label">登录密码：</label>
               <div class="col-sm-6">
                 <input type="password" class="form-control" name="user-password">
               </div>
+              <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-password-check" class="col-sm-2 control-label">密码确认：</label>
               <div class="col-sm-6">
                 <input type="password" class="form-control" name="user-password-check">
               </div>
+              <div class="help-block with-errors">*</div>
             </div>
-            <div class="form-group">
-              <div class="col-sm-2"></div>
+            <div class="col-sm-6 btn-modify">
+              <div class="btn-group btn-group-justified">
+                <a class="btn btn-success" href="#" onclick="console.log($(this).parents('form'));$(this).parents('form').submit();">修改</a>
+                <a class="btn btn-primary" href="#">取消</a>
+              </div>
             </div>
           </form>
-          <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-success" href="">修改</a>
-              <a class="btn btn-primary" href="">取消</a>
-            </div>
-          </div>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
@@ -252,6 +254,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
     <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>

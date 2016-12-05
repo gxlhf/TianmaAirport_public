@@ -8,7 +8,7 @@ $('#box-search button').click(function (e) {
 	var key_text = form_elem.find('[name = "key"]').val();
 	$('[name="is_flightNo"]').val(flight_num_exp.test(key_text));
 
-	// form_elem.submit();
+	form_elem.submit();
 });
 
 $(function () {
