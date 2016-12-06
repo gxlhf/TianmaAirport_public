@@ -171,37 +171,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </tr>
                   </thead>
                   <tbody>
-                    <tr data-id="10001">
+                    <tr>
                       <td>
                         <span class="glyphicon"></span>
                       </td>
                       <td>用户管理</td>
                     </tr>
-                    <tr data-id="10002">
+                    <tr>
                       <td>
                         <span class="glyphicon"></span>
                       </td>
                       <td>角色管理</td>
                     </tr>
-                    <tr data-id="10003">
+                    <tr>
                       <td>
                         <span class="glyphicon"></span>
                       </td>
                       <td>航班信息管理</td>
                     </tr>
-                    <tr data-id="10003">
+                    <tr>
                       <td>
                         <span class="glyphicon"></span>
                       </td>
                       <td>机场设施管理</td>
                     </tr>
-                    <tr data-id="10003">
+                    <tr>
                       <td>
                         <span class="glyphicon"></span>
                       </td>
                       <td>物业设施管理</td>
                     </tr>
-                    <tr data-id="10003">
+                    <tr>
                       <td>
                       </td>
                       <td>
@@ -222,37 +222,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </tr>
                   </thead>
                   <tbody>
-                    <tr data-id="10001">
+                    <tr>
                       <td>
                         <span class="glyphicon"></span>
                       </td>
                       <td></td>
                     </tr>
-                    <tr data-id="10002">
+                    <tr>
                       <td>
                         <span class="glyphicon"></span>
                       </td>
                       <td></td>
                     </tr>
-                    <tr data-id="10003">
+                    <tr>
                       <td>
                         <span class="glyphicon"></span>
                       </td>
                       <td></td>
                     </tr>
-                    <tr data-id="10003">
+                    <tr>
                       <td>
                         <span class="glyphicon"></span>
                       </td>
                       <td></td>
                     </tr>
-                    <tr data-id="10003">
+                    <tr>
                       <td>
                         <span class="glyphicon"></span>
                       </td>
                       <td></td>
                     </tr>
-                    <tr data-id="10003">
+                    <tr>
                       <td>
                       </td>
                       <td>

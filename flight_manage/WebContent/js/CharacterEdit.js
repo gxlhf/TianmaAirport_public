@@ -71,7 +71,6 @@ $(function () {
 	});
 	$('#btn-remove').click(function () {
 		var select_elem = $('#right-side-table td>.glyphicon-check:not(.td-check)').parent().next('td');
-		console.log(select_elem);
 
 		for (var i = 0; i < select_elem.length; i++) {
 			var empty_tr = $('<tr data-id="10003"><td><span class="glyphicon"></span></td><td></td></tr>');
@@ -93,8 +92,12 @@ $(function () {
 	});
 	//绑定全选事件
 	$('th > span').click(function () {
-		console.log($(this).parents('table').find('tbody > tr'));
-		$(this).parents('table').find('tbody > tr .glyphicon').addClass('glyphicon-check');
+		var selected_box = $(this).parents('table').find('tbody > tr .glyphicon');
+		selected_box.each(function () {
+			if($(this).parent().next().text() != ''){
+				$(this).addClass('glyphicon-check')
+			}
+		});
 	});
 	//输入已分配的权限
 	$('#btn-save').click(function () {
