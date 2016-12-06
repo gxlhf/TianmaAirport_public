@@ -593,4 +593,151 @@ public class UserDao {
     	 } 
        return news;
     }
+    public String[] returnAllLocalDestination()
+    {/*返回数据库中离港航班的所有国内目的地
+        allLocalDestination:国内目的地数组
+        return allLocalDestination;
+       */
+    	String[] allLocalDestination=null;
+        int i=0;
+        sql = "SELECT DISTINCT flight_off.Destination FROM flight_off WHERE flight_off.InternationalOrLocal=false";//SQL语句  
+        db1= new db_connection(sql);//创建db_connection对象         
+        try {  
+            ret = db1.pst.executeQuery();//执行语句，得到结果集 
+            ret.last();
+            int rowNumber=ret.getRow();
+            ret.beforeFirst();
+            allLocalDestination=new String[rowNumber];
+            while (ret.next()) {           	 
+            	allLocalDestination[i]=ret.getString("Destination");   	  	         	 
+                  i++;
+            }
+            ret.close();  
+           
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        } 
+        finally{
+        	 db1.close();//关闭连接  
+        }
+		return allLocalDestination;
+    	
+    }
+    public String[] returnAllLocalFrom()
+    {/*返回数据库中到港航班的所有国内始发地
+        allLocalFrom:始发地数组
+        return allLocalFrom
+        */
+    	String[] allLocalFrom=null;
+        int i=0;
+        sql = "SELECT DISTINCT flight_arrival.Starting_station FROM flight_arrival WHERE flight_arrival.InternationalOrLocal=false";//SQL语句  
+        db1= new db_connection(sql);//创建db_connection对象         
+        try {  
+            ret = db1.pst.executeQuery();//执行语句，得到结果集 
+            ret.last();
+            int rowNumber=ret.getRow();
+            ret.beforeFirst();
+            allLocalFrom=new String[rowNumber];
+            while (ret.next()) {           	 
+            	allLocalFrom[i]=ret.getString("Starting_station");   	  	         	 
+                  i++;
+            }
+            ret.close();  
+           
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        } 
+        finally{
+        	 db1.close();//关闭连接  
+        }
+		return allLocalFrom;
+    }
+    public String[] returnAllInternationalDestination()
+    {/*返回数据库中离港航班的所有国际目的地
+        allInternationalDestination:国际目的地数组
+        return allInternationalDestination;
+       */
+    	String[] allInternationalDestination=null;
+        int i=0;
+        sql = "SELECT DISTINCT flight_off.Destination FROM flight_off WHERE flight_off.InternationalOrLocal=true";//SQL语句  
+        db1= new db_connection(sql);//创建db_connection对象         
+        try {  
+            ret = db1.pst.executeQuery();//执行语句，得到结果集 
+            ret.last();
+            int rowNumber=ret.getRow();
+            ret.beforeFirst();
+            allInternationalDestination=new String[rowNumber];
+            while (ret.next()) {           	 
+            	allInternationalDestination[i]=ret.getString("Destination");   	  	         	 
+                  i++;
+            }
+            ret.close();  
+           
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        } 
+        finally{
+        	 db1.close();//关闭连接  
+        }
+		return allInternationalDestination;
+    	
+    }
+    public String[] returnAllInternationalFrom()
+    {/*返回数据库中到港航班的所有国际始发地
+        allInternationalFrom:国际始发地数组
+        return allInternationalFrom
+        */
+    	String[] allInternationalFrom=null;
+        int i=0;
+        sql = "SELECT DISTINCT flight_arrival.Starting_station FROM flight_arrival WHERE flight_arrival.InternationalOrLocal=true";//SQL语句  
+        db1= new db_connection(sql);//创建db_connection对象         
+        try {  
+            ret = db1.pst.executeQuery();//执行语句，得到结果集 
+            ret.last();
+            int rowNumber=ret.getRow();
+            ret.beforeFirst();
+            allInternationalFrom=new String[rowNumber];
+            while (ret.next()) {           	 
+            	allInternationalFrom[i]=ret.getString("Starting_station");   	  	         	 
+                  i++;
+            }
+            ret.close();  
+           
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        } 
+        finally{
+        	 db1.close();//关闭连接  
+        }
+		return allInternationalFrom;
+    }
+    public String[] returnAllAirline()
+    {/*返回数据库中的所有航空公司
+        allAirline:航空公司数组
+        return allAirline
+        */
+    	String[] allAirline=null;
+        int i=0;
+        sql = "SELECT Airline FROM flight_arrival UNION SELECT  Airline  FROM flight_off";//SQL语句  
+        db1= new db_connection(sql);//创建db_connection对象         
+        try {  
+            ret = db1.pst.executeQuery();//执行语句，得到结果集 
+            ret.last();
+            int rowNumber=ret.getRow();
+            ret.beforeFirst();
+            allAirline=new String[rowNumber];
+            while (ret.next()) {           	 
+            	allAirline[i]=ret.getString("Airline");   	  	         	 
+                  i++;
+            }
+            ret.close();  
+           
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        } 
+        finally{
+        	 db1.close();//关闭连接  
+        }
+		return allAirline;
+    }
 }

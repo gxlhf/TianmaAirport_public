@@ -202,9 +202,9 @@ else
               <label for="init-site" class="col-sm-2 control-label">始发地：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="from-site">
-                  <option value="广州白云">广州白云</option>
-                  <option value="上海虹桥">上海虹桥</option>
-                  <option value="重庆江北">重庆江北</option>
+                  <option value="广州">广州</option>
+                  <option value="上海">上海虹桥</option>
+                  <option value="重庆">重庆</option>
                 </select>
               </div>
             </div>
@@ -218,6 +218,7 @@ else
                 </select>
               </div>
             </div>
+            <input type="hidden" name="area" value="<%=area%>" /> 
             <div class="form-group">
               <div class="col-sm-2"></div>
               <div class="col-sm-6">
@@ -225,7 +226,7 @@ else
               </div>
             </div>
           </form>
-          <table class="table table-hover select-table">
+          <%-- <table class="table table-hover select-table">
             <thead>
               <tr>
                 <%
@@ -238,35 +239,59 @@ else
                 <!-- <th>
                   <span class="glyphicon glyphicon-check th-check"></span>
                 </th> -->
+                <th>航空公司</th>
                 <th>航班号</th>
                 <th>始发地</th>
                 <th>经停地</th>
                 <th>目的地</th>
                 <th>到港时间</th>
                 <th>行李转盘</th>
-                <th>航空公司</th>
+                
               </tr>
             </thead>
-            <tbody>
+            <tbody> --%>
             <%
-            ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
-            for(ArrivalFlightInfo output:arrivalFlightInfos)
+            if(request.getAttribute("arrivalFlightInfos")!=null)
             {
-            	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+            	out.println("<table class='table table-hover select-table'><thead><tr>");
             	if(session.getAttribute("priv1")!=null){
-                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+              	  out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
                 }else{
-              	  out.println("<td></td>");
+              	  out.println("<th></th>");
                 }
-            	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-            	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-            	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-            	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-            	out.println("<td>"+output.getTime()+"</td>");
-            	out.println("<td>"+output.getLuggageCarousel()+"</td>");
-            	out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-				out.println("</tr>");            
+            	out.println("<th>航空公司</th><th>航班号</th><th>始发地</th><th>经停地</th><th>目的地</th><th>到港时间</th><th>行李转盘</th></tr></thead><tbody>");
+            	ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
+                for(ArrivalFlightInfo output:arrivalFlightInfos)
+                {
+                	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                	if(session.getAttribute("priv1")!=null){
+                    	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                    }else{
+                  	  out.println("<td></td>");
+                    }
+                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
+                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                    	out.println("<td>"+output.getTime()+"</td>");
+                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+        				out.println("</tr>");
+                	}
+                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
+                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                    	out.println("<td>"+output.getTime()+"</td>");
+                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+        				out.println("</tr>");
+                	}         
+                }
             }
+            
             %>
               <!-- <tr data-id="10001"> -->
                 <%-- <%
@@ -287,82 +312,7 @@ else
                 <td>1</td>
                 <td>1</td>
               </tr> -->
-              <tr data-id="10002">
-                <%-- <%
-                if(session.getAttribute("priv1")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %> --%>
-                <%-- <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>航班信息管理员</td>
-                <td>主要负责管理航班</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr data-id="10003">
-                <%
-                if(session.getAttribute("priv1")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>机场信息管理员</td>
-                <td>主要负责管理机场设施</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr data-id="10004">
-                <%
-                if(session.getAttribute("priv1")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>新闻发布员</td>
-                <td>主要负责管理新闻</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr data-id="10005">
-                <%
-                if(session.getAttribute("priv1")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>李静</td>
-                <td>女</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr> --%>
+              
             </tbody>
           </table>
           <div>
