@@ -6,6 +6,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="<%=basePath%>">
 
     <title>用户与角色管理- 用户管理 - 天马机场</title>
 
@@ -150,52 +151,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">新增用户</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form action="../PostTest" method="post" class="form-horizontal" role="form" data-toggle="validator">
+          <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
-              <div class="col-sm-6 has-feedback">
+              <div class="col-sm-6">
                 <input type="text" class="form-control" name="user-id" pattern="\d{4}" data-error="请填写4位员工号*" required>
-                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
               </div>
               <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-name" class="col-sm-2 control-label">姓名：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-name" data-error="*" required>
+                <input type="text" class="form-control" name="user-name" data-error="请填写姓名*" required>
               </div>
-              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
               <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-sex" class="col-sm-2 control-label">性别：</label>
-              <div class="col-sm-6">
-                <select class="form-control" name="user-sex" >
-                  <option>不限</option>
-                  <option>男</option>
-                  <option>女</option>
-                </select>
+              <div class="btn-group col-sm-6" data-toggle="buttons">
+                <label class="btn btn-default col-xs-4">
+                  <input type="radio" name="user-sex" value="male" data-error="请选择性别*" autocomplete="off" required>男
+                </label>
+                <label class="btn btn-default col-xs-4">
+                  <input type="radio" name="user-sex" value="female" data-error="请选择性别*" autocomplete="off" required>女
+                </label>
               </div>
+              <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-pos" class="col-sm-2 control-label">职位：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="user-pos">
-                  <option>不限</option>
+                <select class="form-control" name="user-pos" data-error="请选择职位*" required>
+                  <option></option>
                   <option>机场地勤人员</option>
                   <option>信息技术员</option>
                 </select>
               </div>
+              <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-roles" class="col-sm-2 control-label">角色：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="user-roles">
-                  <option>不限</option>
+                <select class="form-control" name="user-roles" data-error="请选择角色*" required>
+                  <option></option>
                   <option>机场地勤人员</option>
                   <option>信息技术员</option>
                 </select>
               </div>
+              <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-phone" class="col-sm-2 control-label">电话：</label>
@@ -212,27 +215,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-email" class="col-sm-2 control-label">电子邮箱：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-email">
+                <input type="email" class="form-control" name="user-email" data-error="请填写正确的电子邮箱*" required>
               </div>
               <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-password" class="col-sm-2 control-label">登录密码：</label>
               <div class="col-sm-6">
-                <input type="password" class="form-control" name="user-password">
+                <input type="password" class="form-control" name="user-password" data-minlength="6" data-required-error="请填写密码*" data-minlength-error="密码长度至少为6位*" required>
               </div>
               <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-password-check" class="col-sm-2 control-label">密码确认：</label>
               <div class="col-sm-6">
-                <input type="password" class="form-control" name="user-password-check">
+                <input type="password" class="form-control" data-match='[name="user-password"]' data-required-error="请确认密码*" data-match-error="密码不一致*" required>
               </div>
               <div class="help-block with-errors">*</div>
             </div>
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
-                <a class="btn btn-success" onclick="console.log($(this).parents('form'));$(this).parents('form').submit();">修改</a>
+                <a class="btn btn-success" onclick="$(this).parents('form').submit();">修改</a>
                 <a class="btn btn-primary" href="#">取消</a>
               </div>
             </div>
@@ -256,7 +259,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/validator.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
     <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
