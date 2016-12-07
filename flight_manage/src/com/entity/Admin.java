@@ -10,6 +10,7 @@
  * position:职位
  */
 package com.entity;
+import com.dao.*;
 
 public class Admin extends User {
 	String empno;
@@ -21,6 +22,7 @@ public class Admin extends User {
 	String phone;
 	String department;
 	String position;
+	String password;
 	public String getEmpno() {
 		return empno;
 	}
@@ -75,9 +77,15 @@ public class Admin extends User {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public Admin(String empno, String name, int sex, String email, Role role, String mobile, String phone,
-			String department, String position) {
+			String department, String position, String password) {
 		this.empno = empno;
 		this.name = name;
 		this.sex = sex;
@@ -87,6 +95,7 @@ public class Admin extends User {
 		this.phone = phone;
 		this.department = department;
 		this.position = position;
+		this.password = password;
 	}
 	//权限验证函数，输入形参为操作函数名；返回布尔值，若该管理员有该操作的权限则返回true，否则返回false
 	private boolean authorityValidate(String op)
@@ -131,11 +140,12 @@ public class Admin extends User {
 			role[0].name = "-1";*/
 		}
 		/*
-		 * Role[] searchR(String name);
+		 * Role searchRole(String name);
 		 * 数据库操作：查询角色名称为该name的角色信息
 		 * 形参为角色名称，返回类型为Role对象
 		 */
-		//role=searchR(name);		
+		AdminDao adminDao = new AdminDao();
+		role = adminDao.searchRole(name);
 		return role;
 	}
 	
@@ -144,10 +154,14 @@ public class Admin extends User {
 		if(!authorityValidate("addRole"))
 			return -1;
 		/*
-		 * boolean add(Role role);
+		 * boolean addRole(Role role);
 		 * 数据库操作：新增角色，形参为角色对象，返回值为布尔值
 		 */
-		//return add(role);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.addRole(role);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -156,10 +170,14 @@ public class Admin extends User {
 		if(!authorityValidate("modifyRole"))
 			return -1;
 		/*
-		 * boolean add(Role role);
+		 * boolean modifyRole(Role role);
 		 * 数据库操作：修改角色，形参为角色对象，返回值为布尔值
 		 */
-		//return add(role);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.modifyRole(role);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -168,10 +186,14 @@ public class Admin extends User {
 		if(!authorityValidate("deleteRole"))
 			return -1;
 		/*
-		 * boolean add(Role role);
+		 * boolean deleteRole(Role role);
 		 * 数据库操作：删除角色，形参为角色对象，返回值为布尔值
 		 */
-		//return add(role);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.deleteRole(role);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 
