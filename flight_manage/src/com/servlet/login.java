@@ -12,7 +12,7 @@ import javax.servlet.http.*;
 import com.entity.Admin;
 import com.entity.Role;
 import com.dao.*;
-
+import com.servlet.Regex;
 
 /**
  * Servlet implementation class login
@@ -50,6 +50,15 @@ public class login extends HttpServlet {
 		response.setContentType("text/html");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		Regex regex=new Regex();
+		if(!regex.isValid(username)){
+			System.out.println("username not valid");
+			request.getRequestDispatcher("error.jsp").forward(request, response);
+		}
+		else if(!regex.isValid(password)){
+			System.out.println("password not valid");
+			request.getRequestDispatcher("error.jsp").forward(request, response);
+		}else{
 		HttpSession session = request.getSession();
 		LoginDao loginDao = new LoginDao();
 		Admin admin = loginDao.loginCheck(username, password);
@@ -108,7 +117,7 @@ public class login extends HttpServlet {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			//response.sendRedirect("login.jsp");
 		}
-
+		}
 		
 	}
 
