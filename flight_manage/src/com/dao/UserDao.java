@@ -711,23 +711,23 @@ public class UserDao {
         }
 		return allInternationalFrom;
     }
-    public String[] returnAllAirline()
-    {/*返回数据库中的所有航空公司
-        allAirline:航空公司数组
-        return allAirline
+    public String[] returnAllArrivalLocalAirline()
+    {/*返回数据库中的所有到港国内航空公司
+        allArrivalLocalAirline:到港国内航空公司数组
+        return allArrivalLocalAirline
         */
-    	String[] allAirline=null;
+    	String[] allArrivalLocalAirline=null;
         int i=0;
-        sql = "SELECT Airline FROM flight_arrival UNION SELECT  Airline  FROM flight_off";//SQL语句  
+        sql = "SELECT  DISTINCT Airline FROM flight_arrival WHERE flight_arrival.InternationalOrLocal=false";//SQL语句  
         db1= new db_connection(sql);//创建db_connection对象         
         try {  
             ret = db1.pst.executeQuery();//执行语句，得到结果集 
             ret.last();
             int rowNumber=ret.getRow();
             ret.beforeFirst();
-            allAirline=new String[rowNumber];
+            allArrivalLocalAirline=new String[rowNumber];
             while (ret.next()) {           	 
-            	allAirline[i]=ret.getString("Airline");   	  	         	 
+            	allArrivalLocalAirline[i]=ret.getString("Airline");   	  	         	 
                   i++;
             }
             ret.close();  
@@ -738,6 +738,93 @@ public class UserDao {
         finally{
         	 db1.close();//关闭连接  
         }
-		return allAirline;
+		return allArrivalLocalAirline;
+    }
+    public String[] returnAllArrivalInternationalAirline()
+    {/*返回数据库中的所有到港国际航空公司
+        allArrivalInternationalAirline:到港国际航空公司数组
+        return allArrivalInternationalAirline
+        */
+    	String[] allArrivalInternationalAirline=null;
+        int i=0;
+        sql = "SELECT  DISTINCT Airline FROM flight_arrival WHERE flight_arrival.InternationalOrLocal=true";//SQL语句  
+        db1= new db_connection(sql);//创建db_connection对象         
+        try {  
+            ret = db1.pst.executeQuery();//执行语句，得到结果集 
+            ret.last();
+            int rowNumber=ret.getRow();
+            ret.beforeFirst();
+            allArrivalInternationalAirline=new String[rowNumber];
+            while (ret.next()) {           	 
+            	allArrivalInternationalAirline[i]=ret.getString("Airline");   	  	         	 
+                  i++;
+            }
+            ret.close();  
+           
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        } 
+        finally{
+        	 db1.close();//关闭连接  
+        }
+		return allArrivalInternationalAirline;
+    }
+    public String[] returnAllDepartureInternationalAirline()
+    {/*返回数据库中的所有离港国际航空公司
+        allDepartureInternationalAirline:离港国际航空公司数组
+        return allDepartureInternationalAirline
+        */
+    	String[] allDepartureInternationalAirline=null;
+        int i=0;
+        sql = "SELECT  DISTINCT Airline FROM flight_off WHERE flight_off.InternationalOrLocal=true";//SQL语句  
+        db1= new db_connection(sql);//创建db_connection对象         
+        try {  
+            ret = db1.pst.executeQuery();//执行语句，得到结果集 
+            ret.last();
+            int rowNumber=ret.getRow();
+            ret.beforeFirst();
+            allDepartureInternationalAirline=new String[rowNumber];
+            while (ret.next()) {           	 
+            	allDepartureInternationalAirline[i]=ret.getString("Airline");   	  	         	 
+                  i++;
+            }
+            ret.close();  
+           
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        } 
+        finally{
+        	 db1.close();//关闭连接  
+        }
+		return allDepartureInternationalAirline;
+    }
+    public String[] returnAllDepartureLocalAirline()
+    {/*返回数据库中的所有离港国内航空公司
+        allDepartureLocalAirline:离港国内航空公司数组
+        return allDepartureLocalAirline
+        */
+    	String[] allDepartureLocalAirline=null;
+        int i=0;
+        sql = "SELECT  DISTINCT Airline FROM flight_off WHERE flight_off.InternationalOrLocal=false";//SQL语句  
+        db1= new db_connection(sql);//创建db_connection对象         
+        try {  
+            ret = db1.pst.executeQuery();//执行语句，得到结果集 
+            ret.last();
+            int rowNumber=ret.getRow();
+            ret.beforeFirst();
+            allDepartureLocalAirline=new String[rowNumber];
+            while (ret.next()) {           	 
+            	allDepartureLocalAirline[i]=ret.getString("Airline");   	  	         	 
+                  i++;
+            }
+            ret.close();  
+           
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        } 
+        finally{
+        	 db1.close();//关闭连接  
+        }
+		return allDepartureLocalAirline;
     }
 }
