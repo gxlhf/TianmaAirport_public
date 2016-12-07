@@ -205,13 +205,15 @@ public class Admin extends User {
 			admin = new Admin[1];
 			admin[0].empno = "-1";
 		}
-		if(empno!=""){
+		if(empno!=""&&empno!=null){
 			/*
 			 * Admin[] searchAdmin0(String empno);
 			 * 数据库操作：查询员工号为该empno的管理员信息
 			 * 形参为员工号，返回类型为Admin对象数组
 			 */
-			//return searchAdmin0(empno);
+			//
+			AdminDao adminDao = new AdminDao();
+			return adminDao.searchAdmin0(empno);
 		}
 		else{
 			/*
@@ -219,10 +221,12 @@ public class Admin extends User {
 			 * 数据库操作：查询姓名为name，性别为sex，职位为position，角色为roleName的管理员信息，若其中有形参值为空字符串，则表示无该条件限制
 			 * 形参为姓名，性别，职位，角色，返回类型为Admin对象数组
 			 */
-			//return searchAdmin1(empno);
+			//
+			AdminDao adminDao = new AdminDao();
+			return adminDao.searchAdmin1(name, sex, position, roleName);
 		}
 		
-		return admin;
+		
 	}
 	
 	//新增管理员函数：输入参数为管理员对象；返回整数值，成功为1，失败为0，无权限操作为-1
@@ -233,7 +237,11 @@ public class Admin extends User {
 		 * boolean add(Admin admin);
 		 * 数据库操作：新增管理员，形参为管理员对象，返回值为布尔值
 		 */
-		//return add(admin);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.addAdmin(admin);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -245,7 +253,11 @@ public class Admin extends User {
 		 * boolean modify(Admin admin);
 		 * 数据库操作：修改管理员，形参为管理员对象，返回值为布尔值
 		 */
-		//return modify(admin);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.modifyAdmin(admin);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -257,7 +269,11 @@ public class Admin extends User {
 		 * boolean delete(Admin admin);
 		 * 数据库操作：删除管理员，形参为管理员对象，返回值为布尔值
 		 */
-		//return delete(admin);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.deleteAdmin(admin);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -267,7 +283,11 @@ public class Admin extends User {
 		 * boolean add(AirportResource airportResource);
 		 * 数据库操作：新增机场资源，形参为机场资源对象，返回值为布尔值
 		 */
-		//return add(airportResource);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.addAirportResource(airportResource);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 
@@ -279,7 +299,11 @@ public class Admin extends User {
 		 * boolean modify(AirportResource airportResource);
 		 * 数据库操作：修改机场资源，形参为机场资源对象，返回值为布尔值
 		 */
-		//return modify(airportResource);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.modifyAirportResource(airportResource);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 
@@ -291,7 +315,11 @@ public class Admin extends User {
 		 * boolean delete(AirportResource airportResource);
 		 * 数据库操作：删除机场资源，形参为机场资源对象，返回值为布尔值
 		 */
-		//return delete(airportResource);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.deleteAirportResource(airportResource);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -303,7 +331,11 @@ public class Admin extends User {
 		 * boolean add(PropertyFacility propertyFacility);
 		 * 数据库操作：新增物业设施，形参为物业设施对象，返回值为布尔值
 		 */
-		//return add(propertyFacility);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.addPropertyFacility(propertyFacility);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 
@@ -315,7 +347,11 @@ public class Admin extends User {
 		 * boolean modify(PropertyFacility propertyFacility);
 		 * 数据库操作：修改物业设施，形参为物业设施对象，返回值为布尔值
 		 */
-		//return modify(propertyFacility);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.modifyPropertyFacility(propertyFacility);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 
@@ -327,7 +363,11 @@ public class Admin extends User {
 		 * boolean delete(PropertyFacility propertyFacility);
 		 * 数据库操作：删除物业设施，形参为物业设施对象，返回值为布尔值
 		 */
-		//return delete(propertyFacility);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.deletePropertyFacility(propertyFacility);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 
@@ -339,7 +379,11 @@ public class Admin extends User {
 		 * boolean add(DepartureFlightInfo departureFlightInfo);
 		 * 数据库操作：新增离港航班信息，形参为离港航班信息对象，返回值为布尔值
 		 */
-		//return add(DepartureFlightInfo departureFlightInfo);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.addDepartureFlightInfo(departureFlightInfo);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -352,6 +396,10 @@ public class Admin extends User {
 		 * 数据库操作：修改离港航班信息，形参为离港航班信息对象，返回值为布尔值
 		 */
 		//return modify(DepartureFlightInfo departureFlightInfo);
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.modifyDepartureFlightInfo(departureFlightInfo);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -363,7 +411,11 @@ public class Admin extends User {
 		 * boolean delete(DepartureFlightInfo departureFlightInfo);
 		 * 数据库操作：删除离港航班信息，形参为离港航班信息对象，返回值为布尔值
 		 */
-		//return delete(DepartureFlightInfo departureFlightInfo);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.deleteDepartureFlightInfo(departureFlightInfo);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -375,7 +427,11 @@ public class Admin extends User {
 		 * boolean add(ArrivalFlightInfo arrivalFlightInfo);
 		 * 数据库操作：新增到港航班信息，形参为到港航班信息对象，返回值为布尔值
 		 */
-		//return add(ArrivalFlightInfo arrivalFlightInfo);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.addArrivalFlightInfo(arrivalFlightInfo);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -387,7 +443,11 @@ public class Admin extends User {
 		 * boolean modify(ArrivalFlightInfo arrivalFlightInfo);
 		 * 数据库操作：修改到港航班信息，形参为到港航班信息对象，返回值为布尔值
 		 */
-		//return modify(ArrivalFlightInfo arrivalFlightInfo);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.modifyArrivalFlightInfo(arrivalFlightInfo);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -399,7 +459,11 @@ public class Admin extends User {
 		 * boolean delete(ArrivalFlightInfo arrivalFlightInfo);
 		 * 数据库操作：删除到港航班信息，形参为到港航班信息对象，返回值为布尔值
 		 */
-		//return delete(ArrivalFlightInfo arrivalFlightInfo);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.deleteArrivalFlightInfo(arrivalFlightInfo);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	
@@ -411,7 +475,11 @@ public class Admin extends User {
 		 * boolean add(News news);
 		 * 数据库操作：新增新闻，形参为新闻对象，返回值为布尔值
 		 */
-		//return add(News news);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.addNews(news);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 
@@ -423,7 +491,11 @@ public class Admin extends User {
 		 * boolean modify(News news);
 		 * 数据库操作：修改新闻，形参为新闻对象，返回值为布尔值
 		 */
-		//return modify(News news);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.modifyNews(news);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 
@@ -435,7 +507,11 @@ public class Admin extends User {
 		 * boolean delete(News news);
 		 * 数据库操作：删除新闻，形参为新闻对象，返回值为布尔值
 		 */
-		//return delete(News news);
+		//
+		AdminDao adminDao = new AdminDao();
+		boolean result = adminDao.deleteNews(news);
+		if(result==true)
+			return 1;
 		return 0;
 	}
 	

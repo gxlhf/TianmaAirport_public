@@ -293,7 +293,7 @@ public class AdminDao {
             		db1.pst.setString(1, name);
             		db1.pst.setString(2, position);
             		db1.pst.setString(3, roleName);
-            	}else if((name==null&&name=="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
+            	}else if((name==null||name=="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
             	{	
             		sql=sql+"user_info.Sex=? AND user_info.Position=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
