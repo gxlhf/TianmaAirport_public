@@ -270,7 +270,7 @@ else
                 </td> -->
                 <td>1</td>
                 <td>
-                  <a href="<%=basePath%>News/NewsDetail.jsp">最新航班消息</a>
+                  <a href="<%=basePath%>/Public/News/NewsDetail.jsp">最新航班消息</a>
                 </td>
                 <td>2016-1-1</td>
                 <td>李静</td>
