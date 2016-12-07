@@ -1,0 +1,47 @@
+<!--导航栏CSS属性-->
+td{
+border:1px solid #cceeff;/* 单元格样式 */
+}
+#globalNav ul{
+list-style:none;
+font-size:20px;
+text-decoration:none;
+width:100%;
+}
+#globalNav li{
+float:right;
+margin-right:40px;
+padding:0px;
+}
+#globalNav li a{
+line-height:30px;
+width:100px;
+display:block;
+text-align:center;
+text-decoration:none;
+}
+#globalNav li a:hover{
+position:relative;
+}
+#globalNav li span{
+display:none;
+border:0px solid #cceeff;
+}
+#globalNav li a:hover span{
+display:block;
+position:absolute;
+top:27px;left:-3px;
+}
+#globalNav li:hover,#globalNav li a:hover span,#PopUp li a:hover dt{}
+#globalNav dt{
+background:none;
+}
+#globalNav li a:hover dt a{
+float:left;
+background:#ddd;
+margin-top:1px;
+}
+#globalNav li a:hover,#globalNav li a:hover dt a:hover{ /* 鼠标放上后背景样式 */
+background:#ff6600;
+width:100%;
+}

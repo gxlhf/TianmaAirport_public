@@ -1,0 +1,30 @@
+@media (max-width: 470px) {
+	#mult-select-table {
+		padding: 0px !important;
+	}
+	.col-xs-6 {
+		padding: 2px !important;
+	}
+}
+
+td:first-child, th:first-child {
+	width: 30px;
+	padding-right: 5px;
+}
+
+.td-check {
+    color: #c3c3c3;
+    position: relative !important;
+    top: 1px !important;
+}
+td > .td-check:before {
+    content: "\e067";
+}
+
+tr:last-child:hover {
+	background: white !important;
+}
+
+#right-side-table td {
+	height: 39px;
+}
