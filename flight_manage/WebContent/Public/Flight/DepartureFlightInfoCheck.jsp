@@ -12,12 +12,14 @@ else
 <head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title><%
+    <title>
+    <%
     if(area.equals("local"))
     	out.println("航班信息 - 国内离港 - 天马机场");
     else
     	out.println("航班信息 - 国际离港 - 天马机场");
-    %></title>
+    %>
+    </title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/adminPage.css">
@@ -179,15 +181,17 @@ else
             <li>
               <a href="#">航班信息</a>
             </li>
-            <li class="active"><%
+            <li class="active">
+            <%
             if(area.equals("local"))
             	out.println("国内离港");
             else
             	out.println("国际离港");
-            %></li>
+            %>
+            </li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
+          <form class="form-horizontal" role="form" action="<%=basePath%>DepartureFlightSearch">
             <div class="form-group">
               <label for="flight-id" class="col-sm-2 control-label">航班号：</label>
               <div class="col-sm-6">
@@ -198,9 +202,33 @@ else
               <label for="init-site" class="col-sm-2 control-label">目的地：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="to-site">
-                  <option>不限</option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option>
+                  <option value="">请选择</option>
+                <%
+                	User user = new User();
+            		if(area.equals("local")){
+            			String[] result = user.returnAllLocalDestination();
+            			for(String output:result)
+            			{
+            				if(output.equals("")||output==null)
+            					  continue;
+            				out.println("<option value='"+output+"'>"+output+"</option>");
+            			}
+            				
+            		}
+            		else{
+            			String[] result = user.returnAllInternationalDestination();
+            			for(String output:result)
+            			{
+            				if(output.equals("")||output==null)
+            					  continue;
+            				out.println("<option value='"+output+"'>"+output+"</option>");
+            			}
+            				
+            		}
+                %>
+                  <!-- <option value="广州">广州</option>
+                  <option value="上海">上海虹桥</option>
+                  <option value="重庆">重庆</option> -->
                 </select>
               </div>
             </div>
@@ -208,12 +236,23 @@ else
               <label for="airCompany-name" class="col-sm-2 control-label">航空公司：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="airCompany-name">
-                  <option>不限</option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option>
+                  <option value="">请选择</option>
+                  <%
+                  String[] result = user.returnAllAirline();
+      			  for(String output:result)
+      			  {
+      				  if(output.equals("")||output==null)
+      					  continue;
+      				  out.println("<option value='"+output+"'>"+output+"</option>");
+      			  } 
+                %>
+                  <!-- <option value="中国南方航空公司">中国南方航空公司</option>
+                  <option value="海南航空公司">海南航空公司</option>
+                  <option value="中国东方航空公司">中国东方航空公司</option> -->
                 </select>
               </div>
             </div>
+            <input type="hidden" name="area" value="<%=area%>" /> 
             <div class="form-group">
               <div class="col-sm-2"></div>
               <div class="col-sm-6">
@@ -221,7 +260,7 @@ else
               </div>
             </div>
           </form>
-          <table class="table table-hover select-table">
+          <%-- <table class="table table-hover select-table">
             <thead>
               <tr>
                 <%
@@ -234,105 +273,84 @@ else
                 <!-- <th>
                   <span class="glyphicon glyphicon-check th-check"></span>
                 </th> -->
+                <th>航空公司</th>
                 <th>航班号</th>
                 <th>始发地</th>
                 <th>经停地</th>
                 <th>目的地</th>
-                <th>离港时间</th>
-                <th>值机柜台</th>
-                <th>登机门</th>
-                <th>航空公司</th>
+                <th>到港时间</th>
+                <th>行李转盘</th>
+                
               </tr>
             </thead>
-            <tbody>
-              <tr data-id="10001">
-                <%
+            <tbody> --%>
+            <%
+            if(request.getAttribute("departureFlightInfos")!=null)
+            {
+            	out.println("<table class='table table-hover select-table'><thead><tr>");
+            	if(session.getAttribute("priv1")!=null){
+              	  out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
+                }else{
+              	  out.println("<th></th>");
+                }
+            	out.println("<th>航空公司</th><th>航班号</th><th>始发地</th><th>经停地</th><th>目的地</th><th>离港时间</th><th>值机柜台</th><th>登机门</th></tr></thead><tbody>");
+            	DepartureFlightInfo[] departureFlightInfos = (DepartureFlightInfo[])request.getAttribute("departureFlightInfos");
+                for(DepartureFlightInfo output:departureFlightInfos)
+                {
+                	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                	if(session.getAttribute("priv1")!=null){
+                    	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                    }else{
+                  	  out.println("<td></td>");
+                    }
+                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
+                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                    	out.println("<td>"+output.getTime()+"</td>");
+                    	out.println("<td>"+output.getCheckinCounter()+"</td>");
+                    	out.println("<td>"+output.getBoardingGate()+"</td>");
+        				out.println("</tr>");
+                	}
+                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
+                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                    	out.println("<td>"+output.getTime()+"</td>");
+                    	out.println("<td>"+output.getCheckinCounter()+"</td>");
+                    	out.println("<td>"+output.getBoardingGate()+"</td>");
+        				out.println("</tr>");
+                	}         
+                }
+                out.println("</tbody></table>");
+                out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+            }
+            
+            %>
+              <!-- <tr data-id="10001"> -->
+                <%-- <%
                 if(session.getAttribute("priv1")!=null){
                 	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
                 }else{
               	  out.println("<td></td>");
                 }
-                %>
-                <td>系统管理员</td>
+                %> --%>
+                <!-- <td>
+                  <span class="glyphicon glyphicon-check"></span>
+                </td> -->
+                <!-- <td>系统管理员</td>
                 <td>主要负责用户管理，权限分配等工作</td>
                 <td>1</td>
                 <td>1</td>
                 <td>1</td>
                 <td>1</td>
                 <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr data-id="10002">
-                <%
-                if(session.getAttribute("priv1")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <td>航班信息管理员</td>
-                <td>主要负责管理航班</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr data-id="10003">
-                <%
-                if(session.getAttribute("priv1")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <td>机场信息管理员</td>
-                <td>主要负责管理机场设施</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr data-id="10004">
-                <%
-                if(session.getAttribute("priv1")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <td>新闻发布员</td>
-                <td>主要负责管理新闻</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr data-id="10005">
-                <%
-                if(session.getAttribute("priv1")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <td>李静</td>
-                <td>女</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-            </tbody>
-          </table>
-          <div>
+              </tr> -->
+          <!-- <div>
             <ul class="pager">
               <li class="previous">
                 <a href="#">← 上一页</a>
@@ -341,7 +359,7 @@ else
                 <a href="#">下一页 →</a>
               </li>
             </ul>
-          </div>
+          </div> -->
           <%
           if(session.getAttribute("priv1")!=null){
         	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"Flight/FlightEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");

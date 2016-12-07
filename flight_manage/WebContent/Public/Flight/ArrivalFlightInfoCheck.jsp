@@ -202,9 +202,33 @@ else
               <label for="init-site" class="col-sm-2 control-label">始发地：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="from-site">
-                  <option value="广州">广州</option>
+                	<option value="">请选择</option>
+                <%
+                	User user = new User();
+            		if(area.equals("local")){
+            			String[] result = user.returnAllLocalFrom();
+            			for(String output:result)
+            			{
+            				if(output.equals("")||output==null)
+          					    continue;
+            				out.println("<option value='"+output+"'>"+output+"</option>");
+            			}
+            				
+            		}
+            		else{
+            			String[] result = user.returnAllInternationalFrom();
+            			for(String output:result)
+            			{
+            				if(output.equals("")||output==null)
+          					    continue;
+            				out.println("<option value='"+output+"'>"+output+"</option>");
+            			}
+            				
+            		}
+                %>
+                  <!-- <option value="广州">广州</option>
                   <option value="上海">上海虹桥</option>
-                  <option value="重庆">重庆</option>
+                  <option value="重庆">重庆</option> -->
                 </select>
               </div>
             </div>
@@ -212,9 +236,19 @@ else
               <label for="airCompany-name" class="col-sm-2 control-label">航空公司：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="airCompany-name">
-                  <option value="中国南方航空公司">中国南方航空公司</option>
+                  <option value="">请选择</option>
+                  <%
+                  String[] result = user.returnAllAirline();
+      			  for(String output:result)
+      			  {
+      				  if(output.equals("")||output==null)
+      					  continue;
+      				  out.println("<option value='"+output+"'>"+output+"</option>");
+      			  } 
+                %>
+                  <!-- <option value="中国南方航空公司">中国南方航空公司</option>
                   <option value="海南航空公司">海南航空公司</option>
-                  <option value="中国东方航空公司">中国东方航空公司</option>
+                  <option value="中国东方航空公司">中国东方航空公司</option> -->
                 </select>
               </div>
             </div>
@@ -290,6 +324,8 @@ else
         				out.println("</tr>");
                 	}         
                 }
+                out.println("</tbody></table>");
+                out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
             }
             
             %>
@@ -313,9 +349,8 @@ else
                 <td>1</td>
               </tr> -->
               
-            </tbody>
-          </table>
-          <div>
+            
+          <!-- <div>
             <ul class="pager">
               <li class="previous">
                 <a href="#">← 上一页</a>
@@ -324,7 +359,7 @@ else
                 <a href="#">下一页 →</a>
               </li>
             </ul>
-          </div>
+          </div> -->
           <%
           if(session.getAttribute("priv1")!=null){
         	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"Flight/FlightEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
