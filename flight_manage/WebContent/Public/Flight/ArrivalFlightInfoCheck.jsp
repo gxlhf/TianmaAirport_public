@@ -238,7 +238,11 @@ else
                 <select class="form-control" name="airCompany-name">
                   <option value="">请选择</option>
                   <%
-                  String[] result = user.returnAllAirline();
+                  String[] result;
+                  if(area.equals("local"))
+                      result = user.returnAllArrivalLocalAirline();
+                  else
+                	  result = user.returnAllArrivalInternationalAirline();
       			  for(String output:result)
       			  {
       				  if(output.equals("")||output==null)
