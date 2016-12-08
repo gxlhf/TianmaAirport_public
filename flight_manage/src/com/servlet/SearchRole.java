@@ -43,6 +43,10 @@ public class SearchRole extends HttpServlet {
 		String roleName = request.getParameter("role-name");
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		Role roleInfo = admin.searchRole(roleName);
+		if(roleInfo==null){
+			request.setAttribute("roleInfo", roleInfo);
+			request.getRequestDispatcher("Role/RoleAdmin.jsp").forward(request, response);
+		}
 		if(roleInfo.getName().equals("-1"))
 			request.getRequestDispatcher("/error.jsp").forward(request, response);
 		else{

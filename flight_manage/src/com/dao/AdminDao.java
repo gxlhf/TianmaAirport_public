@@ -213,102 +213,103 @@ public class AdminDao {
     	Admin[] admin= null;
 		sql = "SELECT user_info.Em_No,user_info.Name,user_info.Sex,user_info.PhoneNo,user_info.Tel,user_info.Email," +
 			"user_info.Dept,user_info.Position,user_actor.A_name,user_actor.password FROM user_info LEFT OUTER JOIN user_actor ON user_info.Em_No = user_actor.Em_No" +
-			" WHERE ";//SQL语句  
+			" WHERE 1=1";//SQL语句  
         db1= new db_connection(sql);//创建db_connection对象  
         try {  
         	if((name!=null&&name!="")&&(sex!=1&&sex!=0)&&(position==null||position=="")&&(roleName==null||roleName==""))
         	{	
-        		sql=sql+"user_info.Name=?";
+        		sql=sql+" AND user_info.Name=?";
         		db1.pst = db1.conn.prepareStatement(sql);
         		db1.pst.setString(1, name);
         	}else if((name==null||name=="")&&(sex==1||sex==0)&&(position==null||position=="")&&(roleName==null||roleName==""))
             	{	
-            		sql=sql+"user_info.Sex=?";
+            		sql=sql+" AND user_info.Sex=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setInt(1, sex);
             	}else if((name==null||name=="")&&(sex!=1&&sex!=0)&&(position!=null&&position!="")&&(roleName==null||roleName==""))
             	{	
-            		sql=sql+"user_info.Position=?";
+            		sql=sql+" AND user_info.Position=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, position);
             	}else if((name==null||name=="")&&(sex!=1&&sex!=0)&&(position==null||position=="")&&(roleName!=null&&roleName!=""))
             	{	
-            		sql=sql+"user_actor.A_name=?";
+            		sql=sql+" AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, roleName);
             	}else if((name!=null&&name!="")&&(sex==1||sex==0)&&(position==null||position=="")&&(roleName==null||roleName==""))
             	{	
-            		sql=sql+"user_info.Name=? AND user_info.Sex=?";
+            		sql=sql+" AND user_info.Name=? AND user_info.Sex=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setInt(2, sex);
             	}else if((name!=null&&name!="")&&(sex!=1&&sex!=0)&&(position!=null&&position!="")&&(roleName==null||roleName==""))
             	{	
-            		sql=sql+"user_info.Name=? AND user_info.Position=?";
+            		sql=sql+" AND user_info.Name=? AND user_info.Position=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setString(2, position);
             	}else if((name!=null&&name!="")&&(sex!=1&&sex!=0)&&(position==null||position=="")&&(roleName!=null&&roleName!=""))
             	{	
-            		sql=sql+"user_info.Name=? AND user_actor.A_name";
+            		sql=sql+" AND user_info.Name=? AND user_actor.A_name";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setString(2, roleName);
             	}else if((name==null||name=="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName==null||roleName==""))
             	{	
-            		sql=sql+"user_info.Sex=? AND user_info.Position=?";
+            		sql=sql+" AND user_info.Sex=? AND user_info.Position=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setInt(1, sex);
             		db1.pst.setString(2, position);
             	}else if((name==null||name=="")&&(sex==1||sex==0)&&(position==null||position=="")&&(roleName!=null&&roleName!=""))
             	{	
-            		sql=sql+"user_info.Sex=? AND user_actor.A_name=?";
+            		sql=sql+" AND user_info.Sex=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setInt(1, sex);
             		db1.pst.setString(2, roleName);
             	}else if((name==null||name=="")&&(sex!=1&&sex!=0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
             	{	
-            		sql=sql+"user_info.Position=? AND user_actor.A_name=?";
+            		sql=sql+" AND user_info.Position=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, position);
             		db1.pst.setString(2, roleName);
             	}else if((name!=null&&name!="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName==null||roleName==""))
             	{	
-            		sql=sql+"user_info.Name=? AND user_info.Sex=? AND user_info.Position=?";
+            		sql=sql+" AND user_info.Name=? AND user_info.Sex=? AND user_info.Position=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setInt(2, sex);
             		db1.pst.setString(3, position);
             	}else if((name!=null&&name!="")&&(sex==1||sex==0)&&(position==null||position=="")&&(roleName!=null&&roleName!=""))
             	{	
-            		sql=sql+"user_info.Name=? AND user_info.Sex=? AND user_actor.A_name=?";
+            		sql=sql+" AND user_info.Name=? AND user_info.Sex=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setInt(2, sex);
             		db1.pst.setString(3, roleName);
             	}else if((name!=null&&name!="")&&(sex!=1&&sex!=0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
             	{	
-            		sql=sql+"user_info.Name=? AND user_info.Position=? AND user_actor.A_name=?";
+            		sql=sql+" AND user_info.Name=? AND user_info.Position=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setString(2, position);
             		db1.pst.setString(3, roleName);
-            	}else if((name==null||name=="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
+            	}else if((name==null&&name=="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
             	{	
-            		sql=sql+"user_info.Sex=? AND user_info.Position=? AND user_actor.A_name=?";
+            		sql=sql+" AND user_info.Sex=? AND user_info.Position=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setInt(1, sex);
             		db1.pst.setString(2, position);
             		db1.pst.setString(3, roleName);
             	}else if((name!=null&&name!="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
             	{	
-            		sql=sql+"user_info.Name=? AND user_info.Sex=? AND user_info.Position=? AND user_actor.A_name=?";
+            		sql=sql+" AND user_info.Name=? AND user_info.Sex=? AND user_info.Position=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setInt(2, sex);
             		db1.pst.setString(3, position);
             		db1.pst.setString(4, roleName);
-            	}       	
+            	}
+        	    
             ret = db1.pst.executeQuery();//执行语句，得到结果集  
             ret.last();
 	        int rowNumber=ret.getRow();
