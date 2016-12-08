@@ -8,8 +8,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>机场介绍 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/adminPage.css">
+    <link rel="stylesheet" href="<%=basePath%>/css/main.css">
+    <link rel="stylesheet" href="<%=basePath%>/css/News.css">
+    <link rel="stylesheet" href="<%=basePath%>/css/adminPage.css">
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
@@ -151,27 +152,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">机场介绍</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
-              <h2 class="text-center text-muted">机场介绍</h2>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label" id="out-time">发布时间：</label>
-              <label for="out-ti" class="col-sm-2 control-label">2016-1-1</label>
-            </div>
-            <div class="form-group">
-              <hr border="2" color="grey">
-            </div>
-            <div class="form-group">
-              <label for="newsContent" class="col-sm-2 control-label">新闻正文：</label>
-              <div class="col-sm-6">自本机场成立至今，已有很多月</div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-2"></div>
-              <div class="col-sm-6"></div>
-            </div>
-          </form>
-          <div></div>
+          <div class="page-header">
+            <h2 class="text-center">机场介绍</h2>
+          </div>
+          <div id="main-text">
+            <p>发布时间：2000-01-01 13:00</p>
+            <p>长沙天马机场，三字代码CST，1994年8月18日通航，是湖南省第二家国际机场。通航22年来，一代代天马机场人满怀发展梦，饱经艰苦历练，在摸索中前进，在曲折中发展，在低谷中积蓄爆发力量，在发展中积累成长经验，经历了由小变大、由弱变强的蜕变历程。 </p>
+            <p>安全形势持续平稳。天马机场始终坚持“安全第一、预防为主、综合治理”的方针，建立和完善了“自我监督、自我审查、自我约束、自我完善”的安全管理体系（SMS）。安全运行保障基础设施设备不断完善，净空管理不断规范，应急管理能力不断提升，风险管控常态化。2013年，天马机场通过RNP AR/RNP ONE实地验证试飞，成为民航中南地区首家启动和实施该项目的机场。通航以来，未发生机场责任原因不安全事件，机场安全品质、综合保障能力不断提升。2012-2014年天马机场连续获评天马市“安全生产先进单位”。</p>
+            <p>服务品质逐年提升。天马机场以绿色、快速、健康、可持续发展为目标，强化内部管理，创建机场服务品牌，按照“塑造一流机场形象”的总体要求，全面推行地面服务承诺制，狠抓员工综合素质，推行机场服务质量八项承诺，积极整治运输服务存在的突出问题，旅客满意度显著提升。2014年被评为“湖南省文明窗口单位”，2015年11月通过了机场协会组织开展的服务质量评价工作，建立了CSMS旅客服务管理体系。</p>
+            <p>市场开拓稳步提升。天马机场坚持大力开拓航空市场，不断细分市场、优化市场，不断寻求新的经济增长点。2010至2015年，年运输起降架次同比增长51.15%；年旅客吞吐量同比增长24.78%。到2015年底，已开通国内航线54条，国际不定期包机航线17条。航班时刻不断优化，执行率和客座率均大幅提高。2011年口岸扩大对外开放以来，天马机场出入境流量呈几何倍数增长，增幅居全省口岸首位。2016年1月，国务院已正式批复同意在长沙天马机场口岸开展落地签证。</p>
+            <p>新航站楼顺利启用。天马机场二代航站楼于2015年9月30日顺利转场启用，它以“绿色、生态、人文、科技、浪漫”为设计主题，充分展现天马地区的自然生态特色和传统人文情怀，设计目标年为2020年，设计年旅客吞吐量500万人次、货邮吞吐量1.9万吨、飞机起降4.5万架次。新航站楼先进的内部功能设计和配套设施设备，使天马机场安全管理和服务水平全面提质升级，为社会公众提供更为安全、舒适、方便、快捷的服务。</p>
+          </div>
+
           <%
           if(session.getAttribute("priv2")!=null){
         	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"News/IntroEdit.jsp'>修改</a></div></div>");
