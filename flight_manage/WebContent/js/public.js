@@ -4,11 +4,17 @@ $('.select-table tbody > tr').click(function (e) {
 	$(this).parent().find('.glyphicon').removeClass('glyphicon-check');
 	$(this).find('.glyphicon').addClass('glyphicon-check');
 	console.log($(this).parent().find('[name="select-table-result"]'));
-	$('[name="selected-option"]').val(opValue);
+	// $('[name="selected-option"]').val(opValue);
+	$('#btn-modify').attr('href', $('#btn-modify').attr('href') + '?' + opValue);
+	$('#btn-delete').attr('href', $('#btn-delete').attr('href') + '?' + opValue);
 });
 
 $('#btn-modify').click(function (e) {
-	$(this).attr('href', $(this).attr('href') + '?' + $('[name="selected-option"]').val());
+	// $(this).attr('href', $(this).attr('href') + '?' + $('[name="selected-option"]').val());
+	console.log($(this).attr('href'));
+});
+$('#btn-delete').click(function (e) {
+	// $(this).attr('href', $(this).attr('href') + '?' + $('[name="selected-option"]').val());
 	console.log($(this).attr('href'));
 });
 

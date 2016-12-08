@@ -266,8 +266,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 } */
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
-            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"User/AdminEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+            	out.println("<input class='hide' name='selected-option'><divclass='col-sm-6 btn-modify'><div id='btn-midify' class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/AdminEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
             }
+            // 表格中的data-id属性填写的是需要进行修改或删除时向对应jsp传送的参数字符串
+            // 例如需要将变量名为"EmpNo"值为"1004"和变量名为"Type"值为"1"的两个参数传送到jsp页面，则data-id填写的是"EmpNo=1004&Type=1"
             
             %>
           <%-- <div class="col-sm-6 btn-modify">

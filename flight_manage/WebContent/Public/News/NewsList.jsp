@@ -361,7 +361,7 @@ else
           </div>
           <%
           if(session.getAttribute("priv2")!=null){
-        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp'>修改</a></div></div>");
+        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-midify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp'>修改</a></div></div>");
           }
           %>
           <%-- <div class="col-sm-6 btn-modify">
