@@ -40,6 +40,14 @@
     <servlet-name>PostTest</servlet-name>
     <url-pattern>/PostTest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>SearchRole</servlet-name>
+    <servlet-class>com.servlet.SearchRole</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchRole</servlet-name>
+    <url-pattern>/SearchRole</url-pattern>
+  </servlet-mapping>
   <filter>
     <description>
 		</description>

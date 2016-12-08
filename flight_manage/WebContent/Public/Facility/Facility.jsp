@@ -132,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li role="presentation">
                 <%
                 if(session.getAttribute("priv0")!=null){
-                	out.println("<a href='#'>机场资源</a>");
+                	out.println("<a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a>");
                 }else{
                 	out.println("<a href='#'>乘机指引</a>");
                 }
@@ -140,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <!-- <a href="#">机场资源</a> -->
                 </li>
                 <li role="presentation" class="second-menu-cur">
-                  <a href="#">物业设施</a>
+                  <a href="<%=basePath%>Public/Facility/Facility.jsp">物业设施</a>
                 </li>
               </ul>
             </li>
