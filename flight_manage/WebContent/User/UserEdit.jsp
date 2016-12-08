@@ -157,14 +157,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <input type="text" class="form-control" name="user-id" pattern="\d{4}" data-error="请填写4位员工号*" required>
               </div>
-              <div class="help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-name" class="col-sm-2 control-label">姓名：</label>
               <div class="col-sm-6">
                 <input type="text" class="form-control" name="user-name" data-error="请填写姓名*" required>
               </div>
-              <div class="help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-sex" class="col-sm-2 control-label">性别：</label>
@@ -176,7 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <input type="radio" name="user-sex" value="female" data-error="请选择性别*" autocomplete="off" required>女
                 </label>
               </div>
-              <div class="help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-pos" class="col-sm-2 control-label">职位：</label>
@@ -187,7 +187,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <option>信息技术员</option>
                 </select>
               </div>
-              <div class="help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-roles" class="col-sm-2 control-label">角色：</label>
@@ -198,44 +198,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <option>信息技术员</option>
                 </select>
               </div>
-              <div class="help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-phone" class="col-sm-2 control-label">电话：</label>
               <div class="col-sm-6">
                 <input type="text" class="form-control" name="user-phone">
               </div>
+              <div class="col-sm-2 help-block with-errors"> </div>
             </div>
             <div class="form-group">
               <label for="user-tel" class="col-sm-2 control-label">手机号：</label>
               <div class="col-sm-6">
                 <input type="text" class="form-control" name="user-tel">
               </div>
+              <div class="col-sm-2 help-block with-errors"> </div>
             </div>
             <div class="form-group">
               <label for="user-email" class="col-sm-2 control-label">电子邮箱：</label>
               <div class="col-sm-6">
                 <input type="email" class="form-control" name="user-email" data-error="请填写正确的电子邮箱*" required>
               </div>
-              <div class="help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-password" class="col-sm-2 control-label">登录密码：</label>
               <div class="col-sm-6">
                 <input type="password" class="form-control" name="user-password" data-minlength="6" data-required-error="请填写密码*" data-minlength-error="密码长度至少为6位*" required>
               </div>
-              <div class="help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="user-password-check" class="col-sm-2 control-label">密码确认：</label>
               <div class="col-sm-6">
                 <input type="password" class="form-control" data-match='[name="user-password"]' data-required-error="请确认密码*" data-match-error="密码不一致*" required>
               </div>
-              <div class="help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
-                <a class="btn btn-success" onclick="$(this).parents('form').submit();">修改</a>
+                <a class="btn btn-success" onclick="$(this).parents('form').validator('validate');">修改</a>
                 <a class="btn btn-primary" href="#">取消</a>
               </div>
             </div>
