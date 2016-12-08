@@ -1,21 +1,16 @@
 $(function () {
-	var validator_passed = true;
-
-	$('[data-toggle="validator"]').validator().on('invalid.bs.validator',function () {
-		validator_passed = false;
-	});
-
-
 	$('#btn-save').click(function (e) {
-		validator_passed = true;
 		$(this).parents('form').validator('validate');
+		var validator_passed = !($('.has-error').length);
 		if (validator_passed) {			
 			//填写确认弹框
-			var dataElem = $(this).parents('form').find('input, textarea');
+			var dataElem = $(this).parents('form').find('input, textarea, select');
 			dataElem.each(function () {
+				if($(this).attr('type') == 'radio' && (!this.checked))
+					return;
 				$('#' + $(this).attr('name') + '-ensure').text($(this).val());
 			});
 			$('#ensureBox').modal('show');
-		}		
+		}
 	});
 });

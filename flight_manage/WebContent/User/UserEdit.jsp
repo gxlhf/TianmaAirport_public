@@ -274,19 +274,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="form-group">
                   <label class="col-xs-3 control-label">姓名：</label>
                   <div class="col-xs-9">
-                    <p id="roleDesc-ensure" class="form-control-static"> </p>
+                    <p id="user-name-ensure" class="form-control-static"> </p>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-xs-3 control-label">性别：</label>
                   <div class="col-xs-9">
-                    <p id="rolePriv-ensure" class="form-control-static"> </p>
+                    <p id="user-sex-ensure" class="form-control-static"> </p>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-xs-3 control-label">职位：</label>
                   <div class="col-xs-9">
-                    <p id="rolePriv-ensure" class="form-control-static"> </p>
+                    <p id="user-pos-ensure" class="form-control-static"> </p>
                   </div>
                 </div>
                 <div class="form-group">
