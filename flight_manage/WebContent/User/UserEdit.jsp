@@ -169,11 +169,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-sex" class="col-sm-2 control-label">性别：</label>
               <div class="btn-group col-sm-6" data-toggle="buttons">
-                <label class="btn btn-default col-xs-4">
-                  <input type="radio" name="user-sex" value="male" data-error="请选择性别*" autocomplete="off" required>男
+                <label class="btn btn-default col-md-5">
+                  <input type="radio" name="user-sex" value="男" data-error="请选择性别*" autocomplete="off" required>男
                 </label>
-                <label class="btn btn-default col-xs-4">
-                  <input type="radio" name="user-sex" value="female" data-error="请选择性别*" autocomplete="off" required>女
+                <label class="btn btn-default col-md-5">
+                  <input type="radio" name="user-sex" value="女" data-error="请选择性别*" autocomplete="off" required>女
                 </label>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -182,9 +182,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <label for="user-pos" class="col-sm-2 control-label">职位：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="user-pos" data-error="请选择职位*" required>
-                  <option></option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option>
+                  <option value=""></option>
+                  <option value="机场地勤人员">机场地勤人员</option>
+                  <option value="信息技术员">信息技术员</option>
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -193,9 +193,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <label for="user-roles" class="col-sm-2 control-label">角色：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="user-roles" data-error="请选择角色*" required>
-                  <option></option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option>
+                  <option value=""></option>
+                  <option value="机场地勤人员">机场地勤人员</option>
+                  <option value="信息技术员">信息技术员</option>
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -237,16 +237,95 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
-                <a class="btn btn-success" onclick="$(this).parents('form').validator('validate');">修改</a>
+                <a class="btn btn-success" id="btn-save">修改</a>
                 <a class="btn btn-primary" href="#">取消</a>
               </div>
             </div>
           </form>
         </div>
       </div>
+
       <div id="backToTop-btn" onclick="scroll(0,0)">
         <span class="glyphicon glyphicon-chevron-up"></span>
       </div>
+
+      <!-- 确认信息弹框开始 -->
+      <div id="ensureBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- <div class="modal-header"> -->
+              <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button> -->
+              <!-- <h4 class="modal-title" id="myModalLabel">确认需要保存的信息</h4> -->
+            <!-- </div> -->
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4>以下是即将保存的信息，请确认。<br></h4>
+              <strong class="text-danger">提交修改后将无法撤销</strong>
+
+              <hr>
+
+              <div class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">员工号：</label>
+                  <div class="col-xs-9">
+                    <p id="user-id-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">姓名：</label>
+                  <div class="col-xs-9">
+                    <p id="roleDesc-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">性别：</label>
+                  <div class="col-xs-9">
+                    <p id="rolePriv-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">职位：</label>
+                  <div class="col-xs-9">
+                    <p id="rolePriv-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">角色：</label>
+                  <div class="col-xs-9">
+                    <p id="user-roles-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">电话：</label>
+                  <div class="col-xs-9">
+                    <p id="user-phone-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">手机号：</label>
+                  <div class="col-xs-9">
+                    <p id="user-tel-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">电子邮箱：</label>
+                  <div class="col-xs-9">
+                    <p id="user-email-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-primary">保存</button>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 确认信息弹框结束 -->
+      
     </div>
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
@@ -259,9 +338,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </footer>
     <!-- 尾部结束 -->
     <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
     <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
