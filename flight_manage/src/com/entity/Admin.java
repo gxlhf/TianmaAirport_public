@@ -10,9 +10,11 @@
  * position:职位
  */
 package com.entity;
+import java.io.Serializable;
+
 import com.dao.*;
 
-public class Admin extends User {
+public class Admin extends User implements Serializable{
 	String empno;
 	String name;
 	int sex;
@@ -106,38 +108,39 @@ public class Admin extends User {
 			case "searchRole":
 			case "addRole":
 			case "modifyRole":
-			case "deleteRole":result = role.authorityMap.get("角色管理");
+			case "deleteRole":result = role.getAuthorityMap().get("角色管理");break;
 			case "searchAdmin":
 			case "addAdmin":
 			case "modifyAdmin":
-			case "deleteAdmin":result = role.authorityMap.get("用户管理");
+			case "deleteAdmin":result = role.getAuthorityMap().get("用户管理");break;
 			case "addAirportResource":
 			case "modifyAirportResource":
 			case "deleteAirportResource":
 			case "addPropertyFacility":
 			case "modifyPropertyFacility":
-			case "deletePropertyFacility":result = role.authorityMap.get("机场设施管理");
+			case "deletePropertyFacility":result = role.getAuthorityMap().get("机场设施管理");break;
 			case "addDepartureFlightInfo":
 			case "modifyDepartureFlightInfo":
 			case "deleteDepartureFlightInfo":
 			case "addArrivalFlightInfo":
 			case "modifyArrivalFlightInfo":
-			case "deleteArrivalFlightInfo":result = role.authorityMap.get("航班信息管理");
+			case "deleteArrivalFlightInfo":result = role.getAuthorityMap().get("航班信息管理");break;
 			case "addNews":
 			case "modifyNews":
-			case "deleteNews":result = role.authorityMap.get("新闻管理");
+			case "deleteNews":result = role.getAuthorityMap().get("新闻管理");break;
 			default:result = false;
 		}
 		return result;
 	}
 	
 	//查询角色函数，输入参数为角色名称，返回一个Role对象；若无权限操作，则返回含有一个Role对象的对象数组，其name成员值为-1；
-	Role searchRole(String name)
+	public Role searchRole(String name)
 	{
 		Role role = null;
-		if(!authorityValidate("searchRole")){  //无权限操作
-			/*role = new Role[1];
-			role[0].name = "-1";*/
+		if(authorityValidate("searchRole")==false){  //无权限操作
+			role = new Role(name);
+			role.setName("-1");
+			return role;
 		}
 		/*
 		 * Role searchRole(String name);
@@ -150,7 +153,7 @@ public class Admin extends User {
 	}
 	
 	//新增角色函数：输入参数为角色对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int addRole(Role role){
+	public int addRole(Role role){
 		if(!authorityValidate("addRole"))
 			return -1;
 		/*
@@ -166,7 +169,7 @@ public class Admin extends User {
 	}
 	
 	//修改角色函数：输入参数为角色对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int modifyRole(Role role){
+	public int modifyRole(Role role){
 		if(!authorityValidate("modifyRole"))
 			return -1;
 		/*
@@ -182,7 +185,7 @@ public class Admin extends User {
 	}
 	
 	//删除角色函数：输入参数为角色对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int deleteRole(Role role){
+	public int deleteRole(Role role){
 		if(!authorityValidate("deleteRole"))
 			return -1;
 		/*
@@ -198,7 +201,7 @@ public class Admin extends User {
 	}
 
 	//查询管理员函数，输入参数为员工号、姓名、性别、职位、角色，返回一个Admin对象数组;若无权限操作，则返回含有一个Admin对象的对象数组，其empno成员值为-1；
-	Admin[] searchAdmin(String empno,String name,int sex,String position,String roleName)
+	public Admin[] searchAdmin(String empno,String name,int sex,String position,String roleName)
 	{
 		Admin[] admin = null;
 		if(!authorityValidate("searchAdmin")){
@@ -230,7 +233,7 @@ public class Admin extends User {
 	}
 	
 	//新增管理员函数：输入参数为管理员对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int addAdmin(Admin admin){
+	public int addAdmin(Admin admin){
 		if(!authorityValidate("addAdmin"))
 			return -1;
 		/*
@@ -246,7 +249,7 @@ public class Admin extends User {
 	}
 	
 	//修改管理员函数：输入参数为管理员对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int modifyAdmin(Admin admin){
+	public int modifyAdmin(Admin admin){
 		if(!authorityValidate("modifyAdmin"))
 			return -1;
 		/*
@@ -262,7 +265,7 @@ public class Admin extends User {
 	}
 	
 	//删除管理员函数：输入参数为管理员对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int deleteAdmin(Admin admin){
+	public int deleteAdmin(Admin admin){
 		if(!authorityValidate("deleteAdmin"))
 			return -1;
 		/*
@@ -278,7 +281,7 @@ public class Admin extends User {
 	}
 	
 	//新增机场资源函数：输入参数为机场资源对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int addAirportResource(AirportResource airportResource){	
+	public int addAirportResource(AirportResource airportResource){	
 		/*
 		 * boolean add(AirportResource airportResource);
 		 * 数据库操作：新增机场资源，形参为机场资源对象，返回值为布尔值
@@ -292,7 +295,7 @@ public class Admin extends User {
 	}
 
 	//修改机场资源函数：输入参数为机场资源对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int modifyAirportResource(AirportResource airportResource){
+	public int modifyAirportResource(AirportResource airportResource){
 		if(!authorityValidate("modifyAirportResource"))
 			return -1;
 		/*
@@ -308,7 +311,7 @@ public class Admin extends User {
 	}
 
 	//删除机场资源函数：输入参数为机场资源对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int deleteAirportResource(AirportResource airportResource){
+	public int deleteAirportResource(AirportResource airportResource){
 		if(!authorityValidate("deleteAirportResource"))
 			return -1;
 		/*
@@ -324,7 +327,7 @@ public class Admin extends User {
 	}
 	
 	//新增物业设施函数：输入参数为物业设施对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int addPropertyFacility(PropertyFacility propertyFacility){
+	public int addPropertyFacility(PropertyFacility propertyFacility){
 		if(!authorityValidate("addPropertyFacility"))
 			return -1;
 		/*
@@ -340,7 +343,7 @@ public class Admin extends User {
 	}
 
 	//修改物业设施函数：输入参数为物业设施对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int modifyPropertyFacility(PropertyFacility propertyFacility){
+	public int modifyPropertyFacility(PropertyFacility propertyFacility){
 		if(!authorityValidate("modifyPropertyFacility"))
 			return -1;
 		/*
@@ -356,7 +359,7 @@ public class Admin extends User {
 	}
 
 	//删除物业设施函数：输入参数为物业设施对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int deletePropertyFacility(PropertyFacility propertyFacility){
+	public int deletePropertyFacility(PropertyFacility propertyFacility){
 		if(!authorityValidate("deletePropertyFacility"))
 			return -1;
 		/*
@@ -372,7 +375,7 @@ public class Admin extends User {
 	}
 
 	//新增离港航班信息函数：输入参数为离港航班信息对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int addDepartureFlightInfo(DepartureFlightInfo departureFlightInfo){
+	public int addDepartureFlightInfo(DepartureFlightInfo departureFlightInfo){
 		if(!authorityValidate("addDepartureFlightInfo"))
 			return -1;
 		/*
@@ -388,7 +391,7 @@ public class Admin extends User {
 	}
 	
 	//修改离港航班信息函数：输入参数为离港航班信息对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int modifyDepartureFlightInfo(DepartureFlightInfo departureFlightInfo){
+	public int modifyDepartureFlightInfo(DepartureFlightInfo departureFlightInfo){
 		if(!authorityValidate("modifyDepartureFlightInfo"))
 			return -1;
 		/*
@@ -404,7 +407,7 @@ public class Admin extends User {
 	}
 	
 	//删除离港航班信息函数：输入参数为离港航班信息对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int deleteDepartureFlightInfo(DepartureFlightInfo departureFlightInfo){
+	public int deleteDepartureFlightInfo(DepartureFlightInfo departureFlightInfo){
 		if(!authorityValidate("deleteDepartureFlightInfo"))
 			return -1;
 		/*
@@ -420,7 +423,7 @@ public class Admin extends User {
 	}
 	
 	//新增到港航班信息函数：输入参数为到港航班信息对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int addArrivalFlightInfo(ArrivalFlightInfo arrivalFlightInfo){
+	public int addArrivalFlightInfo(ArrivalFlightInfo arrivalFlightInfo){
 		if(!authorityValidate("addArrivalFlightInfo"))
 			return -1;
 		/*
@@ -436,7 +439,7 @@ public class Admin extends User {
 	}
 	
 	//修改到港航班信息函数：输入参数为到港航班信息对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int modifyArrivalFlightInfo(ArrivalFlightInfo arrivalFlightInfo){
+	public int modifyArrivalFlightInfo(ArrivalFlightInfo arrivalFlightInfo){
 		if(!authorityValidate("modifyArrivalFlightInfo"))
 			return -1;
 		/*
@@ -452,7 +455,7 @@ public class Admin extends User {
 	}
 	
 	//删除到港航班信息函数：输入参数为到港航班信息对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int deleteArrivalFlightInfo(ArrivalFlightInfo arrivalFlightInfo){
+	public int deleteArrivalFlightInfo(ArrivalFlightInfo arrivalFlightInfo){
 		if(!authorityValidate("deleteArrivalFlightInfo"))
 			return -1;
 		/*
@@ -468,7 +471,7 @@ public class Admin extends User {
 	}
 	
 	//新增新闻函数：输入参数为新闻对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int addNews(News news){
+	public int addNews(News news){
 		if(!authorityValidate("addNews"))
 			return -1;
 		/*
@@ -484,7 +487,7 @@ public class Admin extends User {
 	}
 
 	//修改新闻函数：输入参数为新闻对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int modifyNews(News news){
+	public int modifyNews(News news){
 		if(!authorityValidate("modifyNews"))
 			return -1;
 		/*
@@ -500,7 +503,7 @@ public class Admin extends User {
 	}
 
 	//删除新闻函数：输入参数为新闻对象；返回整数值，成功为1，失败为0，无权限操作为-1
-	int deleteNews(News news){
+	public int deleteNews(News news){
 		if(!authorityValidate("deleteNews"))
 			return -1;
 		/*
