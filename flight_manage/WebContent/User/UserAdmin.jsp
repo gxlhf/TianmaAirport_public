@@ -144,9 +144,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">用户管理</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <%
+          <%-- <%
           Admin[] admins = admin.searchAdmin("", "", -1, "", "");
-          %>
+          %> --%>
           <form class="form-horizontal" role="form" action="<%=basePath%>SearchAdmin">
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
@@ -175,14 +175,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <select class="form-control" name="search-position">
                   <option value="">不限</option>
-                  <%
+                  <%-- <%
                   for(Admin output:admins)
                   {
                 	  out.println("<option value='"+output.getPosition()+"'>"+output.getPosition()+"</option>");
                   }
-                  %>
-                  <!-- <option value="机场地勤人员">机场地勤人员</option>
-                  <option value="信息技术员">信息技术员</option> -->
+                  %> --%>
+                  <option value="机场地勤人员">机场地勤人员</option>
+                  <option value="信息技术员">信息技术员</option>
                 </select>
               </div>
             </div>
@@ -266,7 +266,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 } */
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
-            	out.println("<input class='hide' name='selected-option'><divclass='col-sm-6 btn-modify'><div id='btn-midify' class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/AdminEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div id='btn-midify' class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/AdminEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+            }
+            else
+            {
+            	Admin[] admins = admin.searchAdmin("", "", -1, "", "");
+            	out.println("<table class='table table-hover select-table'><thead><tr>");
+              	out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
+            	out.println("<th>员工号</th><th>姓名</th><th>性别</th><th>电话</th><th>手机</th><th>邮箱</th><th>职位</th></tr></thead><tbody>");
+            	for(Admin output:admins)
+            	{
+            		out.println("<tr data-id='"+output.getEmpno()+"'>");
+            		out.println("<td><span class='glyphicon glyphicon'></span></td>");
+            		out.println("<td>"+output.getEmpno()+"</td>");
+            		out.println("<td>"+output.getName()+"</td>");
+            		
+            		if(output.getSex()==1)
+            			out.println("<td>男</td>");
+            		else
+            			out.println("<td>女</td>");
+            		out.println("<td>"+output.getPhone()+"</td>");
+            		out.println("<td>"+output.getMobile()+"</td>");
+            		out.println("<td>"+output.getEmail()+"</td>");
+            		out.println("<td>"+output.getPosition()+"</td>");
+            		out.println("</tr>");
+            	}
+            	out.println("</tbody></table>");
+                out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div id='btn-midify' class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+            	
             }
             // 表格中的data-id属性填写的是需要进行修改或删除时向对应jsp传送的参数字符串
             // 例如需要将变量名为"EmpNo"值为"1004"和变量名为"Type"值为"1"的两个参数传送到jsp页面，则data-id填写的是"EmpNo=1004&Type=1"
