@@ -105,7 +105,7 @@ public class User {
 	}
 	
 	//机场资源查询函数，输入参数为机场资源名称，返回一个AirportResource对象数组
-	AirportResource[] searchAirportResource(String name)
+	public AirportResource[] searchAirportResource(String name)
 	{
 		
 		UserDao userDao = new UserDao();
@@ -120,7 +120,7 @@ public class User {
 	}
 	
 	//物业设施查询函数，输入参数为物业设施名称，返回一个PropertyFacility对象数组
-	PropertyFacility[] searchPropertyFacility(String name)
+	public PropertyFacility[] searchPropertyFacility(String name)
 	{
 		UserDao userDao = new UserDao();
 		PropertyFacility[] propertyFacility = null;
@@ -133,7 +133,7 @@ public class User {
 		return propertyFacility;
 	}
 	
-	News[] searchNews(String title,String time)
+	public News[] searchNews(String title,String time)
 	{
 		UserDao userDao = new UserDao();
 		News[] news = null;
@@ -145,4 +145,94 @@ public class User {
 		news=userDao.searchNews(title,time);
 		return news;
 	}
+
+	public String[] returnAllInternationalDestination()
+    {/*返回数据库中离港航班的所有国际目的地
+       allInternationalDestination:国际目的地数组
+       return allInternationalDestination;
+      */
+    	
+    	String[] allInternationalDestination=null;
+    	UserDao userDao=new UserDao();
+    	allInternationalDestination=userDao.returnAllInternationalDestination();
+    	return allInternationalDestination;
+    }
+
+	public String[] returnAllInternationalFrom()
+    {/*返回数据库中到港航班的所有国际始发地
+        allInternationalFrom:国际始发地数组
+       return allInternationalFrom
+       */
+    	String[] allInternationalFrom=null;
+    	UserDao userDao=new UserDao();
+    	allInternationalFrom=userDao.returnAllInternationalFrom();
+    	return allInternationalFrom;
+    }
+
+	public String[] returnAllLocalDestination()
+    {/*返回数据库中离港航班的所有国内目的地
+       allLocalDestination:国内目的地数组
+       return allLocalDestination;
+      */
+    	
+    	String[] allLocalDestination=null;
+    	UserDao userDao=new UserDao();
+    	allLocalDestination=userDao.returnAllLocalDestination();
+    	return allLocalDestination;
+    }
+
+	public String[] returnAllLocalFrom()
+    {/*返回数据库中到港航班的所有国内始发地
+        allLocalFrom:国内始发地数组
+       return allLocalFrom
+       */
+    	String[] allLocalFrom=null;
+    	UserDao userDao=new UserDao();
+    	allLocalFrom=userDao.returnAllLocalFrom();
+    	return allLocalFrom;
+    }
+    
+	public String[] returnAllArrivalLocalAirline()
+    {/*返回数据库中到航班信息的所有国内航空公司
+       allArrivalLocalAirline:到港国内航空公司数组
+       return allArrivalLocalAirline
+       */
+    	String[] allArrivalLocalAirline=null;
+    	UserDao userDao=new UserDao();
+    	allArrivalLocalAirline=userDao.returnAllArrivalLocalAirline();
+    	return allArrivalLocalAirline;
+    }
+
+    public String[] returnAllDepartureLocalAirline()
+    {/*返回数据库中离港航班信息的所有国内航空公司
+       allArrivalLocalAirline:国内航空公司数组
+       return allArrivalLocalAirline
+       */
+    	String[] allDepartureLocalAirline=null;
+    	UserDao userDao=new UserDao();
+    	allDepartureLocalAirline=userDao.returnAllDepartureLocalAirline();
+    	return allDepartureLocalAirline;
+    }
+
+    public String[] returnAllArrivalInternationalAirline()
+    {/*返回数据库中到航班信息的所有国际航空公司
+       allArrivalLocalAirline:到港国际航空公司数组
+       return allArrivalLocalAirline
+       */
+    	String[] allArrivalInternationalAirline=null;
+    	UserDao userDao=new UserDao();
+    	allArrivalInternationalAirline=userDao.returnAllArrivalInternationalAirline();
+    	return allArrivalInternationalAirline;
+    }
+    
+    public String[] returnAllDepartureInternationalAirline()
+    {/*返回数据库中到离港航班信息的所有国际航空公司
+       allArrivalLocalAirline:离港国际航空公司数组
+       return allArrivalLocalAirline
+       */
+    	String[] allDepartureInternationalAirline=null;
+    	UserDao userDao=new UserDao();
+    	allDepartureInternationalAirline=userDao.returnAllDepartureInternationalAirline();
+    	return allDepartureInternationalAirline;
+    }
 }

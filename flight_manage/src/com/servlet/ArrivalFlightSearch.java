@@ -45,6 +45,7 @@ public class ArrivalFlightSearch extends HttpServlet {
 		String flightNumber = request.getParameter("flight-id");
 		String from = request.getParameter("from-site");
 		String airline = request.getParameter("airCompany-name");
+		String area = request.getParameter("area");
 		com.entity.User user = new com.entity.User();
 		ArrivalFlightInfo[] arrivalFlightInfos = user.searchArrivalFlightInfo(from,flightNumber,airline);
 		request.setAttribute("arrivalFlightInfos", arrivalFlightInfos);
@@ -52,7 +53,7 @@ public class ArrivalFlightSearch extends HttpServlet {
 		{
 			System.out.println(out.getFlightCourse().getAirline());;
 		}*/
-		request.getRequestDispatcher("Public/Flight/ArrivalFlightInfoCheck.jsp").forward(request, response);
+		request.getRequestDispatcher("Public/Flight/ArrivalFlightInfoCheck.jsp"+"?area="+area).forward(request, response);
 	}
 
 }

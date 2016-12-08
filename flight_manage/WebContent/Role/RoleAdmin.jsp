@@ -142,11 +142,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">角色管理</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
+          <form class="form-horizontal" role="form" action="<%=basePath%>SearchRole">
             <div class="form-group">
               <label for="search-id" class="col-sm-2 control-label">角色名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="role-name">
               </div>
             </div>
             <div class="form-group">
@@ -156,70 +156,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
             </div>
           </form>
-          <table class="table table-hover select-table">
-            <thead>
-              <tr>
-                <th>
-                  <span class="glyphicon glyphicon-check th-check"></span>
-                </th>
-                <th>序号</th>
-                <th>角色名称</th>
-                <th>描述</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr data-id="10001">
-                <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td>
-                <td>1</td>
-                <td>系统管理员</td>
-                <td>主要负责用户管理，权限分配等工作</td>
-              </tr>
-              <tr data-id="10002">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>2</td>
-                <td>航班信息管理员</td>
-                <td>主要负责管理航班</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>3</td>
-                <td>机场信息管理员</td>
-                <td>主要负责管理机场设施</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>4</td>
-                <td>新闻发布员</td>
-                <td>主要负责管理新闻</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>...</td>
-                <td>李静</td>
-                <td>女</td>
-              </tr>
-            </tbody>
-          </table>
-          <div>
-            <ul class="pager">
-              <li class="previous">
-                <a href="#">← 上一页</a>
-              </li>
-              <li class="next">
-                <a href="#">下一页 →</a>
-              </li>
-            </ul>
-          </div>
+          <%
+            if(request.getAttribute("roleInfo")!=null)
+            {
+            	out.println("<table class='table table-hover select-table'><thead><tr>");
+              	out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
+            	out.println("<th>序号</th><th>角色名称</th><th>描述</th></tr></thead><tbody>");
+            	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
+            	Role roleInfo = (Role)request.getAttribute("roleInfo");
+            	out.println("<tr data-id='"+roleInfo.getName()+"'>");
+            	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+            	out.println("<td>"+"1"+"</td>");
+            	out.println("<td>"+roleInfo.getName()+"</td>");
+            	out.println("<td>"+roleInfo.getDescription()+"</td>");
+                /* for(ArrivalFlightInfo output:arrivalFlightInfos)
+                {
+                	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                	if(session.getAttribute("priv1")!=null){
+                    	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                    }else{
+                  	  out.println("<td></td>");
+                    }
+                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
+                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                    	out.println("<td>"+output.getTime()+"</td>");
+                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+        				out.println("</tr>");
+                	}
+                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
+                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                    	out.println("<td>"+output.getTime()+"</td>");
+                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+        				out.println("</tr>");
+                	}         
+                } */
+                out.println("</tbody></table>");
+                out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+            }
+            
+            %>
           <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
               <a class="btn btn-primary" href="<%=basePath%>Role/RoleEdit.jsp">修改</a>
