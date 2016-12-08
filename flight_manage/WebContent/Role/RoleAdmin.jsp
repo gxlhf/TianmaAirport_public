@@ -134,9 +134,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">主页</a>
-            </li>
-            <li>
               <a href="#">用户与角色管理</a>
             </li>
             <li class="active">角色管理</li>
@@ -200,16 +197,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 } */
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+            	out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"Role/RoleEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
             }
             
             %>
-          <div class="col-sm-6 btn-modify">
+          <%-- <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
               <a class="btn btn-primary" href="<%=basePath%>Role/RoleEdit.jsp">修改</a>
               <a class="btn btn-danger" href="">删除</a>
               <a class="btn btn-success" href="">新增</a>
             </div>
-          </div>
+          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">

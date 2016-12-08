@@ -301,13 +301,14 @@ else
             	DepartureFlightInfo[] departureFlightInfos = (DepartureFlightInfo[])request.getAttribute("departureFlightInfos");
                 for(DepartureFlightInfo output:departureFlightInfos)
                 {
-                	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
-                	if(session.getAttribute("priv1")!=null){
-                    	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                    }else{
-                  	  out.println("<td></td>");
-                    }
+                	
                 	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
+                		out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                    	if(session.getAttribute("priv1")!=null){
+                        	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                        }else{
+                      	  out.println("<td></td>");
+                        }
                 		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
@@ -319,6 +320,12 @@ else
         				out.println("</tr>");
                 	}
                 	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
+                		out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                    	if(session.getAttribute("priv1")!=null){
+                        	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                        }else{
+                      	  out.println("<td></td>");
+                        }
                 		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");

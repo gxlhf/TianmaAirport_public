@@ -138,63 +138,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">主页</a>
-            </li>
-            <li>
               <a href="#">用户与角色管理</a>
             </li>
             <li class="active">用户管理</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
+          <form class="form-horizontal" role="form" action="<%=basePath%>SearchAdmin">
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-id">
+                <input type="text" class="form-control" name="search-empno">
               </div>
             </div>
             <div class="form-group">
               <label for="user-name" class="col-sm-2 control-label">姓名：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-name">
+                <input type="text" class="form-control" name="search-name">
               </div>
             </div>
             <div class="form-group">
               <label for="search-sex" class="col-sm-2 control-label">性别：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="search-sex">
-                  <option>不限</option>
-                  <option>男</option>
-                  <option>女</option>
+                  <option value="">不限</option>
+                  <option value="1">男</option>
+                  <option value="0">女</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label for="search-pos" class="col-sm-2 control-label">职位：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="search-pos">
-                  <option>不限</option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option>
+                <select class="form-control" name="search-position">
+                  <option value="">不限</option>
+                  <option value="机场地勤人员">机场地勤人员</option>
+                  <option value="信息技术员">信息技术员</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">角色：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="search-chara">
-                  <option>不限</option>
-                  <option>系统管理员</option>
-                  <option>航班信息管理员</option>
-                  <option>机场设施管理员</option>
-                  <option>新闻管理员</option>
+                <select class="form-control" name="search-role">
+                  <option value="">不限</option>
+                  <option value="系统管理员">系统管理员</option>
+                  <option value="航班信息管理员">航班信息管理员</option>
+                  <option value="机场设施管理员">机场设施管理员</option>
+                  <option value="新闻管理员">新闻管理员</option>
                 </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="search-pos" class="col-sm-2 control-label">时间日期：</label>
-              <div class="col-sm-6">
-                <input type="text" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="search-time">
               </div>
             </div>
             <div class="form-group">
@@ -204,694 +195,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
             </div>
           </form>
-          <table class="table table-hover select-table">
-            <thead>
-              <tr>
-                <th>
-                  <span class="glyphicon glyphicon-check th-check"></span>
-                </th>
-                <th>员工号</th>
-                <th>姓名</th>
-                <th>性别</th>
-                <th>电话</th>
-                <th>手机</th>
-                <th>邮件</th>
-                <th>职位</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr data-id="10001">
-                <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10002">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr data-id="10003">
-                <td>
-                  <span class="glyphicon"></span>
-                </td>
-                <td>10001</td>
-                <td>李静</td>
-                <td>女</td>
-                <td>88884862</td>
-                <td>13123332333</td>
-                <td>123@123.com</td>
-                <td>信息技术员</td>
-              </tr>
-              <tr class="hidden">
-                <td>
-                  <input type="text" name="selected-option">
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div>
-            <ul class="pager">
-              <li class="previous">
-                <a href="#">← 上一页</a>
-              </li>
-              <li class="next">
-                <a href="#">下一页 →</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-sm-6 btn-modify">
+          <%
+            if(request.getAttribute("adminsInfo")!=null)
+            {
+            	out.println("<table class='table table-hover select-table'><thead><tr>");
+              	out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
+            	out.println("<th>员工号</th><th>姓名</th><th>性别</th><th>电话</th><th>手机</th><th>邮箱</th><th>职位</th></tr></thead><tbody>");
+            	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
+            	Admin[] adminInfos = (Admin[])request.getAttribute("adminsInfo");
+            	for(Admin output:adminInfos)
+            	{
+            		out.println("<td><span class='glyphicon glyphicon'></span></td>");
+            		out.println("<td>"+output.getEmpno()+"</td>");
+            		out.println("<td>"+output.getName()+"</td>");
+            		
+            		if(output.getSex()==1)
+            			out.println("<td>男</td>");
+            		else
+            			out.println("<td>女</td>");
+            		out.println("<td>"+output.getPhone()+"</td>");
+            		out.println("<td>"+output.getMobile()+"</td>");
+            		out.println("<td>"+output.getEmail()+"</td>");
+            		out.println("<td>"+output.getPosition()+"</td>");
+            		out.println("</tr>");
+            	}
+            	/* out.println("<tr data-id='"+roleInfo.getName()+"'>");
+            	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+            	out.println("<td>"+"1"+"</td>");
+            	out.println("<td>"+roleInfo.getName()+"</td>");
+            	out.println("<td>"+roleInfo.getDescription()+"</td>"); */
+                /* for(ArrivalFlightInfo output:arrivalFlightInfos)
+                {
+                	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                	if(session.getAttribute("priv1")!=null){
+                    	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                    }else{
+                  	  out.println("<td></td>");
+                    }
+                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
+                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                    	out.println("<td>"+output.getTime()+"</td>");
+                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+        				out.println("</tr>");
+                	}
+                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
+                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                    	out.println("<td>"+output.getTime()+"</td>");
+                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+        				out.println("</tr>");
+                	}         
+                } */
+                out.println("</tbody></table>");
+                out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+            	out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"User/AdminEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+            }
+            
+            %>
+          <%-- <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="<%=basePath%>User/UserEdit.jsp">修改</a>
+              <a class="btn btn-primary" href="<%=basePath%>Role/RoleEdit.jsp">修改</a>
               <a class="btn btn-danger" href="">删除</a>
               <a class="btn btn-success" href="">新增</a>
             </div>
-          </div>
+          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">

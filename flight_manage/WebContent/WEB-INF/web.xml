@@ -48,6 +48,14 @@
     <servlet-name>SearchRole</servlet-name>
     <url-pattern>/SearchRole</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>SearchAdmin</servlet-name>
+    <servlet-class>com.servlet.SearchAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchAdmin</servlet-name>
+    <url-pattern>/SearchAdmin</url-pattern>
+  </servlet-mapping>
   <filter>
     <description>
 		</description>

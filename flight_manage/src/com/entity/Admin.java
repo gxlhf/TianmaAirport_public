@@ -206,7 +206,7 @@ public class Admin extends User implements Serializable{
 		Admin[] admin = null;
 		if(!authorityValidate("searchAdmin")){
 			admin = new Admin[1];
-			admin[0].empno = "-1";
+			admin[0].setEmpno("-1");
 		}
 		if(empno!=""&&empno!=null){
 			/*
