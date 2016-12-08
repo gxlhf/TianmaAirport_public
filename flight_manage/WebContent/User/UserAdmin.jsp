@@ -1,3 +1,4 @@
+<%@page import="java.awt.print.Printable"%>
 <%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
@@ -143,6 +144,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">用户管理</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
+          <%
+          Admin[] admins = admin.searchAdmin("", "", -1, "", "");
+          %>
           <form class="form-horizontal" role="form" action="<%=basePath%>SearchAdmin">
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
@@ -171,8 +175,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <select class="form-control" name="search-position">
                   <option value="">不限</option>
-                  <option value="机场地勤人员">机场地勤人员</option>
-                  <option value="信息技术员">信息技术员</option>
+                  <%
+                  for(Admin output:admins)
+                  {
+                	  out.println("<option value='"+output.getPosition()+"'>"+output.getPosition()+"</option>");
+                  }
+                  %>
+                  <!-- <option value="机场地勤人员">机场地勤人员</option>
+                  <option value="信息技术员">信息技术员</option> -->
                 </select>
               </div>
             </div>
@@ -205,6 +215,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	Admin[] adminInfos = (Admin[])request.getAttribute("adminsInfo");
             	for(Admin output:adminInfos)
             	{
+            		out.println("<tr data-id='"+output.getEmpno()+"'>");
             		out.println("<td><span class='glyphicon glyphicon'></span></td>");
             		out.println("<td>"+output.getEmpno()+"</td>");
             		out.println("<td>"+output.getName()+"</td>");
