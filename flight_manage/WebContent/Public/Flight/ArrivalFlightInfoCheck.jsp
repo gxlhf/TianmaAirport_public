@@ -373,7 +373,7 @@ else
           </div> -->
           <%
           if(session.getAttribute("priv1")!=null){
-        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"Flight/FlightEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+        	  out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' id='btn-modify' href='"+basePath+"Flight/FlightEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
           }
           %>
           <%-- <div class="col-sm-6 btn-modify">
