@@ -55,11 +55,18 @@ public class SearchAdmin extends HttpServlet {
 		String role = request.getParameter("search-role");
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		Admin[] adminsInfo = admin.searchAdmin(empno, name, sex, position, role);
-		if(adminsInfo==null){
+		/*System.out.println(empno);
+		System.out.println(name);
+		System.out.println(sex);
+		System.out.println(position);
+		System.out.println(role);
+		for(Admin output:adminsInfo)
+			System.out.println(output.getEmpno());*/
+		/*if(adminsInfo.length==0){
 			request.setAttribute("adminsInfo", adminsInfo);
 			request.getRequestDispatcher("User/UserAdmin.jsp").forward(request, response);
-		}	
-		if(adminsInfo!=null&&adminsInfo[0].getEmpno().equals("-1"))
+		}*/	
+		if(adminsInfo.length!=0&&adminsInfo[0].getEmpno().equals("-1"))
 			request.getRequestDispatcher("/error.jsp").forward(request, response);
 		else{
 			request.setAttribute("adminsInfo", adminsInfo);

@@ -34,6 +34,34 @@ public class AdminDao {
     	role = new Role(name);
 		return role;   	
     }
+    public Role[] returnAllRole()
+    {//返回所有角色信息，返回Role对象数组
+    	Role[] allRole=null;
+    	String name=null;
+    	sql = "SELECT * FROM actor";//SQL语句  
+        db1= new db_connection(sql);//创建db_connection对象  
+         try {  
+              ret = db1.pst.executeQuery();//执行语句，得到结果集 
+              int i=0;
+             
+              ret.last();
+              int roleNumber=ret.getRow();
+              allRole=new Role[roleNumber];
+              ret.beforeFirst();
+              while(ret.next()){
+                 name=ret.getString("A_name");	  
+                 allRole[i] = new Role(name);
+                 i++;
+             }         
+              ret.close();         
+       } catch (SQLException e) {  
+            e.printStackTrace();
+            return allRole;
+       }finally{
+    	      db1.close();//关闭连接
+       }
+		return allRole;
+    }
     public boolean addRole(Role role)
     {//数据库操作：新增角色，形参为角色对象，返回值为布尔值    
     	     sql = "INSERT INTO actor (A_name,A_describe) "+
@@ -293,7 +321,7 @@ public class AdminDao {
             		db1.pst.setString(1, name);
             		db1.pst.setString(2, position);
             		db1.pst.setString(3, roleName);
-            	}else if((name==null&&name=="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
+            	}else if((name==null||name=="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
             	{	
             		sql=sql+" AND user_info.Sex=? AND user_info.Position=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
@@ -884,5 +912,114 @@ public class AdminDao {
        }
           return true;
     	
+    }
+    public News[] searchNews(String title,String time,String publisher){
+   	 
+//      /*
+//       * News[] searchN(String title,String time,String publisher);
+//       * 数据库操作：查询新闻标题为title，发布时间为time，发布人为publisher的新闻信息；若其中一形参值为空字符串，则表示无此限制条件
+//       * 形参为新闻标题、发布时间，返回类型为News对象数组
+//       */
+   	 News[] news =null;
+   	 int i=0;
+   	 if((title!=""&&title!=null)&&(time!=""&&time!=null)&&(publisher!=null&&publisher!=""))
+   	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%' AND newscenter.Edit_time='"+time+"' AND user_info.Name = '"+publisher+"'";//SQL语句
+   	 else if((title!=""&&title!=null)&&(time==""||time==null)&&(publisher==null||publisher==""))
+   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%'";//SQL语句
+   	 else if((title==""||title==null)&&(time!=""&&time!=null)&&(publisher==null||publisher==""))
+   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time='"+time+"'";//SQL语句
+   	 else if((title==""||title==null)&&(time==""||time==null)&&(publisher!=null&&publisher!=""))
+   	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE user_info.Name = '"+publisher+"'";//SQL语句
+   	 else if((title!=""&&title!=null)&&(time!=""&&time!=null)&&(publisher==null||publisher==""))
+   	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%' AND newscenter.Edit_time='"+time+"'";//SQL语句
+   	 else if((title!=""&&title!=null)&&(time==""||time==null)&&(publisher!=null&&publisher!=""))
+   	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%' AND user_info.Name = '"+publisher+"'";//SQL语句
+   	 else  if((title==""||title==null)&&(time!=""&&time!=null)&&(publisher!=null&&publisher!=""))
+   	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time='"+time+"' AND user_info.Name = '"+publisher+"'";//SQL语句
+   	 else 
+   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No";//SQL语句
+   	 db1= new db_connection(sql);//创建db_connection对象  
+   	 String newsId;
+   	 String content;
+   	 String kind;
+   	 String publisher_id;
+   	 String attachment;
+   	 try {  
+   		 	ret = db1.pst.executeQuery();//执行语句，得到结果集  
+   		 	ret.last();
+	            int rowNumber=ret.getRow();
+	            ret.beforeFirst();
+	            news = new News[rowNumber];
+   		 	while (ret.next()) { 
+   	
+   		 		newsId=ret.getString("News_id");
+   		 		title=ret.getString("Title");
+   		 		time=ret.getString("Edit_time");
+   		 		content=ret.getString("Content");
+   		 		kind=ret.getString("NCname");
+   		 		publisher_id=ret.getString("Em_No");
+   		 		attachment=ret.getString("Attachments");
+   		 		news[i] = new News(title, time, content, kind,  attachment, publisher_id,newsId);
+   		 		i++;
+   		 	}
+   		 	ret.close();    		 
+   	 } catch (SQLException e) {  
+   		 e.printStackTrace();  
+   	 } finally{
+   		 	db1.close();//关闭连接  
+   	 }
+      return news;
+   }
+    public String[] returnAllPosition()
+    {//返回所有职位名称，返回String数组
+    	String[] allPosition=null;
+    	 int i=0;
+         sql = "SELECT DISTINCT Position FROM user_info";//SQL语句  
+         db1= new db_connection(sql);//创建db_connection对象         
+         try {  
+             ret = db1.pst.executeQuery();//执行语句，得到结果集 
+             ret.last();
+             int rowNumber=ret.getRow();
+             ret.beforeFirst();
+             allPosition=new String[rowNumber];
+             while (ret.next()) {           	 
+             	allPosition[i]=ret.getString("Position");   	  	         	 
+                   i++;
+             }
+             ret.close();  
+            
+         } catch (SQLException e) {  
+             e.printStackTrace();  
+         } 
+         finally{
+         	 db1.close();//关闭连接  
+         }
+    	return allPosition;
+    }
+    public String[] returnAllDepartment()
+    {//返回所有部门名称 ，返回String数组
+    	String[] allDepartment=null;
+    	 int i=0;
+         sql = "SELECT DISTINCT Dept FROM user_info";//SQL语句  
+         db1= new db_connection(sql);//创建db_connection对象         
+         try {  
+             ret = db1.pst.executeQuery();//执行语句，得到结果集 
+             ret.last();
+             int rowNumber=ret.getRow();
+             ret.beforeFirst();
+             allDepartment=new String[rowNumber];
+             while (ret.next()) {           	 
+             	allDepartment[i]=ret.getString("Dept");   	  	         	 
+                   i++;
+             }
+             ret.close();  
+            
+         } catch (SQLException e) {  
+             e.printStackTrace();  
+         } 
+         finally{
+         	 db1.close();//关闭连接  
+         }
+    	return allDepartment;
     }
 }

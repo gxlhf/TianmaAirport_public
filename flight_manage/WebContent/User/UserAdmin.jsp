@@ -175,14 +175,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <select class="form-control" name="search-position">
                   <option value="">不限</option>
+                  <%
+                  	for(String output:admin.returnAllPosition())
+                  	{
+                  %>
+                  		<option value="<%=output %>"><%=output %></option>
+                  <%
+                  	}
+                  %>
                   <%-- <%
                   for(Admin output:admins)
                   {
                 	  out.println("<option value='"+output.getPosition()+"'>"+output.getPosition()+"</option>");
                   }
                   %> --%>
-                  <option value="机场地勤人员">机场地勤人员</option>
-                  <option value="信息技术员">信息技术员</option>
+                  <!-- <option value="机场地勤人员">机场地勤人员</option>
+                  <option value="信息技术员">信息技术员</option> -->
                 </select>
               </div>
             </div>
@@ -191,10 +199,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <select class="form-control" name="search-role">
                   <option value="">不限</option>
-                  <option value="系统管理员">系统管理员</option>
+                  <%
+                  	for(Role output:admin.returnAllRole())
+                  	{
+                  %>
+                  		<option value="<%=output.getName() %>"><%=output.getName() %></option>
+                  <%
+                  	}
+                  %>
+                  <!-- <option value="系统管理员">系统管理员</option>
                   <option value="航班信息管理员">航班信息管理员</option>
                   <option value="机场设施管理员">机场设施管理员</option>
-                  <option value="新闻管理员">新闻管理员</option>
+                  <option value="新闻管理员">新闻管理员</option> -->
                 </select>
               </div>
             </div>
@@ -210,12 +226,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             {
             	out.println("<table class='table table-hover select-table'><thead><tr>");
               	out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
-            	out.println("<th>员工号</th><th>姓名</th><th>性别</th><th>电话</th><th>手机</th><th>邮箱</th><th>职位</th></tr></thead><tbody>");
+            	out.println("<th>员工号</th><th>姓名</th><th>性别</th><th>电话</th><th>手机</th><th>邮箱</th><th>部门</th><th>职位</th><th>角色</th></tr></thead><tbody>");
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Admin[] adminInfos = (Admin[])request.getAttribute("adminsInfo");
             	for(Admin output:adminInfos)
             	{
-            		out.println("<tr data-id='"+output.getEmpno()+"'>");
+            		out.println("<tr data-id='empno="+output.getEmpno()+"'>");
             		out.println("<td><span class='glyphicon glyphicon'></span></td>");
             		out.println("<td>"+output.getEmpno()+"</td>");
             		out.println("<td>"+output.getName()+"</td>");
@@ -227,7 +243,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             		out.println("<td>"+output.getPhone()+"</td>");
             		out.println("<td>"+output.getMobile()+"</td>");
             		out.println("<td>"+output.getEmail()+"</td>");
+            		out.println("<td>"+output.getDepartment()+"</td>");
             		out.println("<td>"+output.getPosition()+"</td>");
+            		out.println("<td>"+output.getRole().getName()+"</td>");
             		out.println("</tr>");
             	}
             	/* out.println("<tr data-id='"+roleInfo.getName()+"'>");
@@ -266,17 +284,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 } */
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
-            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div id='btn-midify' class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/AdminEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
             }
             else
             {
             	Admin[] admins = admin.searchAdmin("", "", -1, "", "");
             	out.println("<table class='table table-hover select-table'><thead><tr>");
               	out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
-            	out.println("<th>员工号</th><th>姓名</th><th>性别</th><th>电话</th><th>手机</th><th>邮箱</th><th>职位</th></tr></thead><tbody>");
+            	out.println("<th>员工号</th><th>姓名</th><th>性别</th><th>电话</th><th>手机</th><th>邮箱</th><th>部门</th><th>职位</th><th>角色</th></tr></thead><tbody>");
             	for(Admin output:admins)
             	{
-            		out.println("<tr data-id='"+output.getEmpno()+"'>");
+            		out.println("<tr data-id='empno="+output.getEmpno()+"'>");
             		out.println("<td><span class='glyphicon glyphicon'></span></td>");
             		out.println("<td>"+output.getEmpno()+"</td>");
             		out.println("<td>"+output.getName()+"</td>");
@@ -288,12 +306,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             		out.println("<td>"+output.getPhone()+"</td>");
             		out.println("<td>"+output.getMobile()+"</td>");
             		out.println("<td>"+output.getEmail()+"</td>");
+            		out.println("<td>"+output.getDepartment()+"</td>");
             		out.println("<td>"+output.getPosition()+"</td>");
+            		out.println("<td>"+output.getRole().getName()+"</td>");
             		out.println("</tr>");
             	}
             	out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
-            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div id='btn-midify' class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
             	
             }
             // 表格中的data-id属性填写的是需要进行修改或删除时向对应jsp传送的参数字符串
