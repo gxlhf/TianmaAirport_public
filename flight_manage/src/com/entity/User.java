@@ -104,18 +104,18 @@ public class User {
 		return arrivalFlightInfo;
 	}
 	
-	//机场资源查询函数，输入参数为机场资源名称，返回一个AirportResource对象数组
-	public AirportResource[] searchAirportResource(String name)
+	//机场资源查询函数，输入参数为机场资源名称和类别，返回一个AirportResource对象数组
+	public AirportResource[] searchAirportResource(String name, String type)
 	{
 		
 		UserDao userDao = new UserDao();
 		AirportResource[] airportResource = null;
 		/*
-		 * AirportResource[] searchA(String name);
-		 * 数据库操作：查询机场资源名称为该name的机场资源信息
+		 * AirportResource[] searchA(String name, String type);
+		 * 数据库操作：查询机场资源名称为该name和类别为type的机场资源信息，若其中一项为空表示无此限制条件
 		 * 形参为机场资源名称，返回类型为AirportResource对象数组
 		 */
-		airportResource=userDao.searchAirportResource(name);
+		airportResource=userDao.searchAirportResource(name, type);
 		return airportResource;
 	}
 	
@@ -234,5 +234,35 @@ public class User {
     	UserDao userDao=new UserDao();
     	allDepartureInternationalAirline=userDao.returnAllDepartureInternationalAirline();
     	return allDepartureInternationalAirline;
+    }
+
+    public AirportResource[] returnAllAirportResource()
+    {  /*
+    	* AirportResource[] returnAllAirportResoure();
+		* 数据库操作：返回所有机场资源信息
+		* 返回类型为AirportResource对象数组
+		*/
+    	UserDao userDao= new UserDao();
+		return userDao.returnAllAirportResource();
+    	
+    }
+    public PropertyFacility[] returnAllPropertyFacility()
+    {  /*
+        * PropertyFacility[] returnAllPropertyFacility();
+        * 数据库操作：返回所有物业设施信息
+        * 返回类型为PropertyFacility对象数组
+        */
+    	UserDao userDao= new UserDao();
+		return userDao.returnAllPropertyFacility();
+    }
+    public News[] returnAllNews()
+    { 	 
+	   /*
+		* News[]  returnAllNews();
+		* 数据库操作：返回所有新闻信息；
+		* 返回类型为News对象数组
+		*/
+    	UserDao userDao=new UserDao();
+    	return userDao.returnAllNews();
     }
 }

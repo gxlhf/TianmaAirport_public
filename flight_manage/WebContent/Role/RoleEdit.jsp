@@ -146,18 +146,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
             <li class="active">修改角色</li>
           </ol>
-          <form class="form-horizontal" role="form">
+          <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
               <label for="rolename" class="col-sm-2 control-label">角色名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="roleName" value="航班信息管理员">
+                <input type="text" class="form-control" name="roleName" value="" data-error="请填写角色名称*" required>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="search-name" class="col-sm-2 control-label">描述：</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="roleDesc" rows="3">主要负责管理航班</textarea>
+                <textarea class="form-control" name="roleDesc" rows="3" data-error="请填写角色描述*" required></textarea>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="container" id="mult-select-table">
               <div class="col-xs-6">
@@ -218,7 +220,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       <th>
                         <span class="glyphicon glyphicon-check th-check"></span>
                       </th>
-                      <th>已分配权限</th>
+                      <th>已分配权限 *</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -263,10 +265,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </table>  
               </div> 
             </div>
-            <input class="hide" type="text" name="rolePriv">
+
+            <div class="form-group">
+              <div>
+                <input class="form-control no-height" type="text" name="rolePriv" class="hide" data-error="请分配权限" required>
+              </div>
+              <div class="col-sm-2 help-block with-errors"></div>
+            </div>
+
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
-                <a data-toggle="modal" data-target="#ensureBox" id="btn-save" class="btn btn-success" href="#">修改</a>
+                <a data-toggle="modal" id="btn-save" class="btn btn-success">修改</a><!--  data-target="#ensureBox" -->
                 <a id="btn-cancel" class="btn btn-primary" href="#">取消</a>
               </div>
             </div>
@@ -292,7 +301,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
               <hr>
 
-              <form class="form-horizontal" role="form">
+              <div class="form-horizontal" role="form">
                 <div class="form-group">
                   <label class="col-xs-3 control-label">角色名称</label>
                   <div class="col-xs-9">
@@ -311,7 +320,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <p id="rolePriv-ensure" class="form-control-static">123</p>
                   </div>
                 </div>
-              </form>
+              </div>
 
             </div>
             <div class="modal-footer">
@@ -323,6 +332,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!-- /.modal-dialog -->
       </div>
       <!-- 确认信息弹框结束 -->
+      
     </div>
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
@@ -337,6 +347,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
     <script src="<%=basePath%>/js/CharacterEdit.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
     <script src="<%=basePath%>/js/ensureBox.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>

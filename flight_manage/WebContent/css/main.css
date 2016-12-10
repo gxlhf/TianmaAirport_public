@@ -298,3 +298,10 @@ footer {
 	border-top: 1px #e5e5e5 solid;
     background: white;
 }
+
+
+@media (max-width: 768px) {        
+    .form-control-static { /* 修复确认弹框不对齐问题 */
+        padding-top: 0px !important;
+    }
+}
