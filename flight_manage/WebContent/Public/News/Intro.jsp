@@ -164,7 +164,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="form-group">
               <label for="newsContent" class="col-sm-2 control-label">新闻正文：</label>
-              <div class="col-sm-6">自本机场成立至今，已有很多月</div>
+              <div class="col-sm-6"><%
+              	News[] news=admin.searchNews("机场介绍", "");
+                session.setAttribute("NewsId", news[0].getNewsId());
+           		out.print(news[0].getContent());
+              %>></div>
             </div>
             <div class="form-group">
               <div class="col-sm-2"></div>

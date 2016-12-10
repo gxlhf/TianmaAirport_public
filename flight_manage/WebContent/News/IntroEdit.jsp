@@ -153,7 +153,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">修改</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
+          <form class="form-horizontal" role="form" action="/NewsUpdate">
             <div class="form-group">
               <label for="news-title" class="col-sm-2 control-label">新闻标题：</label>
               <div class="col-sm-6">
