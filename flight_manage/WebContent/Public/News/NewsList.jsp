@@ -270,7 +270,7 @@ else
                 </td> -->
                 <td>1</td>
                 <td>
-                  <a href="<%=basePath%>News/NewsDetail.jsp">最新航班消息</a>
+                  <a href="<%=basePath%>/Public/News/NewsDetail.jsp">最新航班消息</a>
                 </td>
                 <td>2016-1-1</td>
                 <td>李静</td>
@@ -361,7 +361,7 @@ else
           </div>
           <%
           if(session.getAttribute("priv2")!=null){
-        	  out.println(" <div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-success' href='"+basePath+"News/NewsEdit.jsp?type=add'>新增</a><a class='btn btn-danger' href='/DeleteNews'>删除</a><a class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type=update'>修改</a></div></div>");
+        	  out.println(" <div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn=midify' class='btn btn-success' href='"+basePath+"News/NewsEdit.jsp?type=add'>新增</a><a id='btn=midify' class='btn btn-danger' href='/DeleteNews'>删除</a><a id='btn=midify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type=update'>修改</a></div></div>");
           }
           %>
           <%-- <div class="col-sm-6 btn-modify">

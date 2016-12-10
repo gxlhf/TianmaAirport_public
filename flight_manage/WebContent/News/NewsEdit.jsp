@@ -153,79 +153,84 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">修改</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
+          <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
               <label for="news-title" class="col-sm-2 control-label">新闻标题：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="search-id" data-error="请填写标题*" required>
               </div>
+              <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
-              <label for="search-name" class="col-sm-2 control-label">新闻类别：</label>
-              <div class="col-sm-6">
-                <input type="radio" name="news-classified">机场介绍
-                <input type="radio" name="news-classified" checked="">航班信息
-                <input type="radio" name="news-classified">机场资源
-                <input type="radio" name="news-classified">物业资源&nbsp;*</div>
-            </div>
-            <div class="form-group">
-              <label for="news-outname" class="col-sm-2 control-label">发布人：</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="news-outname">
+              <label for="user-sex" class="col-sm-2 control-label">新闻类别：</label>
+              <div class="btn-group col-sm-6" data-toggle="buttons">
+                <label class="btn btn-default col-xs-3">
+                  <input type="radio" name="user-sex" value="机场介绍" data-error="请选择类别*" autocomplete="off" required>机场介绍
+                </label>
+                <label class="btn btn-default col-xs-3">
+                  <input type="radio" name="user-sex" value="航班信息" data-error="请选择类别*" autocomplete="off" required>航班信息
+                </label>
+                <label class="btn btn-default col-xs-3">
+                  <input type="radio" name="user-sex" value="机场资源" data-error="请选择类别*" autocomplete="off" required>机场资源
+                </label>
+                <label class="btn btn-default col-xs-3">
+                  <input type="radio" name="user-sex" value="物业资源" data-error="请选择类别*" autocomplete="off" required>物业资源
+                </label>
               </div>
+              <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="news-context"></textarea>
+                <textarea class="form-control" name="news-context" data-error="请填写正文*" required></textarea>
               </div>
+              <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <div class="col-sm-2"></div>
               <div class="col-sm-6"></div>
             </div>
-          </form>
-          <table class="table table-hover select-table">
-            <thead>
-              <tr>
-                <th>附件</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr data-id="10001">
-                <td>附件1</td>
-                <td>
-                  <a href="">删除</a>
-                </td>
-              </tr>
-              <tr data-id="10002">
-                <td>附件二</td>
-                <td>
-                  <a href="">删除</a>
-                </td>
-              </tr>
-              <tr data-id="10003">
-                <td>附件三</td>
-                <td>
-                  <a href="">删除</a>
-                </td>
-              </tr>
-              <tr data-id="10004">
-                <td>上传新附件：</td>
-                <td>
-                  <input name="" type="file">
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div></div>
-          <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-success" href="">修改</a>
-              <a class="btn btn-primary" href="">取消</a>
+            <table class="table table-hover select-table">
+              <thead>
+                <tr>
+                  <th>附件</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-id="10001">
+                  <td>附件1</td>
+                  <td>
+                    <a href="">删除</a>
+                  </td>
+                </tr>
+                <tr data-id="10002">
+                  <td>附件二</td>
+                  <td>
+                    <a href="">删除</a>
+                  </td>
+                </tr>
+                <tr data-id="10003">
+                  <td>附件三</td>
+                  <td>
+                    <a href="">删除</a>
+                  </td>
+                </tr>
+                <tr data-id="10004">
+                  <td>上传新附件：</td>
+                  <td>
+                    <input name="" type="file">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="col-sm-6 btn-modify">
+              <div class="btn-group btn-group-justified">
+                <a class="btn btn-success" onclick="$(this).parents('form').submit()">修改</a>
+                <a class="btn btn-primary" href="">取消</a>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
@@ -244,6 +249,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 尾部结束 -->
     <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>

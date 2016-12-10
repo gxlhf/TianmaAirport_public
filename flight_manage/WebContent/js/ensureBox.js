@@ -1,9 +1,16 @@
 $(function () {
-	$('#btn-save').click(function () {
-		var dataElem = $(this).parents('form').find('input, textarea');
-		console.log(dataElem);
-		dataElem.each(function () {
-			$('#' + $(this).attr('name') + '-ensure').text($(this).val());
-		})
-	})
+	$('#btn-save').click(function (e) {
+		$(this).parents('form').validator('validate');
+		var validator_passed = !($('.has-error').length);
+		if (validator_passed) {			
+			//填写确认弹框
+			var dataElem = $(this).parents('form').find('input, textarea, select');
+			dataElem.each(function () {
+				if($(this).attr('type') == 'radio' && (!this.checked))
+					return;
+				$('#' + $(this).attr('name') + '-ensure').text($(this).val());
+			});
+			$('#ensureBox').modal('show');
+		}
+	});
 });

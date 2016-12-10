@@ -14,6 +14,217 @@ public class UserDao {
     static String sql = null;
     static db_connection db1 = null;
     static ResultSet ret = null;
+    public DepartureFlightInfo[] returnAllInternationalDepartureFlightInfo()
+    {
+    	DepartureFlightInfo[] allInternationalDepartureFlightInfo = null;
+		//返回国际离港航班信息
+            /*
+             * DepartureFlightInfo[] returnAllInternationalDepartureFlightInfo();
+             * 数据库操作
+             * 返回类型为DepartureFlightInfo对象数组
+             * 
+             */
+                int i=0;
+				sql = "SELECT flight_off.Flight_No2,flight_off.InternationalOrLocal,flight_off.Starting_station,flight_off.Destination," +
+						"flight_off.Staging_post,flight_off.Airline,bc_allocation.Bname,bc_allocation.Cname,bc_allocation.Time " +
+						"FROM flight_off INNER JOIN bc_allocation ON flight_off.Flight_No2 = bc_allocation.Flight_No2 " +
+						"WHERE flight_off.InternationalOrLocal=true";//SQL语句  
+		        db1 = new db_connection(sql);//创建db_connection对象  		       
+		        boolean internationalOrLocal;
+		        String from=null;
+		        String to=null;
+		        String stop=null;
+		        String airline=null;
+		        String boardingGate=null;
+		        String checkinCounter=null;
+		        String flightnumber=null;
+		        String time=null;
+		        try {  
+		            ret = db1.pst.executeQuery();//执行语句，得到结果集  
+		            ret.last();
+		            int rowNumber=ret.getRow();
+		            ret.beforeFirst();
+		            allInternationalDepartureFlightInfo = new DepartureFlightInfo[rowNumber];
+		            while (ret.next()) { 
+		            	flightnumber=ret.getString("Flight_No2");
+		                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
+		            	from=ret.getString("Starting_station");
+		            	to=ret.getString("Destination");
+		            	stop=ret.getString("Staging_post");
+		            	airline=ret.getString("Airline");
+		            	boardingGate=ret.getString("Bname");
+		            	checkinCounter=ret.getString("Cname");
+		            	time=ret.getString("Time");
+		            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,false,flightnumber,airline,from,to,stop);
+		            	allInternationalDepartureFlightInfo[i]=new DepartureFlightInfo(flightCourse,checkinCounter,boardingGate,time);
+		                i++;
+		            }
+		            ret.close();  		          
+		        } catch (SQLException e) {  
+		            e.printStackTrace();  
+		        } finally{
+		        	  db1.close();//关闭连接  
+		        }
+		return allInternationalDepartureFlightInfo;
+    	
+    }
+    public DepartureFlightInfo[] returnAllLocalDepartureFlightInfo()
+    {
+       	DepartureFlightInfo[] allLocalDepartureFlightInfo = null;
+		//返回所有国内离港航班信息
+            /*
+             * DepartureFlightInfo[] returnAllLocalDepartureFlightInfo();
+             * 数据库操作：
+             * 返回类型为DepartureFlightInfo对象数组
+             * 
+             */
+                int i=0;
+				sql = "SELECT flight_off.Flight_No2,flight_off.InternationalOrLocal,flight_off.Starting_station,flight_off.Destination," +
+						"flight_off.Staging_post,flight_off.Airline,bc_allocation.Bname,bc_allocation.Cname,bc_allocation.Time " +
+						"FROM flight_off INNER JOIN bc_allocation ON flight_off.Flight_No2 = bc_allocation.Flight_No2 " +
+						"WHERE flight_off.InternationalOrLocal=false";//SQL语句  
+		        db1 = new db_connection(sql);//创建db_connection对象  		       
+		        boolean internationalOrLocal;
+		        String from=null;
+		        String to=null;
+		        String stop=null;
+		        String airline=null;
+		        String boardingGate=null;
+		        String checkinCounter=null;
+		        String flightnumber=null;
+		        String time=null;
+		        try {  
+		            ret = db1.pst.executeQuery();//执行语句，得到结果集  
+		            ret.last();
+		            int rowNumber=ret.getRow();
+		            ret.beforeFirst();
+		            allLocalDepartureFlightInfo = new DepartureFlightInfo[rowNumber];
+		            while (ret.next()) { 
+		            	flightnumber=ret.getString("Flight_No2");
+		                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
+		            	from=ret.getString("Starting_station");
+		            	to=ret.getString("Destination");
+		            	stop=ret.getString("Staging_post");
+		            	airline=ret.getString("Airline");
+		            	boardingGate=ret.getString("Bname");
+		            	checkinCounter=ret.getString("Cname");
+		            	time=ret.getString("Time");
+		            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,false,flightnumber,airline,from,to,stop);
+		            	allLocalDepartureFlightInfo[i]=new DepartureFlightInfo(flightCourse,checkinCounter,boardingGate,time);
+		                i++;
+		            }
+		            ret.close();  
+		          
+		        } catch (SQLException e) {  
+		            e.printStackTrace();  
+		        } finally{
+		        	  db1.close();//关闭连接  
+		        }
+		return allLocalDepartureFlightInfo;
+    	
+    }
+    public ArrivalFlightInfo[] returnAllInternationalArrivalFlightInfo()
+    {//返回国际到港航班信息
+        /*
+         * ArrivalFlightInfo[] returnAllInternationalArrivalFlightInfo();
+         * 数据库操作
+         * 返回类型为ArrivalFlightInfo对象数组
+         * 
+         */
+    	ArrivalFlightInfo[] allInternationalArrivalFlightInfo=null;
+    	 int i=0;
+         sql = "SELECT flight_arrival.Flight_No,flight_arrival.InternationalOrLocal,flight_arrival.Starting_station,flight_arrival.Destination," +
+			"flight_arrival.Staging_post,flight_arrival.Airline,lc_allocation.Time,lc_allocation.Lname FROM (flight_arrival " +
+			"INNER JOIN lc_allocation ON flight_arrival.Flight_No = lc_allocation.Flight_No) " +
+			"WHERE flight_arrival.InternationalOrLocal=true";//SQL语句  
+	        db1 = new db_connection(sql);//创建db_connection对象  
+	        boolean internationalOrLocal;
+	        String from=null;
+	        String to=null;
+	        String stop=null;
+	        String luggageCarousel=null;
+	        String time=null;
+	        String flightnumber=null;
+	        String airline=null;
+	        try {  
+	            ret = db1.pst.executeQuery();//执行语句，得到结果集  
+	            ret.last();
+	            int rowNumber=ret.getRow();
+	            ret.beforeFirst();
+	            allInternationalArrivalFlightInfo = new ArrivalFlightInfo[rowNumber];
+	            while (ret.next()) { 
+	            	flightnumber = ret.getString("Flight_No");
+	                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
+	            	from=ret.getString("Starting_station");
+	            	to=ret.getString("Destination");
+	            	stop=ret.getString("Staging_post");
+	            	airline=ret.getString("Airline");
+	            	luggageCarousel=ret.getString("Lname");
+	            	time=ret.getString("Time");
+	            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,true,flightnumber,airline,from,to,stop);
+	            	allInternationalArrivalFlightInfo[i]=new ArrivalFlightInfo(flightCourse,luggageCarousel,time);
+	                i++;
+	            }
+	            ret.close();             
+	        } catch (SQLException e) {  
+	            e.printStackTrace();  
+	        }finally{
+	        	 db1.close();//关闭连接  
+	        }
+	        return allInternationalArrivalFlightInfo;
+    	
+    }
+    public ArrivalFlightInfo[] returnAllLocalArrivalFlightInfo()
+    {//返回国内到港航班信息
+        /*
+         * ArrivalFlightInfo[] returnAllLocalArrivalFlightInfo();
+         * 数据库操作
+         * 返回类型为ArrivalFlightInfo对象数组
+         * 
+         */
+    	ArrivalFlightInfo[] allLocalArrivalFlightInfo=null;
+   	    int i=0;
+        sql = "SELECT flight_arrival.Flight_No,flight_arrival.InternationalOrLocal,flight_arrival.Starting_station,flight_arrival.Destination," +
+			"flight_arrival.Staging_post,flight_arrival.Airline,lc_allocation.Time,lc_allocation.Lname FROM (flight_arrival " +
+			"INNER JOIN lc_allocation ON flight_arrival.Flight_No = lc_allocation.Flight_No) " +
+			"WHERE flight_arrival.InternationalOrLocal=false";//SQL语句  
+	        db1 = new db_connection(sql);//创建db_connection对象  
+	        boolean internationalOrLocal;
+	        String from=null;
+	        String to=null;
+	        String stop=null;
+	        String luggageCarousel=null;
+	        String time=null;
+	        String flightnumber=null;
+	        String airline=null;
+	        try {  
+	            ret = db1.pst.executeQuery();//执行语句，得到结果集  
+	            ret.last();
+	            int rowNumber=ret.getRow();
+	            ret.beforeFirst();
+	            allLocalArrivalFlightInfo = new ArrivalFlightInfo[rowNumber];
+	            while (ret.next()) { 
+	            	flightnumber = ret.getString("Flight_No");
+	                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
+	            	from=ret.getString("Starting_station");
+	            	to=ret.getString("Destination");
+	            	stop=ret.getString("Staging_post");
+	            	airline=ret.getString("Airline");
+	            	luggageCarousel=ret.getString("Lname");
+	            	time=ret.getString("Time");
+	            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,true,flightnumber,airline,from,to,stop);
+	            	allLocalArrivalFlightInfo[i]=new ArrivalFlightInfo(flightCourse,luggageCarousel,time);
+	                i++;
+	            }
+	            ret.close();             
+	        } catch (SQLException e) {  
+	            e.printStackTrace();  
+	        }finally{
+	        	 db1.close();//关闭连接  
+	        }
+	        return allLocalArrivalFlightInfo;
+    	
+    }
     public DepartureFlightInfo[] searchDepartureFlightInfo0(String flightnumber)
     {
 		DepartureFlightInfo[] departureFlightInfo = null;
@@ -45,7 +256,6 @@ public class UserDao {
 		            int rowNumber=ret.getRow();
 		            ret.beforeFirst();
 		            departureFlightInfo = new DepartureFlightInfo[rowNumber];
-		            ret.last();
 		            while (ret.next()) { 
 		            	flightnumber=ret.getString("Flight_No2");
 		                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
@@ -426,7 +636,7 @@ public class UserDao {
 		return arrivalFlightInfo;
     	
     }
-    public  AirportResource[] searchAirportResource(String name){
+    public  AirportResource[] searchAirportResource(String name,String type){
     	AirportResource[] airportResource = null;
   /*
   * AirportResource[] searchA(String name);
@@ -436,15 +646,15 @@ public class UserDao {
     	 int i=0;
     	 String location;
          String remark;
-         String type;
-
+         int rowNumber=0;
          try {  
+        	 if(name!=null&&name!=""){
  		     sql= "SELECT * FROM boardinggate WHERE boardinggate.Bname='"+name+"'";
              db1= new db_connection(sql);//创建db_connection对象                  
              ret = db1.pst.executeQuery();//执行语句，得到结果集  
              type="登机门";
              ret.last();
-	         int rowNumber=ret.getRow();
+	         rowNumber=ret.getRow();
 	         ret.beforeFirst();
 	         airportResource = new AirportResource[rowNumber];
              while (ret.next()) {             	
@@ -469,10 +679,6 @@ public class UserDao {
                  type="值机柜台";
                  i=0;
                  while (ret.next()) {             	
-//                  	name=ret.getString("SourseName");
-//                  	location=ret.getString("SourseL");
-//                  	remark=ret.getString("SourseR");
-//                  	type=ret.getString("SourseR");
                   	name=ret.getString("Cname");
                   	location=ret.getString("Clocation");
                   	remark=ret.getString("Cremarks");
@@ -491,10 +697,6 @@ public class UserDao {
                  type="行李转盘";
                  i=0;
                  while (ret.next()) {             	
-//                  	name=ret.getString("SourseName");
-//                  	location=ret.getString("SourseL");
-//                  	remark=ret.getString("SourseR");
-//                  	type=ret.getString("SourseR");
                   	name=ret.getString("Lname");
                   	location=ret.getString("Llocation");
                   	remark=ret.getString("Lremarks");
@@ -502,10 +704,72 @@ public class UserDao {
                     i++;
                   }
              }
-              ret.close();  
-              db1.close();//关闭连接  
+        	 }else if(name==""||name==null){
+        		 if(type=="登机门")
+        	    	{
+        	    	     sql = "SELECT * FROM boardinggate";
+        		         //SQL语句  
+        	    	     db1= new db_connection(sql);//创建db_connection对象
+        	             ret = db1.pst.executeQuery();//执行语句，得到结果集  
+        	             type="登机门";
+        	             ret.last();
+        		         rowNumber=ret.getRow();
+        		         ret.beforeFirst();
+        		         airportResource = new AirportResource[rowNumber];
+        	             while (ret.next()) {             	
+        	             	name=ret.getString("Bname");
+        	            	location=ret.getString("Blocation");
+        	            	remark=ret.getString("Bremarks");
+        	             	airportResource[i]=new AirportResource(name,location,remark,type);         	
+        	                i++;
+        	          }
+        	    	}
+        	    	else if(type=="值机柜台")
+        	    	{
+        	    		sql = "SELECT * FROM checkincounter";
+        	    		//SQL语句 
+        	    		db1= new db_connection(sql);//创建db_connection对象
+        	    		ret = db1.pst.executeQuery();//执行语句，得到结果集  
+                        ret.last();
+        	             rowNumber=ret.getRow();
+        	             ret.beforeFirst();
+        	             airportResource = new AirportResource[rowNumber];	
+                        type="值机柜台";
+                        i=0;
+                        while (ret.next()) {             	
+                         	name=ret.getString("Cname");
+                         	location=ret.getString("Clocation");
+                         	remark=ret.getString("Cremarks");
+                         	airportResource[i]=new AirportResource(name,location,remark,type);
+                           i++;
+                         }
+        	    	}
+        	    	else if(type=="行李转盘")
+        	    	{
+        	    		sql = "SELECT * FROM luggagecarousel";
+        	    		//SQL语句 
+        	    		db1= new db_connection(sql);//创建db_connection对象
+        	    		 ret = db1.pst.executeQuery();//执行语句，得到结果集  
+                         ret.last();
+         	             rowNumber=ret.getRow();
+         	             ret.beforeFirst();
+         	             airportResource = new AirportResource[rowNumber];	             
+                         type="行李转盘";
+                         i=0;
+                         while (ret.next()) {             	
+                          	name=ret.getString("Lname");
+                          	location=ret.getString("Llocation");
+                          	remark=ret.getString("Lremarks");
+                          	airportResource[i]=new AirportResource(name,location,remark,type);
+                            i++;
+                          }
+        	    	}
+        	 }
+              ret.close();               
          } catch (SQLException e) {  
              e.printStackTrace();  
+         }finally{
+        	  db1.close();//关闭连接 
          }
          return airportResource;
     }
@@ -559,9 +823,9 @@ public class UserDao {
     	 News[] news =null;
     	 int i=0;
     	 if(title!=""&&title!=null&&time!=""&&time!=null)
-    	     sql = "SELECT* FROM newscenter WHERE newscenter.title = '"+title+"' AND newscenter.Edit_time='"+time+"'";//SQL语句
+    	     sql = "SELECT* FROM newscenter WHERE newscenter.title like '%"+title+"%' AND newscenter.Edit_time='"+time+"'";//SQL语句
     	 else
-    		 sql = "SELECT* FROM newscenter WHERE newscenter.title = '"+title+"' OR newscenter.Edit_time='"+time+"'";//SQL语句
+    		 sql = "SELECT* FROM newscenter WHERE newscenter.title like '%"+title+"%' OR newscenter.Edit_time='"+time+"'";//SQL语句
     	 db1= new db_connection(sql);//创建db_connection对象  
     	 String newsId;
     	 String content;
@@ -593,6 +857,50 @@ public class UserDao {
     	 } 
        return news;
     }
+    public News[] returnAllNews(){
+   	 
+//      /*
+//       * News[]  returnAllNews();
+//       * 数据库操作：返回所有新闻信息；
+//       * 返回类型为News对象数组
+//       */
+   	 News[] allNews =null;
+   	 int i=0;
+   	 sql = "SELECT* FROM newscenter";//SQL语句
+   	 db1= new db_connection(sql);//创建db_connection对象  
+   	 String newsId;
+   	 String title;
+   	 String time;
+   	 String content;
+   	 String kind;
+   	 String publisher_id;
+   	 String attachment;
+   	 try {  
+   		 	ret = db1.pst.executeQuery();//执行语句，得到结果集  
+   		 	ret.last();
+	            int rowNumber=ret.getRow();
+	            ret.beforeFirst();
+	            allNews  = new News[rowNumber];
+   		 	while (ret.next()) { 
+   	
+   		 		newsId=ret.getString("News_id");
+   		 		title=ret.getString("Title");
+   		 		time=ret.getString("Edit_time");
+   		 		content=ret.getString("Content");
+   		 		kind=ret.getString("NCname");
+   		 		publisher_id=ret.getString("Em_No");
+   		 		attachment=ret.getString("Attachments");
+   		     	allNews[i] = new News(title, time, content, kind,  attachment, publisher_id,newsId);
+   		 		i++;
+   		 	}
+   		 	ret.close();    		 	  
+   	 } catch (SQLException e) {  
+   		 e.printStackTrace();  
+   	 } finally{
+   		 db1.close();//关闭连接
+   	 }
+      return allNews ;
+   }
     public String[] returnAllLocalDestination()
     {/*返回数据库中离港航班的所有国内目的地
         allLocalDestination:国内目的地数组
@@ -827,4 +1135,153 @@ public class UserDao {
         }
 		return allDepartureLocalAirline;
     }
-}
+    public  AirportResource[] returnAllAirportResource(){
+    	AirportResource[] allAirportResource = null;
+  /*
+  * AirportResource[] returnAllAirportResoure();
+  * 数据库操作：返回所有机场资源信息
+  * 返回类型为AirportResource对象数组
+  */
+    	 int i=0;
+    	 int k=0;
+         int j=0;
+         int AirportResourceNumber=0;
+    	 String name;
+    	 String location;
+         String remark;
+         String type;
+         AirportResource[] allBoardinggate=null;
+         AirportResource[] allCheckincounter=null;
+         AirportResource[] allLuggagecarousel=null;
+         try {  
+ 		     sql= "SELECT * FROM boardinggate";
+             db1= new db_connection(sql);//创建db_connection对象                  
+             ret = db1.pst.executeQuery();//执行语句，得到结果集  
+             type="登机门";
+             ret.last();
+	         int rowNumber=ret.getRow();
+	         ret.beforeFirst();
+             allBoardinggate = new AirportResource[rowNumber];
+             while (ret.next()) {             	
+//          	name=ret.getString("SourseName");
+//          	location=ret.getString("SourseL");
+//          	remark=ret.getString("SourseR");
+//          	type=ret.getString("SourseR");
+          	name=ret.getString("Bname");
+          	location=ret.getString("Blocation");
+          	remark=ret.getString("Bremarks");
+          	allBoardinggate[i]=new AirportResource(name,location,remark,type);         	
+              i++;
+          }  
+
+                 sql= "SELECT * FROM checkincounter";
+                 db1.pst=db1.conn.prepareStatement(sql);
+                 ret = db1.pst.executeQuery();//执行语句，得到结果集  
+                 ret.last();
+ 	             rowNumber=ret.getRow();
+ 	             ret.beforeFirst();
+ 	            allCheckincounter = new AirportResource[rowNumber];	
+                 type="值机柜台";
+           
+                 while (ret.next()) {             	
+//                  	name=ret.getString("SourseName");
+//                  	location=ret.getString("SourseL");
+//                  	remark=ret.getString("SourseR");
+//                  	type=ret.getString("SourseR");
+                  	name=ret.getString("Cname");
+                  	location=ret.getString("Clocation");
+                  	remark=ret.getString("Cremarks");
+                  	allCheckincounter[j]=new AirportResource(name,location,remark,type);
+                    j++;
+                  }
+                 sql= "SELECT * FROM luggagecarousel";
+                 db1.pst=db1.conn.prepareStatement(sql);
+                 ret = db1.pst.executeQuery();//执行语句，得到结果集  
+                 ret.last();
+ 	             rowNumber=ret.getRow();
+ 	             ret.beforeFirst();
+ 	            allLuggagecarousel = new AirportResource[rowNumber];	             
+                 type="行李转盘";
+                 
+                 while (ret.next()) {             	
+//                  	name=ret.getString("SourseName");
+//                  	location=ret.getString("SourseL");
+//                  	remark=ret.getString("SourseR");
+//                  	type=ret.getString("SourseR");
+                  	name=ret.getString("Lname");
+                  	location=ret.getString("Llocation");
+                  	remark=ret.getString("Lremarks");
+                  	allLuggagecarousel[k]=new AirportResource(name,location,remark,type);
+                    k++;
+                  }
+                 AirportResourceNumber=i+j+k;
+              ret.close();  
+                  
+         } catch (SQLException e) {  
+             e.printStackTrace();  
+         }finally{
+        	 db1.close();//关闭连接
+         }
+         allAirportResource = new AirportResource[AirportResourceNumber];
+         int x=0;
+         int jj=0;
+         int kk=0;
+         while(x<i){
+        	 allAirportResource[x]=allBoardinggate[x];
+        	 x++;
+         }
+         while(jj<j){
+        	 allAirportResource[x]=allCheckincounter[jj];
+        	 x++;
+        	 jj++;
+         }
+         while(kk<k){
+        	 allAirportResource[x]=allLuggagecarousel[kk];
+        	 x++;
+        	 kk++;
+         }
+         return allAirportResource;
+    }
+    public PropertyFacility[] returnAllPropertyFacility()
+    {
+    	/*
+//       * PropertyFacility[] returnAllPropertyFacility();
+//       * 数据库操作：返回所有物业设施信息
+//       * 返回类型为PropertyFacility对象数组
+//       */
+    	 PropertyFacility[] propertyFacility = null;
+    
+      int i=0;
+      sql = "SELECT* FROM facility";//SQL语句  
+      db1= new db_connection(sql);//创建db_connection对象        
+      String location;
+      String remark;
+      String type;
+      String phone;
+      String name;
+      try {  
+          ret = db1.pst.executeQuery();//执行语句，得到结果集 
+          ret.last();
+          int rowNumber=ret.getRow();
+          ret.beforeFirst();
+          propertyFacility = new PropertyFacility[rowNumber]; 
+          while (ret.next()) {        	 
+        	  	name=ret.getString("Fname");
+        	  	location=ret.getString("Location");
+        	  	remark=ret.getString("Remarks");
+        	  	type=ret.getString("F_category");
+        	  	phone=ret.getString("F_tel");       	  	
+        	  	propertyFacility[i] = new PropertyFacility(name, location, remark, type, phone);
+                i++;
+          }
+          ret.close();  
+           
+      } catch (SQLException e) {  
+          e.printStackTrace();  
+      } finally{
+    	   db1.close();//关闭连接
+      }
+    	 return propertyFacility;
+    }
+  
+  }
