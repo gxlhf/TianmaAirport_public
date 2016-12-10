@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
+ <%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -361,7 +361,7 @@ else
           </div>
           <%
           if(session.getAttribute("priv2")!=null){
-        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-midify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp'>修改</a></div></div>");
+        	  out.println(" <div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn=midify' class='btn btn-success' href='"+basePath+"News/NewsEdit.jsp?type=add'>新增</a><a id='btn=midify' class='btn btn-danger' href='/DeleteNews'>删除</a><a id='btn=midify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type=update'>修改</a></div></div>");
           }
           %>
           <%-- <div class="col-sm-6 btn-modify">
