@@ -48,6 +48,22 @@
     <servlet-name>SearchRole</servlet-name>
     <url-pattern>/SearchRole</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>NewsSearch</servlet-name>
+    <servlet-class>com.servlet.news.NewsSearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsSearch</servlet-name>
+    <url-pattern>/Public/News/NewsSearch</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>NewUpdate</servlet-name>
+    <servlet-class>com.servlet.news.NewsUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsUpdate</servlet-name>
+    <url-pattern>/News/NewsUpdate</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>SearchAdmin</servlet-name>
     <servlet-class>com.servlet.SearchAdmin</servlet-class>

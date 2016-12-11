@@ -155,19 +155,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form class="form-horizontal" role="form" action="/NewsUpdate">
             <div class="form-group">
-              <label for="news-title" class="col-sm-2 control-label">新闻标题：</label>
+              <label for="news-title"  class="col-sm-2 control-label">新闻标题：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="news-title">
+                <input type="text" class="form-control" name="search-id">
               </div>
             </div>
-            <div class="form-group">
-              <label for="search-name" class="col-sm-2 control-label">新闻类别：</label>
-              <div class="col-sm-6">
-                <input type="radio" name="news-classified" checked="">机场介绍
-                <input type="radio" name="news-classified">航班信息
-                <input type="radio" name="news-classified">机场资源
-                <input type="radio" name="news-classified">物业资源&nbsp;*</div>
-            </div>
+			<input type="text" style="display:none" name="type" value="机场介绍">
             <div class="form-group">
               <label for="news-outname" class="col-sm-2 control-label">发布人：</label>
               <div class="col-sm-6">

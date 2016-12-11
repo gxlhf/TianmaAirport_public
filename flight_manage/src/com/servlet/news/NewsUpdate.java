@@ -48,8 +48,7 @@ public class NewsUpdate extends HttpServlet {
 	
 	void processrequest(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
 		String title=request.getParameter("news-title");
-		String classified=request.getParameter("news-classified");
-		String name=request.getParameter("news-outname");
+		String classified=request.getParameter("type");
 		String context=request.getParameter("news-context");
 		HttpSession session=request.getSession();
 		Admin admin=(Admin)session.getAttribute("admin");
@@ -57,11 +56,14 @@ public class NewsUpdate extends HttpServlet {
 		News news=new News(title, df.format(new Date()), context, classified, null,admin.getEmpno() , (String)session.getAttribute("NewsId"));
 		int re=admin.modifyNews(news);
 		if(re==-1){
-			
+			request.getRequestDispatcher("error.jsp").forward(request, response);
+			return;
 		}else if(re==1){
-			request.getRequestDispatcher("");
+			session.setAttribute("update-result", re);
+			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
 		}else {
-			
+			session.setAttribute("update-result", re);
+			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request,response);
 		}
 	}
 
