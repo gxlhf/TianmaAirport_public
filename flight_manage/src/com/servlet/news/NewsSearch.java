@@ -46,6 +46,7 @@ public class NewsSearch extends HttpServlet {
 		response.setContentType("text/html");
 		String title = request.getParameter("news-title");
 		String time = request.getParameter("news-outtime");
+		String type=request.getParameter("type");
 		com.entity.User user = new com.entity.User();
 		News[] news=user.searchNews(title, time);
 		request.setAttribute("news", news);
@@ -53,6 +54,6 @@ public class NewsSearch extends HttpServlet {
 		{
 			System.out.println(out.getFlightCourse().getAirline());;
 		}*/
-		request.getRequestDispatcher("NewsList.jsp").forward(request, response);
+		request.getRequestDispatcher("NewsList.jsp?type="+type).forward(request, response);
 	}
 }

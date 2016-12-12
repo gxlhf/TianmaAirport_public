@@ -2,6 +2,29 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String id="";
+id=request.getParameter("id");
+int a=0;
+String type="";
+News[] news=(News[])request.getSession().getAttribute("news");
+%>
+<%
+if(id!=null){
+	if(news!=null){
+		for(int i=0;i<news.length;i++){
+		  if(news[i].getNewsId().equals(id))
+			  a=i;
+		}
+		if(news[a].getKind()!=null){
+			if(news[a].getKind().equals("航班信息"))
+				type="flightInformation";
+			else if(news[a].getKind().equals("机场资源"))
+				type="airportResource";	
+			else if(news[a].getKind().equals("物业资源"))
+				type = "facilityResource";
+		}
+	}
+}
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -137,7 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?type=add'>发布新闻</a></li>");
                 %>
               </ul>
             </li>
@@ -159,24 +182,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           <div id="main-text">
           <% 
-          String id=request.getParameter("id");
-          int a=0;
-          if(id!=null){
-          News[] news=(News[])request.getSession().getAttribute("news");
-          if(news!=null){
-          for(int i=0;i<news.length;i++){
-        	  if(news[i].getNewsId().equals(id))
-        		  a=i;
-          }
-          out.println("<p>发布时间："+news[a].getTime()+"</p>");
-          out.println("<p>"+news[a].getContent()+"</p>");  
-          }
-            %>
-           </div>
-          <%
+			if(news[a]!=null){
+          		out.println("<p>发布时间："+news[a].getTime()+"</p>");
+          		out.println("<p>"+news[a].getContent()+"</p>  </div>");  
+          		session.setAttribute("new", news[a]);
+		  }
           if(session.getAttribute("priv2")!=null){
-        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp'>修改</a></div></div>");
-          }
+        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"&&id="+id+"'>修改</a></div></div>");
           }
           %>
           <%-- <div class="col-sm-6 btn-modify">

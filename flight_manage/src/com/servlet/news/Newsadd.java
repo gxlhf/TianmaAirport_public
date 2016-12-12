@@ -13,19 +13,18 @@ import javax.servlet.http.HttpSession;
 
 import com.entity.Admin;
 import com.entity.News;
-import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 
 /**
- * Servlet implementation class NewsUpdate
+ * Servlet implementation class Newsadd
  */
-//WebServlet("/NewsUpdate")
-public class NewsUpdate extends HttpServlet {
+//WebServlet("/Newsadd")
+public class Newsadd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewsUpdate() {
+    public Newsadd() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,34 +44,31 @@ public class NewsUpdate extends HttpServlet {
 		// TODO Auto-generated method stub
 		processrequest(request, response);
 	}
-	
+
 	void processrequest(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
-		request.setCharacterEncoding("utf-8");
 		String title=request.getParameter("news-title");
 		String classified=request.getParameter("type");
 		String context=request.getParameter("news-context");
 		String id=request.getParameter("id");
+		System.out.println(title+classified+context);
 		HttpSession session=request.getSession();
 		Admin admin=(Admin)session.getAttribute("admin");
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(title+classified+id+context);
 		News news=new News(title, df.format(new Date()), context, classified, null,admin.getEmpno() , id);
-		int re=admin.modifyNews(news);
+		int re=admin.addNews(news);
 		if(re==-1){
 			request.getRequestDispatcher("error.jsp").forward(request, response);
+			return;
 		}else if(re==1){
-			request.setAttribute("result", re);
-			if(classified.equals("机场介绍")){
-				request.getRequestDispatcher("/Public/News/Intro.jsp").forward(request, response);
-			}else
-				request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
+			session.setAttribute("result", re);
+			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
 		}else {
 			session.setAttribute("result", re);
-			if(classified.equals("机场介绍")){
-				request.getRequestDispatcher("/Public/News/Intro.jsp").forward(request, response);
-			}else
-				request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
+			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request,response);
 		}
 	}
 
+
+
+	
 }

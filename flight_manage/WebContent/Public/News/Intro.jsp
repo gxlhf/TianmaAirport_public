@@ -156,14 +156,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <h2 class="text-center">机场介绍</h2>
           </div>
            <div id="main-text">
-			<%  /***
-              	News[] news=admin.searchNews("机场介绍", "");
-			if(news!=null){
-                session.setAttribute("NewsId", news[0].getNewsId());
-                out.println("<p>发布时间："+news[0].getTime()+"</p>");
-           		out.println("<p>"+news[0].getContent()+"</p>");
-			}
-			***/
+			<%
+				User user=new User();
+				News[] news=user.searchNews("机场介绍", null);
+				session.setAttribute("intro", news[0]);
+				out.println("<p>发布时间："+news[0].getTime()+"</p>");
+				out.println("<p>"+news[0].getContent()+"</p>");
+			
             %>
             
           </div>

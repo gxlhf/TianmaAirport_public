@@ -27,15 +27,14 @@ else
     <!-- 支持时间控件 -->
   </head><body>
   <%
- 	 String re=(String)session.getAttribute("update-result");
-  if(re==null){
-	  
-  }else if(re.equals("0")){
+ 	 Integer re=(Integer)request.getAttribute("result");
+  if(re!=null){
+  if(re.equals(-1)){
 	  out.println("<script>alert('修改失败')</script>");
-  }else if(re.equals("1")){
+  }else if(re.equals(1)){
 	  out.println("<script>alert('修改成功')</script>");
   }
-
+  }
   %>
     <!-- 头部开始 -->
     <nav class="navbar navbar-default" role="navigation">
@@ -195,7 +194,7 @@ else
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?type=add'>发布新闻</a></li>");
                 %>
               </ul>
             </li>
@@ -216,7 +215,8 @@ else
             %></li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form" action="NewsSearch">
+          <form class="form-horizontal" role="form" action="<%=basePath %>Public/News/NewsSearch">
+          <input type="text" name="type" value="<%=type%>" style="display:none" >
             <div class="form-group">
               <label for="news-title" class="col-sm-2 control-label">新闻标题：</label>
               <div class="col-sm-6">
@@ -282,6 +282,21 @@ else
 							out.println(" <td>"+(i+1)+"</td>");
 			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_id()+"</td> </tr>");
 					}
+				}else if(news==null){
+					User user=new User();
+					news=user.returnAllNews();
+					for(int i=0;i<news.length;i++){
+						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
+						out.println(" <tr data-id='10001''>");
+						 if(session.getAttribute("priv2")!=null){
+			                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+			                }else{
+			              	  out.println("<td></td>");
+			                }
+							out.println(" <td>"+(i+1)+"</td>");
+			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_id()+"</td> </tr>");
+					}
+				}
 				}
 			%>
 
