@@ -2,6 +2,10 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+News news=(News)session.getAttribute("intro");
+String title=news.getTitle();
+String id=news.getPublisher_id();
+String content=news.getContent();
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -148,43 +152,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#">新闻中心</a>
             </li>
             <li>
-              <a href="#">机场介绍</a>
+              <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
             </li>
             <li class="active">修改</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form" action="/NewsUpdate">
+          <form class="form-horizontal" method="post" role="form" action='<%=basePath%>News/NewsUpdate' data-toggle='validator' >
             <div class="form-group">
-              <label for="news-title" class="col-sm-2 control-label">新闻标题：</label>
+              <label for="news-title"  class="col-sm-2 control-label">新闻标题：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="news-title">
+                <input type="text" class="form-control" name="news-title" value="<%=title %>" >
               </div>
             </div>
-            <div class="form-group">
-              <label for="search-name" class="col-sm-2 control-label">新闻类别：</label>
-              <div class="col-sm-6">
-                <input type="radio" name="news-classified" checked="">机场介绍
-                <input type="radio" name="news-classified">航班信息
-                <input type="radio" name="news-classified">机场资源
-                <input type="radio" name="news-classified">物业资源&nbsp;*</div>
-            </div>
-            <div class="form-group">
-              <label for="news-outname" class="col-sm-2 control-label">发布人：</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="news-outname">
-              </div>
-            </div>
+			<input type="text" style="display:none" name="type" value="机场介绍">
+               <input type="text" class="form-control" style="display:none" name="id" value="<%=news.getNewsId() %>">
             <div class="form-group">
               <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="news-context"></textarea>
+                <textarea class="form-control" name="news-context"><%=content %></textarea>
               </div>
             </div>
             <div class="form-group">
               <div class="col-sm-2"></div>
               <div class="col-sm-6"></div>
             </div>
-          </form>
+
           <table class="table table-hover select-table">
             <thead>
               <tr>
@@ -222,10 +214,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div></div>
           <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
-              <a class="btn btn-success" href="">修改</a>
-              <a class="btn btn-primary" href="">取消</a>
+              <a class="btn btn-success" href="#" onclick="$('form').submit()">修改</a>
+              <a class="btn btn-primary" href="<%=basePath %>Public/News/Intro.jsp">取消</a>
             </div>
           </div>
+          </form>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">

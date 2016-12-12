@@ -2,6 +2,12 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String type;
+if(request.getParameter("type")==null||(!request.getParameter("type").equals("flightInformation")&&!request.getParameter("type").equals("airportResource")&&!request.getParameter("type").equals("add")&&!request.getParameter("type").equals("facilityResource")))
+	type = null;
+else
+	type = request.getParameter("type");
+String id=request.getParameter("id");
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -150,39 +156,86 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <a href="#">航班信息</a>
             </li>
-            <li class="active">修改</li>
+            <li class="active">
+            <%
+            if(type==null||type.equals("add")){
+            	out.print("新增");
+            }else
+            	out.print("修改");
+            %>></li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
+          <% 
+        	String title="";
+        	String content="";
+				if(type==null||type.equals("add")){
+					out.println(" <form action='"+basePath+"News/NewsAdd' method='get' class='form-horizontal' role='form' data-toggle='validator'>");
+					}else{
+					out.println(" <form action='"+basePath+"News/NewsUpdate' method='get' class='form-horizontal' role='form' data-toggle='validator'>");
+					
+
+			News news=(News)session.getAttribute("new");
+          	if(news!=null){
+          		title=news.getTitle();
+          		content=news.getContent();
+          		if(news.getKind().equals("航班信息")){
+          			type="flightInformation";	
+          		}
+          		else if(news.getKind().equals("物业资源")){
+          			type="facilityResource";
+          		}else{
+          			type="airportResource";
+          		}
+          	}
+		}
+          %>
             <div class="form-group">
               <label for="news-title" class="col-sm-2 control-label">新闻标题：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id" data-error="请填写标题*" required>
+              
+                <input type="text" class="form-control" name="news-title" data-error="请填写标题*" value="<%=title%>" required>
               </div>
               <div class="help-block with-errors">*</div>
             </div>
-            <div class="form-group">
-              <label for="user-sex" class="col-sm-2 control-label">新闻类别：</label>
-              <div class="btn-group col-sm-6" data-toggle="buttons">
-                <label class="btn btn-default col-xs-3">
-                  <input type="radio" name="user-sex" value="机场介绍" data-error="请选择类别*" autocomplete="off" required>机场介绍
-                </label>
-                <label class="btn btn-default col-xs-3">
-                  <input type="radio" name="user-sex" value="航班信息" data-error="请选择类别*" autocomplete="off" required>航班信息
-                </label>
-                <label class="btn btn-default col-xs-3">
-                  <input type="radio" name="user-sex" value="机场资源" data-error="请选择类别*" autocomplete="off" required>机场资源
-                </label>
-                <label class="btn btn-default col-xs-3">
-                  <input type="radio" name="user-sex" value="物业资源" data-error="请选择类别*" autocomplete="off" required>物业资源
-                </label>
+         <%  
+         if(type==null||type.equals("add")){
+            out.println("<div class='form-group'>"
+              +"<label for='user-sex' class='col-sm-2 control-label'>新闻类别：</label>"
+			  +"<div class='btn-group col-sm-6' data-toggle='buttons'>"
+              +"<label class='btn btn-default col-xs-3'>"
+              +"    <input type='radio' name='type' value='机场介绍' data-error='请选择类别*' autocomplete='off' required>机场介绍"
+              +" </label>"
+              +" <label class='btn btn-default col-xs-3'>"
+              +"   <input type='radio' name='type' value='航班信息' data-error='请选择类别*' autocomplete='off' required>航班信息"
+              +" </label>"
+              +"<label class='btn btn-default col-xs-3'>"
+              +"   <input type='radio' name='type' value='机场资源' data-error='请选择类别*' autocomplete='off' required>机场资源"
+              +"</label>"
+              +"  <label class='btn btn-default col-xs-3'>"
+              +" <input type='radio' name='type' value='物业资源' data-error='请选择类别*' autocomplete='off' required>物业资源"
+              +"</label>"
+              +"</div> <div class='help-block with-errors'>*</div>"
+              +"</div>");
+         	}else{
+         	    if(type.equals("flightInformation"))
+         	    	out.println("<input type='text' style='display:none' name='type' value='航班信息' >");
+         	    if(type.equals("airportResource"))
+         	    	out.println("<input type='text' style='display:none' name='type' value='机场资源' >");
+         	    else
+         	    	out.println("<input type='text' style='display:none' name='type' value='物业资源' >");
+         	}
+            %>
+              <div class="form-group">
+              <label for="news-context" class="col-sm-2 control-label">新闻id：</label>
+              <div class="col-sm-6">
+                 <input type='text' class='form-control' name='id'  data-error='请输入id*' autocomplete='off' value="<%if(id!=null&&!id.equals("null")) out.print(id); %>" required>
               </div>
               <div class="help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="news-context" data-error="请填写正文*" required></textarea>
+                <textarea class="form-control" name="news-context" data-error="请填写正文*"  required><%=content %></textarea>
               </div>
               <div class="help-block with-errors">*</div>
             </div>
