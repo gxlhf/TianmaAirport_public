@@ -65,6 +65,22 @@
     <url-pattern>/ModifyAdmin</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AddAdmin</servlet-name>
+    <servlet-class>com.servlet.user.AddAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddAdmin</servlet-name>
+    <url-pattern>/AddAdmin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteAdmin</servlet-name>
+    <servlet-class>com.servlet.user.DeleteAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteAdmin</servlet-name>
+    <url-pattern>/DeleteAdmin</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>NewsSearch</servlet-name>
     <servlet-class>com.servlet.news.NewsSearch</servlet-class>
   </servlet>

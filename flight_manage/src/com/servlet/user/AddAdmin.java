@@ -11,16 +11,16 @@ import com.entity.Admin;
 import com.entity.Role;
 
 /**
- * Servlet implementation class ModifyAdmin
+ * Servlet implementation class AddAdmin
  */
-//@WebServlet("/ModifyAdmin")
-public class ModifyAdmin extends HttpServlet {
+//@WebServlet("/AddAdmin")
+public class AddAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifyAdmin() {
+    public AddAdmin() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,6 @@ public class ModifyAdmin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
 		request.setCharacterEncoding("UTF-8");
 		String empno = request.getParameter("user-id");
 		String name = request.getParameter("user-name");
@@ -54,8 +53,8 @@ public class ModifyAdmin extends HttpServlet {
 		String mobile = request.getParameter("user-tel");
 		String email = request.getParameter("user-email");
 		String password = request.getParameter("user-password");
-		Role roleModifyInfo = new Role(roleName);
-		Admin adminModifyInfo = new Admin(empno, name, sex, email, roleModifyInfo, mobile, phone, department, position, password);
+		Role roleAddInfo = new Role(roleName);
+		Admin adminAddInfo = new Admin(empno, name, sex, email, roleAddInfo, mobile, phone, department, position, password);
 		/*System.out.println(empno);
 		System.out.println(name);
 		System.out.println(sex);
@@ -67,15 +66,15 @@ public class ModifyAdmin extends HttpServlet {
 		System.out.println(email);
 		System.out.println(password);*/
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		int result = admin.modifyAdmin(adminModifyInfo);
+		int result = admin.addAdmin(adminAddInfo);
 		if(result==-1){
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 			return;
 		}else if(result==1){
-			request.setAttribute("modifyResult", result);
+			request.setAttribute("addResult", result);
 			request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request, response);
 		}else {
-			request.setAttribute("modifyResult", result);
+			request.setAttribute("addResult", result);
 			request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request,response);
 		}
 	}

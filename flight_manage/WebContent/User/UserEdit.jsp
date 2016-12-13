@@ -360,14 +360,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           	}
           	else{
           %>
-          <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
+          <form action="<%=basePath%>AddAdmin" method="post" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
               <%-- <%
               	out.println("<input type='text' class='form-control' name='user-id' pattern='\\d{4}' data-error='请填写4位员工号*' value='"+adminModify[0].getEmpno()+"' required disabled>");
               %> --%>
-                 <input type="text" class="form-control" name="user-id" pattern='\\d{4}' data-error="请填写4位员工号*"  required> 
+                 <input type="text" class="form-control" name="user-id" pattern="\d{4}" data-error="请填写4位员工号*"  required> 
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -431,7 +431,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-roles" class="col-sm-2 control-label">角色：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="user-roles" data-error="请选择角色*" required>
+                <select class="form-control" name="user-role" data-error="请选择角色*" required>
                   <option value="">请选择</option>
                   <%
                   	for(Role output:admin.returnAllRole())
@@ -548,7 +548,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="form-group">
                   <label class="col-xs-3 control-label">角色：</label>
                   <div class="col-xs-9">
-                    <p id="user-roles-ensure" class="form-control-static"> </p>
+                    <p id="user-role-ensure" class="form-control-static"> </p>
                   </div>
                 </div>
                 <div class="form-group">
