@@ -2,3 +2,35 @@ ul {
 	list-style: none;
 	padding-left: 0px;
 }
+
+.flight-info-list {
+	font-family: '微软雅黑', "Microsoft Yahei", "Hiragino Sans GB", tahoma, arial, 宋体;
+}
+
+.flight-info-list > li {
+	display: block;
+}
+.flight-info-list > li > p {
+	display: block;
+	width: 100%;
+	text-align: left;
+	padding-left: 20px;
+}
+.detail-box {
+	height: 130px;
+}
+.detail-box > div {
+	display: inline-block;
+	width: 23%;
+	text-align: center;
+}
+.detail-box > div > img {
+	display: inline;
+}
+.detail-box > div > p:nth-child(2) {
+	display: inline;
+}
+.detail-box > div > h6 {
+	display: inline-block;
+	font-size: 20px;
+}
