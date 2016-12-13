@@ -5,8 +5,13 @@ $('.select-table tbody > tr').click(function (e) {
 	$(this).find('.glyphicon').addClass('glyphicon-check');
 	console.log($(this).parent().find('[name="select-table-result"]'));
 	// $('[name="selected-option"]').val(opValue);
-	$('#btn-modify').attr('href', $('#btn-modify').attr('href') + '?' + opValue);
-	$('#btn-delete').attr('href', $('#btn-delete').attr('href') + '?' + opValue);
+	
+	var linkWord = '?';
+	console.log(opValue[0]);
+	if (opValue[0] == '&')
+		linkWord = '';
+	$('#btn-modify').attr('href', $('#btn-modify').attr('href') + linkWord + opValue);
+	$('#btn-delete').attr('href', $('#btn-delete').attr('href') + linkWord + opValue);
 });
 
 $('#btn-modify').click(function (e) {

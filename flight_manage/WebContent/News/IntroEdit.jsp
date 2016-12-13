@@ -2,10 +2,18 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-News news=(News)session.getAttribute("intro");
-String title=news.getTitle();
-String id=news.getPublisher_id();
-String content=news.getContent();
+News news;
+news=(News)session.getAttribute("intro");
+String newsId="NX10001";
+String title="";
+String id="";
+String content="";
+if(news!=null){
+title=news.getTitle();
+id=news.getPublisher_id();
+content=news.getContent();
+newsId=news.getNewsId();
+}
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -165,7 +173,7 @@ String content=news.getContent();
               </div>
             </div>
 			<input type="text" style="display:none" name="type" value="机场介绍">
-               <input type="text" class="form-control" style="display:none" name="id" value="<%=news.getNewsId() %>">
+               <input type="text" class="form-control" style="display:none" name="id" value="<%=newsId %>">
             <div class="form-group">
               <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
               <div class="col-sm-6">

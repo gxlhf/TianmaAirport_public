@@ -7,7 +7,7 @@ if(request.getParameter("type")==null||(!request.getParameter("type").equals("fl
 	type = null;
 else
 	type = request.getParameter("type");
-String id=request.getParameter("id");
+String id=request.getParameter("news-id");
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -162,7 +162,7 @@ String id=request.getParameter("id");
             	out.print("新增");
             }else
             	out.print("修改");
-            %>></li>
+            %></li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <% 
@@ -174,14 +174,21 @@ String id=request.getParameter("id");
 					out.println(" <form action='"+basePath+"News/NewsUpdate' method='get' class='form-horizontal' role='form' data-toggle='validator'>");
 					
 
-			News news=(News)session.getAttribute("new");
+			News[] news=(News[])session.getAttribute("news");
+			int a=0;
+			for(int i=0;i<news.length;i++){
+				if(news[i].getNewsId().equals(id))
+					a=i;
+			}
+		
+			
           	if(news!=null){
-          		title=news.getTitle();
-          		content=news.getContent();
-          		if(news.getKind().equals("航班信息")){
+          		title=news[a].getTitle();
+          		content=news[a].getContent();
+          		if(news[a].getKind().equals("航班信息")){
           			type="flightInformation";	
           		}
-          		else if(news.getKind().equals("物业资源")){
+          		else if(news[a].getKind().equals("物业资源")){
           			type="facilityResource";
           		}else{
           			type="airportResource";
@@ -279,7 +286,12 @@ String id=request.getParameter("id");
             </table>
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
-                <a class="btn btn-success" onclick="$(this).parents('form').submit()">修改</a>
+                <a class="btn btn-success" onclick="$(this).parents('form').submit()">            <%
+            if(type==null||type.equals("add")){
+            	out.print("新增");
+            }else
+            	out.print("修改");
+            %></a>
                 <a class="btn btn-primary" href="">取消</a>
               </div>
             </div>
