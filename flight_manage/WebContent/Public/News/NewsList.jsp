@@ -285,6 +285,7 @@ else
 				}else if(news==null){
 					User user=new User();
 					news=user.returnAllNews();
+					session.setAttribute("news", news);
 					for(int i=0;i<news.length;i++){
 						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
 						out.println(" <tr data-id='10001''>");
@@ -294,7 +295,7 @@ else
 			              	  out.println("<td></td>");
 			                }
 							out.println(" <td>"+(i+1)+"</td>");
-			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_id()+"</td> </tr>");
+			                out.println(" <td><a href='"+basePath+"Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_id()+"</td> </tr>");
 					}
 				}
 				}
