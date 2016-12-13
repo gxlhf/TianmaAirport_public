@@ -33,7 +33,7 @@ public class DeleteAdmin extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 //		System.out.println("ss");
 		request.setCharacterEncoding("UTF-8");
-		System.out.println(request.getParameter("empno"));
+//		System.out.println(request.getParameter("empno"));
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		Admin[] adminModifyInfo = admin.searchAdmin(request.getParameter("empno"), "", -1, "", "");
 //		System.out.println(adminModifyInfo[0].getEmail());

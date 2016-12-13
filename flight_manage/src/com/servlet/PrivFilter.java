@@ -51,7 +51,7 @@ public class PrivFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = (req).getSession();
 		if(session.getAttribute("admin")==null){
-			System.out.println("admin is null in privfilter");
+//			System.out.println("admin is null in privfilter");
 			session.removeAttribute("empno");
 			session.removeAttribute("priv0");
 			session.removeAttribute("priv1");

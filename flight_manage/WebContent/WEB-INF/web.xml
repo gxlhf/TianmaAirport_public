@@ -40,22 +40,7 @@
     <servlet-name>PostTest</servlet-name>
     <url-pattern>/PostTest</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>SearchRole</servlet-name>
-    <servlet-class>com.servlet.role.SearchRole</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SearchRole</servlet-name>
-    <url-pattern>/SearchRole</url-pattern>
-  </servlet-mapping>
-    <servlet>
-    <servlet-name>NewsDelete</servlet-name>
-    <servlet-class>com.servlet.news.NewsDelete</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>NewsDelete</servlet-name>
-    <url-pattern>/News/NewsDelete</url-pattern>
-  </servlet-mapping>
+  
   <servlet>
     <servlet-name>SearchAdmin</servlet-name>
     <servlet-class>com.servlet.user.SearchAdmin</servlet-class>
@@ -88,6 +73,24 @@
     <servlet-name>DeleteAdmin</servlet-name>
     <url-pattern>/DeleteAdmin</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SearchRole</servlet-name>
+    <servlet-class>com.servlet.role.SearchRole</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchRole</servlet-name>
+    <url-pattern>/SearchRole</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ModifyRole</servlet-name>
+    <servlet-class>com.servlet.role.ModifyRole</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyRole</servlet-name>
+    <url-pattern>/ModifyRole</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>NewsSearch</servlet-name>
     <servlet-class>com.servlet.news.NewsSearch</servlet-class>
@@ -112,11 +115,17 @@
     <servlet-name>NewsAdd</servlet-name>
     <url-pattern>/News/NewsAdd</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>NewsDelete</servlet-name>
+    <servlet-class>com.servlet.news.NewsDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsDelete</servlet-name>
+    <url-pattern>/News/NewsDelete</url-pattern>
+  </servlet-mapping>
   <filter>
-    <description>
-		</description>
-    <display-name>
-		PrivFilter</display-name>
+    <description></description>
+    <display-name>PrivFilter</display-name>
     <filter-name>PrivFilter</filter-name>
     <filter-class>com.servlet.PrivFilter</filter-class>
   </filter>

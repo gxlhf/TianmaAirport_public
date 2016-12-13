@@ -451,8 +451,8 @@ public class AdminDao {
     }
     public boolean deleteAdmin(Admin admin)
     {//数据库操作：删除管理员，形参为管理员对象，返回值为布尔值
-    	sql = "DELETE user_info,user_actor FROM  user_info LEFT OUTER JOIN user_actor on user_info.Em_No=user_actor.Em_No" +
-    		  " WHERE user_info.Em_No=?";//SQL语句  
+    	sql = "DELETE user_actor,user_info FROM  user_actor LEFT OUTER JOIN user_info on user_actor.Em_No=user_info.Em_No" +
+      		  " WHERE  user_actor.Em_No=?";//SQL语句
         db1= new db_connection(sql);//创建db_connection对象  
         try {          	
           db1.pst.setString(1, admin.getEmpno());
