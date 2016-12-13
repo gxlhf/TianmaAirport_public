@@ -28,13 +28,31 @@ else
   </head><body>
   <%
  	 Integer re=(Integer)request.getAttribute("result");
-  if(re!=null){
-  if(re.equals(-1)){
-	  out.println("<script>alert('修改失败')</script>");
-  }else if(re.equals(1)){
-	  out.println("<script>alert('修改成功')</script>");
+  	 String forward=(String)request.getAttribute("forward");
+  	 if(forward!=null&&re!=null){
+			if(forward.equals("add")){
+				if(re.equals(0)){
+		  			out.println("<script>alert('新增失败')</script>");
+					}else if(re.equals(1)){
+		  			out.println("<script>alert('新增成功')</script>");
+					}
+			}else if(forward.equals("delete")){
+				if(re.equals(0)){
+		  			out.println("<script>alert('删除失败')</script>");
+					}else if(re.equals(1)){
+		  			out.println("<script>alert('删除成功')</script>");
+					}
+			}else if(forward.equals("update")){
+				if(re.equals(0)){
+		  			out.println("<script>alert('修改失败')</script>");
+					}else if(re.equals(1)){
+		  			out.println("<script>alert('修改成功')</script>");
+					}
+			}
   }
-  }
+  	 
+  	 
+
   %>
     <!-- 头部开始 -->
     <nav class="navbar navbar-default" role="navigation">
@@ -273,14 +291,16 @@ else
 			session.setAttribute("news", news);
 				if(news!=null){
 					for(int i=0;i<news.length;i++){
-						out.println(" <tr data-id='10001''>");
-						 if(session.getAttribute("priv2")!=null){
+						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
+						out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
+						if(session.getAttribute("priv2")!=null){
 			                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
 			                }else{
 			              	  out.println("<td></td>");
 			                }
 							out.println(" <td>"+(i+1)+"</td>");
 			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_id()+"</td> </tr>");
+						}
 					}
 				}else if(news==null){
 					User user=new User();
@@ -288,7 +308,7 @@ else
 					session.setAttribute("news", news);
 					for(int i=0;i<news.length;i++){
 						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
-						out.println(" <tr data-id='10001''>");
+						out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
 						 if(session.getAttribute("priv2")!=null){
 			                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
 			                }else{
@@ -316,7 +336,7 @@ else
           </div>
           <%
           if(session.getAttribute("priv2")!=null){
-        	  out.println(" <div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn=midify' class='btn btn-success' href='"+basePath+"News/NewsEdit.jsp?type=add'>新增</a><a id='btn=midify' class='btn btn-danger' href='/DeleteNews'>删除</a><a id='btn=midify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"'>修改</a></div></div>");
+        	  out.println(" <div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-success' href='"+basePath+"News/NewsEdit.jsp?type=add'>新增</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"News/NewsDelete?type=null'>删除</a><a id='btn-modify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"'>修改</a></div></div>");
           }
           %>
           <%-- <div class="col-sm-6 btn-modify">

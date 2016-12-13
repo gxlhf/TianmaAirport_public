@@ -50,13 +50,22 @@ public class PrivFilter implements Filter {
 		//System.out.println("start");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = (req).getSession();
+		if(session.getAttribute("admin")==null){
+			System.out.println("admin is null in privfilter");
+			session.removeAttribute("empno");
+			session.removeAttribute("priv0");
+			session.removeAttribute("priv1");
+			session.removeAttribute("priv2");
+			session.removeAttribute("priv3");
+			session.removeAttribute("priv4");
+		}
 		String user=(String) session.getAttribute("empno");
 		Boolean[] priv={(Boolean) session.getAttribute("priv0"),(Boolean) session.getAttribute("priv1"),(Boolean) session.getAttribute("priv2"),(Boolean) session.getAttribute("priv3"),(Boolean) session.getAttribute("priv4")};
 		String url = req.getRequestURI().substring(
 				req.getContextPath().length());
 		for(int i=0;i<5;i++){
 		if(url.startsWith(dir[i])){
-			if(user==null){
+			if(user==null||session.getAttribute("admin")==null){
 				request.getRequestDispatcher("/login.jsp").forward(request, response);
 			}else if(priv[i]==null||!priv[i]){
 				request.getRequestDispatcher("/error.jsp").forward(request, response);

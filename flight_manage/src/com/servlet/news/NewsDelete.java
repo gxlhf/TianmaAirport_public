@@ -15,16 +15,16 @@ import com.entity.Admin;
 import com.entity.News;
 
 /**
- * Servlet implementation class Newsadd
+ * Servlet implementation class NewsDelete
  */
-//WebServlet("/Newsadd")
-public class Newsadd extends HttpServlet {
+//WebServlet("/NewsDelete")
+public class NewsDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Newsadd() {
+    public NewsDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,34 +42,42 @@ public class Newsadd extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
+		//processrequest(request, response);
 	}
-
+	
 	void processrequest(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
-		String title=request.getParameter("news-title");
-		String classified=request.getParameter("type");
-		String context=request.getParameter("news-context");
-		String id=request.getParameter("id");
+		if(request.getParameter("news-id")==null){
+			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
+			return;
+		}
+		String id=(String)request.getParameter("news-id");
 		HttpSession session=request.getSession();
 		Admin admin=(Admin)session.getAttribute("admin");
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		News news=new News(title, df.format(new Date()), context, classified, null,admin.getEmpno() , id);
-		int re=admin.addNews(news);
+		News[] news=(News[])session.getAttribute("news");
+		int a=0;
+		for(int i=0;i<news.length;i++){
+			if(news[i].getNewsId().equals(id))
+				a=i;
+		}
+		if(!news[a].getNewsId().equals(id)){
+			request.setAttribute("result", "0");
+			request.setAttribute("forward", "delete");
+			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request,response);
+		}else{
+		int re=admin.deleteNews(news[a]);
 		if(re==-1){
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 			return;
 		}else if(re==1){
 			request.setAttribute("result", re);
-			request.setAttribute("forward", "add");
+			request.setAttribute("forward", "delete");
 			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
 		}else {
 			request.setAttribute("result", re);
-			request.setAttribute("forward", "add");
+			request.setAttribute("forward", "delete");
 			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request,response);
+		}
 		}
 	}
 
-
-
-	
 }
