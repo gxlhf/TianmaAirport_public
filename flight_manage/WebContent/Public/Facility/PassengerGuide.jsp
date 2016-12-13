@@ -6,6 +6,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="<%=basePath%>">
     <title>乘机指引 - 乘机指南 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
@@ -155,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">乘机指引</li>
           </ol>
 
-          <form class="form-inline" role="form" action="<%=basePath%>">
+          <form class="form-inline col-sm-offset-1" role="form" action="<%=basePath%>">
             <div class="form-group">
               <label for="search-id" class="control-label">航班号</label>
               <input type="text" class="form-control" name="role-name">
@@ -166,8 +167,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <ul>
             <li>
               <div>
-                <div></div>
-                <div></div>
+                <img src="img/airlineLogo/ca.png">
+                <p>中国国际航空公司</p>
               </div>
             </li>
             <li>aaaaa</li>

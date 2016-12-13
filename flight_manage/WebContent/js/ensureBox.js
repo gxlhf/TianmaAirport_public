@@ -13,4 +13,9 @@ $(function () {
 			$('#ensureBox').modal('show');
 		}
 	});
+
+	//点击模态框提交按钮时提交表单
+	$('.modal-footer > .btn-primary').click(function () {
+		$('form').submit();
+	});
 });
