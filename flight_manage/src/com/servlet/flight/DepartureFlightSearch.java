@@ -1,4 +1,4 @@
-package com.servlet;
+package com.servlet.flight;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,20 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.entity.*;
 /**
- * Servlet implementation class SearchRole
+ * Servlet implementation class DepartureFlightSearch
  */
-//@WebServlet("/SearchRole")
-public class SearchRole extends HttpServlet {
+//@WebServlet("/DepartureFlightSearch")
+public class DepartureFlightSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchRole() {
+    public DepartureFlightSearch() {
         super();
-        // TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stub   
     }
 
 	/**
@@ -40,18 +41,14 @@ public class SearchRole extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
-		String roleName = request.getParameter("role-name");
-		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		Role roleInfo = admin.searchRole(roleName);
-		if(roleInfo!=null&&roleInfo.getName().equals("-1")){
-			request.getRequestDispatcher("/error.jsp").forward(request, response);
-			return;
-		}
-		else{
-			request.setAttribute("roleInfo", roleInfo);
-			request.getRequestDispatcher("Role/RoleAdmin.jsp").forward(request, response);
-		}
-		
+		String flightNumber = request.getParameter("flight-id");
+		String to = request.getParameter("to-site");
+		String airline = request.getParameter("airCompany-name");
+		String area = request.getParameter("area");
+		com.entity.User user = new com.entity.User();
+		DepartureFlightInfo[] departureFlightInfos = user.searchDepartureFlightInfo(to, flightNumber, airline);
+		request.setAttribute("departureFlightInfos", departureFlightInfos);
+		request.getRequestDispatcher("Public/Flight/DepartureFlightInfoCheck.jsp"+"?area="+area).forward(request, response);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.servlet;
+package com.servlet.flight;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,18 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.entity.*;
 /**
- * Servlet implementation class DepartureFlightSearch
+ * Servlet implementation class ArrivalFlightSearch
  */
-//@WebServlet("/DepartureFlightSearch")
-public class DepartureFlightSearch extends HttpServlet {
+//@WebServlet("/ArrivalFlightSearch")
+public class ArrivalFlightSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DepartureFlightSearch() {
+    public ArrivalFlightSearch() {
         super();
-        // TODO Auto-generated constructor stub   
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -41,14 +41,19 @@ public class DepartureFlightSearch extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
+		response.setContentType("text/html");
 		String flightNumber = request.getParameter("flight-id");
-		String to = request.getParameter("to-site");
+		String from = request.getParameter("from-site");
 		String airline = request.getParameter("airCompany-name");
 		String area = request.getParameter("area");
 		com.entity.User user = new com.entity.User();
-		DepartureFlightInfo[] departureFlightInfos = user.searchDepartureFlightInfo(to, flightNumber, airline);
-		request.setAttribute("departureFlightInfos", departureFlightInfos);
-		request.getRequestDispatcher("Public/Flight/DepartureFlightInfoCheck.jsp"+"?area="+area).forward(request, response);
+		ArrivalFlightInfo[] arrivalFlightInfos = user.searchArrivalFlightInfo(from,flightNumber,airline);
+		request.setAttribute("arrivalFlightInfos", arrivalFlightInfos);
+		/*for(ArrivalFlightInfo out:arrivalFlightInfos)
+		{
+			System.out.println(out.getFlightCourse().getAirline());;
+		}*/
+		request.getRequestDispatcher("Public/Flight/ArrivalFlightInfoCheck.jsp"+"?area="+area).forward(request, response);
 	}
 
 }
