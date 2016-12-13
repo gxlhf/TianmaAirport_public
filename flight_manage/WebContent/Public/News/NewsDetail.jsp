@@ -185,10 +185,10 @@ if(id!=null){
 			if(news[a]!=null){
           		out.println("<p>发布时间："+news[a].getTime()+"</p>");
           		out.println("<p>"+news[a].getContent()+"</p>  </div>");  
-          		session.setAttribute("new", news[a]);
+          		session.setAttribute("news", news[a]);
 		  }
           if(session.getAttribute("priv2")!=null){
-        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"&&id="+id+"'>修改</a></div></div>");
+        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"&&news-id="+id+"'>修改</a></div></div>");
           }
           %>
           <%-- <div class="col-sm-6 btn-modify">

@@ -47,6 +47,7 @@ public class NewsUpdate extends HttpServlet {
 	}
 	
 	void processrequest(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
+		System.out.println("what");
 		request.setCharacterEncoding("utf-8");
 		String title=request.getParameter("news-title");
 		String classified=request.getParameter("type");
@@ -55,19 +56,20 @@ public class NewsUpdate extends HttpServlet {
 		HttpSession session=request.getSession();
 		Admin admin=(Admin)session.getAttribute("admin");
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(title+classified+id+context);
 		News news=new News(title, df.format(new Date()), context, classified, null,admin.getEmpno() , id);
 		int re=admin.modifyNews(news);
 		if(re==-1){
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 		}else if(re==1){
 			request.setAttribute("result", re);
+			request.setAttribute("forward", "update");
 			if(classified.equals("机场介绍")){
 				request.getRequestDispatcher("/Public/News/Intro.jsp").forward(request, response);
 			}else
 				request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
 		}else {
-			session.setAttribute("result", re);
+			request.setAttribute("result", re);
+			request.setAttribute("forward", "update");
 			if(classified.equals("机场介绍")){
 				request.getRequestDispatcher("/Public/News/Intro.jsp").forward(request, response);
 			}else
