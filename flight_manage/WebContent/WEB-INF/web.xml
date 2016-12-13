@@ -49,6 +49,22 @@
     <url-pattern>/SearchRole</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>SearchAdmin</servlet-name>
+    <servlet-class>com.servlet.user.SearchAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchAdmin</servlet-name>
+    <url-pattern>/SearchAdmin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ModifyAdmin</servlet-name>
+    <servlet-class>com.servlet.user.ModifyAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyAdmin</servlet-name>
+    <url-pattern>/ModifyAdmin</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>NewsSearch</servlet-name>
     <servlet-class>com.servlet.news.NewsSearch</servlet-class>
   </servlet>
@@ -64,21 +80,13 @@
     <servlet-name>NewsUpdate</servlet-name>
     <url-pattern>/News/NewsUpdate</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>NewsAdd</servlet-name>
     <servlet-class>com.servlet.news.Newsadd</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>NewsAdd</servlet-name>
     <url-pattern>/News/NewsAdd</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>SearchAdmin</servlet-name>
-    <servlet-class>com.servlet.user.SearchAdmin</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SearchAdmin</servlet-name>
-    <url-pattern>/SearchAdmin</url-pattern>
   </servlet-mapping>
   <filter>
     <description>
