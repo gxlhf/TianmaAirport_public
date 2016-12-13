@@ -1,4 +1,4 @@
-package com.servlet;
+package com.servlet.role;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,20 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.entity.Admin;
-
+import com.entity.*;
 /**
- * Servlet implementation class SearchAdmin
+ * Servlet implementation class SearchRole
  */
-//@WebServlet("/SearchAdmin")
-public class SearchAdmin extends HttpServlet {
+//@WebServlet("/SearchRole")
+public class SearchRole extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchAdmin() {
+    public SearchRole() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,38 +37,21 @@ public class SearchAdmin extends HttpServlet {
 		// TODO Auto-generated method stub
 		processRequest(request,response);
 	}
-
+	
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
-		String empno = request.getParameter("search-empno");
-		String name = request.getParameter("search-name");
-		int sex;
-		if(request.getParameter("search-sex")==null||request.getParameter("search-sex").equals(""))
-			sex = -1;
-		else if(request.getParameter("search-sex").equals("1"))
-			sex = 1;
-		else
-			sex = 0;
-		String position = request.getParameter("search-position");
-		String role = request.getParameter("search-role");
+		String roleName = request.getParameter("role-name");
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		Admin[] adminsInfo = admin.searchAdmin(empno, name, sex, position, role);
-		/*System.out.println(empno);
-		System.out.println(name);
-		System.out.println(sex);
-		System.out.println(position);
-		System.out.println(role);
-		for(Admin output:adminsInfo)
-			System.out.println(output.getEmpno());*/
-		/*if(adminsInfo.length==0){
-			request.setAttribute("adminsInfo", adminsInfo);
-			request.getRequestDispatcher("User/UserAdmin.jsp").forward(request, response);
-		}*/	
-		if(adminsInfo.length!=0&&adminsInfo[0].getEmpno().equals("-1"))
+		Role roleInfo = admin.searchRole(roleName);
+		if(roleInfo!=null&&roleInfo.getName().equals("-1")){
 			request.getRequestDispatcher("/error.jsp").forward(request, response);
-		else{
-			request.setAttribute("adminsInfo", adminsInfo);
-			request.getRequestDispatcher("User/UserAdmin.jsp").forward(request, response);
+			return;
 		}
+		else{
+			request.setAttribute("roleInfo", roleInfo);
+			request.getRequestDispatcher("Role/RoleAdmin.jsp").forward(request, response);
+		}
+		
 	}
+
 }
