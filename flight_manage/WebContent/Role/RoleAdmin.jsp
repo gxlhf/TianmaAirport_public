@@ -134,9 +134,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">主页</a>
-            </li>
-            <li>
               <a href="#">用户与角色管理</a>
             </li>
             <li class="active">角色管理</li>
@@ -161,14 +158,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             {
             	out.println("<table class='table table-hover select-table'><thead><tr>");
               	out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
-            	out.println("<th>序号</th><th>角色名称</th><th>描述</th></tr></thead><tbody>");
+            	out.println("<th>序号</th><th>角色名称</th><th>描述</th><th>拥有权限</th></tr></thead><tbody>");
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Role roleInfo = (Role)request.getAttribute("roleInfo");
-            	out.println("<tr data-id='"+roleInfo.getName()+"'>");
+            	out.println("<tr data-id='roleName="+roleInfo.getName()+"'>");
             	out.println("<td><span class='glyphicon glyphicon'></span></td>");
             	out.println("<td>"+"1"+"</td>");
             	out.println("<td>"+roleInfo.getName()+"</td>");
             	out.println("<td>"+roleInfo.getDescription()+"</td>");
+            	out.println("<td>");
+            	if(roleInfo.getAuthorityMap().get("用户管理")!=null)
+            		out.println("用户管理 ");
+            	if(roleInfo.getAuthorityMap().get("角色管理")!=null)
+            		out.println("角色管理 ");
+            	if(roleInfo.getAuthorityMap().get("航班信息管理")!=null)
+            		out.println("航班信息管理 ");
+            	if(roleInfo.getAuthorityMap().get("机场设施管理")!=null)
+            		out.println("机场设施管理 ");
+            	if(roleInfo.getAuthorityMap().get("新闻管理")!=null)
+            		out.println("新闻管理 ");
+            	out.println("</td>");
+            	out.println("</tr>");
                 /* for(ArrivalFlightInfo output:arrivalFlightInfos)
                 {
                 	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
@@ -200,16 +210,84 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 } */
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' id='btn-modify' href='"+basePath+"Role/RoleEdit.jsp'>修改</a><a class='btn btn-danger' id='btn-delete' href=''>删除</a><a class='btn btn-success' href='"+basePath+"Role/RoleEdit.jsp'>新增</a></div></div>");
             }
-            
+            else
+            {
+            	out.println("<table class='table table-hover select-table'><thead><tr>");
+              	out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
+            	out.println("<th>序号</th><th>角色名称</th><th>描述</th><th>拥有权限</th></tr></thead><tbody>");
+            	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
+            	Role[] roleInfos = admin.returnAllRole();
+            	int count=1;
+            	for(Role output:roleInfos)
+            	{
+            		out.println("<tr data-id='roleName="+output.getName()+"'>");
+                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                	out.println("<td>"+count+"</td>");
+                	out.println("<td>"+output.getName()+"</td>");
+                	out.println("<td>"+output.getDescription()+"</td>");
+                	out.println("<td>");
+                	if(output.getAuthorityMap().get("用户管理")!=null)
+                		out.println("用户管理 ");
+                	if(output.getAuthorityMap().get("角色管理")!=null)
+                		out.println("角色管理 ");
+                	if(output.getAuthorityMap().get("航班信息管理")!=null)
+                		out.println("航班信息管理 ");
+                	if(output.getAuthorityMap().get("机场设施管理")!=null)
+                		out.println("机场设施管理 ");
+                	if(output.getAuthorityMap().get("新闻管理")!=null)
+                		out.println("新闻管理 ");
+                	out.println("</td>");
+                	out.println("</tr>");
+                	count++;
+            	}
+            	/* out.println("<tr data-id='"+roleInfo.getName()+"'>");
+            	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+            	out.println("<td>"+"1"+"</td>");
+            	out.println("<td>"+roleInfo.getName()+"</td>");
+            	out.println("<td>"+roleInfo.getDescription()+"</td>"); */
+                /* for(ArrivalFlightInfo output:arrivalFlightInfos)
+                {
+                	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                	if(session.getAttribute("priv1")!=null){
+                    	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                    }else{
+                  	  out.println("<td></td>");
+                    }
+                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
+                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                    	out.println("<td>"+output.getTime()+"</td>");
+                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+        				out.println("</tr>");
+                	}
+                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
+                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                    	out.println("<td>"+output.getTime()+"</td>");
+                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+        				out.println("</tr>");
+                	}         
+                } */
+                out.println("</tbody></table>");
+                out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' id='btn-modify' href='"+basePath+"Role/RoleEdit.jsp'>修改</a><a class='btn btn-danger' id='btn-delete' href=''>删除</a><a class='btn btn-success' href='"+basePath+"Role/RoleEdit.jsp'>新增</a></div></div>");
+            }
             %>
-          <div class="col-sm-6 btn-modify">
+          <%-- <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
               <a class="btn btn-primary" href="<%=basePath%>Role/RoleEdit.jsp">修改</a>
               <a class="btn btn-danger" href="">删除</a>
               <a class="btn btn-success" href="">新增</a>
             </div>
-          </div>
+          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">

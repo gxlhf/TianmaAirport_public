@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <base href="<%=basePath%>">
 
-    <title>用户与角色管理- 用户管理 - 天马机场</title>
+    <title>用户与角色管理 - 用户管理 - 天马机场</title>
 
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
@@ -140,22 +140,178 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">主页</a>
-            </li>
-            <li>
               <a href="#">用户与角色管理</a>
             </li>
             <li>
-              <a href="#">用户管理</a>
+              <a href="<%=basePath%>User/UserEdit.jsp">用户管理</a>
             </li>
-            <li class="active">新增用户</li>
+            <li class="active">
+            <%
+            	if(request.getParameter("empno")!=null)
+            		out.println("修改用户");
+            	else
+            		out.println("新增用户");
+            %>
+            </li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
+          <%
+          	if(request.getParameter("empno")!=null){
+          		
+          		Admin[] adminModify = admin.searchAdmin(request.getParameter("empno"), "", -1, "", "");
+          	
+          		
+          %>
           <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-id" pattern="\d{4}" data-error="请填写4位员工号*" required>
+              <%-- <%
+              	out.println("<input type='text' class='form-control' name='user-id' pattern='\\d{4}' data-error='请填写4位员工号*' value='"+adminModify[0].getEmpno()+"' required disabled>");
+              %> --%>
+                 <input type="text" class="form-control" name="user-id" pattern='\\d{4}' data-error="请填写4位员工号*" value="<%=adminModify[0].getEmpno() %>" required disabled> 
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="user-name" class="col-sm-2 control-label">姓名：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="user-name" data-error="请填写姓名*" value="<%=adminModify[0].getName() %>" required>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="user-sex" class="col-sm-2 control-label">性别：</label>
+              <div class="btn-group col-sm-6" data-toggle="buttons">
+              	<%
+              		if(adminModify[0].getSex()==1)
+              		{
+              	%>
+		                <label class="btn btn-default col-md-5 active">
+		                  <input type="radio" name="user-sex" value="男" data-error="请选择性别*" autocomplete="off" required checked>男
+		                </label>
+		                <label class="btn btn-default col-md-5">
+		                  <input type="radio" name="user-sex" value="女" data-error="请选择性别*" autocomplete="off" required>女
+		                </label>
+                <%
+              		}
+                %>
+                <%
+                	if(adminModify[0].getSex()==0)
+                	{
+                %>
+                		<label class="btn btn-default col-md-5">
+		                  <input type="radio" name="user-sex" value="男" data-error="请选择性别*" autocomplete="off" required>男
+		                </label>
+		                <label class="btn btn-default col-md-5 active">
+		                  <input type="radio" name="user-sex" value="女" data-error="请选择性别*" autocomplete="off" required checked>女
+		                </label>
+                <%
+                	}
+                %>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="user-pos" class="col-sm-2 control-label">职位：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="user-pos" data-error="请选择职位*" required>
+                  <option value="<%=adminModify[0].getPosition() %>"><%=adminModify[0].getPosition() %></option>
+                  <%
+                  	for(String output:admin.returnAllPosition())
+                  	{
+                  		if(!output.equals(adminModify[0].getPosition()))
+                  		{
+                  %>
+                  			<option value="<%=output %>"><%=output %></option>
+                  <%
+                  	
+                  		}
+                  	}
+                  %>
+                  <!-- <option value="机场地勤人员">机场地勤人员</option>
+                  <option value="信息技术员">信息技术员</option> -->
+                </select>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="user-roles" class="col-sm-2 control-label">角色：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="user-roles" data-error="请选择角色*" required>
+                  <option value="<%=adminModify[0].getRole().getName() %>"><%=adminModify[0].getRole().getName() %></option>
+                  <%
+                  	for(Role output:admin.returnAllRole())
+                  	{
+                  		if(!output.getName().equals(adminModify[0].getRole().getName()))
+                  		{
+                  %>
+                  			<option value="<%=output.getName() %>"><%=output.getName() %></option>
+                  <%
+                  	
+                  		}
+                  	}
+                  %>
+                  <!-- <option value="机场地勤人员">机场地勤人员</option>
+                  <option value="信息技术员">信息技术员</option> -->
+                </select>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="user-phone" class="col-sm-2 control-label">电话：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="user-phone" value="<%=adminModify[0].getPhone() %>">
+              </div>
+              <div class="col-sm-2 help-block with-errors"> </div>
+            </div>
+            <div class="form-group">
+              <label for="user-tel" class="col-sm-2 control-label">手机号：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="user-tel"  value="<%=adminModify[0].getMobile() %>">
+              </div>
+              <div class="col-sm-2 help-block with-errors"> </div>
+            </div>
+            <div class="form-group">
+              <label for="user-email" class="col-sm-2 control-label">电子邮箱：</label>
+              <div class="col-sm-6">
+                <input type="email" class="form-control" name="user-email" data-error="请填写正确的电子邮箱*" value="<%=adminModify[0].getEmail() %>" required>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="user-password" class="col-sm-2 control-label">登录密码：</label>
+              <div class="col-sm-6">
+                <input type="password" class="form-control" name="user-password" data-minlength="6" data-required-error="请填写密码*" data-minlength-error="密码长度至少为6位*" required>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="user-password-check" class="col-sm-2 control-label">密码确认：</label>
+              <div class="col-sm-6">
+                <input type="password" class="form-control" data-match='[name="user-password"]' data-required-error="请确认密码*" data-match-error="密码不一致*" required>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="col-sm-6 btn-modify">
+              <div class="btn-group btn-group-justified">
+                <a class="btn btn-success" id="btn-save">修改</a>
+                <a class="btn btn-primary" href="#">取消</a>
+              </div>
+            </div>
+          </form>
+          <%
+          	}
+          	else{
+          %>
+          <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
+            <div class="form-group">
+              <label for="user-id" class="col-sm-2 control-label">员工号：</label>
+              <div class="col-sm-6">
+              <%-- <%
+              	out.println("<input type='text' class='form-control' name='user-id' pattern='\\d{4}' data-error='请填写4位员工号*' value='"+adminModify[0].getEmpno()+"' required disabled>");
+              %> --%>
+                 <input type="text" class="form-control" name="user-id" pattern='\\d{4}' data-error="请填写4位员工号*"  required> 
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -169,12 +325,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-sex" class="col-sm-2 control-label">性别：</label>
               <div class="btn-group col-sm-6" data-toggle="buttons">
-                <label class="btn btn-default col-md-5">
-                  <input type="radio" name="user-sex" value="男" data-error="请选择性别*" autocomplete="off" required>男
-                </label>
-                <label class="btn btn-default col-md-5">
-                  <input type="radio" name="user-sex" value="女" data-error="请选择性别*" autocomplete="off" required>女
-                </label>
+              	
+		           <label class="btn btn-default col-md-5">
+		              <input type="radio" name="user-sex" value="男" data-error="请选择性别*" autocomplete="off" required>男
+		           </label>
+		           <label class="btn btn-default col-md-5">
+		              <input type="radio" name="user-sex" value="女" data-error="请选择性别*" autocomplete="off" required>女
+		           </label>
+                
+                
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -182,7 +341,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <label for="user-pos" class="col-sm-2 control-label">职位：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="user-pos" data-error="请选择职位*" required>
-                  <option value=""></option>
+                  
                   <option value="机场地勤人员">机场地勤人员</option>
                   <option value="信息技术员">信息技术员</option>
                 </select>
@@ -193,7 +352,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <label for="user-roles" class="col-sm-2 control-label">角色：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="user-roles" data-error="请选择角色*" required>
-                  <option value=""></option>
+                  
                   <option value="机场地勤人员">机场地勤人员</option>
                   <option value="信息技术员">信息技术员</option>
                 </select>
@@ -203,14 +362,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-phone" class="col-sm-2 control-label">电话：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-phone">
+                <input type="text" class="form-control" name="user-phone" >
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>
             <div class="form-group">
               <label for="user-tel" class="col-sm-2 control-label">手机号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-tel">
+                <input type="text" class="form-control" name="user-tel" >
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>
@@ -237,11 +396,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
-                <a class="btn btn-success" id="btn-save">修改</a>
+                <a class="btn btn-success" id="btn-save">新增</a>
                 <a class="btn btn-primary" href="#">取消</a>
               </div>
             </div>
           </form>
+          <%
+          	}
+          %>
         </div>
       </div>
 
@@ -260,7 +422,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="modal-body">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
               <h4>以下是即将保存的信息，请确认。<br></h4>
-              <strong class="text-danger">提交修改后将无法撤销</strong>
+              <strong class="text-danger">提交后将无法撤销</strong>
 
               <hr>
 

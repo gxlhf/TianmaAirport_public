@@ -151,6 +151,14 @@ public class Admin extends User implements Serializable{
 		role = adminDao.searchRole(name);
 		return role;
 	}
+
+	//返回所有角色
+    public Role[] returnAllRole()
+    {
+
+        AdminDao adminDao=new AdminDao();
+        return adminDao.returnAllRole();
+    }
 	
 	//新增角色函数：输入参数为角色对象；返回整数值，成功为1，失败为0，无权限操作为-1
 	public int addRole(Role role){
@@ -206,7 +214,7 @@ public class Admin extends User implements Serializable{
 		Admin[] admin = null;
 		if(!authorityValidate("searchAdmin")){
 			admin = new Admin[1];
-			admin[0].empno = "-1";
+			admin[0].setEmpno("-1");
 		}
 		if(empno!=""&&empno!=null){
 			/*
@@ -518,4 +526,21 @@ public class Admin extends User implements Serializable{
 		return 0;
 	}
 	
+	//返回数据库中所有职位名称
+	public String[] returnAllPosition()
+    {
+    	String[] allPosition=null;
+    	AdminDao adminDao=new AdminDao();
+    	allPosition=adminDao.returnAllPosition();
+    	return allPosition;
+    }
+
+    //返回数据库中所有部门名称
+    public String[] returnAllDepartment()
+    {
+    	String[] allDepartment=null;
+    	AdminDao adminDao=new AdminDao();
+    	allDepartment=adminDao.returnAllDepartment();
+    	return allDepartment;
+    }
 }

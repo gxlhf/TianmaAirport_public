@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
+ <%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -26,6 +26,16 @@ else
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
   </head><body>
+  <%
+ 	 Integer re=(Integer)request.getAttribute("result");
+  if(re!=null){
+  if(re.equals(-1)){
+	  out.println("<script>alert('修改失败')</script>");
+  }else if(re.equals(1)){
+	  out.println("<script>alert('修改成功')</script>");
+  }
+  }
+  %>
     <!-- 头部开始 -->
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
@@ -184,7 +194,7 @@ else
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?type=add'>发布新闻</a></li>");
                 %>
               </ul>
             </li>
@@ -205,7 +215,8 @@ else
             %></li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
+          <form class="form-horizontal" role="form" action="<%=basePath %>Public/News/NewsSearch">
+          <input type="text" name="type" value="<%=type%>" style="display:none" >
             <div class="form-group">
               <label for="news-title" class="col-sm-2 control-label">新闻标题：</label>
               <div class="col-sm-6">
@@ -257,96 +268,40 @@ else
               </tr>
             </thead>
             <tbody>
-              <tr data-id="10001">
-                <%
-                if(session.getAttribute("priv2")!=null){
-                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>1</td>
-                <td>
-                  <a href="<%=basePath%>/Public/News/NewsDetail.jsp">最新航班消息</a>
-                </td>
-                <td>2016-1-1</td>
-                <td>李静</td>
-              </tr>
-              <tr data-id="10002">
-                <%
-                if(session.getAttribute("priv2")!=null){
-                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>2</td>
-                <td>
-                  <a href="">最新航班消息</a>
-                </td>
-                <td>2016-1-1</td>
-                <td>李静</td>
-              </tr>
-              <tr data-id="10003">
-                <%
-                if(session.getAttribute("priv2")!=null){
-                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>3</td>
-                <td>
-                  <a href="">最新航班消息</a>
-                </td>
-                <td>2016-1-1</td>
-                <td>李静</td>
-              </tr>
-              <tr data-id="10004">
-                <%
-                if(session.getAttribute("priv2")!=null){
-                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>4</td>
-                <td>
-                  <a href="">最新航班消息</a>
-                </td>
-                <td>2016-1-1</td>
-                <td>李静</td>
-              </tr>
-              <tr data-id="10005">
-                <%
-                if(session.getAttribute("priv2")!=null){
-                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                }else{
-              	  out.println("<td></td>");
-                }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>...</td>
-                <td>
-                  <a href="">最新航班消息</a>
-                </td>
-                <td>2016-1-1</td>
-                <td>李静</td>
-              </tr>
+			<%
+				News[] news=(News[])request.getAttribute("news");
+			session.setAttribute("news", news);
+				if(news!=null){
+					for(int i=0;i<news.length;i++){
+						out.println(" <tr data-id='10001''>");
+						 if(session.getAttribute("priv2")!=null){
+			                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+			                }else{
+			              	  out.println("<td></td>");
+			                }
+							out.println(" <td>"+(i+1)+"</td>");
+			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_id()+"</td> </tr>");
+					}
+				}else if(news==null){
+					User user=new User();
+					news=user.returnAllNews();
+					session.setAttribute("news", news);
+					for(int i=0;i<news.length;i++){
+						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
+						out.println(" <tr data-id='10001''>");
+						 if(session.getAttribute("priv2")!=null){
+			                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+			                }else{
+			              	  out.println("<td></td>");
+			                }
+							out.println(" <td>"+(i+1)+"</td>");
+			                out.println(" <td><a href='"+basePath+"Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_id()+"</td> </tr>");
+					}
+				}
+				}
+			%>
+
+
             </tbody>
           </table>
           <div>
@@ -361,7 +316,7 @@ else
           </div>
           <%
           if(session.getAttribute("priv2")!=null){
-        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp'>修改</a></div></div>");
+        	  out.println(" <div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn=midify' class='btn btn-success' href='"+basePath+"News/NewsEdit.jsp?type=add'>新增</a><a id='btn=midify' class='btn btn-danger' href='/DeleteNews'>删除</a><a id='btn=midify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"'>修改</a></div></div>");
           }
           %>
           <%-- <div class="col-sm-6 btn-modify">

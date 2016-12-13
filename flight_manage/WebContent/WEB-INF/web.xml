@@ -18,7 +18,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ArrivalFlightSearch</servlet-name>
-    <servlet-class>com.servlet.ArrivalFlightSearch</servlet-class>
+    <servlet-class>com.servlet.flight.ArrivalFlightSearch</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ArrivalFlightSearch</servlet-name>
@@ -26,7 +26,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DepartureFlightSearch</servlet-name>
-    <servlet-class>com.servlet.DepartureFlightSearch</servlet-class>
+    <servlet-class>com.servlet.flight.DepartureFlightSearch</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DepartureFlightSearch</servlet-name>
@@ -42,11 +42,43 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>SearchRole</servlet-name>
-    <servlet-class>com.servlet.SearchRole</servlet-class>
+    <servlet-class>com.servlet.role.SearchRole</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchRole</servlet-name>
     <url-pattern>/SearchRole</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NewsSearch</servlet-name>
+    <servlet-class>com.servlet.news.NewsSearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsSearch</servlet-name>
+    <url-pattern>/Public/News/NewsSearch</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NewsUpdate</servlet-name>
+    <servlet-class>com.servlet.news.NewsUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsUpdate</servlet-name>
+    <url-pattern>/News/NewsUpdate</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>NewsAdd</servlet-name>
+    <servlet-class>com.servlet.news.Newsadd</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsAdd</servlet-name>
+    <url-pattern>/News/NewsAdd</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SearchAdmin</servlet-name>
+    <servlet-class>com.servlet.user.SearchAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchAdmin</servlet-name>
+    <url-pattern>/SearchAdmin</url-pattern>
   </servlet-mapping>
   <filter>
     <description>

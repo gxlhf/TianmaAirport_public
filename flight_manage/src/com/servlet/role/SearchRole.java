@@ -1,4 +1,4 @@
-package com.servlet;
+package com.servlet.role;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -43,8 +43,10 @@ public class SearchRole extends HttpServlet {
 		String roleName = request.getParameter("role-name");
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		Role roleInfo = admin.searchRole(roleName);
-		if(roleInfo.getName().equals("-1"))
+		if(roleInfo!=null&&roleInfo.getName().equals("-1")){
 			request.getRequestDispatcher("/error.jsp").forward(request, response);
+			return;
+		}
 		else{
 			request.setAttribute("roleInfo", roleInfo);
 			request.getRequestDispatcher("Role/RoleAdmin.jsp").forward(request, response);

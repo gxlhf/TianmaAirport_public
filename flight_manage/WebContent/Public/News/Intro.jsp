@@ -155,6 +155,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="page-header">
             <h2 class="text-center">机场介绍</h2>
           </div>
+           <div id="main-text">
+			<%
+				User user=new User();
+				News[] news=user.searchNews("机场介绍", null);
+				session.setAttribute("intro", news[0]);
+				out.println("<p>发布时间："+news[0].getTime()+"</p>");
+				out.println("<p>"+news[0].getContent()+"</p>");
+			
+            %>
+            
+          </div>
+<!--  
+          <div class="page-header">
+            <h2 class="text-center">机场介绍</h2>
+          </div>
           <div id="main-text">
             <p>发布时间：2000-01-01 13:00</p>
             <p>长沙天马机场，三字代码CST，1994年8月18日通航，是湖南省第二家国际机场。通航22年来，一代代天马机场人满怀发展梦，饱经艰苦历练，在摸索中前进，在曲折中发展，在低谷中积蓄爆发力量，在发展中积累成长经验，经历了由小变大、由弱变强的蜕变历程。 </p>
@@ -163,6 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <p>市场开拓稳步提升。天马机场坚持大力开拓航空市场，不断细分市场、优化市场，不断寻求新的经济增长点。2010至2015年，年运输起降架次同比增长51.15%；年旅客吞吐量同比增长24.78%。到2015年底，已开通国内航线54条，国际不定期包机航线17条。航班时刻不断优化，执行率和客座率均大幅提高。2011年口岸扩大对外开放以来，天马机场出入境流量呈几何倍数增长，增幅居全省口岸首位。2016年1月，国务院已正式批复同意在长沙天马机场口岸开展落地签证。</p>
             <p>新航站楼顺利启用。天马机场二代航站楼于2015年9月30日顺利转场启用，它以“绿色、生态、人文、科技、浪漫”为设计主题，充分展现天马地区的自然生态特色和传统人文情怀，设计目标年为2020年，设计年旅客吞吐量500万人次、货邮吞吐量1.9万吨、飞机起降4.5万架次。新航站楼先进的内部功能设计和配套设施设备，使天马机场安全管理和服务水平全面提质升级，为社会公众提供更为安全、舒适、方便、快捷的服务。</p>
           </div>
+-->
 
           <%
           if(session.getAttribute("priv2")!=null){
