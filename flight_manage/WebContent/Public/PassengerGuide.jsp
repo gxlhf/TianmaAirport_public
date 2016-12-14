@@ -166,11 +166,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
           <ul class="flight-info-list">
             <li>
-              <p>长沙 <span class="iconfont icon-plane"></span> 上海</p>
-              <div class="detail-box">
+              <div class="header-box">
+                <img src="img/airlineLogo/ca.png">
+                <p>中国国际航空公司 <strong>CA1111</strong></p>
+              </div>
+              <div class="detail-box depature">
                 <div>
-                  <img src="img/airlineLogo/ca.png">
-                  <p>中国国际航空公司</p>
+                  <p>长沙 <span class="iconfont icon-plane"></span> 上海</p>
                 </div>
                 <div>
                   <p>起飞时间</p>
@@ -179,21 +181,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div>
                   <p>值机柜台</p>
                   <h6>1, 3, 5</h6>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>值机柜台1</strong> 出发大厅东侧<br><strong>值机柜台3</strong> 出发大厅东侧<br><strong>值机柜台5</strong> 出发大厅东侧">查看位置</span>
                 </div>
                 <div>
                   <p>登机口</p>
                   <h6>2</h6>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>登机口1</strong> 候机大厅北端">查看位置</span>
                 </div>
               </div>
             </li>
-            <li>aaaaa</li>
-            <li>aaaaa</li>
-            <li>aaaaa</li>
-            <li>aaaaa</li>
-            <li>aaaaa</li>
-            <li>aaaaa</li>
-            <li>aaaaa</li>
-            <li>aaaaa</li>
+            <li>
+              <div class="header-box">
+                <img src="img/airlineLogo/ca.png">
+                <p>中国国际航空公司 <strong>CA1111</strong></p>
+              </div>
+              <div class="detail-box arrival">
+                <div>
+                  <p>上海 <span class="iconfont icon-plane"></span> 长沙</p>
+                </div>
+                <div>
+                  <p>降落时间</p>
+                  <h6>09:50</h6>
+                </div>
+                <div>
+                  <p>行李转盘</p>
+                  <h6>1</h6>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>行李转盘1</strong> 到达大厅东侧">查看位置</span>
+                </div>
+              </div>
+            </li>
           </ul>
 
           <div>

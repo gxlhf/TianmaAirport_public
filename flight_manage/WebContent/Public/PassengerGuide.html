@@ -25,7 +25,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="http://localhost:8080/flight_manage/index.jsp">
+          <a class="navbar-brand" href="../index.jsp">
             <img class="navbar-logo" src="../img/logo.png">
           </a>
         </div>
@@ -129,11 +129,13 @@
 
           <ul class="flight-info-list">
             <li>
-              <p>长沙 <span class="iconfont icon-plane"></span> 上海</p>
-              <div class="detail-box">
+              <div class="header-box">
+                <img src="../img/airlineLogo/ca.png">
+                <p>中国国际航空公司 <strong>CA1111</strong></p>
+              </div>
+              <div class="detail-box depature">
                 <div>
-                  <img src="../img/airlineLogo/ca.png">
-                  <p>中国南方航空公司</p>
+                  <p>长沙 <span class="iconfont icon-plane"></span> 上海</p>
                 </div>
                 <div>
                   <p>起飞时间</p>
@@ -142,19 +144,23 @@
                 <div>
                   <p>值机柜台</p>
                   <h6>1, 3, 5</h6>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>值机柜台1</strong> 出发大厅东侧<br><strong>值机柜台3</strong> 出发大厅东侧<br><strong>值机柜台5</strong> 出发大厅东侧">查看位置</span>
                 </div>
                 <div>
                   <p>登机口</p>
                   <h6>2</h6>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>登机口1</strong> 候机大厅北端">查看位置</span>
                 </div>
               </div>
             </li>
             <li>
-              <p>长沙 <span class="iconfont icon-plane"></span> 上海</p>
-              <div class="detail-box">
+              <div class="header-box">
+                <img src="../img/airlineLogo/ca.png">
+                <p>中国国际航空公司 <strong>CA1111</strong></p>
+              </div>
+              <div class="detail-box arrival">
                 <div>
-                  <img src="../img/airlineLogo/ca.png">
-                  <p>中国南方航空公司</p>
+                  <p>上海 <span class="iconfont icon-plane"></span> 长沙</p>
                 </div>
                 <div>
                   <p>降落时间</p>
@@ -162,7 +168,8 @@
                 </div>
                 <div>
                   <p>行李转盘</p>
-                  <h6>1, 3, 5</h6>
+                  <h6>1</h6>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>行李转盘1</strong> 到达大厅东侧">查看位置</span>
                 </div>
               </div>
             </li>
@@ -196,12 +203,10 @@
         <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
-    <script src="http://localhost:8080/flight_manage//js/jquery-3.1.1.min.js"></script>
-    <script src="http://localhost:8080/flight_manage//js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://localhost:8080/flight_manage//js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="http://localhost:8080/flight_manage//js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script type="text/javascript" src="http://localhost:8080/flight_manage//js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
-  
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="../js/public.js"></script>
 
 </body></html>
