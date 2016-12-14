@@ -149,92 +149,190 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">新增</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
+          <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
-              <label for="search-id" class="col-sm-2 control-label">航班号：</label>
+              <label for="flight-id" class="col-sm-2 control-label">航班号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-id">
+                <input type="text" class="form-control" name="flight-id" pattern="([A-z]{2}[0-9]{4}|[A-z][0-9]{5}|[0-9][A-z]{1}[0-9]{4})" data-required-error='请填写航班号*' data-pattern-error='请填写正确的航班号*' required>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
-              <label for="search-pos" class="col-sm-2 control-label">出发时间：</label>
+              <label for="flight-dep-time" class="col-sm-2 control-label">离港时间：</label>
               <div class="col-sm-6">
-                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="search-time">
+                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-dep-time" data-required-error='请填写离港时间*' required>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
-              <label for="search-pos" class="col-sm-2 control-label">到港时间：</label>
+              <label for="flight-arr-time" class="col-sm-2 control-label">到港时间：</label>
               <div class="col-sm-6">
-                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="search-time">
+                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-arr-time" data-required-error='请填写到港时间*' required>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
-              <label for="search-pos" class="col-sm-2 control-label">始发地：</label>
+              <label for="flight-from" class="col-sm-2 control-label">始发地：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="search-pos">
-                  <option>不限</option>
+                <select class="form-control" name="flight-from" data-required-error='请选择始发地*' required>
+                  <option></option>
+                  <option>机场地勤人员</option>
+                  <option>信息技术员</option>
+                </select>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="flight-to" class="col-sm-2 control-label">目的地：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="flight-to" data-required-error='请选择目的地*' required>
+                  <option></option>
+                  <option>机场地勤人员</option>
+                  <option>信息技术员</option>
+                </select>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="flight-via" class="col-sm-2 control-label">经停地：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="flight-via">
+                  <option></option>
                   <option>机场地勤人员</option>
                   <option>信息技术员</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
-              <label for="search-pos" class="col-sm-2 control-label">目的地：</label>
+              <label for="flight-airline" class="col-sm-2 control-label">航空公司：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="search-pos">
-                  <option>不限</option>
+                <select class="form-control" name="flight-airline" data-required-error='请选择航空公司*' required>
+                  <option></option>
                   <option>机场地勤人员</option>
                   <option>信息技术员</option>
                 </select>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
-              <label for="search-pos" class="col-sm-2 control-label">经停地：</label>
+              <label for="flight-baggage" class="col-sm-2 control-label">行李转盘：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="search-pos">
-                  <option>不限</option>
+                <select class="form-control" name="flight-baggage" data-required-error='请选择行李转盘*' required>
+                  <option></option>
                   <option>机场地勤人员</option>
                   <option>信息技术员</option>
                 </select>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
-              <label for="search-pos" class="col-sm-2 control-label">航空公司：</label>
+              <label for="flight-counter" class="col-sm-2 control-label">值机柜台：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="search-pos">
-                  <option>不限</option>
+                <select class="form-control" name="flight-counter" data-required-error='请选择值机柜台*' required>
+                  <option></option>
                   <option>机场地勤人员</option>
                   <option>信息技术员</option>
                 </select>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
-              <label for="search-pos" class="col-sm-2 control-label">行李转盘：</label>
+              <label for="flight-gate" class="col-sm-2 control-label">登机门：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="search-pos">
-                  <option>不限</option>
+                <select class="form-control" name="flight-gate" data-required-error='请选择登机门*' required>
+                  <option></option>
                   <option>机场地勤人员</option>
                   <option>信息技术员</option>
                 </select>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
-            <div class="form-group">
-              <div class="col-sm-2"></div>
-              <div class="col-sm-6"></div>
+            <div class="col-sm-6 btn-modify">
+              <div class="btn-group btn-group-justified">      
+                <a id="btn-save" class="btn btn-success">新增</a>
+                <a class="btn btn-primary" href="">取消</a>
+              </div>
             </div>
           </form>
-          <div></div>
-          <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">      
-              <a class="btn btn-success" href="">新增</a>
-              <a class="btn btn-primary" href="">取消</a>
-            </div>
-          </div>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
         <span class="glyphicon glyphicon-chevron-up"></span>
       </div>
+
+      <!-- 确认信息弹框开始 -->
+      <div id="ensureBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4>以下是即将保存的信息，请确认。<br></h4>
+              <strong class="text-danger">提交后将无法撤销</strong>
+
+              <hr>
+
+              <div class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">航班号：</label>
+                  <div class="col-xs-9">
+                    <p id="flight-id-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">离港时间：</label>
+                  <div class="col-xs-9">
+                    <p id="flight-dep-time-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">到港时间：</label>
+                  <div class="col-xs-9">
+                    <p id="flight-arr-time-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">始发地：</label>
+                  <div class="col-xs-9">
+                    <p id="flight-from-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">目的地：</label>
+                  <div class="col-xs-9">
+                    <p id="flight-to-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">经停地：</label>
+                  <div class="col-xs-9">
+                    <p id="flight-via-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">航空公司：</label>
+                  <div class="col-xs-9">
+                    <p id="flight-airline-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">行李转盘：</label>
+                  <div class="col-xs-9">
+                    <p id="flight-baggage-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-primary">保存</button>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 确认信息弹框结束 -->
+
     </div>
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
@@ -248,10 +346,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 尾部结束 -->
     <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
-  
+    <script>
+      $('form').submit(function () {
+        $('[name="flight-id"]').val($('[name="flight-id"]').val().toUpperCase());
+      })
+    </script>
 
-</body></html>
+</body>
+</html>

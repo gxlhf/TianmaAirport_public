@@ -163,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <!-- Nav tabs -->
               <ul class="nav nav-tabs" role="tablist">
                 <li class="col-xs-6 active" role="presentation">
-                  <a class="text-center" href="#departure" role="tab" data-toggle="tab">离港</a>
+                  <a class="text-center" href="#departure" role="tab" data-toggle="tab">港</a>
                 </li>
                 <li class="col-xs-6" role="presentation">
                   <a class="text-center" href="#arrival" role="tab" data-toggle="tab">到港</a>
