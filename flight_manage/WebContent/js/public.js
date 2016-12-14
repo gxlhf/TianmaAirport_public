@@ -75,7 +75,12 @@ $(function () {
 			else 
 				$("#backToTop-btn").fadeOut(500);
 		}
-	})
+	});
+
+	$("[data-toggle='popover']").popover({
+		html : true,
+		trigger : 'hover'
+	});
 });
 
 
