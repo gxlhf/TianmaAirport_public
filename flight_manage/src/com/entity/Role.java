@@ -52,4 +52,12 @@ public class Role {
 		this.authorityMap = roleDao.roleAuthorityMapSearch(name);
 		
 	}
+
+	public Role(String name, String description, Map<String, Boolean> authorityMap) {
+		this.name = name;
+		this.description = description;
+		this.authorityMap = authorityMap;
+	}
+	
+	
 }

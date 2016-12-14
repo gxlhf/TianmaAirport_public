@@ -14,16 +14,16 @@ import com.entity.Admin;
 import com.entity.Role;
 
 /**
- * Servlet implementation class ModifyRole
+ * Servlet implementation class AddRole
  */
-//@WebServlet("/ModifyRole")
-public class ModifyRole extends HttpServlet {
+//@WebServlet("/AddRole")
+public class AddRole extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifyRole() {
+    public AddRole() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,7 @@ public class ModifyRole extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -52,9 +52,9 @@ public class ModifyRole extends HttpServlet {
 		{
 			authorityMap.put(Privoutput, true);
 		}
-		Role roleModifyInfo = new Role(roleName, roleDesc, authorityMap);
+		Role roleAddInfo = new Role(roleName, roleDesc, authorityMap);
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		int result = admin.modifyRole(roleModifyInfo);
+		int result = admin.addRole(roleAddInfo);
 		/*System.out.println(roleName);
 		System.out.println(roleDesc);
 		System.out.println(rolePriv);*/
@@ -62,10 +62,10 @@ public class ModifyRole extends HttpServlet {
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 			return;
 		}else if(result==1){
-			request.setAttribute("modifyResult", result);
+			request.setAttribute("addResult", result);
 			request.getRequestDispatcher("/Role/RoleAdmin.jsp").forward(request, response);
 		}else {
-			request.setAttribute("modifyResult", result);
+			request.setAttribute("addResult", result);
 			request.getRequestDispatcher("/Role/RoleAdmin.jsp").forward(request,response);
 		}
 	}

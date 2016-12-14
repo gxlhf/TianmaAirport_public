@@ -155,7 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           	{
           		Role roleModify = admin.searchRole(request.getParameter("roleName"));
           %>
-          <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
+          <form action="<%=basePath%>ModifyRole" method="post" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
               <label for="rolename" class="col-sm-2 control-label">角色名称：</label>
               <div class="col-sm-6">
@@ -466,7 +466,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           	else
           	{
           %>
-          <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
+          <form action="<%=basePath%>AddRole" method="post" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
               <label for="rolename" class="col-sm-2 control-label">角色名称：</label>
               <div class="col-sm-6">

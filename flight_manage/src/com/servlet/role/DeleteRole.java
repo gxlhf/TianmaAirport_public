@@ -1,9 +1,6 @@
 package com.servlet.role;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +11,16 @@ import com.entity.Admin;
 import com.entity.Role;
 
 /**
- * Servlet implementation class ModifyRole
+ * Servlet implementation class DeleteRole
  */
-//@WebServlet("/ModifyRole")
-public class ModifyRole extends HttpServlet {
+//@WebServlet("/DeleteRole")
+public class DeleteRole extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifyRole() {
+    public DeleteRole() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +30,22 @@ public class ModifyRole extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		String roleName = request.getParameter("roleName");
+		Role roleDeleteInfo = new Role(roleName);
+		Admin admin=(Admin)request.getSession().getAttribute("admin");
+		int result = admin.deleteRole(roleDeleteInfo);
+		if(result==-1){
+			request.getRequestDispatcher("error.jsp").forward(request, response);
+			return;
+		}else if(result==1){
+			request.setAttribute("deleteResult", result);
+			request.getRequestDispatcher("/Role/RoleAdmin.jsp").forward(request, response);
+		}else {
+			request.setAttribute("deleteResult", result);
+			request.getRequestDispatcher("/Role/RoleAdmin.jsp").forward(request,response);
+		}
 	}
 
 	/**
@@ -42,32 +54,6 @@ public class ModifyRole extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
-		request.setCharacterEncoding("UTF-8");
-		String roleName = request.getParameter("roleName");
-		String roleDesc = request.getParameter("roleDesc");
-		String rolePriv = request.getParameter("rolePriv");
-		String[] rolePrivInfo = rolePriv.split(",");
-		Map<String, Boolean> authorityMap = new HashMap();
-		for(String Privoutput:rolePrivInfo)
-		{
-			authorityMap.put(Privoutput, true);
-		}
-		Role roleModifyInfo = new Role(roleName, roleDesc, authorityMap);
-		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		int result = admin.modifyRole(roleModifyInfo);
-		/*System.out.println(roleName);
-		System.out.println(roleDesc);
-		System.out.println(rolePriv);*/
-		if(result==-1){
-			request.getRequestDispatcher("error.jsp").forward(request, response);
-			return;
-		}else if(result==1){
-			request.setAttribute("modifyResult", result);
-			request.getRequestDispatcher("/Role/RoleAdmin.jsp").forward(request, response);
-		}else {
-			request.setAttribute("modifyResult", result);
-			request.getRequestDispatcher("/Role/RoleAdmin.jsp").forward(request,response);
-		}
 	}
 
 }

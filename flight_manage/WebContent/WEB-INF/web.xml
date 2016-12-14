@@ -40,7 +40,6 @@
     <servlet-name>PostTest</servlet-name>
     <url-pattern>/PostTest</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>SearchAdmin</servlet-name>
     <servlet-class>com.servlet.user.SearchAdmin</servlet-class>
@@ -73,7 +72,6 @@
     <servlet-name>DeleteAdmin</servlet-name>
     <url-pattern>/DeleteAdmin</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>SearchRole</servlet-name>
     <servlet-class>com.servlet.role.SearchRole</servlet-class>
@@ -90,7 +88,22 @@
     <servlet-name>ModifyRole</servlet-name>
     <url-pattern>/ModifyRole</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>AddRole</servlet-name>
+    <servlet-class>com.servlet.role.AddRole</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddRole</servlet-name>
+    <url-pattern>/AddRole</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteRole</servlet-name>
+    <servlet-class>com.servlet.role.DeleteRole</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteRole</servlet-name>
+    <url-pattern>/DeleteRole</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>NewsSearch</servlet-name>
     <servlet-class>com.servlet.news.NewsSearch</servlet-class>
