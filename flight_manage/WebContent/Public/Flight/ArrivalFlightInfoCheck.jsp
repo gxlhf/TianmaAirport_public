@@ -314,8 +314,11 @@ else
                     	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+                    	String[] t1 = output.getTime().split("-", 2);
+                    	String[] t2 = t1[1].split(":");
+                    	out.println("<td>"+t2[0]+":"+t2[1]+"</td>");
+                    	String[] t3 = output.getLuggageCarousel().split("盘");
+                    	out.println("<td>"+t3[1]+"</td>");
         				out.println("</tr>");
                 	}
                 	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
@@ -330,8 +333,11 @@ else
                     	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+                    	String[] t1 = output.getTime().split("-", 2);
+                    	String[] t2 = t1[1].split(":");
+                    	out.println("<td>"+t2[0]+":"+t2[1]+"</td>");
+                    	String[] t3 = output.getLuggageCarousel().split("盘");
+                    	out.println("<td>"+t3[1]+"</td>");
         				out.println("</tr>");
                 	}         
                 }

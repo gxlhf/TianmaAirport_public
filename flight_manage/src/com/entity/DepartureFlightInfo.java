@@ -9,10 +9,10 @@ package com.entity;
 
 public class DepartureFlightInfo {
 	FlightCourse flightCourse;
-	String checkinCounter;
+	String[] checkinCounter;
 	String boardingGate;
 	String time;
-	public DepartureFlightInfo(FlightCourse flightCourse, String checkinCounter, String boardingGate, String time) {
+	public DepartureFlightInfo(FlightCourse flightCourse, String[] checkinCounter, String boardingGate, String time) {
 		this.flightCourse = flightCourse;
 		this.checkinCounter = checkinCounter;
 		this.boardingGate = boardingGate;
@@ -24,10 +24,10 @@ public class DepartureFlightInfo {
 	public void setFlightCourse(FlightCourse flightCourse) {
 		this.flightCourse = flightCourse;
 	}
-	public String getCheckinCounter() {
+	public String[] getCheckinCounter() {
 		return checkinCounter;
 	}
-	public void setCheckinCounter(String checkinCounter) {
+	public void setCheckinCounter(String[] checkinCounter) {
 		this.checkinCounter = checkinCounter;
 	}
 	public String getBoardingGate() {

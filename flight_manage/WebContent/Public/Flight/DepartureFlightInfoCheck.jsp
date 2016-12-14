@@ -301,41 +301,86 @@ else
             	DepartureFlightInfo[] departureFlightInfos = (DepartureFlightInfo[])request.getAttribute("departureFlightInfos");
                 for(DepartureFlightInfo output:departureFlightInfos)
                 {
-                	
-                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                		out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
-                    	if(session.getAttribute("priv1")!=null){
-                        	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                        }else{
-                      	  out.println("<td></td>");
-                        }
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getCheckinCounter()+"</td>");
-                    	out.println("<td>"+output.getBoardingGate()+"</td>");
-        				out.println("</tr>");
+                	if(output!=null)
+                	{
+                		if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
+                    		out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                        	if(session.getAttribute("priv1")!=null){
+                            	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                            }else{
+                          	  out.println("<td></td>");
+                            }
+                    		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                        	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                        	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                        	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                        	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                        	String[] t1 = output.getTime().split("-", 2);
+                        	String[] t2 = t1[1].split(":");
+                        	out.println("<td>"+t2[0]+":"+t2[1]+"</td>");
+                        	String checkincounters = "";
+                        	int flag = 1;
+                        	for(String checkincounteroutput:output.getCheckinCounter())
+                        	{
+                        		if(checkincounteroutput!=null)
+                        		{
+                        			String t3[] = checkincounteroutput.split("台");
+                        			if(flag==1)
+                        			{
+                        				checkincounters = checkincounters + t3[1];
+                        				flag = 0;
+                        			}
+                        			else
+                        				checkincounters = checkincounters + ", " + t3[1];
+                        		}
+                        			
+                        	}
+                        	out.println("<td>"+checkincounters+"</td>");
+                        	/* out.println("<td>"+output.getCheckinCounter()+"</td>"); */
+                        	String[] t4 = output.getBoardingGate().split("门");
+                        	out.println("<td>"+t4[1]+"</td>");
+            				out.println("</tr>");
+                    	}
+                    	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
+                    		out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                        	if(session.getAttribute("priv1")!=null){
+                            	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                            }else{
+                          	  out.println("<td></td>");
+                            }
+                    		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
+                        	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
+                        	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
+                        	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
+                        	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
+                        	String[] t1 = output.getTime().split("-", 2);
+                        	String[] t2 = t1[1].split(":");
+                        	out.println("<td>"+t2[0]+":"+t2[1]+"</td>");
+                        	String checkincounters = "";
+                        	int flag = 1;
+                        	for(String checkincounteroutput:output.getCheckinCounter())
+                        	{
+                        		if(checkincounteroutput!=null)
+                        		{
+                        			String t3[] = checkincounteroutput.split("台");
+                        			if(flag==1)
+                        			{
+                        				checkincounters = checkincounters + t3[1];
+                        				flag = 0;
+                        			}
+                        			else
+                        				checkincounters = checkincounters + ", " + t3[1];
+                        		}
+                        			
+                        	}
+                        	out.println("<td>"+checkincounters+"</td>");
+                        	/* out.println("<td>"+output.getCheckinCounter()+"</td>"); */
+                        	String[] t4 = output.getBoardingGate().split("门");
+                        	out.println("<td>"+t4[1]+"</td>");
+            				out.println("</tr>");
+                    	}
                 	}
-                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
-                		out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
-                    	if(session.getAttribute("priv1")!=null){
-                        	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                        }else{
-                      	  out.println("<td></td>");
-                        }
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getCheckinCounter()+"</td>");
-                    	out.println("<td>"+output.getBoardingGate()+"</td>");
-        				out.println("</tr>");
-                	}         
+                	         
                 }
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
