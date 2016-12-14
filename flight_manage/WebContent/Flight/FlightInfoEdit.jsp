@@ -151,9 +151,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <!-- <h2 class="page-header">用户管理</h2> -->
           <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
-              <label for="flight-id" class="col-sm-2 control-label">航班号：</label>
+              <label for="flight-no" class="col-sm-2 control-label">航班号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="flight-id" pattern="([A-z]{2}[0-9]{4}|[A-z][0-9]{5}|[0-9][A-z]{1}[0-9]{4})" data-required-error='请填写航班号*' data-pattern-error='请填写正确的航班号*' required>
+                <input type="text" class="form-control" name="flight-no" pattern="([A-z]{2}[0-9]{4}|[A-z][0-9]{5}|[0-9][A-z]{1}[0-9]{4})" data-required-error='请填写航班号*' data-pattern-error='请填写正确的航班号*' required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -206,11 +206,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="flight-airline" class="col-sm-2 control-label">航空公司：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="flight-airline" data-required-error='请选择航空公司*' required>
-                  <option></option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option>
-                </select>
+                <input type="text" class="form-control" name="flight-airline" data-required-error='请选择航空公司*' required>
+                <!-- jQuery UI Autocomplete -->
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -320,6 +317,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <p id="flight-baggage-ensure" class="form-control-static"> </p>
                   </div>
                 </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">值机柜台：</label>
+                  <div class="col-xs-9">
+                    <p id="flight-counter-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
               </div>
 
             </div>
@@ -344,18 +347,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
+
+    <!-- 放置值机柜台信息 -->
+    <script>
+      var counterList = ['值机柜台1', '值机柜台2', '值机柜台3', '值机柜台4'];
+    </script>
+
+
     <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/bootstrap-tokenfield.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/FlightInfoEdit.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script>
-      $('form').submit(function () {
-        $('[name="flight-id"]').val($('[name="flight-id"]').val().toUpperCase());
-      })
-    </script>
 
 </body>
 </html>
