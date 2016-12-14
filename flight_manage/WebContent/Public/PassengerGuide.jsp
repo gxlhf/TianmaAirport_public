@@ -156,12 +156,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">乘机指引</li>
           </ol>
 
-          <form class="form-inline col-sm-offset-1" role="form" action="<%=basePath%>">
+          <form class="form-horizontal col-sm-offset-1" role="form" action="http://localhost:8080/flight_manage/">
             <div class="form-group">
-              <label for="search-id" class="control-label">航班号</label>
-              <input type="text" class="form-control" name="role-name">
+              <label for="key" class="col-sm-2 control-label">航班号或城市</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="key">
+              </div>
+              <div class="btn-group col-sm-2" data-toggle="buttons">
+                <label class="btn btn-default col-sm-6 active">
+                  <input type="radio" name="type" value="departure" checked>离港
+                </label>
+                <label class="btn btn-default col-sm-6">
+                  <input type="radio" name="type" value="arrival">到港
+                </label>   
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary">查询</button>
+            <input type="text" class="hide" name="is_flightNo">
+            <div class="form-group">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-6">
+                <button type="submit" class="col-sm-12 btn btn-primary">查询</button>
+              </div>
+            </div>
           </form>
 
           <ul class="flight-info-list">
@@ -255,7 +271,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
+    <script type="text/javascript">
+      $('form').submit(function (e) {
+        var flight_num_exp = /([a-z]{2}[0-9]{4}|[a-z]{1}[0-9]{5}|[0-9]{1}[a-z]{1}[0-9]{4})/i;
+        var form_elem = $(this).parent();
+        var key_text = form_elem.find('[name = "key"]').val();
+        $('[name="is_flightNo"]').val(flight_num_exp.test(key_text));
+      });    
+    </script>
   
 
 </body></html>
