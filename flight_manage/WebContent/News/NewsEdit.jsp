@@ -3,10 +3,15 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String type;
-if(request.getParameter("type")==null||(!request.getParameter("type").equals("flightInformation")&&!request.getParameter("type").equals("airportResource")&&!request.getParameter("type").equals("add")&&!request.getParameter("type").equals("facilityResource")))
+if(request.getParameter("type")==null||(!request.getParameter("type").equals("flightInformation")&&!request.getParameter("type").equals("airportResource")&&!request.getParameter("type").equals("facilityResource")))
 	type = null;
 else
 	type = request.getParameter("type");
+String todo;
+if(request.getParameter("todo")==null||!request.getParameter("todo").equals("add"))
+		todo=null;
+else	
+		todo=request.getParameter("todo");
 String id=request.getParameter("news-id");
 %>
 <html><head>
@@ -106,7 +111,7 @@ String id=request.getParameter("news-id");
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
                 %>
                 
               </ul>
@@ -142,7 +147,7 @@ String id=request.getParameter("news-id");
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
                 %>
               </ul>
             </li>
@@ -151,49 +156,60 @@ String id=request.getParameter("news-id");
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">新闻中心</a>
+              <a href="<%=basePath %>Public/News/Intro.jsp">新闻中心</a>
             </li>
             <li>
-              <a href="#">航班信息</a>
+              <a href="<%=basePath %>Public/News/NewsList.jsp?type=<%=type %>">
+              <% 
+              	if(type!=null){
+              		if(type.equals("flightInformation")){
+              			out.print("航班信息");
+              		}
+              		else if(type.equals("airportResource")){
+              			out.print("机场资源");
+              		}
+              		else{
+              			out.print("物业资源");}
+              	}
+              %>
+              </a>
             </li>
             <li class="active">
             <%
-            if(type==null||type.equals("add")){
-            	out.print("新增");
-            }else
+            if(todo==null){
             	out.print("修改");
+            }else
+            	out.print("新增");
             %></li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <% 
         	String title="";
         	String content="";
-				if(type==null||type.equals("add")){
-					out.println(" <form action='"+basePath+"News/NewsAdd' method='get' class='form-horizontal' role='form' data-toggle='validator'>");
-					}else{
-					out.println(" <form action='"+basePath+"News/NewsUpdate' method='get' class='form-horizontal' role='form' data-toggle='validator'>");
+				if(todo==null){
+					out.println(" <form action='"+basePath+"News/NewsUpdate' method='post' class='form-horizontal' role='form' data-toggle='validator'>");
+					News[] news=(News[])session.getAttribute("news");
+					int a=0;
+					for(int i=0;i<news.length;i++){
+						if(news[i].getNewsId().equals(id))
+							a=i;
+					}
+				
 					
-
-			News[] news=(News[])session.getAttribute("news");
-			int a=0;
-			for(int i=0;i<news.length;i++){
-				if(news[i].getNewsId().equals(id))
-					a=i;
-			}
-		
-			
-          	if(news!=null){
-          		title=news[a].getTitle();
-          		content=news[a].getContent();
-          		if(news[a].getKind().equals("航班信息")){
-          			type="flightInformation";	
-          		}
-          		else if(news[a].getKind().equals("物业资源")){
-          			type="facilityResource";
-          		}else{
-          			type="airportResource";
-          		}
-          	}
+		          	if(news!=null){
+		          		title=news[a].getTitle();
+		          		content=news[a].getContent();
+		          		if(news[a].getKind().equals("航班信息")){
+		          			type="flightInformation";	
+		          		}
+		          		else if(news[a].getKind().equals("物业资源")){
+		          			type="facilityResource";
+		          		}else{
+		          			type="airportResource";
+		          		}
+		          	}
+				}else{
+						out.println(" <form action='"+basePath+"News/NewsAdd' method='post' class='form-horizontal' role='form' data-toggle='validator'>");
 		}
           %>
             <div class="form-group">
@@ -205,7 +221,7 @@ String id=request.getParameter("news-id");
               <div class="help-block with-errors">*</div>
             </div>
          <%  
-         if(type==null||type.equals("add")){
+         if(type==null){
             out.println("<div class='form-group'>"
               +"<label for='user-sex' class='col-sm-2 control-label'>新闻类别：</label>"
 			  +"<div class='btn-group col-sm-6' data-toggle='buttons'>"
@@ -287,10 +303,10 @@ String id=request.getParameter("news-id");
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
                 <a class="btn btn-success" onclick="$(this).parents('form').submit()">            <%
-            if(type==null||type.equals("add")){
-            	out.print("新增");
-            }else
+            if(todo==null){
             	out.print("修改");
+            }else
+            	out.print("新增");
             %></a>
                 <a class="btn btn-primary" href="">取消</a>
               </div>

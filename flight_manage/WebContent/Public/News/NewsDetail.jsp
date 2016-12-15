@@ -124,7 +124,7 @@ if(id!=null){
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
                 %>
                 
               </ul>
@@ -160,7 +160,7 @@ if(id!=null){
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?type=add'>发布新闻</a></li>");
+                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
                 %>
               </ul>
             </li>
@@ -169,12 +169,25 @@ if(id!=null){
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">新闻中心</a>
+              <a href="<%=basePath %>Public/News/Intro.jsp">新闻中心</a>
             </li>
             <li>
-              <a href="#">航班信息</a>
+              <a href="<%=basePath %>Public/News/NewsList.jsp?type=<%=type %>">
+              <% 
+              	if(type!=null){
+              		if(type.equals("flightInformation")){
+              			out.print("航班信息");
+              		}
+              		else if(type.equals("airportResource")){
+              			out.print("机场资源");
+              		}
+              		else{
+              			out.print("物业资源");}
+              	}
+              %>
+              </a>
             </li>
-            <li class="active">最新航班</li>
+            <li class="active">最新消息</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <div class="page-header">
@@ -185,7 +198,6 @@ if(id!=null){
 			if(news[a]!=null){
           		out.println("<p>发布时间："+news[a].getTime()+"</p>");
           		out.println("<p>"+news[a].getContent()+"</p>  </div>");  
-          		session.setAttribute("news", news[a]);
 		  }
           if(session.getAttribute("priv2")!=null){
         	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"&&news-id="+id+"'>修改</a></div></div>");

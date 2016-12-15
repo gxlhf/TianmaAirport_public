@@ -112,7 +112,7 @@ newsId=news.getNewsId();
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
                 %>
                 
               </ul>
@@ -148,7 +148,7 @@ newsId=news.getNewsId();
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
                 %>
               </ul>
             </li>
@@ -157,7 +157,7 @@ newsId=news.getNewsId();
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">新闻中心</a>
+              <a href="<%=basePath %>Public/News/Intro.jsp">新闻中心</a>
             </li>
             <li>
               <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>

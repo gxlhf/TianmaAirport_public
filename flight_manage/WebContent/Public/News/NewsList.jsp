@@ -158,7 +158,7 @@ else
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
                 %>
                 
               </ul>
@@ -212,7 +212,7 @@ else
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?type=add'>发布新闻</a></li>");
+                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
                 %>
               </ul>
             </li>
@@ -221,7 +221,7 @@ else
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">新闻中心</a>
+              <a href="<%=basePath %>Public/News/Intro.jsp">新闻中心</a>
             </li>
             <li class="active"><%
             if(type.equals("flightInformation"))
@@ -336,7 +336,7 @@ else
           </div>
           <%
           if(session.getAttribute("priv2")!=null){
-        	  out.println(" <div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-success' href='"+basePath+"News/NewsEdit.jsp?type=add'>新增</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"News/NewsDelete?type=null'>删除</a><a id='btn-modify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"'>修改</a></div></div>");
+        	  out.println(" <div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-success' href='"+basePath+"News/NewsEdit.jsp?type="+type+"&todo=add'>新增</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"News/NewsDelete?type=null'>删除</a><a id='btn-modify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"'>修改</a></div></div>");
           }
           %>
           <%-- <div class="col-sm-6 btn-modify">
