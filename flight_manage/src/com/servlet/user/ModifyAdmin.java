@@ -72,10 +72,10 @@ public class ModifyAdmin extends HttpServlet {
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 			return;
 		}else if(result==1){
-			request.setAttribute("result", result);
+			request.setAttribute("modifyResult", result);
 			request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request, response);
 		}else {
-			request.setAttribute("result", result);
+			request.setAttribute("modifyResult", result);
 			request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request,response);
 		}
 	}

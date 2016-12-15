@@ -24,11 +24,11 @@ public class UserDao {
              * 返回类型为DepartureFlightInfo对象数组
              * 
              */
-                int i=0;
+                int i=-1;
 				sql = "SELECT flight_off.Flight_No2,flight_off.InternationalOrLocal,flight_off.Starting_station,flight_off.Destination," +
 						"flight_off.Staging_post,flight_off.Airline,bc_allocation.Bname,bc_allocation.Cname,bc_allocation.Time " +
 						"FROM flight_off INNER JOIN bc_allocation ON flight_off.Flight_No2 = bc_allocation.Flight_No2 " +
-						"WHERE flight_off.InternationalOrLocal=true";//SQL语句  
+						"WHERE flight_off.InternationalOrLocal=true ORDER BY Time,Flight_No2";//SQL语句  
 		        db1 = new db_connection(sql);//创建db_connection对象  		       
 		        boolean internationalOrLocal;
 		        String from=null;
@@ -36,7 +36,7 @@ public class UserDao {
 		        String stop=null;
 		        String airline=null;
 		        String boardingGate=null;
-		        String checkinCounter=null;
+		        String[] checkinCounter=null;
 		        String flightnumber=null;
 		        String time=null;
 		        try {  
@@ -45,19 +45,28 @@ public class UserDao {
 		            int rowNumber=ret.getRow();
 		            ret.beforeFirst();
 		            allInternationalDepartureFlightInfo = new DepartureFlightInfo[rowNumber];
+		            int j=0;
 		            while (ret.next()) { 
-		            	flightnumber=ret.getString("Flight_No2");
-		                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
-		            	from=ret.getString("Starting_station");
-		            	to=ret.getString("Destination");
-		            	stop=ret.getString("Staging_post");
-		            	airline=ret.getString("Airline");
-		            	boardingGate=ret.getString("Bname");
-		            	checkinCounter=ret.getString("Cname");
-		            	time=ret.getString("Time");
-		            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,false,flightnumber,airline,from,to,stop);
-		            	allInternationalDepartureFlightInfo[i]=new DepartureFlightInfo(flightCourse,checkinCounter,boardingGate,time);
-		                i++;
+		            	if(ret.getString("Flight_No2").equals(flightnumber) && ret.getString("Time").equals(time))
+                        {  
+         	        	   j++;
+         	            }else
+         	               {
+	            	           checkinCounter=new String[10];
+         	        	       i++;
+         	        	       j=0;
+         	               }
+		            	           flightnumber=ret.getString("Flight_No2");
+		                           internationalOrLocal=ret.getBoolean("InternationalOrLocal");
+		            	           from=ret.getString("Starting_station");
+		            	           to=ret.getString("Destination");
+		            	           stop=ret.getString("Staging_post");
+		            	           airline=ret.getString("Airline");
+		            	           boardingGate=ret.getString("Bname");
+		            	           checkinCounter[j]=ret.getString("Cname");
+		            	           time=ret.getString("Time");
+		            	           FlightCourse flightCourse=new FlightCourse(internationalOrLocal,false,flightnumber,airline,from,to,stop);
+		            	           allInternationalDepartureFlightInfo[i]=new DepartureFlightInfo(flightCourse,checkinCounter,boardingGate,time);		            	           
 		            }
 		            ret.close();  		          
 		        } catch (SQLException e) {  
@@ -78,11 +87,11 @@ public class UserDao {
              * 返回类型为DepartureFlightInfo对象数组
              * 
              */
-                int i=0;
+                int i=-1;
 				sql = "SELECT flight_off.Flight_No2,flight_off.InternationalOrLocal,flight_off.Starting_station,flight_off.Destination," +
 						"flight_off.Staging_post,flight_off.Airline,bc_allocation.Bname,bc_allocation.Cname,bc_allocation.Time " +
 						"FROM flight_off INNER JOIN bc_allocation ON flight_off.Flight_No2 = bc_allocation.Flight_No2 " +
-						"WHERE flight_off.InternationalOrLocal=false";//SQL语句  
+						"WHERE flight_off.InternationalOrLocal=false ORDER BY Time,Flight_No2";//SQL语句  
 		        db1 = new db_connection(sql);//创建db_connection对象  		       
 		        boolean internationalOrLocal;
 		        String from=null;
@@ -90,7 +99,7 @@ public class UserDao {
 		        String stop=null;
 		        String airline=null;
 		        String boardingGate=null;
-		        String checkinCounter=null;
+		        String[] checkinCounter=null;
 		        String flightnumber=null;
 		        String time=null;
 		        try {  
@@ -99,7 +108,17 @@ public class UserDao {
 		            int rowNumber=ret.getRow();
 		            ret.beforeFirst();
 		            allLocalDepartureFlightInfo = new DepartureFlightInfo[rowNumber];
+		            int j=0;
 		            while (ret.next()) { 
+		            	if(ret.getString("Flight_No2").equals(flightnumber) && ret.getString("Time").equals(time))
+                        {  
+         	        	   j++;
+         	            }else
+         	               {
+	            	           checkinCounter=new String[10];
+         	        	       i++;
+         	        	       j=0;
+         	               }
 		            	flightnumber=ret.getString("Flight_No2");
 		                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
 		            	from=ret.getString("Starting_station");
@@ -107,11 +126,10 @@ public class UserDao {
 		            	stop=ret.getString("Staging_post");
 		            	airline=ret.getString("Airline");
 		            	boardingGate=ret.getString("Bname");
-		            	checkinCounter=ret.getString("Cname");
+		            	checkinCounter[j]=ret.getString("Cname");
 		            	time=ret.getString("Time");
 		            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,false,flightnumber,airline,from,to,stop);
 		            	allLocalDepartureFlightInfo[i]=new DepartureFlightInfo(flightCourse,checkinCounter,boardingGate,time);
-		                i++;
 		            }
 		            ret.close();  
 		          
@@ -136,7 +154,7 @@ public class UserDao {
          sql = "SELECT flight_arrival.Flight_No,flight_arrival.InternationalOrLocal,flight_arrival.Starting_station,flight_arrival.Destination," +
 			"flight_arrival.Staging_post,flight_arrival.Airline,lc_allocation.Time,lc_allocation.Lname FROM (flight_arrival " +
 			"INNER JOIN lc_allocation ON flight_arrival.Flight_No = lc_allocation.Flight_No) " +
-			"WHERE flight_arrival.InternationalOrLocal=true";//SQL语句  
+			"WHERE flight_arrival.InternationalOrLocal=true ";//SQL语句  
 	        db1 = new db_connection(sql);//创建db_connection对象  
 	        boolean internationalOrLocal;
 	        String from=null;
@@ -236,11 +254,11 @@ public class UserDao {
              * 
              */
             //departureFlightInfo=searchDepartureFlightInfo0(flightnumber); 
-                int i=0;
+                int i=-1;
 				sql = "SELECT flight_off.Flight_No2,flight_off.InternationalOrLocal,flight_off.Starting_station,flight_off.Destination," +
 						"flight_off.Staging_post,flight_off.Airline,bc_allocation.Bname,bc_allocation.Cname,bc_allocation.Time " +
 						"FROM flight_off INNER JOIN bc_allocation ON flight_off.Flight_No2 = bc_allocation.Flight_No2 " +
-						"WHERE flight_off.Flight_No2 = '"+flightnumber+"'";//SQL语句  
+						"WHERE flight_off.Flight_No2 = ? ORDER BY Time,Flight_No2";//SQL语句  
 		        db1 = new db_connection(sql);//创建db_connection对象  		       
 		        boolean internationalOrLocal;
 		        String from=null;
@@ -248,15 +266,26 @@ public class UserDao {
 		        String stop=null;
 		        String airline=null;
 		        String boardingGate=null;
-		        String checkinCounter=null;
+		        String[] checkinCounter=null;
 		        String time=null;
 		        try {  
+		        	db1.pst.setString(1, flightnumber);
 		            ret = db1.pst.executeQuery();//执行语句，得到结果集  
 		            ret.last();
 		            int rowNumber=ret.getRow();
 		            ret.beforeFirst();
 		            departureFlightInfo = new DepartureFlightInfo[rowNumber];
+		            int j=0;
 		            while (ret.next()) { 
+		            	if(ret.getString("Flight_No2").equals(flightnumber) && ret.getString("Time").equals(time))
+                        {  
+         	        	   j++;
+         	            }else
+         	               {
+	            	           checkinCounter=new String[10]; 
+         	        	       i++;
+         	        	       j=0;
+         	               }
 		            	flightnumber=ret.getString("Flight_No2");
 		                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
 		            	from=ret.getString("Starting_station");
@@ -264,17 +293,18 @@ public class UserDao {
 		            	stop=ret.getString("Staging_post");
 		            	airline=ret.getString("Airline");
 		            	boardingGate=ret.getString("Bname");
-		            	checkinCounter=ret.getString("Cname");
+		            	checkinCounter[j]=ret.getString("Cname");
 		            	time=ret.getString("Time");
 		            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,false,flightnumber,airline,from,to,stop);
 		            	departureFlightInfo[i]=new DepartureFlightInfo(flightCourse,checkinCounter,boardingGate,time);
-		                i++;
 		            }
 		            ret.close();  
-		            db1.close();//关闭连接  
+		            
 		        } catch (SQLException e) {  
 		            e.printStackTrace();  
-		        } 
+		        } finally{
+		        	db1.close();//关闭连接  
+		        }
 		return departureFlightInfo;
     	
     }
@@ -289,11 +319,11 @@ public class UserDao {
              * 
              */
             //departureFlightInfo=searchDepartureFlightInfo1(flightnumber); 
-                int i=0;
+                int i=-1;
                 sql = "SELECT flight_off.Flight_No2,flight_off.InternationalOrLocal,flight_off.Starting_station,flight_off.Destination," +
 				"flight_off.Staging_post,flight_off.Airline,bc_allocation.Bname,bc_allocation.Cname,bc_allocation.Time " +
 				"FROM flight_off INNER JOIN bc_allocation ON flight_off.Flight_No2 = bc_allocation.Flight_No2 " +
-				"WHERE flight_off.Destination = '"+city+"' AND flight_off.Airline = '"+airline+"'";//SQL语句  
+				"WHERE flight_off.Destination = ? AND flight_off.Airline = ? ORDER BY Time,Flight_No2";//SQL语句  
 		        db1 = new db_connection(sql);//创建db_connection对象  
 		        String flightNumber=null;
 		        boolean internationalOrLocal;
@@ -301,15 +331,27 @@ public class UserDao {
 		        String to=null;
 		        String stop=null;
 		        String boardingGate=null;
-		        String checkinCounter=null;
+		        String[] checkinCounter=null;
 		        String time=null;
-		        try {  
+		        try { 
+		        	db1.pst.setString(1, city);
+		        	db1.pst.setString(2, airline);
 		            ret = db1.pst.executeQuery();//执行语句，得到结果集  
 		            ret.last();
 		            int rowNumber=ret.getRow();
 		            ret.beforeFirst();
 		            departureFlightInfo = new DepartureFlightInfo[rowNumber];
+		            int j=0;
 		            while (ret.next()) { 
+		            	if(ret.getString("Flight_No2").equals(flightNumber) && ret.getString("Time").equals(time))
+                        {  
+         	        	   j++;
+         	            }else
+         	               {
+	            	           checkinCounter=new String[10];
+         	        	       i++;
+         	        	       j=0;
+         	               }
 		            	flightNumber=ret.getString("Flight_No2");
 		                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
 		            	from=ret.getString("Starting_station");
@@ -317,17 +359,17 @@ public class UserDao {
 		            	stop=ret.getString("Staging_post");
 		            	airline=ret.getString("Airline");
 		            	boardingGate=ret.getString("Bname");
-		            	checkinCounter=ret.getString("Cname");
+		            	checkinCounter[j]=ret.getString("Cname");
 		            	time=ret.getString("Time");
 		            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,false,flightNumber,airline,from,to,stop);
 		            	departureFlightInfo[i]=new DepartureFlightInfo(flightCourse,checkinCounter,boardingGate,time);
-		                i++;
 		            }
-		            ret.close();  
-		            db1.close();//关闭连接  
+		            ret.close();  		           
 		        } catch (SQLException e) {  
 		            e.printStackTrace();  
-		        } 
+		        } finally{
+		        	 db1.close();//关闭连接  
+		        }
 		return departureFlightInfo;
     	
     }
@@ -342,11 +384,11 @@ public class UserDao {
              * 
              */
             //departureFlightInfo=searchDepartureFlightInfo1(flightnumber); 
-                int i=0;
+                int i=-1;
                 sql = "SELECT flight_off.Flight_No2,flight_off.InternationalOrLocal,flight_off.Starting_station,flight_off.Destination," +
 				"flight_off.Staging_post,flight_off.Airline,bc_allocation.Bname,bc_allocation.Cname,bc_allocation.Time " +
 				"FROM flight_off INNER JOIN bc_allocation ON flight_off.Flight_No2 = bc_allocation.Flight_No2 " +
-				"WHERE flight_off.Airline = '"+airline+"'";//SQL语句  
+				"WHERE flight_off.Airline = ? ORDER BY Time,Flight_No2";//SQL语句  
 		        db1 = new db_connection(sql);//创建db_connection对象  
 		        String flightNumber=null;
 		        boolean internationalOrLocal;
@@ -354,15 +396,26 @@ public class UserDao {
 		        String to=null;
 		        String stop=null;
 		        String boardingGate=null;
-		        String checkinCounter=null;
+		        String[] checkinCounter=null;
 		        String time=null;
 		        try {  
+		        	db1.pst.setString(1,airline);
 		            ret = db1.pst.executeQuery();//执行语句，得到结果集  
 		            ret.last();
 		            int rowNumber=ret.getRow();
 		            ret.beforeFirst();
 		            departureFlightInfo = new DepartureFlightInfo[rowNumber];
+		            int j=0;
 		            while (ret.next()) { 
+		            	if(ret.getString("Flight_No2").equals(flightNumber) && ret.getString("Time").equals(time))
+                        {  
+         	        	   j++;
+         	            }else
+         	               {
+	            	           checkinCounter=new String[10];
+         	        	       i++;
+         	        	       j=0;
+         	               }
 		            	flightNumber=ret.getString("Flight_No2");
 		                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
 		            	from=ret.getString("Starting_station");
@@ -370,17 +423,18 @@ public class UserDao {
 		            	stop=ret.getString("Staging_post");
 		            	airline=ret.getString("Airline");
 		            	boardingGate=ret.getString("Bname");
-		            	checkinCounter=ret.getString("Cname");
+		            	checkinCounter[j]=ret.getString("Cname");
 		            	time=ret.getString("Time");
 		            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,false,flightNumber,airline,from,to,stop);
 		            	departureFlightInfo[i]=new DepartureFlightInfo(flightCourse,checkinCounter,boardingGate,time);
-		                i++;
 		            }
 		            ret.close();  
-		            db1.close();//关闭连接  
+		          
 		        } catch (SQLException e) {  
 		            e.printStackTrace();  
-		        } 
+		        } finally{
+		        	  db1.close();//关闭连接  
+		        }
 		return departureFlightInfo;
     	
     }
@@ -395,11 +449,11 @@ public class UserDao {
              * 
              */
             //departureFlightInfo=searchDepartureFlightInfo1(flightnumber); 
-                int i=0;
+                int i=-1;
                 sql = "SELECT flight_off.Flight_No2,flight_off.InternationalOrLocal,flight_off.Starting_station,flight_off.Destination," +
 				"flight_off.Staging_post,flight_off.Airline,bc_allocation.Bname,bc_allocation.Cname,bc_allocation.Time " +
 				"FROM flight_off INNER JOIN bc_allocation ON flight_off.Flight_No2 = bc_allocation.Flight_No2 " +
-				"WHERE flight_off.Destination = '"+city+"'";//SQL语句  
+				"WHERE flight_off.Destination = ? ORDER BY Time,Flight_No2" ;//SQL语句  
 		        db1 = new db_connection(sql);//创建db_connection对象  
 		        String flightNumber=null;
 		        boolean internationalOrLocal;
@@ -407,16 +461,27 @@ public class UserDao {
 		        String to=null;
 		        String stop=null;
 		        String boardingGate=null;
-		        String checkinCounter=null;
+		        String[] checkinCounter=null;
 		        String airline=null;
 		        String time=null;
 		        try {  
+		        	db1.pst.setString(1, city);
 		            ret = db1.pst.executeQuery();//执行语句，得到结果集  
 		            ret.last();
 		            int rowNumber=ret.getRow();
 		            ret.beforeFirst();
 		            departureFlightInfo = new DepartureFlightInfo[rowNumber];
+		            int j=0;
 		            while (ret.next()) { 
+		            	if(ret.getString("Flight_No2").equals(flightNumber) && ret.getString("Time").equals(time))
+                        {  
+         	        	   j++;
+         	            }else
+         	               {
+	            	           checkinCounter=new String[10];
+         	        	       i++;
+         	        	       j=0;
+         	               }
 		            	flightNumber=ret.getString("Flight_No2");
 		                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
 		            	from=ret.getString("Starting_station");
@@ -424,17 +489,19 @@ public class UserDao {
 		            	stop=ret.getString("Staging_post");
 		            	airline=ret.getString("Airline");
 		            	boardingGate=ret.getString("Bname");
-		            	checkinCounter=ret.getString("Cname");
+		            	checkinCounter[j]=ret.getString("Cname");
 		            	time=ret.getString("Time");
 		            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,false,flightNumber,airline,from,to,stop);
 		            	departureFlightInfo[i]=new DepartureFlightInfo(flightCourse,checkinCounter,boardingGate,time);
-		                i++;
+
 		            }
 		            ret.close();  
-		            db1.close();//关闭连接  
+		            
 		        } catch (SQLException e) {  
 		            e.printStackTrace();  
-		        } 
+		        } finally{
+		        	 db1.close();//关闭连接 
+		        }
 		return departureFlightInfo;
     	
     }

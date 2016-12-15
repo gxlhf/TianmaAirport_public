@@ -16,12 +16,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 支持时间控件 -->
   </head><body>
   <%
-  	Integer result=(Integer)request.getAttribute("result");
-  	if(result!=null){
-  		if(result.equals(0)){
+  	Integer modifyResult=(Integer)request.getAttribute("modifyResult");
+  	if(modifyResult!=null){
+  		if(modifyResult.equals(0)){
 			out.println("<script>alert('修改失败')</script>");
-  		}else if(result.equals(1)){
+  		}else if(modifyResult.equals(1)){
 	  		out.println("<script>alert('修改成功')</script>");
+  		}
+  	}
+  	
+  	Integer addResult=(Integer)request.getAttribute("addResult");
+  	if(addResult!=null){
+  		if(addResult.equals(0)){
+			out.println("<script>alert('新增失败')</script>");
+  		}else if(addResult.equals(1)){
+	  		out.println("<script>alert('新增成功')</script>");
+  		}
+  	}
+  	
+  	Integer deleteResult=(Integer)request.getAttribute("deleteResult");
+  	if(deleteResult!=null){
+  		if(deleteResult.equals(0)){
+			out.println("<script>alert('删除失败')</script>");
+  		}else if(deleteResult.equals(1)){
+	  		out.println("<script>alert('删除成功')</script>");
   		}
   	}
   %>
@@ -90,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	if(session.getAttribute("priv0")!=null)
             		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             	else
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             		
             %>
             
@@ -294,7 +312,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 } */
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
-            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
+            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteAdmin'>删除</a><a class='btn btn-success' href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
             }
             else
             {
@@ -323,7 +341,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	}
             	out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
-            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
+            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteAdmin'>删除</a><a class='btn btn-success' href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
             	
             }
             // 表格中的data-id属性填写的是需要进行修改或删除时向对应jsp传送的参数字符串

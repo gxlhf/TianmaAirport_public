@@ -451,8 +451,8 @@ public class AdminDao {
     }
     public boolean deleteAdmin(Admin admin)
     {//数据库操作：删除管理员，形参为管理员对象，返回值为布尔值
-    	sql = "DELETE user_info,user_actor FROM  user_info LEFT OUTER JOIN user_actor on user_info.Em_No=user_actor.Em_No" +
-    		  " WHERE user_info.Em_No=?";//SQL语句  
+    	sql = "DELETE user_actor,user_info FROM  user_actor LEFT OUTER JOIN user_info on user_actor.Em_No=user_info.Em_No" +
+    		  " WHERE  user_actor.Em_No=?";//SQL语句  
         db1= new db_connection(sql);//创建db_connection对象  
         try {          	
           db1.pst.setString(1, admin.getEmpno());
@@ -604,12 +604,15 @@ public class AdminDao {
     	
     }
     public boolean addDepartureFlightInfo(DepartureFlightInfo departureFlightInfo)
-    {//数据库操作：新增离港航班信息，形参为离港航班信息对象，返回值为布尔值
-    	sql="SELECT COUNT(*) FROM flight_off WHERE flight_off.Flight_No2='"+departureFlightInfo.getFlightCourse().getFlightNumber()+"'";
+    {//数据库操作：新增离港航班信息，形参为离港航班信息对象，返回值为布尔值 	
+    	String[] checkincounter=departureFlightInfo.getCheckinCounter();
+    	int i=0;
+    	sql="SELECT COUNT(*) FROM flight_off WHERE flight_off.Flight_No2=?";
         db1= new db_connection(sql);//创建db_connection对象
     	try {
     		int countFlightInfo=0;
     		db1.conn.setAutoCommit(false);
+    		db1.pst.setString(1, departureFlightInfo.getFlightCourse().getFlightNumber());
     		ret = db1.pst.executeQuery();
     		while(ret.next()){
     			countFlightInfo=ret.getInt("COUNT(*)");
@@ -619,29 +622,43 @@ public class AdminDao {
     			sql = "INSERT INTO bc_allocation (Flight_No2,Bname,Cname,Time) " +
     		    "VALUES (?,?,?,?)";//SQL语句  
     			db1.conn.setAutoCommit(false);
+    			i=0;
+    			while(i<checkincounter.length){
              	db1.pst=db1.conn.prepareStatement(sql);
             	db1.pst.setString(1, departureFlightInfo.getFlightCourse().getFlightNumber());
              	db1.pst.setString(2, departureFlightInfo.getBoardingGate());
-            	db1.pst.setString(3, departureFlightInfo.getCheckinCounter());
+            	db1.pst.setString(3, checkincounter[i]);
             	db1.pst.setString(4, departureFlightInfo.getTime());
             	db1.pst.executeUpdate();//执行语句
+            	i++;
+    			}
             	db1.conn.commit(); 
     		}
     		else{
+    			
             sql = "INSERT INTO flight_off (Flight_No2,InternationalOrLocal,Starting_station,Destination,Staging_post,Airline) "+
- 	           	  "VALUES ('"+departureFlightInfo.getFlightCourse().getFlightNumber()+"',"+departureFlightInfo.getFlightCourse().isInternationalOrLocal()+",'"+departureFlightInfo.getFlightCourse().getFrom()+"'" +
- 			   	  ",'"+departureFlightInfo.getFlightCourse().getTo()+"','"+departureFlightInfo.getFlightCourse().getStop()+"','"+departureFlightInfo.getFlightCourse().getAirline()+"')";//SQL语句   	          
+ 	           	  "VALUES (?,?,?,?,?,?)";//SQL语句   	          
             db1.conn.setAutoCommit(false);
             db1.pst=db1.conn.prepareStatement(sql);
-            db1.pst.executeUpdate();//执行语句
+            db1.pst.setString(1,departureFlightInfo.getFlightCourse().getFlightNumber() );
+            db1.pst.setBoolean(2, departureFlightInfo.getFlightCourse().isInternationalOrLocal());
+            db1.pst.setString(3, departureFlightInfo.getFlightCourse().getFrom());
+            db1.pst.setString(4, departureFlightInfo.getFlightCourse().getTo());
+            db1.pst.setString(5, departureFlightInfo.getFlightCourse().getStop());
+            db1.pst.setString(6, departureFlightInfo.getFlightCourse().getAirline());
+            db1.pst.executeUpdate();//执行语句            
         	sql = "INSERT INTO bc_allocation (Flight_No2,Bname,Cname,Time) " +
 		    "VALUES (?,?,?,?)";//SQL语句  
+        	i=0;
+        	while(i<checkincounter.length){
          	db1.pst=db1.conn.prepareStatement(sql);
         	db1.pst.setString(1, departureFlightInfo.getFlightCourse().getFlightNumber());
          	db1.pst.setString(2, departureFlightInfo.getBoardingGate());
-        	db1.pst.setString(3, departureFlightInfo.getCheckinCounter());
+        	db1.pst.setString(3, checkincounter[i]);
         	db1.pst.setString(4, departureFlightInfo.getTime());
         	db1.pst.executeUpdate();//执行语句
+        	i++;
+        	}
         	db1.conn.commit(); 
     		}
            } catch (SQLException e) {  
@@ -667,56 +684,89 @@ public class AdminDao {
     }
     public boolean modifyDepartureFlightInfo(DepartureFlightInfo departureFlightInfo)
     {//数据库操作：修改离港航班信息，形参为离港航班信息对象，返回值为布尔值
-    	 sql = "UPDATE bc_allocation INNER JOIN flight_off ON bc_allocation.Flight_No2=flight_off.Flight_No2 SET flight_off.InternationalOrLocal=?," +
-    	 		"flight_off.Starting_station=?,flight_off.Destination=?,flight_off.Staging_post=?,flight_off.Airline=?,bc_allocation.Bname=?,bc_allocation.Cname=? " +
-    	 		"WHERE bc_allocation.Flight_No2=? AND bc_allocation.Time=?";//SQL语句  
+    	String[] checkincounter=departureFlightInfo.getCheckinCounter();
+    	int i=0;
+    	sql = "UPDATE flight_off SET flight_off.InternationalOrLocal=?," +
+	 		"flight_off.Starting_station=?,flight_off.Destination=?,flight_off.Staging_post=?,flight_off.Airline=? where flight_off.Flight_No2=?";//SQL语句  
  	     db1= new db_connection(sql);//创建db_connection对象  
-        try {        	
+        try {
+        	db1.conn.setAutoCommit(false);
         	db1.pst.setBoolean(1, departureFlightInfo.getFlightCourse().isInternationalOrLocal());
          	db1.pst.setString(2, departureFlightInfo.getFlightCourse().getFrom());
         	db1.pst.setString(3, departureFlightInfo.getFlightCourse().getTo());
         	db1.pst.setString(4, departureFlightInfo.getFlightCourse().getStop());
-        	db1.pst.setString(5, departureFlightInfo.getFlightCourse().getAirline());
-        	db1.pst.setString(6, departureFlightInfo.getBoardingGate());
-        	db1.pst.setString(7, departureFlightInfo.getCheckinCounter());
-        	db1.pst.setString(8, departureFlightInfo.getFlightCourse().getFlightNumber());
-        	db1.pst.setString(9, departureFlightInfo.getTime());
-        	db1.pst.executeUpdate();//执行语句 
+     	    db1.pst.setString(5, departureFlightInfo.getFlightCourse().getAirline());  
+     	    db1.pst.setString(6, departureFlightInfo.getFlightCourse().getFlightNumber());
+     	    db1.pst.executeUpdate();//更新flight_off表
+     	    
+     	    sql = "delete FROM bc_allocation WHERE bc_allocation.Flight_No2=? and bc_allocation.Time=?";//SQL语句
+     	    db1.pst=db1.conn.prepareStatement(sql);
+     	    db1.pst.setString(1, departureFlightInfo.getFlightCourse().getFlightNumber());
+         	db1.pst.setString(2, departureFlightInfo.getTime());
+         	 db1.pst.executeUpdate();//删除bc_location表里航班号为？和航班时间为？的数据
+         	 
+         	sql = "INSERT INTO bc_allocation (Flight_No2,Bname,Cname,Time) " +
+		    "VALUES (?,?,?,?)";//SQL语句  
+        	i=0;
+        	while(i<checkincounter.length){
+         	db1.pst=db1.conn.prepareStatement(sql);
+        	db1.pst.setString(1, departureFlightInfo.getFlightCourse().getFlightNumber());
+         	db1.pst.setString(2, departureFlightInfo.getBoardingGate());
+        	db1.pst.setString(3, checkincounter[i]);
+        	db1.pst.setString(4, departureFlightInfo.getTime());
+        	db1.pst.executeUpdate();//执行语句 ，向bc_location表插入新的航班号为？和航班时间为？的数据
+        	i++;
+        	}
+        	db1.conn.commit();
            } catch (SQLException e) {      	       
                    e.printStackTrace(); 
                   return false;
         }
         finally{    	 
-              db1.close();//关闭连接   
+        	 try {
+                 db1.conn.setAutoCommit(true);
+                 db1.close();//关闭连接   
+             } catch (SQLException e) {
+                 e.printStackTrace();
+             }   
      }    
      return true; 
     	
     }
     public boolean deleteDepartureFlightInfo(DepartureFlightInfo departureFlightInfo)
     {//数据库操作：删除离港航班信息，形参为离港航班信息对象，返回值为布尔值
-    	sql = "SELECT count(*) FROM bc_allocation WHERE bc_allocation.Flight_No2='"+departureFlightInfo.getFlightCourse().getFlightNumber()+"'";//SQL语句  
+    	sql = "SELECT count( DISTINCT bc_allocation.Time) FROM bc_allocation WHERE bc_allocation.Flight_No2='"+departureFlightInfo.getFlightCourse().getFlightNumber()+"'";//SQL语句  
 	     db1= new db_connection(sql);//创建db_connection对象  
        try {  
+    	   db1.conn.setAutoCommit(false);
     	   int countFlightInfo=0;
            ret = db1.pst.executeQuery();
            while(ret.next()){
-        	   countFlightInfo=ret.getInt("COUNT(*)");
+        	   countFlightInfo=ret.getInt("count( DISTINCT bc_allocation.Time)");
        		}
            ret.close();
-       		if(countFlightInfo>1)
-        	   sql = "delete FROM bc_allocation WHERE bc_allocation.Flight_No2='"+departureFlightInfo.getFlightCourse().getFlightNumber()+"' and bc_allocation.Bname = '"+departureFlightInfo.getBoardingGate()+"' " +
-        	   		"and bc_allocation.Cname= '"+departureFlightInfo.getCheckinCounter()+"' and bc_allocation.Time='"+departureFlightInfo.getTime()+"'";//SQL语句  
-           else
-        	   sql = "delete bc_allocation,flight_off FROM bc_allocation INNER JOIN flight_off on bc_allocation.Flight_No2=flight_off.Flight_No2 WHERE bc_allocation.Flight_No2='"+departureFlightInfo.getFlightCourse().getFlightNumber()+"' and bc_allocation.Bname = '"+departureFlightInfo.getBoardingGate()+"' " +
-   	   		         "and bc_allocation.Cname= '"+departureFlightInfo.getCheckinCounter()+"' and bc_allocation.Time='"+departureFlightInfo.getTime()+"'";//SQL语句
-            db1.pst=db1.conn.prepareStatement(sql);
-       		db1.pst.executeUpdate();//执行语句
+           sql = "delete FROM bc_allocation WHERE bc_allocation.Flight_No2='"+departureFlightInfo.getFlightCourse().getFlightNumber()+"' and bc_allocation.Time='"+departureFlightInfo.getTime()+"'";//SQL语句
+           db1.pst=db1.conn.prepareStatement(sql);
+           db1.pst.executeUpdate();//执行语句
+           if(countFlightInfo<=1)
+           {
+        	   sql = "delete  FROM  flight_off  " +
+        	   		"WHERE flight_off.Flight_No2='"+departureFlightInfo.getFlightCourse().getFlightNumber()+"'";//SQL语句
+               db1.pst=db1.conn.prepareStatement(sql);
+       	       db1.pst.executeUpdate();//执行语句
+       		}
+	        db1.conn.commit();
           } catch (SQLException e) {  
                 e.printStackTrace(); 
                 return false;
        }
        finally{
-             db1.close();//关闭连接   
+    	   try {
+               db1.conn.setAutoCommit(true);
+               db1.close();//关闭连接   
+           } catch (SQLException e) {
+               e.printStackTrace();
+           }   
     }    
     return true;  	
     }

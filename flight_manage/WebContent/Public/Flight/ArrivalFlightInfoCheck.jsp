@@ -105,7 +105,7 @@ else
             	if(session.getAttribute("priv0")!=null)
             		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             	else
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='#'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             		
             %>
             
@@ -314,8 +314,11 @@ else
                     	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+                    	String[] t1 = output.getTime().split("-", 2);
+                    	String[] t2 = t1[1].split(":");
+                    	out.println("<td>"+t2[0]+":"+t2[1]+"</td>");
+                    	String[] t3 = output.getLuggageCarousel().split("盘");
+                    	out.println("<td>"+t3[1]+"</td>");
         				out.println("</tr>");
                 	}
                 	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
@@ -330,8 +333,11 @@ else
                     	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
                     	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
+                    	String[] t1 = output.getTime().split("-", 2);
+                    	String[] t2 = t1[1].split(":");
+                    	out.println("<td>"+t2[0]+":"+t2[1]+"</td>");
+                    	String[] t3 = output.getLuggageCarousel().split("盘");
+                    	out.println("<td>"+t3[1]+"</td>");
         				out.println("</tr>");
                 	}         
                 }
