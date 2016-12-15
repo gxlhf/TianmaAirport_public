@@ -136,18 +136,42 @@ String id=request.getParameter("news-id");
                 <li role="presentation">
                   <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
-                <li role="presentation" class="second-menu-cur">
+                <%
+                if(type!=null&&type.equals("flightInformation"))
+                	out.println("<li role='presentation' class='second-menu-cur'>");
+                else
+                	out.println("<li role='presentation'>");
+                %>
+                <!-- <li role="presentation" class="second-menu-cur"> -->
                   <a href="<%=basePath%>Public/News/NewsList.jsp?type=flightInformation">航班信息</a>
                 </li>
-                <li role="presentation">
+                <%
+                if(type!=null&&type.equals("airportResource"))
+                	out.println("<li role='presentation' class='second-menu-cur'>");
+                else
+                	out.println("<li role='presentation'>");
+                %>
+                <!-- <li role="presentation"> -->
                   <a href="<%=basePath%>Public/News/NewsList.jsp?type=airportResource">机场资源</a>
                 </li>
-                <li role="presentation">
+                <%
+                if(type!=null&&type.equals("facilityResource"))
+                	out.println("<li role='presentation' class='second-menu-cur'>");
+                else
+                	out.println("<li role='presentation'>");
+                %>
+                <!-- <li role="presentation"> -->
                   <a href="<%=basePath%>Public/News/NewsList.jsp?type=facilityResource">物业资源</a>
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
+                	{
+                		if(type==null)
+                			out.println("<li role='presentation' class='second-menu-cur'><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
+                		else
+                			out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
+                	}
+                		
                 %>
               </ul>
             </li>
