@@ -16,9 +16,10 @@ $('.select-table tbody > tr').click(function (e) {
 $('#btn-modify').click(function (e) {
 	$(this).attr('href', $('#btn-modify').attr('href') + linkWord + opValue);
 });
-$('#btn-delete').click(function (e) {
-	$(this).attr('href', $('#btn-delete').attr('href') + linkWord + opValue);
-});
+
+// $('#btn-delete').click(function (e) {
+// 	$(this).attr('href', $('#btn-modify').attr('href') + linkWord + opValue);
+// });
 
 $(function () {
 	//绑定时间控件

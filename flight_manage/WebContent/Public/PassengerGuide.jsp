@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
             <%
             	if(session.getAttribute("priv0")!=null)
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a></li><li class='curmenu'><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li><a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             	else
             		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");            		
             %>
@@ -120,26 +120,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-2" id="sidebar">
           <ul class="nav nav-pills nav-stacked" role="tablist">
             <li role="presentation" class="first-menu">
-            <%
+            <%-- <%
             if(session.getAttribute("priv0")!=null){
             	out.println("<strong>机场设施管理</strong>");
             }else{
             	out.println("<strong>乘机指南</strong>");
             }
-            %>
-              <!-- <strong>机场设施管理</strong> -->
+            %> --%>
+              <strong>乘机指南</strong>
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <li role="presentation" class="second-menu-cur">
-                <%
+                <%-- <%
                 if(session.getAttribute("priv0")!=null){
                 	out.println("<a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a>");
                 }else{
                 	out.println("<a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a>");
                 }
-                %>
-                  <!-- <a href="#">机场资源</a> -->
+                %> --%>
+                  <a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a>
                 </li>
                 <li role="presentation">
                   <a href="<%=basePath%>Public/Facility/Facility.jsp">物业设施</a>
@@ -156,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">乘机指引</li>
           </ol>
 
-          <form class="form-horizontal col-sm-offset-1" role="form" action="http://localhost:8080/flight_manage/">
+          <form class="form-horizontal col-sm-offset-1" role="form" action="<%=basePath%>PassengerGuide">
             <div class="form-group">
               <label for="key" class="col-sm-2 control-label">航班号或城市</label>
               <div class="col-sm-6">
@@ -164,10 +164,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
               <div class="btn-group col-sm-2" data-toggle="buttons">
                 <label class="btn btn-default col-sm-6 active">
-                  <input type="radio" name="type" value="departure" checked>离港
+                  <input type="radio" name="flight_type" value="departure" checked>离港
                 </label>
                 <label class="btn btn-default col-sm-6">
-                  <input type="radio" name="type" value="arrival">到港
+                  <input type="radio" name="flight_type" value="arrival">到港
                 </label>   
               </div>
             </div>
@@ -181,7 +181,153 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </form>
 
           <ul class="flight-info-list">
+            <%
+            if(request.getAttribute("departureFlightInfos")!=null)
+            {
+            	DepartureFlightInfo[] departureFlightInfos = (DepartureFlightInfo[])request.getAttribute("departureFlightInfos");
+            	for(DepartureFlightInfo output:departureFlightInfos)
+            	{
+            		if(output!=null)
+            		{
+            %>
             <li>
+              <div class="header-box">
+              <%
+              	
+              	String airlineFlag = output.getFlightCourse().getFlightNumber().substring(0, 2).toLowerCase();
+              %>
+                <img src="img/airlineLogo/<%=airlineFlag %>.png">
+                <p><%=output.getFlightCourse().getAirline() %> <strong><%=output.getFlightCourse().getFlightNumber() %></strong></p>
+              </div>
+              <div class="detail-box depature">
+                <div>
+                  <p><%=output.getFlightCourse().getFrom() %>
+                  <%
+                  		if(output.getFlightCourse().getStop().equals("")||output.getFlightCourse().getStop()==null)
+                  			out.println("<span class='iconfont icon-plane'></span>");
+                  		else
+                  		{
+                  			out.println("<span class='iconfont icon-plane'></span>");
+                  			out.println(output.getFlightCourse().getStop());
+                  			out.println("<span class='iconfont icon-plane'></span>");
+                  		}
+                  %> 
+                  <!-- <span class="iconfont icon-plane"></span> -->
+                  <%=output.getFlightCourse().getTo() %></p>
+                </div>
+                <div>
+                  <p>起飞时间</p>
+                  <%
+                  	String[] t1 = output.getTime().split("-", 2);
+              		String[] t2 = t1[1].split(":");
+                  %>
+                  <h6><%=t2[0]+":"+t2[1] %></h6>
+                </div>
+                <div>
+                  <p>值机柜台</p>
+                  <%
+                  	String checkincounters = "";
+                  	User user = new User();
+              		int flag = 1;
+              		String checkincountersAndLocations = "";
+              		for(String checkincounteroutput:output.getCheckinCounter())
+              		{
+              			if(checkincounteroutput!=null)
+              			{
+              				AirportResource[] airportResources = user.searchAirportResource(checkincounteroutput, "");     				
+              				/* checkincountersAndLocations = checkincountersAndLocations + "<strong>" + checkincounteroutput + "</strong>" + airportResources[0].getLocation(); */
+              				String t3[] = checkincounteroutput.split("台");
+              				if(flag==1)
+              				{
+              					checkincounters = checkincounters + t3[1];
+              					checkincountersAndLocations = checkincountersAndLocations + "<strong>" + checkincounteroutput + "</strong> " + airportResources[0].getLocation();
+              					flag = 0;
+              				}
+              				else
+              				{
+              					checkincounters = checkincounters + ", " + t3[1];
+              					checkincountersAndLocations = checkincountersAndLocations + "<br><strong>" + checkincounteroutput + "</strong> " + airportResources[0].getLocation();
+              				}		
+              			}			
+              		}
+                  %>
+                  <h6><%=checkincounters %></h6>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<%=checkincountersAndLocations %>">查看位置</span>
+                  <%-- <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>值机柜台1</strong> 出发大厅东侧<br><strong>值机柜台3</strong> 出发大厅东侧<br><strong>值机柜台5</strong> 出发大厅东侧">查看位置</span> --%>
+                </div>
+                <div>
+                  <p>登机门</p>
+                  <%
+                  	String[] t4 = output.getBoardingGate().split("门");
+                  	AirportResource[] airportResources = user.searchAirportResource(output.getBoardingGate(), "");
+                  %>
+                  <h6><%=t4[1] %></h6>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong><%=output.getBoardingGate() %></strong> <%=airportResources[0].getLocation() %>">查看位置</span>
+                </div>
+              </div>
+            </li>
+            <%
+            		}
+            	}
+            }
+            %>
+            
+            <%
+            if(request.getAttribute("arrivalFlightInfos")!=null)
+            {
+            	ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
+            	User user = new User();
+            	for(ArrivalFlightInfo output:arrivalFlightInfos)
+            	{
+            %>
+            <li>
+              <div class="header-box">
+              <%	
+              	String airlineFlag = output.getFlightCourse().getFlightNumber().substring(0, 2).toLowerCase();
+              %>
+                <img src="img/airlineLogo/<%=airlineFlag %>.png">
+                <p><%=output.getFlightCourse().getAirline() %> <strong><%=output.getFlightCourse().getFlightNumber() %></strong></p>
+              </div>
+              <div class="detail-box arrival">
+                <div>
+                  <p><%=output.getFlightCourse().getFrom() %>
+                  <%
+                  		if(output.getFlightCourse().getStop().equals("")||output.getFlightCourse().getStop()==null)
+                  			out.println("<span class='iconfont icon-plane'></span>");
+                  		else
+                  		{
+                  			out.println("<span class='iconfont icon-plane'></span>");
+                  			out.println(output.getFlightCourse().getStop());
+                  			out.println("<span class='iconfont icon-plane'></span>");
+                  		}
+                  %> 
+                  <!-- <span class="iconfont icon-plane"></span> -->
+                  <%=output.getFlightCourse().getTo() %></p>
+                </div>
+                <div>
+                  <p>降落时间</p>
+                  <%
+                  	String[] t1 = output.getTime().split("-", 2);
+              		String[] t2 = t1[1].split(":");
+                  %>
+                  <h6><%=t2[0]+":"+t2[1] %></h6>
+                </div>
+                <div>
+                  <p>行李转盘</p>
+                  <%
+                  String[] t3 = output.getLuggageCarousel().split("盘");
+                  AirportResource[] airportResources = user.searchAirportResource(output.getLuggageCarousel(), "");
+                  %>
+                  <h6><%=t3[1] %></h6>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<%=airportResources[0].getLocation() %>">查看位置</span>
+                </div>
+              </div>
+            </li>
+            <%
+            	}
+            }
+            %>
+            <%-- <li>
               <div class="header-box">
                 <img src="img/airlineLogo/ca.png">
                 <p>中国国际航空公司 <strong>CA1111</strong></p>
@@ -225,7 +371,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>行李转盘1</strong> 到达大厅东侧">查看位置</span>
                 </div>
               </div>
-            </li>
+            </li> --%>
           </ul>
 
           <div>

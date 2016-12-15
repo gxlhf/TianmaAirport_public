@@ -173,7 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <!-- Tab panes -->
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="departure">
-                  <form class="form-inline" action="" type="post" role="form">
+                  <form class="form-inline" action="<%=basePath%>PassengerGuide" type="post" role="form" method="get">
                     <input type="text" name="key" class="form-control" placeholder="航班号或城市">
                     <input type="text" class="hide" name="is_flightNo">
                     <input type="text" class="hide" name="flight_type" value="departure">
@@ -181,7 +181,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   </form>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="arrival">
-                  <form class="form-inline" action="" type="post" role="form">
+                  <form class="form-inline" action="<%=basePath%>PassengerGuide" type="post" role="form" method="get">
                     <input type="text" name="key" class="form-control" placeholder="航班号或城市">
                     <input type="text" class="hide" name="is_flightNo">
                     <input type="text" class="hide" name="flight_type" value="arrival">
