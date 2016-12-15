@@ -1,4 +1,5 @@
 $(function () {
+	//信息编辑页面-点击保存时弹框
 	$('#btn-save').click(function (e) {
 		$(this).parents('form').validator('validate');
 		var validator_passed = !($('.has-error').length);
@@ -14,8 +15,19 @@ $(function () {
 		}
 	});
 
-	//点击模态框提交按钮时提交表单
+	//信息编辑页面-点击模态框提交按钮时提交表单
 	$('.modal-footer > .btn-primary').click(function () {
 		$('form').submit();
 	});
+
+
+	// 信息列表页面-点击删除时弹框
+	$('#btn-delete').click(function () {
+		var thElem = $('th');
+		var deletingElem = $('[data-id="' + opValue + '"]').children('td');
+
+		for (var i = 1; i < deletingElem.length; i++) {
+			$('.modal-body').children(':contains("' + thElem[i] + '：")').next().children('p').text($(deletingElem[i]).text());
+		}
+	})
 });
