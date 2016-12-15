@@ -9,10 +9,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import com.dao.loggingDao;
 import com.entity.Admin;
-import com.entity.News;
 
 import javax.servlet.annotation.WebFilter;
 
@@ -57,6 +59,7 @@ public class logFilter implements Filter {
 		HttpSession session=req.getSession();
 		String ip=getRemortIP(req);
 		String action=req.getServletPath();
+		
 		if(action.endsWith("js")||action.endsWith("css")||action.endsWith("jpg")||action.endsWith("png")||action.endsWith("woof")||action.endsWith("gif")){
 
 		}else{
@@ -67,8 +70,11 @@ public class logFilter implements Filter {
 				Admin admin=(Admin)session.getAttribute("admin");
 				userId=admin.getEmpno();
 			}
+			Date date=new Date();
+			DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			 String time=format.format(date);
 			loggingDao loggingDao=new loggingDao();
-			loggingDao.LogAdd(ip, userId, action);
+			loggingDao.LogAdd(ip, userId, action,time);
 		}
 		chain.doFilter(request, response);
 		// pass the request along the filter chain
