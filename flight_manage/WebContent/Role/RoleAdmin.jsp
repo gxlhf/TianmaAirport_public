@@ -378,7 +378,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <h5 class="modal-title" id="myModalLabel">提示</h5>
             </div>
             <div class="modal-body">
-              <p class="text-center">请选择需要更改的角色</p>
+              <p class="text-center">请选择角色</p>
             </div>
 
           </div><!-- /.modal-content -->
