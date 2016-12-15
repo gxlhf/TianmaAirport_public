@@ -47,7 +47,6 @@ public class NewsUpdate extends HttpServlet {
 	}
 	
 	void processrequest(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
-		System.out.println("what");
 		request.setCharacterEncoding("utf-8");
 		String title=request.getParameter("news-title");
 		String classified=request.getParameter("type");
