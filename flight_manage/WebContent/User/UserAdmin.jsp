@@ -341,7 +341,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	}
             	out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
-            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteAdmin'>删除</a><a class='btn btn-success' act-href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
+            	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteAdmin'>删除</a><a class='btn btn-success' href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
             	
             }
             // 表格中的data-id属性填写的是需要进行修改或删除时向对应jsp传送的参数字符串
@@ -440,6 +440,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!-- /.modal-dialog -->
       </div>
       <!-- 确认信息弹框结束 -->
+
+
+      <!-- 报错弹框开始 -->
+      <div id="errorBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h5 class="modal-title" id="myModalLabel">提示</h5>
+            </div>
+            <div class="modal-body">
+              <p class="text-center">请选择需要更改的角色</p>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 报错弹框结束 -->
+
 
     </div>
     <!-- 内容结束 -->
