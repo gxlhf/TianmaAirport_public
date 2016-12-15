@@ -17,6 +17,14 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>EditMyInfo</servlet-name>
+    <servlet-class>com.servlet.EditMyInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditMyInfo</servlet-name>
+    <url-pattern>/EditMyInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>PassengerGuide</servlet-name>
     <servlet-class>com.servlet.PassengerGuide</servlet-class>
   </servlet>
@@ -154,7 +162,7 @@
     <filter-name>PrivFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-    <filter>
+  <filter>
     <description></description>
     <display-name>logFilter</display-name>
     <filter-name>logFilter</filter-name>
@@ -164,5 +172,4 @@
     <filter-name>logFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
 </web-app>
