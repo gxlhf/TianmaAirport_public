@@ -17,6 +17,14 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>PassengerGuide</servlet-name>
+    <servlet-class>com.servlet.PassengerGuide</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PassengerGuide</servlet-name>
+    <url-pattern>/PassengerGuide</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ArrivalFlightSearch</servlet-name>
     <servlet-class>com.servlet.flight.ArrivalFlightSearch</servlet-class>
   </servlet>

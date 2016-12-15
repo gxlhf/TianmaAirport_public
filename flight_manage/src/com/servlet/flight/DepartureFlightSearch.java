@@ -48,6 +48,19 @@ public class DepartureFlightSearch extends HttpServlet {
 		com.entity.User user = new com.entity.User();
 		DepartureFlightInfo[] departureFlightInfos = user.searchDepartureFlightInfo(to, flightNumber, airline);
 		request.setAttribute("departureFlightInfos", departureFlightInfos);
+		/*for(DepartureFlightInfo info:departureFlightInfos)
+		{
+			if(info!=null)
+			{
+				for(String output:info.getCheckinCounter())
+				{
+					if(output.equals(""))
+						System.out.println(output);
+				}
+			}
+			
+				
+		}*/
 		request.getRequestDispatcher("Public/Flight/DepartureFlightInfoCheck.jsp"+"?area="+area).forward(request, response);
 	}
 
