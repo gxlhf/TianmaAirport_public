@@ -1,4 +1,4 @@
-var opValue;
+var opValue = '';
 var linkWord = '?';
 
 $('.select-table tbody > tr').click(function (e) {
@@ -14,6 +14,12 @@ $('.select-table tbody > tr').click(function (e) {
 });
 
 $('#btn-modify').click(function (e) {
+	if (opValue == '') {
+		$('#errorBox').modal('show');
+		return false;
+	}
+
+
 	$(this).attr('href', $('#btn-modify').attr('href') + linkWord + opValue);
 });
 
@@ -48,8 +54,7 @@ $(function () {
 		    console.log(min, max, start, date_config);
 
 			$(this).datetimepicker(date_config);
-		}
-		)
+		})
 	};
 
 	//显示天气
