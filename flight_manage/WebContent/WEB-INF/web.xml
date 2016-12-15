@@ -154,4 +154,15 @@
     <filter-name>PrivFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+    <filter>
+    <description></description>
+    <display-name>logFilter</display-name>
+    <filter-name>logFilter</filter-name>
+    <filter-class>com.servlet.logFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>logFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
 </web-app>
