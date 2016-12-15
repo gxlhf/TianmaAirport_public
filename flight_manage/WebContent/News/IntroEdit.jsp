@@ -177,7 +177,7 @@ newsId=news.getNewsId();
             <div class="form-group">
               <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="news-context"><%=content %></textarea>
+                <textarea rows="20" class="form-control" name="news-context"><%=content %></textarea>
               </div>
             </div>
             <div class="form-group">
