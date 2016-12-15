@@ -266,6 +266,7 @@ String id=request.getParameter("news-id");
               <div class="col-sm-2"></div>
               <div class="col-sm-6"></div>
             </div>
+           <!-- 
             <table class="table table-hover select-table">
               <thead>
                 <tr>
@@ -300,6 +301,7 @@ String id=request.getParameter("news-id");
                 </tr>
               </tbody>
             </table>
+             -->
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
                 <a class="btn btn-success" onclick="$(this).parents('form').submit()">            <%

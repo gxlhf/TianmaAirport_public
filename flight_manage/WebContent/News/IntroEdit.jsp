@@ -184,7 +184,7 @@ newsId=news.getNewsId();
               <div class="col-sm-2"></div>
               <div class="col-sm-6"></div>
             </div>
-
+<!-- 
           <table class="table table-hover select-table">
             <thead>
               <tr>
@@ -219,6 +219,7 @@ newsId=news.getNewsId();
               </tr>
             </tbody>
           </table>
+           -->
           <div></div>
           <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
