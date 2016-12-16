@@ -304,7 +304,7 @@ else
                 	if(output!=null)
                 	{
                 		if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                    		out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                    		out.println("<tr data-id='FlightNumber="+output.getFlightCourse().getFlightNumber()+"'&time="+output.getTime()+">");
                         	if(session.getAttribute("priv1")!=null){
                             	out.println("<td><span class='glyphicon glyphicon'></span></td>");
                             }else{
@@ -385,7 +385,7 @@ else
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
                 if(session.getAttribute("priv1")!=null)
-              	  out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-midify' class='btn btn-primary' href='"+basePath+"Flight/FlightInfoEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+              	  out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-midify' class='btn btn-primary' href='"+basePath+"Flight/FlightInfoEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href='"+basePath+"Flight/FlightInfoEdit.jsp'>新增</a></div></div>");
             }
             
             %>

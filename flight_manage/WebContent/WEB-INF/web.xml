@@ -49,6 +49,22 @@
     <url-pattern>/DepartureFlightSearch</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>SearchResource</servlet-name>
+    <servlet-class>com.servlet.facility.SearchResource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchResource</servlet-name>
+    <url-pattern>/SearchResource</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SearchFacility</servlet-name>
+    <servlet-class>com.servlet.facility.SearchFacility</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchFacility</servlet-name>
+    <url-pattern>/SearchFacility</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>PostTest</servlet-name>
     <servlet-class>com.servlet.PostTest</servlet-class>
   </servlet>
