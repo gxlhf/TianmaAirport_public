@@ -149,7 +149,7 @@ if(id!=null){
                 <li role="presentation">
                   <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
-                <li role="presentation" class="second-menu-cur">
+                <li role="presentation">
                   <a href="<%=basePath%>Public/News/NewsList.jsp?type=flightInformation">航班信息</a>
                 </li>
                 <li role="presentation">
@@ -187,11 +187,11 @@ if(id!=null){
               %>
               </a>
             </li>
-            <li class="active">最新消息</li>
+            <li class="active"><%=news[a].getTitle() %></li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <div class="page-header">
-            <h2 class="text-center">机场新闻</h2>
+            <h2 class="text-center"><%=news[a].getTitle() %></h2>
           </div>
           <div id="main-text">
           <% 

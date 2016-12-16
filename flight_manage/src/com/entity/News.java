@@ -9,6 +9,8 @@
  */
 package com.entity;
 
+import com.dao.AdminDao;
+
 public class News {
 	String title;
 	String time;
@@ -16,6 +18,7 @@ public class News {
 	String kind;
 	String attachment;
 	String publisher_id;
+	String publisher_name;
 	String newsId;
 	public News(String title, String time, String content, String kind, String attachment, String publisher_id,
 			String newsId) {
@@ -25,6 +28,9 @@ public class News {
 		this.kind = kind;
 		this.attachment = attachment;
 		this.publisher_id = publisher_id;
+		AdminDao adminDao = new AdminDao();
+		Admin[] publisher = adminDao.searchAdmin0(publisher_id);
+		this.publisher_name = publisher[0].getName();
 		this.newsId = newsId;
 	}
 	public String getTitle() {
@@ -62,6 +68,12 @@ public class News {
 	}
 	public void setPublisher_id(String publisher_id) {
 		this.publisher_id = publisher_id;
+	}
+	public String getPublisher_name() {
+		return publisher_name;
+	}
+	public void setPublisher_name(String publisher_name) {
+		this.publisher_name = publisher_name;
 	}
 	public String getNewsId() {
 		return newsId;

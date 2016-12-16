@@ -299,7 +299,7 @@ else
 			              	  out.println("<td></td>");
 			                }
 							out.println(" <td>"+(i+1)+"</td>");
-			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_id()+"</td> </tr>");
+			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
 						}
 					}
 				}else if(news==null){
@@ -315,7 +315,7 @@ else
 			              	  out.println("<td></td>");
 			                }
 							out.println(" <td>"+(i+1)+"</td>");
-			                out.println(" <td><a href='"+basePath+"Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_id()+"</td> </tr>");
+			                out.println(" <td><a href='"+basePath+"Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
 					}
 				}
 				}
