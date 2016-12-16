@@ -162,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <input type="text" class="form-control" name="key">
               </div>
-              <div class="btn-group col-sm-2" data-toggle="buttons">
+              <div class="btn-group col-sm-3" data-toggle="buttons">
                 <label class="btn btn-default col-sm-6 active">
                   <input type="radio" name="flight_type" value="departure" checked>离港
                 </label>
