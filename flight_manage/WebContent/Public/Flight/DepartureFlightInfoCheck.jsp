@@ -304,7 +304,7 @@ else
                 	if(output!=null)
                 	{
                 		if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                    		out.println("<tr data-id='FlightNumber="+output.getFlightCourse().getFlightNumber()+"'&time="+output.getTime()+">");
+                    		out.println("<tr data-id='FlightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"'>");
                         	if(session.getAttribute("priv1")!=null){
                             	out.println("<td><span class='glyphicon glyphicon'></span></td>");
                             }else{
@@ -342,7 +342,7 @@ else
             				out.println("</tr>");
                     	}
                     	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
-                    		out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                    		out.println("<tr data-id='FlightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"'>");
                         	if(session.getAttribute("priv1")!=null){
                             	out.println("<td><span class='glyphicon glyphicon'></span></td>");
                             }else{
