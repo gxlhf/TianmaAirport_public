@@ -279,7 +279,7 @@ else
                 <!-- <th>
                   <span class="glyphicon glyphicon-check th-check"></span>
                 </th> -->
-                <th>序号</th>
+                <!-- <th>序号</th> -->
                 <th>新闻标题</th>
                 <th>发布时间</th>
                 <th>发布人</th>
@@ -298,7 +298,7 @@ else
 			                }else{
 			              	  out.println("<td></td>");
 			                }
-							out.println(" <td>"+(i+1)+"</td>");
+							/* out.println(" <td>"+(i+1)+"</td>"); */
 			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
 						}
 					}
@@ -314,7 +314,7 @@ else
 			                }else{
 			              	  out.println("<td></td>");
 			                }
-							out.println(" <td>"+(i+1)+"</td>");
+							/* out.println(" <td>"+(i+1)+"</td>"); */
 			                out.println(" <td><a href='"+basePath+"Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
 					}
 				}
