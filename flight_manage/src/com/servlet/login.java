@@ -1,16 +1,19 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.OverlayLayout;
 import javax.servlet.http.*;
 
 import com.entity.Admin;
 import com.entity.Role;
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 import com.dao.*;
 import com.servlet.Regex;
 
@@ -48,8 +51,24 @@ public class login extends HttpServlet {
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		String result;
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String validateC=(String)request.getSession().getAttribute("validateCode");
+		String veryCode=request.getParameter("veryCode");
+		if(veryCode==null||"".equals(veryCode)){
+			result="验证码为空";
+			request.setAttribute("result", result);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+			return;
+		}else{
+			if(!validateC.equals(veryCode)){
+				result="验证码错误";
+				request.setAttribute("result", result);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+				return;
+			}
+		}
 		Regex regex=new Regex();
 		if(!regex.isValid(username)){
 			System.out.println("username not valid");
@@ -62,7 +81,6 @@ public class login extends HttpServlet {
 		HttpSession session = request.getSession();
 		LoginDao loginDao = new LoginDao();
 		Admin admin = loginDao.loginCheck(username, password);
-		String result;
 		/*if(username.equals("aaa") && password.equals("123")){
 		//	request.setAttribute("admin", admin);
 			request.getRequestDispatcher("/index.jsp").forward(request, response);

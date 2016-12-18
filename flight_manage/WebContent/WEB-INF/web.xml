@@ -8,6 +8,16 @@
     <servlet-name>login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+ 
+    <servlet>
+    <servlet-name>VerifyCode</servlet-name>
+    <servlet-class>com.servlet.VerifyCode</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VerifyCode</servlet-name>
+    <url-pattern>/VerifyCode</url-pattern>
+  </servlet-mapping>
+
   <servlet>
     <servlet-name>logout</servlet-name>
     <servlet-class>com.servlet.logout</servlet-class>

@@ -142,11 +142,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
               </div>
               <div class="form-group" id="captcha-group">
-                <input name="captcha" class="form-control" type="text" placeholder="验证码">
-                <img src="img/captcha.jpg">
+                <input name="veryCode" class="form-control" id="veryCode" type="text" placeholder="验证码">
+                <img id="imgObj" src="VerifyCode" onclick="changeImg()" />
               </div>
-              <button type="submit" class="btn btn-primary btn-block">登陆</button>
+              <button type="submit" class="btn btn-primary btn-block" >登陆</button>
             </form>
+            
+            <script type="text/javascript">
+ function changeImg(){
+    var imgSrc = $("#imgObj");
+    var src = imgSrc.attr("src");    
+    imgSrc.attr("src",chgUrl(src));    
+}    
+//时间戳    
+//为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳    
+function chgUrl(url){    
+    var timestamp = (new Date()).valueOf();
+    urlurl = url.substring(0,17);
+    if((url.indexOf("&")>=0)){
+        urlurl = url + "×tamp=" + timestamp;
+    }else{
+        urlurl = url + "?timestamp=" + timestamp;
+    }
+    return url;
+}    
+
+</script> 
+            
+            
+            
+            
+            
             
             <%
             if(request.getAttribute("result")!=null){
