@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
+ <%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -147,53 +147,217 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <a href="#">机场资源</a>
             </li>
-            <li class="active">新增</li>
+            <li class="active">
+            
+            <%
+                if(request.getParameter("rname")!=null)
+                    out.println("修改");
+                else
+                    out.println("新增");
+            %>
+            </li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
+          <%
+
+            String name = request.getParameter("rname");
+
+            if(name!=null){
+                
+               User user = new User();
+               AirportResource[] resourceModify = user.searchAirportResource(name, ""); 
+            
+                
+          %>
+          
+          <!--修改资源-->
+           <form class="form-horizontal" role="form"action = "<%=basePath%>ModifyResource" method = "post" data-toggle = "validator">
             <div class="form-group">
               <label for="resource-type" class="col-sm-2 control-label">资源分类：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="resource-type">
-                  <option>行李转盘</option>
-                  <option>登机门</option>
-                  <option>值机柜台</option>
+                <select class="form-control" name="resource-type"data-error="请选择资源分类*"  required>
+                  <option value="<%=resourceModify[0].getType() %>" ><%=resourceModify[0].getType() %></option>  
+				
+                
+                  <%
+                    if(!resourceModify[0].getType().equals("登机门"))
+                    {
+                  %> 
+                  <option value = "登机门">登机门</option>
+                <%
+                    }
+                %>
+                <%
+                    if(!resourceModify[0].getType().equals("值机柜台"))
+                    {
+                  %> 
+                  <option value = "值机柜台">值机柜台</option>
+                <%
+                    }
+                %>
+                <%
+                    if(!resourceModify[0].getType().equals("行李转盘"))
+                    {
+                  %> 
+                  <option value = "行李转盘">行李转盘</option>
+                <%
+                    }
+                %>
+                  
+                  
                 </select>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="resource-name" class="col-sm-2 control-label">资源名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="resource-name">
+                <input type="text" class="form-control" name="resource-name" data-error="请填写资源名称*"  value="<%=resourceModify[0].getName() %>"required>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="resource-site" class="col-sm-2 control-label">位置：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="resource-site">
+                <input type="text" class="form-control" name="resource-site" data-error="请填写位置*"  value="<%=resourceModify[0].getLocation() %>"required>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="resource-extra" class="col-sm-2 control-label">备注：</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="resource-extra"><%=resourceModify[0].getRemark()%></textarea>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+             </div>
+              <!--  
+              <div class="form-group">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-6"></div>
+              </div>
+              -->
+              <div class="col-sm-6 btn-modify">
+                <div class="btn-group btn-group-justified">
+                  <a class="btn btn-success"  id="btn-save">修改</a>
+                  <a class="btn btn-primary" href="#">取消</a>
+                </div>
+              </div>
+            
+          </form>
+          
+           <%
+            }
+            else{
+          %>
+          <form class="form-horizontal" role="form"action = "<%=basePath%>AddResource" method = "post" data-toggle = "validator">
+            <div class="form-group">
+              <label for="resource-type" class="col-sm-2 control-label">资源分类：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="resource-type"data-error="请选择资源分类*"  required>
+                  <option value = "行李转盘">行李转盘</option>
+                  <option value = "登机门">登机门</option>
+                  <option value = "值机柜台">值机柜台</option>
+                </select>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="resource-name" class="col-sm-2 control-label">资源名称：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="resource-name" data-error="请填写资源名称*"  required>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="resource-site" class="col-sm-2 control-label">位置：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="resource-site" data-error="请填写位置*"  required>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="resource-extra" class="col-sm-2 control-label">备注：</label>
               <div class="col-sm-6">
                 <textarea class="form-control" name="resource-extra"></textarea>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+             </div>
+              <!--  
               <div class="form-group">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-6"></div>
               </div>
+              -->
               <div class="col-sm-6 btn-modify">
                 <div class="btn-group btn-group-justified">
-                  <a class="btn btn-success" href="">新增</a>
-                  <a class="btn btn-primary" href="">取消</a>
+                  <a class="btn btn-success"  id="btn-save">新增</a>
+                  <a class="btn btn-primary" href="#">取消</a>
                 </div>
               </div>
-            </div>
+            
           </form>
+          <%
+            }
+          %>
         </div>
         <div id="backToTop-btn" onclick="scroll(0,0)">
           <span class="glyphicon glyphicon-chevron-up"></span>
         </div>
+        
+      <!-- 确认信息弹框开始 -->
+      <div id="ensureBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- <div class="modal-header"> -->
+              <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button> -->
+              <!-- <h4 class="modal-title" id="myModalLabel">确认需要保存的信息</h4> -->
+            <!-- </div> -->
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4>以下是即将保存的信息，请确认。<br></h4>
+              <strong class="text-danger">提交后将无法撤销</strong>
+
+              <hr>
+
+              <div class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">资源分类：</label>
+                  <div class="col-xs-9">
+                    <p id="resource-type-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">资源名称：</label>
+                  <div class="col-xs-9">
+                    <p id="resource-name-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">位置：</label>
+                  <div class="col-xs-9">
+                    <p id="resource-site-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">备注：</label>
+                  <div class="col-xs-9">
+                    <p id="resource-extra-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-primary">保存</button>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 确认信息弹框结束 -->
+        
       </div>
       <!-- 内容结束 -->
       <!-- 尾部开始 -->

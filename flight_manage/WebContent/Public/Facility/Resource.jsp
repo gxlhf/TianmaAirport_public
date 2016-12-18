@@ -14,6 +14,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
   </head><body>
+  
+  <%
+  	Integer modifyResult=(Integer)request.getAttribute("modifyResult");
+  	if(modifyResult!=null){
+  		if(modifyResult.equals(0)){
+			out.println("<script>alert('修改失败')</script>");
+  		}else if(modifyResult.equals(1)){
+	  		out.println("<script>alert('修改成功')</script>");
+  		}
+  	}
+  	
+  	Integer addResult=(Integer)request.getAttribute("addResult");
+  	if(addResult!=null){
+  		if(addResult.equals(0)){
+			out.println("<script>alert('新增失败')</script>");
+  		}else if(addResult.equals(1)){
+	  		out.println("<script>alert('新增成功')</script>");
+  		}
+  	}
+  	
+  	Integer deleteResult=(Integer)request.getAttribute("deleteResult");
+  	if(deleteResult!=null){
+  		if(deleteResult.equals(0)){
+			out.println("<script>alert('删除失败')</script>");
+  		}else if(deleteResult.equals(1)){
+	  		out.println("<script>alert('删除成功')</script>");
+  		}
+  	}
+  %>
+  
     <!-- 头部开始 -->
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
@@ -35,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <% 
             Admin admin=(Admin)session.getAttribute("admin");
 			if(admin!=null){
-        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='"+basePath+"EditMyInfo.jsp'>修改个人信息</a></li>");
+        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
         		out.println("<li><a class='text-danger' href='"+basePath+"logout'>退出</a></li>");
 			}else{
 				out.println("<li><a class='text-info' href='"+basePath+"login.jsp'>登陆</a></li>");
@@ -79,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	if(session.getAttribute("priv0")!=null)
             		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             	else
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='#'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             		
             %>
             
@@ -134,7 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   if(session.getAttribute("priv0")!=null)
                 	  out.println("<a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a>"); 
                   else
-                	  out.println("<a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a>");
+                	  out.println("<a href='#'>乘机指引</a>");
                   %>
                   <!-- <a href="#">机场资源</a> -->
                 </li>
@@ -153,7 +183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">机场资源</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form" action="<%=basePath%>SearchResource">
+          <form class="form-horizontal" role="form" action="<%=basePath%>SearchResource" method = "post">
             <div class="form-group">
               <label for="resource-name" class="col-sm-2 control-label">资源名称：</label>
               <div class="col-sm-6">
@@ -200,7 +230,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	  int i=1;
         	  AirportResource[] resourceInfos = (AirportResource[])request.getAttribute("resourceInfo");
         	  for (AirportResource output:resourceInfos) {
-                  out.println("<tr data-id='"+ output.getName() + "'>");
+                  out.println("<tr data-id='rname="+ output.getName() + "'>");
                   if(session.getAttribute("priv0")!=null){
                       out.println("<td><span class='glyphicon glyphicon'></span></td>");
                     }else{
@@ -229,7 +259,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	  AirportResource[] resourceInfos = user.returnAllAirportResource();
         	  int i=1;
         	  for (AirportResource output:resourceInfos) {
-                  out.println("<tr data-id='"+ output.getName() + "'>");
+                  out.println("<tr data-id='rname="+ output.getName() + "'>");
                   if(session.getAttribute("priv0")!=null){
                       out.println("<td><span class='glyphicon glyphicon'></span></td>");
                     }else{
@@ -249,7 +279,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              out.println("</tbody></table>");
              out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
             if(session.getAttribute("priv0")!=null){
-            out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"Facility/ResourceEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+            out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a  id='btn-modify' class='btn btn-primary' href='"+basePath+"Facility/ResourceEdit.jsp'>修改</a><a class='btn btn-danger' href='"+basePath+"ResourceDelete'>删除</a><a class='btn btn-success' href='"+basePath+"Facility/ResourceEdit.jsp'>新增</a></div></div>");
            }
          %>
           
@@ -279,7 +309,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
   
 
 </body></html>

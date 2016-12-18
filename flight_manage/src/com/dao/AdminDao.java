@@ -468,17 +468,17 @@ public class AdminDao {
     }
     public boolean addAirportResource(AirportResource airportResource)
     {//数据库操作：新增机场资源，形参为机场资源对象，返回值为布尔值
-    	if(airportResource.getType()=="登机门")
+    	if(airportResource.getType().equals("登机门"))
     	{
     	     sql = "INSERT INTO boardinggate (Bname,Blocation,Bremarks) " +
 		     "VALUES ('"+airportResource.getName()+"','"+airportResource.getLocation()+"','"+airportResource.getRemark()+"');";//SQL语句  
     	}
-    	else if(airportResource.getType()=="值机柜台")
+    	else if(airportResource.getType().equals("值机柜台"))
     	{
     		sql = "INSERT INTO checkincounter (Cname,Clocation,Cremarks) " +
     		"VALUES ('"+airportResource.getName()+"','"+airportResource.getLocation()+"','"+airportResource.getRemark()+"');";//SQL语句 
     	}
-    	else if(airportResource.getType()=="行李转盘")
+    	else if(airportResource.getType().equals("行李转盘"))
     	{
     		sql = "INSERT INTO luggagecarousel (Lname,Llocation,Lremarks) " +
     		"VALUES ('"+airportResource.getName()+"','"+airportResource.getLocation()+"','"+airportResource.getRemark()+"');";//SQL语句 
@@ -497,17 +497,17 @@ public class AdminDao {
     }
     public boolean modifyAirportResource(AirportResource airportResource)
     {//数据库操作：修改机场资源，形参为机场资源对象，返回值为布尔值
-    	if(airportResource.getType()=="登机门")
+    	if(airportResource.getType().equals("登机门"))
     	{
     	     sql = "UPDATE boardinggate set Blocation='"+airportResource.getLocation()+"',Bremarks='"+airportResource.getRemark()+"' " +
     	     		"WHERE boardinggate.Bname='"+airportResource.getName()+"'";//SQL语句  
     	}
-    	else if(airportResource.getType()=="值机柜台")
+    	else if(airportResource.getType().equals("值机柜台"))
     	{
     		sql = "UPDATE checkincounter set Clocation='"+airportResource.getLocation()+"',Cremarks='"+airportResource.getRemark()+"' " +
     				"WHERE checkincounter.Cname='"+airportResource.getName()+"'";//SQL语句
     	}
-    	else if(airportResource.getType()=="行李转盘")
+    	else if(airportResource.getType().equals("行李转盘"))
     	{
     		sql = "UPDATE luggagecarousel set Llocation='"+airportResource.getLocation()+"',Lremarks='"+airportResource.getRemark()+"' " +
     				"WHERE luggagecarousel.Lname='"+airportResource.getName()+"'";//SQL语句
@@ -527,15 +527,15 @@ public class AdminDao {
     }
     public boolean deleteAirportResource(AirportResource airportResource)
     {//数据库操作：删除机场资源，形参为机场资源对象，返回值为布尔值
-    	if(airportResource.getType()=="登机门")
+    	if(airportResource.getType().equals("登机门"))
     	{
     	     sql = "DELETE FROM boardinggate WHERE Bname='"+airportResource.getName()+"'";//SQL语句  
     	}
-    	else if(airportResource.getType()=="值机柜台")
+    	else if(airportResource.getType().equals("值机柜台"))
     	{
     		sql = "DELETE FROM checkincounter WHERE Cname='"+airportResource.getName()+"'";//SQL语句
     	}
-    	else if(airportResource.getType()=="行李转盘")
+    	else if(airportResource.getType().equals("行李转盘"))
     	{
     		sql = "DELETE FROM luggagecarousel WHERE Lname='"+airportResource.getName()+"'";//SQL语句
     	}

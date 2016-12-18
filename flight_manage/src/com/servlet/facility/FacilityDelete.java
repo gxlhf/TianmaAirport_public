@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.entity.*;
-import com.entity.User;
 
 /**
- * Servlet implementation class SearchFacility
+ * Servlet implementation class FacilityDelete
  */
-//@WebServlet("/SearchFacility")
-public class SearchFacility extends HttpServlet {
+//@WebServlet("/FacilityDelete")
+public class FacilityDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchFacility() {
+    public FacilityDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +29,25 @@ public class SearchFacility extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//processRequest(request, response);
+		request.setCharacterEncoding("UTF-8");
+		String name = request.getParameter("fname");
+		System.out.println(name);
+		
+		Admin admin=(Admin)request.getSession().getAttribute("admin");
+		User user = new User();
+		PropertyFacility[] facilityModifyInfo = user.searchPropertyFacility(name);
+		int result = admin.deletePropertyFacility(facilityModifyInfo[0]);
+		
+		if(result==-1){
+			request.getRequestDispatcher("error.jsp").forward(request, response);
+			return;
+		}else if(result==1){
+			request.setAttribute("deleteResult", result);
+			request.getRequestDispatcher("Public/Facility/Facility.jsp").forward(request, response);
+		}else {
+			request.setAttribute("deleteResult", result);
+			request.getRequestDispatcher("Public/Facility/Facility.jsp").forward(request,response);
+		}
 	}
 
 	/**
@@ -38,20 +55,7 @@ public class SearchFacility extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		processRequest(request, response);
+		
 	}
 
-	
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String name = request.getParameter("facility-name");
-		User user = new User();
-		
-		
-		PropertyFacility[] facilityInfo = user.searchPropertyFacility(name);	 
-			request.setAttribute("facilityInfo", facilityInfo);
-			request.getRequestDispatcher("Public/Facility/Facility.jsp").forward(request, response);
-		
-	}
-	
 }
