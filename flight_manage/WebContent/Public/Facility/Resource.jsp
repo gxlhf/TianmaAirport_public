@@ -198,7 +198,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                   <option value="3">行李转盘</option>
                   <option value="1">登机门</option>
-                  <option value ="2">值机柜台</option>
+                  <option value="2">值机柜台</option>
                   
                    
                 </select>
@@ -248,7 +248,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           else{
         	  out.println("<table class='table table-hover select-table'><thead> <tr>");
               if(session.getAttribute("priv0")!=null){
-                  out.println("<th><span class='glyphicon glyphicon th-check'></span></th>");
+                  out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
                 }else{
                   out.println("<th></th>");
                 }
@@ -276,23 +276,85 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              
           
             
-             out.println("</tbody></table>");
-             out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
-            if(session.getAttribute("priv0")!=null){
-            out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a  id='btn-modify' class='btn btn-primary' href='"+basePath+"Facility/ResourceEdit.jsp'>修改</a><a class='btn btn-danger' href='"+basePath+"ResourceDelete'>删除</a><a class='btn btn-success' href='"+basePath+"Facility/ResourceEdit.jsp'>新增</a></div></div>");
-           }
+          out.println("</tbody></table>");
+          out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+          if(session.getAttribute("priv0")!=null){
+            out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a  id='btn-modify' class='btn btn-primary' href='"+basePath+"Facility/ResourceEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"ResourceDelete'>删除</a><a class='btn btn-success' href='"+basePath+"Facility/ResourceEdit.jsp'>新增</a></div></div>");
+          }
          %>
-          
-              
-            
-
-
           
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
         <span class="glyphicon glyphicon-chevron-up"></span>
       </div>
+
+
+      <!-- 确认信息弹框开始 -->
+      <div id="ensureBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- <div class="modal-header"> -->
+              <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button> -->
+              <!-- <h4 class="modal-title" id="myModalLabel">确认需要保存的信息</h4> -->
+            <!-- </div> -->
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4>以下是即将保存的信息，请确认。<br></h4>
+              <strong class="text-danger">提交后将无法撤销</strong>
+
+              <hr>
+
+              <div class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">资源名称：</label>
+                  <div class="col-xs-9">
+                    <p id="resource-name-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">位置：</label>
+                  <div class="col-xs-9">
+                    <p id="resource-site-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">备注：</label>
+                  <div class="col-xs-9">
+                    <p id="resource-extra-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-danger">删除</button>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 确认信息弹框结束 -->
+
+
+      <!-- 报错弹框开始 -->
+      <div id="errorBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h5 class="modal-title" id="myModalLabel">提示</h5>
+            </div>
+            <div class="modal-body">
+              <p class="text-center">请选择机场资源</p>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 报错弹框结束 -->
     </div>
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
