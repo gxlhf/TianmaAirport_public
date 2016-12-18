@@ -218,6 +218,7 @@ String id=request.getParameter("news-id");
 					News[] news=(News[])session.getAttribute("news");
 					int a=0;
 					for(int i=0;i<news.length;i++){
+						if(news[i]!=null)
 						if(news[i].getNewsId().equals(id))
 							a=i;
 					}
