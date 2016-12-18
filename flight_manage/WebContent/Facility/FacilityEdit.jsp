@@ -315,7 +315,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <textarea class="form-control" name="facility-extra" ></textarea>
               </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
               <!--
               <div class="form-group">
@@ -399,7 +398,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!-- /.modal-dialog -->
       </div>
       <!-- 确认信息弹框结束 -->
-        
+        </div>
       </div>
       <!-- 内容结束 -->
       <!-- 尾部开始 -->
@@ -413,11 +412,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!-- 尾部结束 -->
       <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
       <script src="<%=basePath%>/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-      <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
-    </div>
-  
+      <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
 
 </body></html>
