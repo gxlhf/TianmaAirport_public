@@ -12,6 +12,7 @@ News[] news=(News[])request.getSession().getAttribute("news");
 if(id!=null){
 	if(news!=null){
 		for(int i=0;i<news.length;i++){
+		if(news[i]!=null)
 		  if(news[i].getNewsId().equals(id))
 			  a=i;
 		}
