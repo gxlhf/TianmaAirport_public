@@ -49,7 +49,7 @@ else
             <% 
             Admin admin=(Admin)session.getAttribute("admin");
 			if(admin!=null){
-        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
+        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='"+basePath+"EditMyInfo.jsp'>修改个人信息</a></li>");
         		out.println("<li><a class='text-danger' href='"+basePath+"logout'>退出</a></li>");
 			}else{
 				out.println("<li><a class='text-info' href='"+basePath+"login.jsp'>登陆</a></li>");
@@ -304,7 +304,7 @@ else
                 	if(output!=null)
                 	{
                 		if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                    		out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                    		out.println("<tr data-id='FlightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"'>");
                         	if(session.getAttribute("priv1")!=null){
                             	out.println("<td><span class='glyphicon glyphicon'></span></td>");
                             }else{
@@ -342,7 +342,7 @@ else
             				out.println("</tr>");
                     	}
                     	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
-                    		out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
+                    		out.println("<tr data-id='FlightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"'>");
                         	if(session.getAttribute("priv1")!=null){
                             	out.println("<td><span class='glyphicon glyphicon'></span></td>");
                             }else{
@@ -385,7 +385,7 @@ else
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
                 if(session.getAttribute("priv1")!=null)
-              	  out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-midify' class='btn btn-primary' href='"+basePath+"Flight/FlightInfoEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+              	  out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"Flight/FlightInfoEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href='"+basePath+"Flight/FlightInfoEdit.jsp'>新增</a></div></div>");
             }
             
             %>

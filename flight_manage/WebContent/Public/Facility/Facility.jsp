@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <% 
             Admin admin=(Admin)session.getAttribute("admin");
 			if(admin!=null){
-        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
+        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='"+basePath+"EditMyInfo.jsp'>修改个人信息</a></li>");
         		out.println("<li><a class='text-danger' href='"+basePath+"logout'>退出</a></li>");
 			}else{
 				out.println("<li><a class='text-info' href='"+basePath+"login.jsp'>登陆</a></li>");
@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
+                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
                 %>
                 
               </ul>
@@ -154,7 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">物业设施</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form">
+          <form class="form-horizontal" role="form" action = "<%=basePath%>SearchFacility" >
             <div class="form-group">
               <label for="facility-name" class="col-sm-2 control-label">设施名称：</label>
               <div class="col-sm-6">
@@ -168,130 +168,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
             </div>
           </form>
-          <table class="table table-hover select-table">
-            <thead>
-              <tr>
-              <%
-              if(session.getAttribute("priv0")!=null){
-            	  out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
-              }else{
-            	  out.println("<th></th>");
-              }
-              %>
-                <!-- <th>
-                  <span class="glyphicon glyphicon-check th-check"></span>
-                </th> -->
-                <th>序号</th>
-                <th>设施名称</th>
-                <th>位置</th>
-                <th>备注</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr data-id="10001">
-                <%
+          
+         <%
+         out.println("<table class='table table-hover select-table'><thead> <tr>");
+         if(session.getAttribute("priv0")!=null){
+                  out.println("<th><span class='glyphicon glyphicon th-check'></span></th>");
+         }else{
+                  out.println("<th></th>");
+         }
+         out.println("<th>设施名称</th><th>设施分类</th><th>联系电话</th> <th>位置</th> <th>备注</th></tr></thead> <tbody>");
+
+         if (request.getAttribute("facilityInfo")!=null ) {
+             PropertyFacility[]facilityInfos = (PropertyFacility[])request.getAttribute("facilityInfo");
+             int i=1;
+
+             for(PropertyFacility output:facilityInfos)
+             {
+                out.println("<tr data-id='"+ output.getName() + "'>");
                 if(session.getAttribute("priv0")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
+                  out.println("<td><span class='glyphicon glyphicon'></span></td>");
                 }else{
-              	  out.println("<td></td>");
+                  out.println("<td></td>");
                 }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>1</td>
-                <td>邮局01</td>
-                <td>B1出口</td>
-                <td>主要负责用户管理，权限分配等工作</td>
-              </tr>
-              <tr data-id="10002">
-                <%
-                if(session.getAttribute("priv0")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-                	  out.println("<td></td>");
-                  }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>2</td>
-                <td>航班信息管理员</td>
-                <td>1</td>
-                <td>主要负责管理航班</td>
-              </tr>
-              <tr data-id="10003">
-                <%
-                if(session.getAttribute("priv0")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-                	  out.println("<td></td>");
-                  }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>3</td>
-                <td>机场信息管理员</td>
-                <td>1</td>
-                <td>主要负责管理机场设施</td>
-              </tr>
-              <tr data-id="10004">
-                <%
-                if(session.getAttribute("priv0")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-                	  out.println("<td></td>");
-                  }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>4</td>
-                <td>新闻发布员</td>
-                <td>1</td>
-                <td>主要负责管理新闻</td>
-              </tr>
-              <tr data-id="10003">
-                <%
-                if(session.getAttribute("priv0")!=null){
-                	out.println("<td><span class='glyphicon glyphicon-check'></span></td>");
-                }else{
-                	  out.println("<td></td>");
-                  }
-                %>
-                <!-- <td>
-                  <span class="glyphicon glyphicon-check"></span>
-                </td> -->
-                <td>...</td>
-                <td>李静</td>
-                <td>1</td>
-                <td>女</td>
-              </tr>
-            </tbody>
-          </table>
-          <div>
-            <ul class="pager">
-              <li class="previous">
-                <a href="#">← 上一页</a>
-              </li>
-              <li class="next">
-                <a href="#">下一页 →</a>
-              </li>
-            </ul>
-          </div>
-          <%
-          if(session.getAttribute("priv0")!=null){
-        	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"Facility/FacilityEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+                /* out.println("<td>"+ i +"</td>"); */
+                out.println("<td>" + output.getName() + "</td>");
+                out.println("<td>" + output.getType() + "</td>");
+                out.println("<td>" + output.getPhone() + "</td>");
+                out.println("<td>" + output.getLocation() + "</td>");
+                if(output.getRemark()==null) 	
+                	out.println("<td></td></tr>");
+                else
+                	out.println("<td>" + output.getRemark() + "</td></tr>");      
+                i++;
+             }
+         }
+
+         else{
+              User user = new User();
+              PropertyFacility[]facilityInfos = user.returnAllPropertyFacility();
+              int i=1;
+
+              for(PropertyFacility output:facilityInfos)
+              {
+                 out.println("<tr data-id='"+ output.getName() + "'>");
+                 if(session.getAttribute("priv0")!=null){
+                   out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                 }else{
+                   out.println("<td></td>");
+                 }
+                 /* out.println("<td>"+ i +"</td>"); */
+                 out.println("<td>" + output.getName() + "</td>");
+                 out.println("<td>" + output.getType() + "</td>");
+                 out.println("<td>" + output.getPhone() + "</td>");
+                 out.println("<td>" + output.getLocation() + "</td>");
+                 if(output.getRemark()==null) 	
+                 	out.println("<td></td></tr>");
+                 else
+                 	out.println("<td>" + output.getRemark() + "</td></tr>"); 
+                 i++;
+              }
+       }
+
+
+       out.println("</tbody></table>");
+             out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+
+       if(session.getAttribute("priv0")!=null){
+            out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"Facility/FacilityEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
           }
-          %>
-          <%-- <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="<%=basePath%>Facility/FacilityEdit.jsp">修改</a>
-              <a class="btn btn-danger" href="">删除</a>
-              <a class="btn btn-success" href="">新增</a>
-            </div>
-          </div> --%>
+ %>
+          
+         
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">

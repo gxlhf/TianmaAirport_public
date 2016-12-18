@@ -46,7 +46,7 @@ String id=request.getParameter("news-id");
             <% 
             Admin admin=(Admin)session.getAttribute("admin");
 			if(admin!=null){
-        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
+        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='"+basePath+"EditMyInfo.jsp'>修改个人信息</a></li>");
         		out.println("<li><a class='text-danger' href='"+basePath+"logout'>退出</a></li>");
 			}else{
 				out.println("<li><a class='text-info' href='"+basePath+"login.jsp'>登陆</a></li>");
@@ -182,10 +182,11 @@ String id=request.getParameter("news-id");
             <li>
               <a href="<%=basePath %>Public/News/Intro.jsp">新闻中心</a>
             </li>
-            <li>
-              <a href="<%=basePath %>Public/News/NewsList.jsp?type=<%=type %>">
+            
               <% 
               	if(type!=null){
+                  out.print("<li><a href=" + basePath + "Public/News/NewsList.jsp?type=" + type + ">");
+
               		if(type.equals("flightInformation")){
               			out.print("航班信息");
               		}
@@ -193,7 +194,9 @@ String id=request.getParameter("news-id");
               			out.print("机场资源");
               		}
               		else{
-              			out.print("物业资源");}
+              			out.print("物业资源");
+                  }
+                  out.print("</a></li>");
               	}
               %>
               </a>
@@ -247,18 +250,15 @@ String id=request.getParameter("news-id");
          <%  
          if(type==null){
             out.println("<div class='form-group'>"
-              +"<label for='user-sex' class='col-sm-2 control-label'>新闻类别：</label>"
-			  +"<div class='btn-group col-sm-6' data-toggle='buttons'>"
-              +"<label class='btn btn-default col-xs-3'>"
-              +"    <input type='radio' name='type' value='机场介绍' data-error='请选择类别*' autocomplete='off' required>机场介绍"
-              +" </label>"
-              +" <label class='btn btn-default col-xs-3'>"
+              +"<label for='type' class='col-sm-2 control-label'>新闻类别：</label>"
+			        +"<div class='btn-group col-sm-6' data-toggle='buttons'>"
+              +" <label class='btn btn-default col-xs-4'>"
               +"   <input type='radio' name='type' value='航班信息' data-error='请选择类别*' autocomplete='off' required>航班信息"
               +" </label>"
-              +"<label class='btn btn-default col-xs-3'>"
+              +"<label class='btn btn-default col-xs-4'>"
               +"   <input type='radio' name='type' value='机场资源' data-error='请选择类别*' autocomplete='off' required>机场资源"
               +"</label>"
-              +"  <label class='btn btn-default col-xs-3'>"
+              +"  <label class='btn btn-default col-xs-4'>"
               +" <input type='radio' name='type' value='物业资源' data-error='请选择类别*' autocomplete='off' required>物业资源"
               +"</label>"
               +"</div> <div class='help-block with-errors'>*</div>"
@@ -272,7 +272,7 @@ String id=request.getParameter("news-id");
          	    	out.println("<input type='text' style='display:none' name='type' value='物业资源' >");
          	}
             %>
-              <div class="form-group">
+            <div class="form-group">
               <label for="news-context" class="col-sm-2 control-label">新闻id：</label>
               <div class="col-sm-6">
                  <input type='text' class='form-control' name='id'  data-error='请输入id*' autocomplete='off' value="<%if(id!=null&&!id.equals("null")) out.print(id); %>" required>
@@ -282,7 +282,7 @@ String id=request.getParameter("news-id");
             <div class="form-group">
               <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="news-context" data-error="请填写正文*"  required><%=content %></textarea>
+                <textarea rows="20" class="form-control" name="news-context" data-error="请填写正文*"  required><%=content %></textarea>
               </div>
               <div class="help-block with-errors">*</div>
             </div>
@@ -328,12 +328,14 @@ String id=request.getParameter("news-id");
              -->
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
-                <a class="btn btn-success" onclick="$(this).parents('form').submit()">            <%
-            if(todo==null){
-            	out.print("修改");
-            }else
-            	out.print("新增");
-            %></a>
+                <a id="btn-save" class="btn btn-success">            
+                <%
+                  if(todo==null){
+                  	out.print("修改");
+                  }else
+                  	out.print("新增");
+                %>
+                </a>
                 <a class="btn btn-primary" href="">取消</a>
               </div>
             </div>
@@ -343,8 +345,58 @@ String id=request.getParameter("news-id");
       <div id="backToTop-btn" onclick="scroll(0,0)">
         <span class="glyphicon glyphicon-chevron-up"></span>
       </div>
+
+
+      <!-- 确认信息弹框开始 -->
+      <div id="ensureBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- <div class="modal-header"> -->
+              <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button> -->
+              <!-- <h4 class="modal-title" id="myModalLabel">确认需要保存的信息</h4> -->
+            <!-- </div> -->
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4>以下是即将保存的信息，请确认。<br></h4>
+              <strong class="text-danger">提交后将无法撤销</strong>
+
+              <hr>
+
+              <div class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">新闻标题：</label>
+                  <div class="col-xs-9">
+                    <p id="news-title-ensure" class="form-control-static">321</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">新闻类别：</label>
+                  <div class="col-xs-9">
+                    <p id="type-ensure" class="form-control-static">321</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">新闻正文：</label>
+                  <div class="col-xs-9">
+                    <p id="news-context-ensure" class="form-control-static">123</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-primary">保存</button>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 确认信息弹框结束 -->
+
     </div>
     <!-- 内容结束 -->
+    
     <!-- 尾部开始 -->
     <footer class="container-fluid">
       <p class="text-center">
@@ -360,7 +412,7 @@ String id=request.getParameter("news-id");
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
   
 
 </body></html>

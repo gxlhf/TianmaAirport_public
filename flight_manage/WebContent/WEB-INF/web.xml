@@ -17,6 +17,14 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>EditMyInfo</servlet-name>
+    <servlet-class>com.servlet.EditMyInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditMyInfo</servlet-name>
+    <url-pattern>/EditMyInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>PassengerGuide</servlet-name>
     <servlet-class>com.servlet.PassengerGuide</servlet-class>
   </servlet>
@@ -39,6 +47,22 @@
   <servlet-mapping>
     <servlet-name>DepartureFlightSearch</servlet-name>
     <url-pattern>/DepartureFlightSearch</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SearchResource</servlet-name>
+    <servlet-class>com.servlet.facility.SearchResource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchResource</servlet-name>
+    <url-pattern>/SearchResource</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SearchFacility</servlet-name>
+    <servlet-class>com.servlet.facility.SearchFacility</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchFacility</servlet-name>
+    <url-pattern>/SearchFacility</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>PostTest</servlet-name>
@@ -154,7 +178,7 @@
     <filter-name>PrivFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-    <filter>
+  <filter>
     <description></description>
     <display-name>logFilter</display-name>
     <filter-name>logFilter</filter-name>
@@ -164,5 +188,4 @@
     <filter-name>logFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
 </web-app>

@@ -43,7 +43,7 @@ ul {
 .detail-box > div:first-child {
 	padding: 22px 0px;
 	font-size: 20px;
-    vertical-align: middle;
+	vertical-align: middle;
 }
 .detail-box > div > h6 {
 	display: inline-block;
@@ -70,6 +70,12 @@ ul {
 	}
 	.arrival > div:first-child {
 		width: 99%;
+	}
+}
+
+@media (max-width: 768px) {
+	.btn-group.col-sm-3 {
+		margin-top: 15px;
 	}
 }
 
