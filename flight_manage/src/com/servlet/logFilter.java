@@ -60,7 +60,7 @@ public class logFilter implements Filter {
 		String ip=getRemortIP(req);
 		String action=req.getServletPath();
 		
-		if(action.endsWith("js")||action.endsWith("css")||action.endsWith("jpg")||action.endsWith("png")||action.endsWith("woff")||action.endsWith("gif")){
+		if(action.endsWith("js")||action.endsWith("css")||action.endsWith("jpg")||action.endsWith("png")||action.endsWith("woff")||action.endsWith("gif")||action.endsWith("ico")){
 
 		}else{
 			String userId="";
