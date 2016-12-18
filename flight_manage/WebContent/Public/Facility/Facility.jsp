@@ -202,7 +202,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <%
          out.println("<table class='table table-hover select-table'><thead> <tr>");
          if(session.getAttribute("priv0")!=null){
-                  out.println("<th><span class='glyphicon glyphicon th-check'></span></th>");
+                  out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
          }else{
                   out.println("<th></th>");
          }
@@ -216,7 +216,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              {
                 out.println("<tr data-id='fname="+ output.getName() + "'>");
                 if(session.getAttribute("priv0")!=null){
-                  out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                  out.println("<td><span class='glyphicon'></span></td>");
                 }else{
                   out.println("<td></td>");
                 }

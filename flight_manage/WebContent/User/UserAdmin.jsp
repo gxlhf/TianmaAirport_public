@@ -260,7 +260,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	for(Admin output:adminInfos)
             	{
             		out.println("<tr data-id='empno="+output.getEmpno()+"'>");
-            		out.println("<td><span class='glyphicon glyphicon'></span></td>");
+            		out.println("<td><span class='glyphicon'></span></td>");
             		out.println("<td>"+output.getEmpno()+"</td>");
             		out.println("<td>"+output.getName()+"</td>");
             		
