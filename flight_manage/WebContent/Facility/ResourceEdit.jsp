@@ -171,11 +171,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           %>
           
           <!--修改资源-->
-           <form class="form-horizontal" role="form"action = "<%=basePath%>ModifyResource" method = "post" data-toggle = "validator">
+           <form class="form-horizontal" role="form" action="<%=basePath%>ModifyResource" method="post" data-toggle="validator">
             <div class="form-group">
               <label for="resource-type" class="col-sm-2 control-label">资源分类：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="resource-type"data-error="请选择资源分类*"  required>
+                <select class="form-control" name="resource-type" data-error="请选择资源分类*"  required>
                   <option value="<%=resourceModify[0].getType() %>" ><%=resourceModify[0].getType() %></option>  
 				
                 
@@ -249,11 +249,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
             else{
           %>
-          <form class="form-horizontal" role="form"action = "<%=basePath%>AddResource" method = "post" data-toggle = "validator">
+          <form class="form-horizontal" role="form" action = "<%=basePath%>AddResource" method = "post" data-toggle = "validator">
             <div class="form-group">
               <label for="resource-type" class="col-sm-2 control-label">资源分类：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="resource-type"data-error="请选择资源分类*"  required>
+                <select class="form-control" name="resource-type" data-error="请选择资源分类*"  required>
                   <option value = "行李转盘">行李转盘</option>
                   <option value = "登机门">登机门</option>
                   <option value = "值机柜台">值机柜台</option>
@@ -280,7 +280,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <textarea class="form-control" name="resource-extra"></textarea>
               </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
              </div>
               <!--  
               <div class="form-group">
@@ -359,6 +358,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!-- 确认信息弹框结束 -->
         
       </div>
+      </div>
       <!-- 内容结束 -->
       <!-- 尾部开始 -->
       <footer class="container-fluid">
@@ -371,11 +371,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!-- 尾部结束 -->
       <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
       <script src="<%=basePath%>/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-      <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
-    </div>
+      <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
   
 
 </body></html>
