@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <% 
             Admin admin=(Admin)session.getAttribute("admin");
 			if(admin!=null){
-        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
+        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='"+basePath+"EditMyInfo.jsp'>修改个人信息</a></li>");
         		out.println("<li><a class='text-danger' href='"+basePath+"logout'>退出</a></li>");
 			}else{
 				out.println("<li><a class='text-info' href='"+basePath+"login.jsp'>登陆</a></li>");
@@ -225,7 +225,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   out.println("<th></th>");
                 }
 
-               out.println("<th>序号</th><th>资源名称</th><th>位置</th> <th>备注</th></tr> </thead> <tbody>");
+               out.println("<th>资源名称</th><th>位置</th> <th>备注</th></tr> </thead> <tbody>");
         	  
         	  int i=1;
         	  AirportResource[] resourceInfos = (AirportResource[])request.getAttribute("resourceInfo");
@@ -236,7 +236,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }else{
                       out.println("<td></td>");
                     }
-                    out.println("<td>"+ i +"</td>");
+                    /* out.println("<td>"+ i +"</td>"); */
                     out.println("<td>" + output.getName() + "</td>");
                     out.println("<td>" + output.getLocation() + "</td>");
                     out.println("<td>" + output.getRemark() + "</td></tr>");
@@ -253,7 +253,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   out.println("<th></th>");
                 }
 
-               out.println("<th>序号</th><th>资源名称</th><th>位置</th> <th>备注</th></tr> </thead> <tbody>");
+               out.println("<th>资源名称</th><th>位置</th> <th>备注</th></tr> </thead> <tbody>");
         	  
         	  User user = new User();
         	  AirportResource[] resourceInfos = user.returnAllAirportResource();
@@ -265,7 +265,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }else{
                       out.println("<td></td>");
                     }
-                    out.println("<td>"+ i +"</td>");
+                    /* out.println("<td>"+ i +"</td>"); */
                     out.println("<td>" + output.getName() + "</td>");
                     out.println("<td>" + output.getLocation() + "</td>");
                     out.println("<td>" + output.getRemark() + "</td></tr>");
@@ -300,8 +300,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- </div> -->
             <div class="modal-body">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-              <h4>以下是即将保存的信息，请确认。<br></h4>
-              <strong class="text-danger">提交后将无法撤销</strong>
+              <h4>以下是即将删除的信息，请确认。<br></h4>
+              <strong class="text-danger">删除后将无法撤销！</strong>
 
               <hr>
 

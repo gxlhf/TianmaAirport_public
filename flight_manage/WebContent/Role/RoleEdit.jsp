@@ -457,7 +457,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
                 <a data-toggle="modal" id="btn-save" class="btn btn-success">修改</a><!--  data-target="#ensureBox" -->
-                <a id="btn-cancel" class="btn btn-primary" href="#">取消</a>
+                <a id="btn-cancel" class="btn btn-primary" href="<%=basePath%>Role/RoleAdmin.jsp">取消</a>
               </div>
             </div>
           </form>
@@ -596,7 +596,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
                 <a data-toggle="modal" id="btn-save" class="btn btn-success">新增</a><!--  data-target="#ensureBox" -->
-                <a id="btn-cancel" class="btn btn-primary" href="#">取消</a>
+                <a id="btn-cancel" class="btn btn-primary" href="<%=basePath%>Role/RoleAdmin.jsp">取消</a>
               </div>
             </div>
           </form>

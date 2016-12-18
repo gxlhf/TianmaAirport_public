@@ -130,10 +130,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <li role="presentation" class="second-menu-cur">
-                  <a href="#">机场资源</a>
+                  <a href="<%=basePath%>Public/Facility/Resource.jsp">机场资源</a>
                 </li>
                 <li role="presentation">
-                  <a href="#">物业设施</a>
+                  <a href="<%=basePath%>Public/Facility/Facility.jsp">物业设施</a>
                 </li>
               </ul>
             </li>
@@ -145,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#">机场设施管理</a>
             </li>
             <li>
-              <a href="#">机场资源</a>
+              <a href="<%=basePath%>Public/Facility/Resource.jsp">机场资源</a>
             </li>
             <li class="active">
             
@@ -212,7 +212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="resource-name" class="col-sm-2 control-label">资源名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="resource-name" data-error="请填写资源名称*"  value="<%=resourceModify[0].getName() %>"required>
+                <input type="text" class="form-control" name="resource-name" data-error="请填写资源名称*"  value="<%=resourceModify[0].getName() %>" required readonly>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -226,7 +226,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="resource-extra" class="col-sm-2 control-label">备注：</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="resource-extra"><%=resourceModify[0].getRemark()%></textarea>
+                <textarea class="form-control" name="resource-extra"><%
+                if(resourceModify[0].getRemark()!=null)
+                	out.println(resourceModify[0].getRemark());
+                %></textarea>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
              </div>
@@ -239,7 +242,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6 btn-modify">
                 <div class="btn-group btn-group-justified">
                   <a class="btn btn-success"  id="btn-save">修改</a>
-                  <a class="btn btn-primary" href="#">取消</a>
+                  <a class="btn btn-primary" href="<%=basePath%>Public/Facility/Resource.jsp">取消</a>
                 </div>
               </div>
             
@@ -290,7 +293,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6 btn-modify">
                 <div class="btn-group btn-group-justified">
                   <a class="btn btn-success"  id="btn-save">新增</a>
-                  <a class="btn btn-primary" href="#">取消</a>
+                  <a class="btn btn-primary" href="<%=basePath%>Public/Facility/Resource.jsp">取消</a>
                 </div>
               </div>
             

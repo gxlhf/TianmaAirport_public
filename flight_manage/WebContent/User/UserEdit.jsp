@@ -352,7 +352,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
                 <a class="btn btn-success" id="btn-save">修改</a>
-                <a class="btn btn-primary" href="#">取消</a>
+                <a class="btn btn-primary" href="<%=basePath%>User/UserAdmin.jsp">取消</a>
               </div>
             </div>
           </form>
@@ -485,7 +485,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
                 <a class="btn btn-success" id="btn-save">新增</a>
-                <a class="btn btn-primary" href="#">取消</a>
+                <a class="btn btn-primary" href="<%=basePath%>User/UserAdmin.jsp">取消</a>
               </div>
             </div>
           </form>
