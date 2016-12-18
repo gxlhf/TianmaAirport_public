@@ -14,6 +14,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
   </head><body>
+  
+  <%
+  	Integer modifyResult=(Integer)request.getAttribute("modifyResult");
+  	if(modifyResult!=null){
+  		if(modifyResult.equals(0)){
+			out.println("<script>alert('修改失败')</script>");
+  		}else if(modifyResult.equals(1)){
+	  		out.println("<script>alert('修改成功')</script>");
+  		}
+  	}
+  	
+  	Integer addResult=(Integer)request.getAttribute("addResult");
+  	if(addResult!=null){
+  		if(addResult.equals(0)){
+			out.println("<script>alert('新增失败')</script>");
+  		}else if(addResult.equals(1)){
+	  		out.println("<script>alert('新增成功')</script>");
+  		}
+  	}
+  	
+  	Integer deleteResult=(Integer)request.getAttribute("deleteResult");
+  	if(deleteResult!=null){
+  		if(deleteResult.equals(0)){
+			out.println("<script>alert('删除失败')</script>");
+  		}else if(deleteResult.equals(1)){
+	  		out.println("<script>alert('删除成功')</script>");
+  		}
+  	}
+  %>
+  
     <!-- 头部开始 -->
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
@@ -35,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <% 
             Admin admin=(Admin)session.getAttribute("admin");
 			if(admin!=null){
-        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='"+basePath+"EditMyInfo.jsp'>修改个人信息</a></li>");
+        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
         		out.println("<li><a class='text-danger' href='"+basePath+"logout'>退出</a></li>");
 			}else{
 				out.println("<li><a class='text-info' href='"+basePath+"login.jsp'>登陆</a></li>");
@@ -79,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	if(session.getAttribute("priv0")!=null)
             		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>机场设施管理</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             	else
-            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
+            		out.println("<li class='dropdown'><a href='#' class='dropdown-toggle curmenu' data-toggle='dropdown' data-hover='dropdown'>乘机指南</a><ul class='dropdown-menu' role='menu'><li class='curmenu'><a href='#'>乘机指引</a></li><li><a href='"+basePath+"Public/Facility/Facility.jsp'>物业设施</a></li></ul></li>");
             		
             %>
             
@@ -134,7 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   if(session.getAttribute("priv0")!=null)
                 	  out.println("<a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a>"); 
                   else
-                	  out.println("<a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a>");
+                	  out.println("<a href='#'>乘机指引</a>");
                   %>
                   <!-- <a href="#">机场资源</a> -->
                 </li>
@@ -153,7 +183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">机场资源</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form" action="<%=basePath%>SearchResource">
+          <form class="form-horizontal" role="form" action="<%=basePath%>SearchResource" method = "post">
             <div class="form-group">
               <label for="resource-name" class="col-sm-2 control-label">资源名称：</label>
               <div class="col-sm-6">
@@ -168,7 +198,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                   <option value="3">行李转盘</option>
                   <option value="1">登机门</option>
-                  <option value ="2">值机柜台</option>
+                  <option value="2">值机柜台</option>
                   
                    
                 </select>
@@ -200,7 +230,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	  int i=1;
         	  AirportResource[] resourceInfos = (AirportResource[])request.getAttribute("resourceInfo");
         	  for (AirportResource output:resourceInfos) {
-                  out.println("<tr data-id='"+ output.getName() + "'>");
+                  out.println("<tr data-id='rname="+ output.getName() + "'>");
                   if(session.getAttribute("priv0")!=null){
                       out.println("<td><span class='glyphicon glyphicon'></span></td>");
                     }else{
@@ -218,7 +248,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           else{
         	  out.println("<table class='table table-hover select-table'><thead> <tr>");
               if(session.getAttribute("priv0")!=null){
-                  out.println("<th><span class='glyphicon glyphicon th-check'></span></th>");
+                  out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
                 }else{
                   out.println("<th></th>");
                 }
@@ -229,7 +259,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	  AirportResource[] resourceInfos = user.returnAllAirportResource();
         	  int i=1;
         	  for (AirportResource output:resourceInfos) {
-                  out.println("<tr data-id='"+ output.getName() + "'>");
+                  out.println("<tr data-id='rname="+ output.getName() + "'>");
                   if(session.getAttribute("priv0")!=null){
                       out.println("<td><span class='glyphicon glyphicon'></span></td>");
                     }else{
@@ -246,23 +276,85 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              
           
             
-             out.println("</tbody></table>");
-             out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
-            if(session.getAttribute("priv0")!=null){
-            out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"Facility/ResourceEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
-           }
+          out.println("</tbody></table>");
+          out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+          if(session.getAttribute("priv0")!=null){
+            out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a  id='btn-modify' class='btn btn-primary' href='"+basePath+"Facility/ResourceEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"ResourceDelete'>删除</a><a class='btn btn-success' href='"+basePath+"Facility/ResourceEdit.jsp'>新增</a></div></div>");
+          }
          %>
-          
-              
-            
-
-
           
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
         <span class="glyphicon glyphicon-chevron-up"></span>
       </div>
+
+
+      <!-- 确认信息弹框开始 -->
+      <div id="ensureBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- <div class="modal-header"> -->
+              <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button> -->
+              <!-- <h4 class="modal-title" id="myModalLabel">确认需要保存的信息</h4> -->
+            <!-- </div> -->
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4>以下是即将保存的信息，请确认。<br></h4>
+              <strong class="text-danger">提交后将无法撤销</strong>
+
+              <hr>
+
+              <div class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">资源名称：</label>
+                  <div class="col-xs-9">
+                    <p id="resource-name-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">位置：</label>
+                  <div class="col-xs-9">
+                    <p id="resource-site-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">备注：</label>
+                  <div class="col-xs-9">
+                    <p id="resource-extra-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-danger">删除</button>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 确认信息弹框结束 -->
+
+
+      <!-- 报错弹框开始 -->
+      <div id="errorBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h5 class="modal-title" id="myModalLabel">提示</h5>
+            </div>
+            <div class="modal-body">
+              <p class="text-center">请选择机场资源</p>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 报错弹框结束 -->
     </div>
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
@@ -279,7 +371,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
   
 
 </body></html>
