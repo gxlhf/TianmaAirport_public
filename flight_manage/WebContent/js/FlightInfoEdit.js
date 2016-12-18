@@ -3,13 +3,12 @@ $(function () {
         console.log($(this));
         $(this).val($(this).val().toUpperCase());
     });
-    // $('#inp-flight-counter').tokenfield({
-    //   autocomplete: {
-    //     source: ['red','blue','green','yellow','violet','brown','purple','black','white'],
-    //     delay: 100
-    //   },
-    //   showAutocompleteOnFocus: true
-    // });
+    $('#inp-flight-counter').tokenfield({
+        autocomplete: {
+            source: ['red','blue','green','yellow','violet','brown','purple','black','white'],
+            delay: 100
+        },
+        showAutocompleteOnFocus: true
+    });
 
-    
 })

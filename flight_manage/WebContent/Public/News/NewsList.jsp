@@ -295,7 +295,7 @@ else
 						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
 						out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
 						if(session.getAttribute("priv2")!=null){
-			                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+			                	out.println("<td><span class='glyphicon'></span></td>");
 			                }else{
 			              	  out.println("<td></td>");
 			                }

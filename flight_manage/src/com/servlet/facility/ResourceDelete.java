@@ -7,20 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import com.entity.*;
+import com.entity.Admin;
+import com.entity.AirportResource;
+import com.entity.User;
 
 /**
- * Servlet implementation class SearchResource
+ * Servlet implementation class ResourceDelete
  */
-//@WebServlet("/SearchResource")
-public class SearchResource extends HttpServlet {
+//@WebServlet("/ResourceDelete")
+public class ResourceDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchResource() {
+    public ResourceDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +31,7 @@ public class SearchResource extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//processRequest(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -38,36 +39,29 @@ public class SearchResource extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		processRequest(request, response);
+		//doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		String name = request.getParameter("rname");
+		//String type = request.getParameter("resource-type");
+		//System.out.println(name);
+		
+		User user = new User();
+	    AirportResource[] resourceModifyInfo = user.searchAirportResource(name, "");
+	   
+	    Admin admin=(Admin)request.getSession().getAttribute("admin");
+	    int result = admin.deleteAirportResource(resourceModifyInfo[0]);
+		
+		if(result==-1){
+			request.getRequestDispatcher("error.jsp").forward(request, response);
+			return;
+		}else if(result==1){
+			request.setAttribute("deleteResult", result);
+			request.getRequestDispatcher("Public/Facility/Resource.jsp").forward(request, response);
+		}else {
+			request.setAttribute("deleteResult", result);
+			request.getRequestDispatcher("Public/Facility/Resource.jsp").forward(request,response);
+		}
+		
 	}
 
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	//	request.setCharacterEncoding("UTF-8");
-	//	response.setContentType("text/html");
-		String name = request.getParameter("resource-name");
-		String type = request.getParameter("resource-type");
-		//System.out.println(name);
-		String t="";
-		if(type.equals("1"))
-			t = "登机门";
-		if(type.equals("2"))
-			t = "值机柜台";
-		if(type.equals("3"))
-			t = "行李转盘";
-		User user = new User();
-		
-		AirportResource[] resourceInfo = user.searchAirportResource(name, t);
-	  
-		
-			request.setAttribute("resourceInfo", resourceInfo);
-			
-			/*if(resourceInfo==null)
-			{
-				System.out.println("空指针！！！");
-			}*/
-			   
-			request.getRequestDispatcher("Public/Facility/Resource.jsp").forward(request, response);
-		
-	}
 }

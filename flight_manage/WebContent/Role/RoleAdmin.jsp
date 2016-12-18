@@ -190,7 +190,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Role roleInfo = (Role)request.getAttribute("roleInfo");
             	out.println("<tr data-id='roleName="+roleInfo.getName()+"'>");
-            	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+            	out.println("<td><span class='glyphicon'></span></td>");
             	out.println("<td>"+"1"+"</td>");
             	out.println("<td>"+roleInfo.getName()+"</td>");
             	out.println("<td>"+roleInfo.getDescription()+"</td>");
@@ -251,7 +251,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	for(Role output:roleInfos)
             	{
             		out.println("<tr data-id='roleName="+output.getName()+"'>");
-                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                	out.println("<td><span class='glyphicon'></span></td>");
                 	out.println("<td>"+count+"</td>");
                 	out.println("<td>"+output.getName()+"</td>");
                 	out.println("<td>"+output.getDescription()+"</td>");

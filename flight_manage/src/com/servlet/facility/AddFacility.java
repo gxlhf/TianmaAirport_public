@@ -6,21 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.entity.*;
-import com.entity.User;
-
 /**
- * Servlet implementation class SearchFacility
+ * Servlet implementation class AddFacility
  */
-//@WebServlet("/SearchFacility")
-public class SearchFacility extends HttpServlet {
+//@WebServlet("/AddFacility")
+public class AddFacility extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchFacility() {
+    public AddFacility() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +27,7 @@ public class SearchFacility extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//processRequest(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -38,20 +35,28 @@ public class SearchFacility extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		processRequest(request, response);
+		//doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		String name = request.getParameter("facility-name");
+		String site =  request.getParameter("facility-site");
+		String phone =  request.getParameter("facility-phone");
+		String extra =  request.getParameter("facility-extra");
+		String type = request.getParameter("facility-type");
+		
+		PropertyFacility facilityAddInfo = new PropertyFacility(name, site, extra, type, phone);
+		Admin admin=(Admin)request.getSession().getAttribute("admin");
+		
+		int result = admin.addPropertyFacility(facilityAddInfo);
+		if(result==-1){
+			request.getRequestDispatcher("error.jsp").forward(request, response);
+			return;
+		}else if(result==1){
+			request.setAttribute("addResult", result);
+			request.getRequestDispatcher("Public/Facility/Facility.jsp").forward(request, response);
+		}else {
+			request.setAttribute("addResult", result);
+			request.getRequestDispatcher("Public/Facility/Facility.jsp").forward(request,response);
+		}
 	}
 
-	
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String name = request.getParameter("facility-name");
-		User user = new User();
-		
-		
-		PropertyFacility[] facilityInfo = user.searchPropertyFacility(name);	 
-			request.setAttribute("facilityInfo", facilityInfo);
-			request.getRequestDispatcher("Public/Facility/Facility.jsp").forward(request, response);
-		
-	}
-	
 }

@@ -57,12 +57,60 @@
     <url-pattern>/SearchResource</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ModifyResource</servlet-name>
+    <servlet-class>com.servlet.facility.ModifyResource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyResource</servlet-name>
+    <url-pattern>/ModifyResource</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddResource</servlet-name>
+    <servlet-class>com.servlet.facility.AddResource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddResource</servlet-name>
+    <url-pattern>/AddResource</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ResourceDelete</servlet-name>
+    <servlet-class>com.servlet.facility.ResourceDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResourceDelete</servlet-name>
+    <url-pattern>/ResourceDelete</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>SearchFacility</servlet-name>
     <servlet-class>com.servlet.facility.SearchFacility</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchFacility</servlet-name>
     <url-pattern>/SearchFacility</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ModifyFacility</servlet-name>
+    <servlet-class>com.servlet.facility.ModifyFacility</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyFacility</servlet-name>
+    <url-pattern>/ModifyFacility</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddFacility</servlet-name>
+    <servlet-class>com.servlet.facility.AddFacility</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddFacility</servlet-name>
+    <url-pattern>/AddFacility</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>FacilityDelete</servlet-name>
+    <servlet-class>com.servlet.facility.FacilityDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FacilityDelete</servlet-name>
+    <url-pattern>/FacilityDelete</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>PostTest</servlet-name>

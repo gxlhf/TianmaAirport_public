@@ -6,21 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
 import com.entity.*;
-
 /**
- * Servlet implementation class SearchResource
+ * Servlet implementation class AddResource
  */
-//@WebServlet("/SearchResource")
-public class SearchResource extends HttpServlet {
+//@WebServlet("/AddResource")
+public class AddResource extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchResource() {
+    public AddResource() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +27,7 @@ public class SearchResource extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//processRequest(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -38,36 +35,28 @@ public class SearchResource extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		processRequest(request, response);
-	}
-
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	//	request.setCharacterEncoding("UTF-8");
-	//	response.setContentType("text/html");
+	//	doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("resource-name");
 		String type = request.getParameter("resource-type");
-		//System.out.println(name);
-		String t="";
-		if(type.equals("1"))
-			t = "登机门";
-		if(type.equals("2"))
-			t = "值机柜台";
-		if(type.equals("3"))
-			t = "行李转盘";
-		User user = new User();
+		String site = request.getParameter("resource-site");
+		String extra = request.getParameter("resource-extra");
 		
-		AirportResource[] resourceInfo = user.searchAirportResource(name, t);
-	  
-		
-			request.setAttribute("resourceInfo", resourceInfo);
+		AirportResource resourceAddInfo = new AirportResource(name, site, extra, type);
+		 Admin admin=(Admin)request.getSession().getAttribute("admin");
+		    int result = admin.addAirportResource(resourceAddInfo);
 			
-			/*if(resourceInfo==null)
-			{
-				System.out.println("空指针！！！");
-			}*/
-			   
-			request.getRequestDispatcher("Public/Facility/Resource.jsp").forward(request, response);
+			if(result==-1){
+				request.getRequestDispatcher("error.jsp").forward(request, response);
+				return;
+			}else if(result==1){
+				request.setAttribute("addResult", result);
+				request.getRequestDispatcher("Public/Facility/Resource.jsp").forward(request, response);
+			}else {
+				request.setAttribute("addResult", result);
+				request.getRequestDispatcher("Public/Facility/Resource.jsp").forward(request,response);
+			}
 		
 	}
+
 }

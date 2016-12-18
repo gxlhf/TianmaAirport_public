@@ -6,7 +6,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户与角色管理 - 天马机场</title>
+    <title>航班信息管理 - 天马机场</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>/css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/adminPage.css">
@@ -15,6 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="<%=basePath%>/css/tokenfield-typeahead.min.css">
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css">
   </head><body>
     <!-- 头部开始 -->
     <nav class="navbar navbar-default" role="navigation">
@@ -237,14 +238,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="flight-counter" class="col-sm-2 control-label">值机柜台：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" id="inp-flight-counter" list="list-counter" name="flight-counter" data-required-error='请选择值机柜台*' required>
-                <datalist id="list-counter">
+                <input type="text" class="form-control" id="inp-flight-counter"  name="flight-counter" data-required-error='请选择值机柜台*' required><!-- list="list-counter" -->
+                <!-- <datalist id="list-counter">
                   <option value="柜台1">
                   <option value="柜台2">
                   <option value="柜台3">
                   <option value="柜台4">
                   <option value="柜台5">
-                </datalist>
+                </datalist> -->
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -362,7 +363,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <a href="#">About Us</a>·
         <a href="#">Site Map</a>·
         <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+        <a href="#">Contact Us</a>· ©2016 软件1401班第三组
+      </p>
     </footer>
     <!-- 尾部结束 -->
 
@@ -377,7 +379,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-tokenfield.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/FlightInfoEdit.js"></script>
