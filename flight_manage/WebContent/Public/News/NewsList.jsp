@@ -249,7 +249,7 @@ else
             </div>
             <%
             if(session.getAttribute("priv2")!=null){
-            	out.println("<div class='form-group'><label for='news-outname' class='col-sm-2 control-label'>发布人：</label><div class='col-sm-6'><input type='text' class='form-control' name='news-outname'></div></div>");
+            	out.println("<div class='form-group'><label for='news-outname' class='col-sm-2 control-label'>发布人：</label><div class='col-sm-6'><input type='text' class='form-control' name='news-name'></div></div>");
             }
             %>
             <!-- <div class="form-group">
@@ -291,6 +291,7 @@ else
 			session.setAttribute("news", news);
 				if(news!=null){
 					for(int i=0;i<news.length;i++){
+						if(news[i]!=null){
 						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
 						out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
 						if(session.getAttribute("priv2")!=null){
@@ -302,6 +303,7 @@ else
 			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
 						}
 					}
+				}
 				}else if(news==null){
 					User user=new User();
 					news=user.returnAllNews();

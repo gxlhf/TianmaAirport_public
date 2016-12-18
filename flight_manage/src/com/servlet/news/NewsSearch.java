@@ -47,13 +47,36 @@ public class NewsSearch extends HttpServlet {
 		String title = request.getParameter("news-title");
 		String time = request.getParameter("news-outtime");
 		String type=request.getParameter("type");
+		String name=request.getParameter("news-name");
 		com.entity.User user = new com.entity.User();
 		News[] news=user.searchNews(title, time);
-		request.setAttribute("news", news);
-		/*for(ArrivalFlightInfo out:arrivalFlightInfos)
-		{
+		News[] news2=new News[30];
+		if(name!=null&&!name.equals("")){
+			int a=0;
+			for(int i=0;i<news.length;i++){
+				if(news[i].getPublisher_name().equals(name)){
+					news2[a++]=news[i];
+				}
+			}
+			news=news2;
+			/*for(ArrivalFlightInfo out:arrivalFlightInfos)
+			{
 			System.out.println(out.getFlightCourse().getAirline());;
-		}*/
+			}*/
+		}		
+		News[] news3=new News[30];
+		if(time!=null&&!time.equals("")){
+			int a=0;
+			for(int i=0;i<news.length;i++){
+				if(news[i]!=null){
+				if(news[i].getTime().equals(time)){
+					news3[a++]=news[i];
+				}
+			}
+			}
+			news=news3;
+		}
+		request.setAttribute("news", news);
 		request.getRequestDispatcher("NewsList.jsp?type="+type).forward(request, response);
 	}
 }
