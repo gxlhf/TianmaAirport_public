@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <% 
             Admin admin=(Admin)session.getAttribute("admin");
       if(admin!=null){
-            out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
+            out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='"+basePath+"EditMyInfo.jsp'>修改个人信息</a></li>");
             out.println("<li><a class='text-danger' href='"+basePath+"logout'>退出</a></li>");
       }else{
         out.println("<li><a class='text-info' href='"+basePath+"login.jsp'>登陆</a></li>");
@@ -130,10 +130,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <li role="presentation">
-                  <a href="#">机场资源</a>
+                  <a href="<%=basePath%>Public/Facility/Resource.jsp">机场资源</a>
                 </li>
                 <li role="presentation" class="second-menu-cur">
-                  <a href="#">物业设施</a>
+                  <a href="<%=basePath%>Public/Facility/Facility.jsp">物业设施</a>
                 </li>
               </ul>
             </li>
@@ -145,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a href="#">机场设施管理</a>
             </li>
             <li>
-              <a href="#">物业设施</a>
+              <a href="<%=basePath%>Public/Facility/Facility.jsp">物业设施</a>
             </li>
             <li class="active">
             <%
@@ -242,7 +242,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="facility-extra" class="col-sm-2 control-label">备注：</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="facility-extra" ><%=facilityModify[0].getRemark() %></textarea>
+                <textarea class="form-control" name="facility-extra" ><%
+                if(facilityModify[0].getRemark()!=null)
+                	out.println(facilityModify[0].getRemark());
+                %></textarea>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -255,7 +258,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6 btn-modify">
                 <div class="btn-group btn-group-justified">
                   <a class="btn btn-success" id="btn-save" >修改</a>
-                  <a class="btn btn-primary" href="#">取消</a>
+                  <a class="btn btn-primary" href="<%=basePath%>Public/Facility/Facility.jsp">取消</a>
                 </div>
               </div>
             
@@ -315,7 +318,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <textarea class="form-control" name="facility-extra" ></textarea>
               </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
               <!--
               <div class="form-group">
@@ -326,7 +328,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6 btn-modify">
                 <div class="btn-group btn-group-justified">
                   <a class="btn btn-success" id="btn-save" >新增</a>
-                  <a class="btn btn-primary" href="#">取消</a>
+                  <a class="btn btn-primary" href="<%=basePath%>Public/Facility/Facility.jsp">取消</a>
                 </div>
               </div>
             
@@ -399,7 +401,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!-- /.modal-dialog -->
       </div>
       <!-- 确认信息弹框结束 -->
-        
+        </div>
       </div>
       <!-- 内容结束 -->
       <!-- 尾部开始 -->
@@ -413,11 +415,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!-- 尾部结束 -->
       <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
       <script src="<%=basePath%>/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-      <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
-    </div>
-  
+      <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
 
 </body></html>

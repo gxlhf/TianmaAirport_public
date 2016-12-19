@@ -42,10 +42,10 @@ public class ModifyResource extends HttpServlet {
 		String site = request.getParameter("resource-site");
 		String extra = request.getParameter("resource-extra");
 		
-		System.out.println(name);
+		/*System.out.println(name);
 		System.out.println(type);
 		System.out.println(site);
-		System.out.println(extra);
+		System.out.println(extra);*/
 		
 		AirportResource resourceModifyInfo = new AirportResource(name, site, extra, type);
 		 Admin admin=(Admin)request.getSession().getAttribute("admin");

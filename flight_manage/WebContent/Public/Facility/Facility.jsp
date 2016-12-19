@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <% 
             Admin admin=(Admin)session.getAttribute("admin");
 			if(admin!=null){
-        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='#'>修改个人信息</a></li>");
+        		out.println("<li id='cur-user'><span class='glyphicon glyphicon-user'></span>"+admin.getName()+" | 已登录</li><li><a class='text-info' href='"+basePath+"EditMyInfo.jsp'>修改个人信息</a></li>");
         		out.println("<li><a class='text-danger' href='"+basePath+"logout'>退出</a></li>");
 			}else{
 				out.println("<li><a class='text-info' href='"+basePath+"login.jsp'>登陆</a></li>");
@@ -206,7 +206,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          }else{
                   out.println("<th></th>");
          }
-         out.println("<th>序号</th><th>设施名称</th><th>设施分类</th><th>联系电话</th> <th>位置</th> <th>备注</th></tr></thead> <tbody>");
+         out.println("<th>设施名称</th><th>设施分类</th><th>联系电话</th> <th>位置</th> <th>备注</th></tr></thead> <tbody>");
 
          if (request.getAttribute("facilityInfo")!=null ) {
              PropertyFacility[]facilityInfos = (PropertyFacility[])request.getAttribute("facilityInfo");
@@ -220,13 +220,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }else{
                   out.println("<td></td>");
                 }
-                out.println("<td>"+ i +"</td>");
-                 out.println("<td>" + output.getName() + "</td>");
-                 out.println("<td>" + output.getType() + "</td>");
-                 out.println("<td>" + output.getPhone() + "</td>");
-                    out.println("<td>" + output.getLocation() + "</td>");
-                    out.println("<td>" + output.getRemark() + "</td></tr>");
-                    i++;
+                /* out.println("<td>"+ i +"</td>"); */
+                out.println("<td>" + output.getName() + "</td>");
+               	out.println("<td>" + output.getType() + "</td>");
+                out.println("<td>" + output.getPhone() + "</td>");
+                out.println("<td>" + output.getLocation() + "</td>");
+                if(output.getRemark()==null)
+               	 out.println("<td></td></tr>");
+                else
+                	out.println("<td>" + output.getRemark() + "</td></tr>");
+                i++;
              }
          }
 
@@ -243,13 +246,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  }else{
                    out.println("<td></td>");
                  }
-                 out.println("<td>"+ i +"</td>");
-                  out.println("<td>" + output.getName() + "</td>");
-                  out.println("<td>" + output.getType() + "</td>");
-                  out.println("<td>" + output.getPhone() + "</td>");
-                     out.println("<td>" + output.getLocation() + "</td>");
-                     out.println("<td>" + output.getRemark() + "</td></tr>");
-                     i++;
+                 /* out.println("<td>"+ i +"</td>"); */
+                 out.println("<td>" + output.getName() + "</td>");
+                 out.println("<td>" + output.getType() + "</td>");
+                 out.println("<td>" + output.getPhone() + "</td>");
+                 out.println("<td>" + output.getLocation() + "</td>");
+                 if(output.getRemark()==null)
+                	 out.println("<td></td></tr>");
+                 else
+                 	out.println("<td>" + output.getRemark() + "</td></tr>");
+                 i++;
               }
        }
 
@@ -258,7 +264,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
 
        if(session.getAttribute("priv0")!=null){
-            out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"Facility/FacilityEdit.jsp'>修改</a><a id='btn-modify' class='btn btn-danger' href='"+basePath+"FacilityDelete'>删除</a><a class='btn btn-success' href='"+basePath+"Facility/FacilityEdit.jsp'>新增</a></div></div>");
+            out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"Facility/FacilityEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"FacilityDelete'>删除</a><a class='btn btn-success' href='"+basePath+"Facility/FacilityEdit.jsp'>新增</a></div></div>");
           }
  %>
           
@@ -268,6 +274,66 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div id="backToTop-btn" onclick="scroll(0,0)">
         <span class="glyphicon glyphicon-chevron-up"></span>
       </div>
+
+      <!-- 确认信息弹框开始 -->
+      <div id="ensureBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- <div class="modal-header"> -->
+              <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button> -->
+              <!-- <h4 class="modal-title" id="myModalLabel">确认需要保存的信息</h4> -->
+            <!-- </div> -->
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4>以下是即将删除的信息，请确认。<br></h4>
+              <strong class="text-danger">删除后将无法撤销！</strong>
+
+              <hr>
+
+              <div class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">设施名称：</label>
+                  <div class="col-xs-9">
+                    <p id="facility-name-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">设施分类：</label>
+                  <div class="col-xs-9">
+                    <p id="facility-type-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">位置：</label>
+                  <div class="col-xs-9">
+                    <p id="facility-site-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">联系电话：</label>
+                  <div class="col-xs-9">
+                    <p id="facility-phone-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">备注：</label>
+                  <div class="col-xs-9">
+                    <p id="facility-extra-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-danger">删除</button>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 确认信息弹框结束 -->      
     </div>
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
@@ -284,7 +350,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
   
 
 </body></html>

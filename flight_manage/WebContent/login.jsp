@@ -151,6 +151,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <script type="text/javascript">
  function changeImg(){
     var imgSrc = $("#imgObj");
+    console.log(imgSrc);
     var src = imgSrc.attr("src");    
     imgSrc.attr("src",chgUrl(src));    
 }    
@@ -158,13 +159,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳    
 function chgUrl(url){    
     var timestamp = (new Date()).valueOf();
-    urlurl = url.substring(0,17);
+    urlurl = url.substring(0,10);
+    // console.log(urlurl);
     if((url.indexOf("&")>=0)){
-        urlurl = url + "×tamp=" + timestamp;
+        urlurl = urlurl + "×tamp=" + timestamp;
     }else{
-        urlurl = url + "?timestamp=" + timestamp;
+        urlurl = urlurl + "?timestamp=" + timestamp;
     }
-    return url;
+    console.log(urlurl);
+    return urlurl;
 }    
 
 </script> 
@@ -197,6 +200,5 @@ function chgUrl(url){
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&location=changsha"></script>
   </body>
 </html>

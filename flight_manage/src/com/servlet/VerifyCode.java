@@ -81,7 +81,7 @@ public class VerifyCode extends HttpServlet {
 		Random random=new Random();
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, width, height);
-		Font font=new Font("Fixedsys", Font.PLAIN, fontHeight);
+		Font font=new Font("Microsoft Yahei", Font.PLAIN, fontHeight);
 		g.setFont(font);
 
 		g.setColor(Color.BLACK);

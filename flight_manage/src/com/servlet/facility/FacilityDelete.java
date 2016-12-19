@@ -31,7 +31,7 @@ public class FacilityDelete extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("fname");
-		System.out.println(name);
+//		System.out.println(name);
 		
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		User user = new User();
