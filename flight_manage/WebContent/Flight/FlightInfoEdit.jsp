@@ -125,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
-                <li role="presentation" class="second-menu-cur">
+                <li role="presentation">
                   <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=local">国内到港</a>
                 </li>
                 <li role="presentation">
@@ -146,12 +146,338 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
               <a href="#">航班信息</a>
             </li>
-            <li>
+            <!-- <li>
               <a href="#">国内到港</a>
-            </li>
-            <li class="active">新增</li>
+            </li> -->
+            <%
+            if(request.getParameter("flightNumber")!=null&&request.getParameter("time")!=null&&request.getParameter("area")!=null&&request.getParameter("type")!=null)
+            	out.println("<li class='active'>修改</li>");
+            else
+            	out.println("<li class='active'>新增</li>");
+            %>
+            <!-- <li class="active">新增</li> -->
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
+          <%
+          if(request.getParameter("flightNumber")!=null&&request.getParameter("time")!=null&&request.getParameter("area")!=null&&request.getParameter("type")!=null)
+          {
+        	  /* System.out.println(request.getParameter("time")); */
+        	  String[] t1 = request.getParameter("time").split(":");
+        	  String time = t1[0]+":"+t1[1];
+        	  User user = new User();
+        	  DepartureFlightInfo[] departureFlightModifyInfo = null;
+        	  ArrivalFlightInfo[] arrivalFlightModifyInfo = null;
+        	  if(request.getParameter("type").equals("departure"))
+        	  {
+        		  departureFlightModifyInfo = user.searchDepartureFlightInfo("", request.getParameter("flightNumber"), "", time);
+        	      /* System.out.println(departureFlightModifyInfo[0].getFlightCourse().getAirline()); */
+        	  }
+        	  if(request.getParameter("type").equals("arrival"))
+        	  {
+        		  arrivalFlightModifyInfo = user.searchArrivalFlightInfo("", request.getParameter("flightNumber"), "", time);
+        		  /* System.out.println(arrivalFlightModifyInfo[0].getFlightCourse().getAirline()); */
+        	  }
+        		  
+        	  /* System.out.println(t1[0]+":"+t1[1]); */
+          %>
+          <form action="PostTest" method="post" class="form-horizontal" role="form" data-toggle="validator">
+            <div class="form-group">
+              <label for="flight-no" class="col-sm-2 control-label">航班号：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="flight-no" pattern="([A-z]{2}[0-9]{4}|[A-z][0-9]{5}|[0-9][A-z]{1}[0-9]{4})" data-required-error='请填写航班号*' data-pattern-error='请填写正确的航班号*' 
+                value="<%
+                if(request.getParameter("type").equals("departure"))
+                	out.println(departureFlightModifyInfo[0].getFlightCourse().getFlightNumber());
+                if(request.getParameter("type").equals("arrival"))
+                	out.println(arrivalFlightModifyInfo[0].getFlightCourse().getFlightNumber());
+                %>" required readonly>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <%
+            if(request.getParameter("type").equals("departure"))
+            {
+            %>
+            <div class="form-group">
+              <label for="flight-dep-time" class="col-sm-2 control-label">离港时间：</label>
+              <div class="col-sm-6">
+                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-dep-time" data-required-error='请填写离港时间*' value="<%=time %>" required readonly>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <%
+            }
+            if(request.getParameter("type").equals("arrival"))
+            {
+            %>
+            <div class="form-group">
+              <label for="flight-arr-time" class="col-sm-2 control-label">到港时间：</label>
+              <div class="col-sm-6">
+                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-arr-time" data-required-error='请填写到港时间*' value="<%=time %>" required readonly>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <%
+            }
+            %>
+            <div class="form-group">
+              <label for="flight-from" class="col-sm-2 control-label">始发地：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="flight-from" data-required-error='请选择始发地*' required>
+                  <%
+                  if(request.getParameter("type").equals("departure"))
+                	  out.println("<option value='"+departureFlightModifyInfo[0].getFlightCourse().getFrom()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getFrom()+"</option>");
+            	  if(request.getParameter("type").equals("arrival"))
+            	  {
+            		  out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getFrom()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getFrom()+"</option>");
+            		  if(request.getParameter("area").equals("local"))
+                      {
+                		  /* String[] result = user.returnAllLocalFrom(); */
+                		  String[] localFrom = {"成都","宁波","昆明","哈尔滨","重庆","温州","厦门","福州","青岛","天津","西安","三亚","北京","南昌","杭州","南京","张家界","广州","西宁","北海","珠海","太原","揭阳","上海浦东","济南","大连","长春","海口","运城","乌鲁木齐","深圳","兰州","上海虹桥","贵阳","丽江","南宁","景洪","呼和浩特","泉州","绵阳","泸州","盐城","石家庄","无锡","烟台"};
+                		  for(String output:localFrom)
+                		  {
+                			  if(request.getParameter("type").equals("departure"))
+                			  {
+                				  if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getFrom()))
+                					  out.println("<option value='"+output+"'>"+output+"</option>");
+                			  }
+                			  if(request.getParameter("type").equals("arrival"))
+                			  {
+                				  if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getFrom()))
+                					  out.println("<option value='"+output+"'>"+output+"</option>");
+                			  }
+                		  }
+                      }
+                	  if(request.getParameter("area").equals("international"))
+                	  {
+                		  String[] internationalFrom = {"首尔","法兰克福","曼谷","吉隆坡","新加坡"};
+                	  	  for(String output:internationalFrom)
+                	  	  {
+                	  	      if(request.getParameter("type").equals("departure"))
+              			      {
+              				      if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getFrom()))
+              					      out.println("<option value='"+output+"'>"+output+"</option>");
+              			      }
+              			      if(request.getParameter("type").equals("arrival"))
+              			      {
+              				      if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getFrom()))
+              					      out.println("<option value='"+output+"'>"+output+"</option>");
+              			      }
+                	  	  }
+                	  }
+            	  }
+            		  
+            	  
+                  %>
+                  <!-- <option value=""></option>
+                  <option>机场地勤人员</option>
+                  <option>信息技术员</option> -->
+                </select>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="flight-via" class="col-sm-2 control-label">经停地：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="flight-via">
+                  <%
+                  if(request.getParameter("type").equals("departure"))
+                  {
+                	  if(departureFlightModifyInfo[0].getFlightCourse().getStop()!=null&&departureFlightModifyInfo[0].getFlightCourse().getStop()!="")
+                	      out.println("<option value='"+departureFlightModifyInfo[0].getFlightCourse().getStop()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getStop()+"</option>");
+              		  else
+              			  out.println("<option value=''></option>");
+                  }
+            	  if(request.getParameter("type").equals("arrival"))
+            	  {
+            		  if(arrivalFlightModifyInfo[0].getFlightCourse().getStop()!=null&&arrivalFlightModifyInfo[0].getFlightCourse().getStop()!="")
+            		      out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getStop()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getStop()+"</option>");
+            		  else
+            			  out.println("<option value=''></option>");
+            	  }
+            	  if(request.getParameter("area").equals("local"))
+            	  {
+            		  String[] stopStation = {"青岛","西安","西宁","烟台","济南","杭州","昆明","宁波","天津","呼和浩特","南京"};
+            		  for(String output:stopStation)
+            	  	  {
+            	  	      if(request.getParameter("type").equals("departure"))
+          			      {
+          				      if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getFrom()))
+          					      out.println("<option value='"+output+"'>"+output+"</option>");
+          			      }
+          			      if(request.getParameter("type").equals("arrival"))
+          			      {
+          				      if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getFrom()))
+          					      out.println("<option value='"+output+"'>"+output+"</option>");
+          			      }
+            	  	  }
+            	  }
+            	  if(request.getParameter("area").equals("international"))
+            	  {
+            		  String[] internationalStop = {"首尔","法兰克福","曼谷","吉隆坡","新加坡"};
+            	  	  for(String output:internationalStop)
+            	  	  {
+            	  	      if(request.getParameter("type").equals("departure"))
+          			      {
+          				      if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getFrom()))
+          					      out.println("<option value='"+output+"'>"+output+"</option>");
+          			      }
+          			      if(request.getParameter("type").equals("arrival"))
+          			      {
+          				      if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getFrom()))
+          					      out.println("<option value='"+output+"'>"+output+"</option>");
+          			      }
+            	  	  }
+            	  }
+                  %>
+                  <!-- <option></option>
+                  <option>机场地勤人员</option>
+                  <option>信息技术员</option> -->
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="flight-to" class="col-sm-2 control-label">目的地：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="flight-to" data-required-error='请选择目的地*' required>
+                  <%
+                  if(request.getParameter("type").equals("arrival"))
+                	  out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getTo()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getTo()+"</option>");
+            	  if(request.getParameter("type").equals("departure"))
+            	  {
+            		  out.println("<option value='"+departureFlightModifyInfo[0].getFlightCourse().getTo()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getTo()+"</option>");
+            		  if(request.getParameter("area").equals("local"))
+                      {
+                		  /* String[] result = user.returnAllLocalFrom(); */
+                		  String[] localTo = {"成都","宁波","昆明","哈尔滨","重庆","温州","厦门","福州","青岛","天津","西安","三亚","北京","南昌","杭州","南京","张家界","广州","西宁","北海","珠海","太原","揭阳","上海浦东","济南","大连","长春","海口","运城","乌鲁木齐","深圳","兰州","上海虹桥","贵阳","丽江","南宁","景洪","呼和浩特","泉州","绵阳","泸州","盐城","石家庄","无锡","烟台"};
+                		  for(String output:localTo)
+                		  {
+                			  if(request.getParameter("type").equals("departure"))
+                			  {
+                				  if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getFrom()))
+                					  out.println("<option value='"+output+"'>"+output+"</option>");
+                			  }
+                			  if(request.getParameter("type").equals("arrival"))
+                			  {
+                				  if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getFrom()))
+                					  out.println("<option value='"+output+"'>"+output+"</option>");
+                			  }
+                		  }
+                      }
+                	  if(request.getParameter("area").equals("international"))
+                	  {
+                		  String[] internationalTo = {"首尔","法兰克福","曼谷","吉隆坡","新加坡"};
+                	  	  for(String output:internationalTo)
+                	  	  {
+                	  	      if(request.getParameter("type").equals("departure"))
+              			      {
+              				      if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getFrom()))
+              					      out.println("<option value='"+output+"'>"+output+"</option>");
+              			      }
+              			      if(request.getParameter("type").equals("arrival"))
+              			      {
+              				      if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getFrom()))
+              					      out.println("<option value='"+output+"'>"+output+"</option>");
+              			      }
+                	  	  }
+                	  }
+            	  }
+                  %>
+                  <!-- <option></option>
+                  <option>机场地勤人员</option>
+                  <option>信息技术员</option> -->
+                </select>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            
+            <div class="form-group">
+              <label for="flight-airline" class="col-sm-2 control-label">航空公司：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" list="list-airline" name="flight-airline" data-required-error='请选择航空公司*' required>
+                <datalist id="list-airline">
+                  <%
+                  if(request.getParameter("type").equals("departure"))
+                	  out.println("<option value='"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
+            	  if(request.getParameter("type").equals("arrival"))
+                      out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
+                  %>
+                  <!-- <option value="航司1">
+                  <option value="航司2">
+                  <option value="航司3">
+                  <option value="航司4">
+                  <option value="航司5"> -->
+                </datalist>
+                <!-- jQuery UI Autocomplete -->
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <%
+            if(request.getParameter("type").equals("arrival"))
+            {
+            %>
+            <div class="form-group">
+              <label for="flight-baggage" class="col-sm-2 control-label">行李转盘：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="inp-flight-baggage" list="list-baggage" name="flight-baggage" data-required-error='请选择行李转盘*' required>
+                <datalist id="list-baggage">
+                  <option value="转盘1">
+                  <option value="转盘2">
+                  <option value="转盘3">
+                  <option value="转盘4">
+                  <option value="转盘5">
+                </datalist>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <%
+            }
+            if(request.getParameter("type").equals("departure"))
+            {
+            %>
+            <div class="form-group">
+              <label for="flight-counter" class="col-sm-2 control-label">值机柜台：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="inp-flight-counter"  name="flight-counter" data-required-error='请选择值机柜台*' required><!-- list="list-counter" -->
+                <!-- <datalist id="list-counter">
+                  <option value="柜台1">
+                  <option value="柜台2">
+                  <option value="柜台3">
+                  <option value="柜台4">
+                  <option value="柜台5">
+                </datalist> -->
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <div class="form-group">
+              <label for="flight-gate" class="col-sm-2 control-label">登机门：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="inp-flight-gate" list="list-gate" name="flight-gate" data-required-error='请选择登机门*' required>
+                <datalist id="list-gate">
+                  <option value="登机门1">
+                  <option value="登机门2">
+                  <option value="登机门3">
+                  <option value="登机门4">
+                  <option value="登机门5">
+                </datalist>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div>
+            <%
+            }
+            %>
+            <div class="col-sm-6 btn-modify">
+              <div class="btn-group btn-group-justified">      
+                <a id="btn-save" class="btn btn-success">新增</a>
+                <a class="btn btn-primary" href="">取消</a>
+              </div>
+            </div>
+          </form>
+          <%
+          }
+          else
+          {
+          %>
           <form action="PostTest" method="get" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
               <label for="flight-no" class="col-sm-2 control-label">航班号：</label>
@@ -270,6 +596,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
             </div>
           </form>
+          <%
+          }
+          %>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">

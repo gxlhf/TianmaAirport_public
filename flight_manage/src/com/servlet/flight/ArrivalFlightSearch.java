@@ -47,7 +47,7 @@ public class ArrivalFlightSearch extends HttpServlet {
 		String airline = request.getParameter("airCompany-name");
 		String area = request.getParameter("area");
 		com.entity.User user = new com.entity.User();
-		ArrivalFlightInfo[] arrivalFlightInfos = user.searchArrivalFlightInfo(from,flightNumber,airline);
+		ArrivalFlightInfo[] arrivalFlightInfos = user.searchArrivalFlightInfo(from,flightNumber,airline,"");
 		request.setAttribute("arrivalFlightInfos", arrivalFlightInfos);
 		/*for(ArrivalFlightInfo out:arrivalFlightInfos)
 		{

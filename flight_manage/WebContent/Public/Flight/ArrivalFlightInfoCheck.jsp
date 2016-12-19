@@ -303,7 +303,7 @@ else
                 {
                 	
                 	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                		out.println("<tr data-id='FlightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"'>");
+                		out.println("<tr data-id='flightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"&area="+area+"&type=arrival"+"'>");
                     	if(session.getAttribute("priv1")!=null){
                         	out.println("<td><span class='glyphicon'></span></td>");
                         }else{
