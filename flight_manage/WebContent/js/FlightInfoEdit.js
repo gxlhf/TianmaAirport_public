@@ -6,6 +6,7 @@ $(function () {
     //值机柜台tokenfield
     $('#inp-flight-counter')
     .on('tokenfield:createtoken', function (e) {
+        console.log('createtoken');
         var valid = false;
         for (var i = 0; i < counterList.length; i++) {
             if(counterList[i] == e.attrs.value){
@@ -14,6 +15,8 @@ $(function () {
                 i--;
             }
         }
+        $('#inp-flight-counter-tokenfield').autocomplete("option", 'source', counterList);
+        $('#inp-flight-counter-tokenfield').blur();
         if(!valid){
             $('#inp-flight-counter-tokenfield').val('');
             return false;
@@ -21,6 +24,11 @@ $(function () {
     })
     .on('tokenfield:removetoken',function (e) {
         counterList.push(e.attrs.value);
+        $('#inp-flight-counter-tokenfield').autocomplete("option", 'source', counterList);
+    })
+    .on('tokenfield:editedtoken',function (e) {
+        counterList.push(e.attrs.value);
+        $('#inp-flight-counter-tokenfield').autocomplete("option", 'source', counterList);
     })
     .tokenfield({
         autocomplete: {
@@ -39,9 +47,9 @@ $(function () {
     });
 
     $('#btn-save').click(function () {
+        $('#inp-flight-counter-mirror').val($('#inp-flight-counter').val());
         $('#inp-flight-counter-mirror').focus();
         $('#inp-flight-counter-mirror').blur();
     });
-
 
 });
