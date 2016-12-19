@@ -394,8 +394,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="flight-airline" class="col-sm-2 control-label">航空公司：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" list="list-airline" name="flight-airline" data-required-error='请选择航空公司*' required>
-                <datalist id="list-airline">
+                <select type="text" class="form-control" name="flight-airline" data-required-error='请选择航空公司*' required>
                   <%
                   if(request.getParameter("type").equals("departure"))
                 	  out.println("<option value='"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
@@ -407,8 +406,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <option value="航司3">
                   <option value="航司4">
                   <option value="航司5"> -->
-                </datalist>
-                <!-- jQuery UI Autocomplete -->
+                </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -419,14 +417,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="flight-baggage" class="col-sm-2 control-label">行李转盘：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" id="inp-flight-baggage" list="list-baggage" name="flight-baggage" data-required-error='请选择行李转盘*' required>
-                <datalist id="list-baggage">
-                  <option value="转盘1">
-                  <option value="转盘2">
-                  <option value="转盘3">
-                  <option value="转盘4">
-                  <option value="转盘5">
-                </datalist>
+                <select type="text" class="form-control" id="inp-flight-baggage" name="flight-baggage" data-required-error='请选择行李转盘*' required>
+                  <option value=""></option>
+                  <option value="转盘1">转盘1</option>
+                  <option value="转盘2">转盘2</option>
+                  <option value="转盘3">转盘3</option>
+                  <option value="转盘4">转盘4</option>
+                  <option value="转盘5">转盘5</option>
+                </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -438,28 +436,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="flight-counter" class="col-sm-2 control-label">值机柜台：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" id="inp-flight-counter"  name="flight-counter" data-required-error='请选择值机柜台*' required><!-- list="list-counter" -->
-                <!-- <datalist id="list-counter">
-                  <option value="柜台1">
-                  <option value="柜台2">
-                  <option value="柜台3">
-                  <option value="柜台4">
-                  <option value="柜台5">
-                </datalist> -->
+                <input type="text" class="form-control no-height" name="flight-counter" id="inp-flight-counter-mirror" data-required-error='请选择值机柜台*' required>
+                <input type="text" class="form-control" id="inp-flight-counter">
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+
+              <!-- 放置值机柜台信息 -->
+              <script>
+                var counterList = ['值机柜台1', '值机柜台2', '值机柜台3', '值机柜台4', '值机柜台5', '值机柜台6', '值机柜台8', '值机柜台9', '值机柜台10'];
+              </script>
+
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="flight-gate" class="col-sm-2 control-label">登机门：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" id="inp-flight-gate" list="list-gate" name="flight-gate" data-required-error='请选择登机门*' required>
-                <datalist id="list-gate">
-                  <option value="登机门1">
-                  <option value="登机门2">
-                  <option value="登机门3">
-                  <option value="登机门4">
-                  <option value="登机门5">
-                </datalist>
+                <select type="text" class="form-control" id="inp-flight-gate" list="list-gate" name="flight-gate" data-required-error='请选择登机门*' required>
+                  <option value="登机门1"></option>
+                  <option value="登机门1">登机门1</option>
+                  <option value="登机门2">登机门2</option>
+                  <option value="登机门3">登机门3</option>
+                  <option value="登机门4">登机门4</option>
+                  <option value="登机门5">登机门5</option>
+                </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
