@@ -447,11 +447,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <input type="text" class="form-control no-height" name="flight-counter" id="inp-flight-counter-mirror" data-required-error='请选择值机柜台*' required>
                 <input type="text" class="form-control" id="inp-flight-counter">
               </div>
-             
+
 
               <!-- 放置值机柜台信息 -->
               <script>
-                var counterList = ['值机柜台1', '值机柜台2', '值机柜台3', '值机柜台4', '值机柜台5', '值机柜台6', '值机柜台8', '值机柜台9', '值机柜台10'];
+                var counterList = ['值机柜台01', '值机柜台02', '值机柜台03', '值机柜台04', '值机柜台05', '值机柜台06', '值机柜台08', '值机柜台09', '值机柜台10'];
               </script>
 
               <div class="col-sm-2 help-block with-errors">*</div>
