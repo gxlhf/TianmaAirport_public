@@ -33,8 +33,8 @@ public class VerifyCode extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public void initxuan()throws ServletException{
-    	String strWidth="80";
-    	String strHeight="30";
+    	String strWidth="100";
+    	String strHeight="40";
     	String strCodeCount="4";
     	try{
     		if(strWidth!=null&&strWidth.length()!=0){
@@ -50,8 +50,8 @@ public class VerifyCode extends HttpServlet {
 				// TODO: handle exception
 		}
     	x=width/(codeCount+1);
-    	fontHeight=height-2;
-    	codeY=height-4;
+    	fontHeight=height-8;
+    	codeY=height-10;
     }
     
     public VerifyCode() {
@@ -81,11 +81,11 @@ public class VerifyCode extends HttpServlet {
 		Random random=new Random();
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, width, height);
-		Font font=new Font("Microsoft Yahei", Font.PLAIN, fontHeight);
+		Font font=new Font("Fixedsys", Font.PLAIN, fontHeight);
 		g.setFont(font);
 
 		g.setColor(Color.BLACK);
-		for(int i=0;i<10;i++){
+		for(int i=0;i<30;i++){
 			int x=random.nextInt(width);
 			int y=random.nextInt(height);
 			int xl=random.nextInt(12);
@@ -96,11 +96,11 @@ public class VerifyCode extends HttpServlet {
 		int red=0,green=0,blue=0;
 		for(int i=0;i<codeCount;i++){
 			String strRand=String.valueOf(codeSequence[random.nextInt(36)]);
-			red=random.nextInt(255);
-			green=random.nextInt(255);
-			blue=random.nextInt(255);
+			red=random.nextInt(120) + 10;
+			green=random.nextInt(120) + 10;
+			blue=random.nextInt(120) + 10;
 			g.setColor(new Color(red, green, blue));
-			g.drawString(strRand, (i+1)*x, codeY);
+			g.drawString(strRand, (i)*x, codeY);
 			randomCode.append(strRand);
 		}
 		HttpSession session=request.getSession();
