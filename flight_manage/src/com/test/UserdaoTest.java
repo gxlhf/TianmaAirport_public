@@ -1,5 +1,7 @@
 package com.test;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.dao.AdminDao;
 import com.dao.LoginDao;
 import com.dao.RoleDao;
@@ -29,5 +31,13 @@ public class UserdaoTest {
 	    	 System.out.println("null!");*/
 	     /*for(Admin output:admins)
 	    	 System.out.println(output.getEmpno());*/
+	     String[]  string;
+	     
+	    
+	     
+	     
+	     
+	     
+	     
 	}
 }

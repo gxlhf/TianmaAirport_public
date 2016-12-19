@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.entity.*,com.alibaba.fastjson.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -201,7 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="flight-dep-time" class="col-sm-2 control-label">离港时间：</label>
               <div class="col-sm-6">
-                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-dep-time" data-required-error='请填写离港时间*' value="<%=time %>" required readonly>
+                <input type="text" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-dep-time" data-required-error='请填写离港时间*' value="<%=time %>" required readonly>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -213,7 +213,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="flight-arr-time" class="col-sm-2 control-label">到港时间：</label>
               <div class="col-sm-6">
-                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-arr-time" data-required-error='请填写到港时间*' value="<%=time %>" required readonly>
+                <input type="text" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-arr-time" data-required-error='请填写到港时间*' value="<%=time %>" required readonly>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -396,16 +396,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <select type="text" class="form-control" name="flight-airline" data-required-error='请选择航空公司*' required>
                   <%
-                  String[] localAirline = {"四川航空公司","祥鹏航空公司","奥凯航空公司","中国国际航空公司","中国南方航空公司","成都航空公司","上海航空公司","天津航空公司","吉祥航空公司","海南航空公司","首都航空公司","昆明航空公司","","","","","","","","",""};
+                  String[] localAirline = {"四川航空公司","祥鹏航空公司","奥凯航空公司","中国国际航空公司","中国南方航空公司","成都航空公司","上海航空公司","天津航空公司","吉祥航空公司","海南航空公司","首都航空公司","昆明航空公司","厦门航空公司","中国东方航空公司","河北航空公司","重庆航空公司","西部航空公司","青岛航空公司","山东航空公司","深圳航空公司"};
+                  String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空公司","大韩航空公司","胜安航空(新加坡)","泰国东方航空公司","韩亚航空公司"};
                   if(request.getParameter("type").equals("departure"))
                   {
                 	  out.println("<option value='"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
-                  	  
+                  	  if(request.getParameter("area").equals("local"))
+                  	  {
+                  		  for(String output:localAirline)
+                  		  {
+                  			  if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getAirline()))
+                  			      out.println("<option value='"+output+"'>"+output+"</option>");
+                  		  }
+                  	  }
+                  	  if(request.getParameter("area").equals("international"))
+                	  {
+                		  for(String output:internationalAirline)
+                		  {
+                			  if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getAirline()))
+                			      out.println("<option value='"+output+"'>"+output+"</option>");
+                		  }
+                	  }
                   }
                 	  
             	  if(request.getParameter("type").equals("arrival"))
             	  {
             		  out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
+            		  if(request.getParameter("area").equals("local"))
+                  	  {
+                  		  for(String output:localAirline)
+                  		  {
+                  			  if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getAirline()))
+                  			      out.println("<option value='"+output+"'>"+output+"</option>");
+                  		  }
+                  	  }
+                  	  if(request.getParameter("area").equals("international"))
+                	  {
+                		  for(String output:internationalAirline)
+                		  {
+                			  if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getAirline()))
+                			      out.println("<option value='"+output+"'>"+output+"</option>");
+                		  }
+                	  }
             	  }
                       
                   %>
@@ -426,12 +458,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <label for="flight-baggage" class="col-sm-2 control-label">行李转盘：</label>
               <div class="col-sm-6">
                 <select type="text" class="form-control" id="inp-flight-baggage" name="flight-baggage" data-required-error='请选择行李转盘*' required>
-                  <option value=""></option>
+                  <%
+                  	out.println("<option value='"+arrivalFlightModifyInfo[0].getLuggageCarousel()+"'>"+arrivalFlightModifyInfo[0].getLuggageCarousel()+"</option>");
+                    AirportResource[] luggageCarousel = user.searchAirportResource("", "行李转盘");
+            		for(AirportResource output:luggageCarousel)
+            		{
+            			if(!output.getName().equals(arrivalFlightModifyInfo[0].getLuggageCarousel()))
+            				out.println("<option value='"+output.getName()+"'>"+output.getName()+"</option>");
+            		}
+                  %>
+                  <!-- <option value=""></option>
                   <option value="转盘1">转盘1</option>
                   <option value="转盘2">转盘2</option>
                   <option value="转盘3">转盘3</option>
                   <option value="转盘4">转盘4</option>
-                  <option value="转盘5">转盘5</option>
+                  <option value="转盘5">转盘5</option> -->
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -440,6 +481,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
             if(request.getParameter("type").equals("departure"))
             {
+            	String checkincounters = "";
+            	int flag = 1;
+            	for(String checkincounteroutput:departureFlightModifyInfo[0].getCheckinCounter())
+            	{
+            		if(checkincounteroutput!=null)
+            		{
+            			String t3[] = checkincounteroutput.split("台");
+            			if(flag==1)
+            			{
+            				checkincounters = checkincounters + t3[1];
+            				flag = 0;
+            			}
+            			else
+            				checkincounters = checkincounters + ", " + t3[1];
+            		}
+            			
+            	}
             %>
             <div class="form-group">
               <label for="flight-counter" class="col-sm-2 control-label">值机柜台：</label>
@@ -450,8 +508,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
               <!-- 放置值机柜台信息 -->
+              <%
+              	AirportResource[] checkinCounter = user.searchAirportResource("", "值机柜台");
+                /* int count = checkinCounter.length; */
+            	int i=0;
+                String[] checkinCounterName = new String[checkinCounter.length];
+            	for(AirportResource output:checkinCounter)
+            	{
+            		checkinCounterName[i] = output.getName();
+            		i++;
+            	}
+            	String json_arr_String = JSON.toJSONString(checkinCounterName,true); 
+            	JSONArray jsonArray = JSON.parseArray(json_arr_String);
+            	System.out.println(jsonArray);
+            	/* System.out.println(checkinCounterName[5]); */
+            	/* JSONArray jsonarray = JSONArray.fromObject(checkinCounterName); */
+            	/* System.out.println(jsonarray); */
+              %>
               <script>
-                var counterList = ['值机柜台01', '值机柜台02', '值机柜台03', '值机柜台04', '值机柜台05', '值机柜台06', '值机柜台08', '值机柜台09', '值机柜台10'];
+                /* var counterList = ['值机柜台01', '值机柜台02', '值机柜台03', '值机柜台04', '值机柜台05', '值机柜台06', '值机柜台08', '值机柜台09', '值机柜台10']; */
+                var counterList = <%=jsonArray %>;
               </script>
 
               <div class="col-sm-2 help-block with-errors">*</div>
