@@ -1,14 +1,47 @@
 $(function () {
     $('[name="flight-no"]').blur(function () {
-        console.log($(this));
         $(this).val($(this).val().toUpperCase());
     });
-    $('#inp-flight-counter').tokenfield({
+
+    //值机柜台tokenfield
+    $('#inp-flight-counter')
+    .on('tokenfield:createtoken', function (e) {
+        var valid = false;
+        for (var i = 0; i < counterList.length; i++) {
+            if(counterList[i] == e.attrs.value){
+                valid = true;
+                counterList.splice(i,1);
+                i--;
+            }
+        }
+        if(!valid){
+            $('#inp-flight-counter-tokenfield').val('');
+            return false;
+        }
+    })
+    .on('tokenfield:removetoken',function (e) {
+        counterList.push(e.attrs.value);
+    })
+    .tokenfield({
         autocomplete: {
-            source: ['red','blue','green','yellow','violet','brown','purple','black','white'],
-            delay: 100
+            source: counterList,
+            delay: 0,
+            autoFocus: true
         },
-        showAutocompleteOnFocus: true
+        showAutocompleteOnFocus: true,
+        limit: 5
     });
 
-})
+    $('#inp-flight-counter-tokenfield').blur(function () {
+        $('#inp-flight-counter-mirror').val($('#inp-flight-counter').val());
+        $('#inp-flight-counter-mirror').focus();
+        $('#inp-flight-counter-mirror').blur();
+    });
+
+    $('#btn-save').click(function () {
+        $('#inp-flight-counter-mirror').focus();
+        $('#inp-flight-counter-mirror').blur();
+    });
+
+
+});

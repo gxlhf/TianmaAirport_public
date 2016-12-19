@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="<%=basePath%>/css/tokenfield-typeahead.min.css">
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" href="<%=basePath%>/css/jquery-ui.min.css">
   </head><body>
     <!-- 头部开始 -->
     <nav class="navbar navbar-default" role="navigation">
@@ -209,14 +209,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="flight-airline" class="col-sm-2 control-label">航空公司：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" list="list-airline" name="flight-airline" data-required-error='请选择航空公司*' required>
-                <datalist id="list-airline">
-                  <option value="航司1">
-                  <option value="航司2">
-                  <option value="航司3">
-                  <option value="航司4">
-                  <option value="航司5">
-                </datalist>
+                <select type="text" class="form-control" name="flight-airline" data-required-error='请选择航空公司*' required>
+                  <option></option>
+                  <option>航司1</option>
+                  <option>航司2</option>
+                  <option>航司3</option>
+                  <option>航司4</option>
+                  <option>航司5</option>
+                </select>
                 <!-- jQuery UI Autocomplete -->
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -224,45 +224,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="flight-baggage" class="col-sm-2 control-label">行李转盘：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" id="inp-flight-baggage" list="list-baggage" name="flight-baggage" data-required-error='请选择行李转盘*' required>
-                <datalist id="list-baggage">
-                  <option value="转盘1">
-                  <option value="转盘2">
-                  <option value="转盘3">
-                  <option value="转盘4">
-                  <option value="转盘5">
-                </datalist>
+                <select type="text" class="form-control" id="inp-flight-baggage" name="flight-baggage" data-required-error='请选择行李转盘*' required>
+                  <option></option>
+                  <option>转盘1</option>
+                  <option>转盘2</option>
+                  <option>转盘3</option>
+                  <option>转盘4</option>
+                  <option>转盘5</option>
+                </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <label for="flight-counter" class="col-sm-2 control-label">值机柜台：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" id="inp-flight-counter"  name="flight-counter" data-required-error='请选择值机柜台*' required><!-- list="list-counter" -->
-                <!-- <datalist id="list-counter">
-                  <option value="柜台1">
-                  <option value="柜台2">
-                  <option value="柜台3">
-                  <option value="柜台4">
-                  <option value="柜台5">
-                </datalist> -->
+                <input type="text" class="form-control no-height" name="flight-counter" id="inp-flight-counter-mirror" data-required-error='请选择值机柜台*' required>
+                <input type="text" class="form-control" id="inp-flight-counter">
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
+
+              <!-- 放置值机柜台信息 -->
+              <script>
+                var counterList = ['值机柜台1', '值机柜台2', '值机柜台3', '值机柜台4', '值机柜台5', '值机柜台6', '值机柜台8', '值机柜台9', '值机柜台10'];
+              </script>
+
             </div>
             <div class="form-group">
               <label for="flight-gate" class="col-sm-2 control-label">登机门：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" id="inp-flight-gate" list="list-gate" name="flight-gate" data-required-error='请选择登机门*' required>
-                <datalist id="list-gate">
-                  <option value="登机门1">
-                  <option value="登机门2">
-                  <option value="登机门3">
-                  <option value="登机门4">
-                  <option value="登机门5">
-                </datalist>
+                <select type="text" class="form-control" id="inp-flight-gate" list="list-gate" name="flight-gate" data-required-error='请选择登机门*' required>
+                  <option></option>
+                  <option>登机门2</option>
+                  <option>登机门3</option>
+                  <option>登机门4</option>
+                  <option>登机门5</option>
+                </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
+            <!-- <div class="form-group">
+              <label for="flight-gate" class="col-sm-2 control-label">登机门：</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="inp-flight-gate1" name="flight-gate" data-required-error='请选择登机门*' required>
+                <div>
+                  <input type="text" class="form-control" id="inp-flight-gate1-org">
+                </div>
+              </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
+            </div> -->
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">      
                 <a id="btn-save" class="btn btn-success">新增</a>
@@ -368,18 +377,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </footer>
     <!-- 尾部结束 -->
 
-    <!-- 放置值机柜台信息 -->
-    <script>
-      var counterList = ['值机柜台1', '值机柜台2', '值机柜台3', '值机柜台4', '值机柜台5', '值机柜台6', '值机柜台7', '值机柜台8', '值机柜台9', '值机柜台10'];
-    </script>
 
 
-    <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
-    <script src="<%=basePath%>/js/bootstrap.min.js"></script>
+    <!-- <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script> -->
+    <script type="text/javascript" src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-tokenfield.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/FlightInfoEdit.js"></script>

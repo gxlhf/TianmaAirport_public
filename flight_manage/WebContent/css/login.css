@@ -52,14 +52,14 @@ h4 {
 #content {
 	min-height: 400px;
 }
-#captcha-group > img { 
+#captcha-group > img {
 	position: absolute;
 	right: 15px;
 	margin-top: -40px;
 	height: 40px;
 	border: 1px solid #ccc;
-    border-radius: 0px 4px 4px 0px;
-    cursor: pointer;
+	border-radius: 0px 4px 4px 0px;
+	cursor: pointer;
 }
 #content > p{
 	margin-top: 10px;
