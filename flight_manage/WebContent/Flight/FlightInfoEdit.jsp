@@ -396,10 +396,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <select type="text" class="form-control" name="flight-airline" data-required-error='请选择航空公司*' required>
                   <%
+                  String[] localAirline = {"四川航空公司","祥鹏航空公司","奥凯航空公司","中国国际航空公司","中国南方航空公司","成都航空公司","上海航空公司","天津航空公司","吉祥航空公司","海南航空公司","首都航空公司","昆明航空公司","","","","","","","","",""};
                   if(request.getParameter("type").equals("departure"))
+                  {
                 	  out.println("<option value='"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
+                  	  
+                  }
+                	  
             	  if(request.getParameter("type").equals("arrival"))
-                      out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
+            	  {
+            		  out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
+            	  }
+                      
                   %>
                   <!-- <option value="航司1">
                   <option value="航司2">
@@ -439,7 +447,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <input type="text" class="form-control no-height" name="flight-counter" id="inp-flight-counter-mirror" data-required-error='请选择值机柜台*' required>
                 <input type="text" class="form-control" id="inp-flight-counter">
               </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
+             
 
               <!-- 放置值机柜台信息 -->
               <script>
