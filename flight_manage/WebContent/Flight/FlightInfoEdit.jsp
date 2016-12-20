@@ -662,6 +662,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <!-- 放置值机柜台信息 -->
               <script>
                 var counterList = ['值机柜台1', '值机柜台2', '值机柜台3', '值机柜台4', '值机柜台5', '值机柜台6', '值机柜台8', '值机柜台9', '值机柜台10'];
+                var selectedCounterList = null;
               </script>
 
             </div>

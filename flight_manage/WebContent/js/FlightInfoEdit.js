@@ -16,7 +16,6 @@ $(function () {
             }
         }
         $('#inp-flight-counter-tokenfield').autocomplete("option", 'source', counterList);
-        $('#inp-flight-counter-tokenfield').blur();
         if(!valid){
             $('#inp-flight-counter-tokenfield').val('');
             return false;
@@ -44,6 +43,7 @@ $(function () {
     $('#inp-flight-counter').tokenfield('setTokens', selectedCounterList);
 
     $('#inp-flight-counter-tokenfield').blur(function () {
+        console.log('blur');
         $('#inp-flight-counter-mirror').val($('#inp-flight-counter').val());
         $('#inp-flight-counter-mirror').focus();
         $('#inp-flight-counter-mirror').blur();
