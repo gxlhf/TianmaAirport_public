@@ -39,7 +39,7 @@ public class FacilityDelete extends HttpServlet {
 		int result = admin.deletePropertyFacility(facilityModifyInfo[0]);
 		
 		if(result==-1){
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			response.sendRedirect("error.jsp");
 			return;
 		}else if(result==1){
 			request.setAttribute("deleteResult", result);

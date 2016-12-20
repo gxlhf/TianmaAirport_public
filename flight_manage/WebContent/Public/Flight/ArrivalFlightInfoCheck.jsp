@@ -28,6 +28,34 @@ else
     <!-- 支持时间控件 -->
   </head>
   <body>
+  <%
+  	Integer modifyResult=(Integer)request.getAttribute("modifyResult");
+  	if(modifyResult!=null){
+  		if(modifyResult.equals(0)){
+			out.println("<script>alert('修改失败')</script>");
+  		}else if(modifyResult.equals(1)){
+	  		out.println("<script>alert('修改成功')</script>");
+  		}
+  	}
+  	
+  	Integer addResult=(Integer)request.getAttribute("addResult");
+  	if(addResult!=null){
+  		if(addResult.equals(0)){
+			out.println("<script>alert('新增失败')</script>");
+  		}else if(addResult.equals(1)){
+	  		out.println("<script>alert('新增成功')</script>");
+  		}
+  	}
+  	
+  	Integer deleteResult=(Integer)request.getAttribute("deleteResult");
+  	if(deleteResult!=null){
+  		if(deleteResult.equals(0)){
+			out.println("<script>alert('删除失败')</script>");
+  		}else if(deleteResult.equals(1)){
+	  		out.println("<script>alert('删除成功')</script>");
+  		}
+  	}
+  %>
     <!-- 头部开始 -->
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
@@ -303,7 +331,7 @@ else
                 {
                 	
                 	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                		out.println("<tr data-id='FlightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"'>");
+                		out.println("<tr data-id='flightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"&area="+area+"&type=arrival"+"'>");
                     	if(session.getAttribute("priv1")!=null){
                         	out.println("<td><span class='glyphicon'></span></td>");
                         }else{
@@ -322,7 +350,7 @@ else
         				out.println("</tr>");
                 	}
                 	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
-                		out.println("<tr data-id='FlightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"'>");
+                		out.println("<tr data-id='flightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"&area="+area+"&type=arrival"+"'>");
                     	if(session.getAttribute("priv1")!=null){
                         	out.println("<td><span class='glyphicon glyphicon'></span></td>");
                         }else{
@@ -344,7 +372,7 @@ else
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
                 if(session.getAttribute("priv1")!=null)
-              	  out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"Flight/FlightInfoEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
+              	  out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"Flight/FlightInfoEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href='"+basePath+"Flight/FlightInfoEdit.jsp?type=arrival&area="+area+"'>新增</a></div></div>");
             }
             
             %>

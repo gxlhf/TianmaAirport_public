@@ -56,7 +56,7 @@ public class Newsadd extends HttpServlet {
 		News news=new News(title, df.format(new Date()), context, classified, null,admin.getEmpno() , id);
 		int re=admin.addNews(news);
 		if(re==-1){
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			response.sendRedirect("error.jsp");
 			return;
 		}else if(re==1){
 			request.setAttribute("result", re);

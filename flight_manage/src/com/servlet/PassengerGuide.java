@@ -42,9 +42,9 @@ public class PassengerGuide extends HttpServlet {
 		if(flight_type.equals("departure"))
 		{
 			if(is_flightNo.equals("true"))
-				departureFlightInfos = user.searchDepartureFlightInfo("", key, "");
+				departureFlightInfos = user.searchDepartureFlightInfo("", key, "", "");
 			else
-				departureFlightInfos = user.searchDepartureFlightInfo(key, "", "");
+				departureFlightInfos = user.searchDepartureFlightInfo(key, "", "", "");
 			/*for(DepartureFlightInfo output:departureFlightInfos)
 			{
 				if(output!=null)
@@ -58,9 +58,9 @@ public class PassengerGuide extends HttpServlet {
 		else if(flight_type.equals("arrival"))
 		{
 			if(is_flightNo.equals("true"))
-				arrivalFlightInfos = user.searchArrivalFlightInfo("", key, "");
+				arrivalFlightInfos = user.searchArrivalFlightInfo("", key, "", "");
 			else
-				arrivalFlightInfos = user.searchArrivalFlightInfo(key, "", "");
+				arrivalFlightInfos = user.searchArrivalFlightInfo(key, "", "", "");
 			request.setAttribute("arrivalFlightInfos", arrivalFlightInfos);
 			request.getRequestDispatcher("Public/PassengerGuide.jsp").forward(request, response);
 		}

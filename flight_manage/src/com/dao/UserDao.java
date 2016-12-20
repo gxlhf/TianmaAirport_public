@@ -505,6 +505,66 @@ public class UserDao {
 		return departureFlightInfo;
     	
     }
+    public DepartureFlightInfo[] searchDepartureFlightInfo4(String flightNumber,String time)
+    {
+		DepartureFlightInfo[] departureFlightInfo = null;
+		
+                int i=-1;
+                sql = "SELECT flight_off.Flight_No2,flight_off.InternationalOrLocal,flight_off.Starting_station,flight_off.Destination," +
+				"flight_off.Staging_post,flight_off.Airline,bc_allocation.Bname,bc_allocation.Cname,bc_allocation.Time " +
+				"FROM flight_off INNER JOIN bc_allocation ON flight_off.Flight_No2 = bc_allocation.Flight_No2 " +
+				"WHERE flight_off.Flight_No2 = ? AND bc_allocation.Time = ? ORDER BY Time,Flight_No2";//SQL语句  
+		        db1 = new db_connection(sql);//创建db_connection对象  
+//		        String flightNumber=null;
+		        boolean internationalOrLocal;
+		        String from=null;
+		        String to=null;
+		        String stop=null;
+		        String boardingGate=null;
+		        String[] checkinCounter=null;
+		        String airline = null;
+//		        String time=null;
+		        try { 
+		        	db1.pst.setString(1, flightNumber);
+		        	db1.pst.setString(2, time);
+		            ret = db1.pst.executeQuery();//执行语句，得到结果集  
+		            ret.last();
+		            int rowNumber=ret.getRow();
+		            ret.beforeFirst();
+		            departureFlightInfo = new DepartureFlightInfo[rowNumber];
+		            int j=0;
+		            time=null;
+		            while (ret.next()) { 
+		            	if(ret.getString("Flight_No2").equals(flightNumber) && ret.getString("Time").equals(time))
+                        {  
+         	        	   j++;
+         	            }else
+         	               {
+	            	           checkinCounter=new String[10];
+         	        	       i++;
+         	        	       j=0;
+         	               }
+		            	flightNumber=ret.getString("Flight_No2");
+		                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
+		            	from=ret.getString("Starting_station");
+		            	to=ret.getString("Destination");
+		            	stop=ret.getString("Staging_post");
+		            	airline=ret.getString("Airline");
+		            	boardingGate=ret.getString("Bname");
+		            	checkinCounter[j]=ret.getString("Cname");
+		            	time=ret.getString("Time");
+		            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,false,flightNumber,airline,from,to,stop);
+		            	departureFlightInfo[i]=new DepartureFlightInfo(flightCourse,checkinCounter,boardingGate,time);
+		            }
+		            ret.close();  		           
+		        } catch (SQLException e) {  
+		            e.printStackTrace();  
+		        } finally{
+		        	 db1.close();//关闭连接  
+		        }
+		return departureFlightInfo;
+    	
+    }
     public  ArrivalFlightInfo[] searchArrivalFlightInfo0(String flightnumber)
     {
     	ArrivalFlightInfo[] arrivalFlightInfo = null;
@@ -674,6 +734,51 @@ public class UserDao {
 		        String stop=null;
 		        String luggageCarousel=null;
 		        String time=null;
+		        String flightnumber=null;
+		        String airline=null;
+		        try {  
+		            ret = db1.pst.executeQuery();//执行语句，得到结果集  
+		            ret.last();
+		            int rowNumber=ret.getRow();
+		            ret.beforeFirst();
+		            arrivalFlightInfo = new ArrivalFlightInfo[rowNumber];
+		            while (ret.next()) { 
+		            	flightnumber = ret.getString("Flight_No");
+		                internationalOrLocal=ret.getBoolean("InternationalOrLocal");
+		            	from=ret.getString("Starting_station");
+		            	to=ret.getString("Destination");
+		            	stop=ret.getString("Staging_post");
+		            	airline=ret.getString("Airline");
+		            	luggageCarousel=ret.getString("Lname");
+		            	time=ret.getString("Time");
+		            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,true,flightnumber,airline,from,to,stop);
+		            	arrivalFlightInfo[i]=new ArrivalFlightInfo(flightCourse,luggageCarousel,time);
+		                i++;
+		            }
+		            ret.close();  
+		            db1.close();//关闭连接  
+		        } catch (SQLException e) {  
+		            e.printStackTrace();  
+		        } 
+		return arrivalFlightInfo;
+    	
+    }
+    public  ArrivalFlightInfo[] searchArrivalFlightInfo4(String flightNumber,String time)
+    {
+    	ArrivalFlightInfo[] arrivalFlightInfo = null;
+    	
+                int i=0;
+                sql = "SELECT flight_arrival.Flight_No,flight_arrival.InternationalOrLocal,flight_arrival.Starting_station,flight_arrival.Destination," +
+				"flight_arrival.Staging_post,flight_arrival.Airline,lc_allocation.Time,lc_allocation.Lname FROM (flight_arrival " +
+				"INNER JOIN lc_allocation ON flight_arrival.Flight_No = lc_allocation.Flight_No) " +
+				"WHERE flight_arrival.Flight_No = '"+flightNumber+"' AND lc_allocation.Time= '"+time+"'";//SQL语句  
+		        db1 = new db_connection(sql);//创建db_connection对象  
+		        boolean internationalOrLocal;
+		        String from=null;
+		        String to=null;
+		        String stop=null;
+		        String luggageCarousel=null;
+//		        String time=null;
 		        String flightnumber=null;
 		        String airline=null;
 		        try {  

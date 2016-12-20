@@ -6,10 +6,15 @@ import com.dao.*;
 
 public class User {
 	//离港航班信息查询函数，输入三个参数依次为目的地、航班号、航空公司，返回一个DepartureFlightInfo对象数组
-	public DepartureFlightInfo[] searchDepartureFlightInfo(String city, String flightNumber, String airline)
+	public DepartureFlightInfo[] searchDepartureFlightInfo(String city, String flightNumber, String airline, String time)
 	{
 		DepartureFlightInfo[] departureFlightInfo = null;
 		UserDao userDao = new UserDao();
+		if((city==null||city=="")&&(airline==null||airline=="")&&(flightNumber!=null&&flightNumber!="")&&(time!=null&&time!="")){
+			//用于修改离港航班信息时取出修改前的数据，正常情况下只返回一条结果
+			departureFlightInfo = userDao.searchDepartureFlightInfo4(flightNumber, time);
+			return departureFlightInfo;
+		}
 		if(flightNumber!=null&&flightNumber!=""){//查询该航班号的离港航班信息
 			/*
 			 * DepartureFlightInfo[] searchDepartureFlightInfo0(String flightnumber);
@@ -55,10 +60,15 @@ public class User {
 		return departureFlightInfo;
 	}
 	//到港航班信息查询函数，输入三个参数依次为出发地、航班号、航空公司，返回一个ArrivalFlightInfo对象数组
-	public ArrivalFlightInfo[] searchArrivalFlightInfo(String city, String flightNumber, String airline)
+	public ArrivalFlightInfo[] searchArrivalFlightInfo(String city, String flightNumber, String airline, String time)
 	{
 		ArrivalFlightInfo[] arrivalFlightInfo = null;
 		UserDao userDao = new UserDao();
+		if((city==null||city=="")&&(airline==null||airline=="")&&(flightNumber!=null&&flightNumber!="")&&(time!=null&&time!="")){
+			//用于修改到港航班信息时取出修改前的数据，正常情况下只返回一条结果
+			arrivalFlightInfo=userDao.searchArrivalFlightInfo4(flightNumber, time);
+			return arrivalFlightInfo;
+		}
 		if(flightNumber!=null&&flightNumber!=""){//查询该航班号的到港航班信息
 			/*
 			 * ArrivalFlightInfo[] searchArrivalFlightInfo0(String flightnumber); 

@@ -59,7 +59,7 @@ public class AddRole extends HttpServlet {
 		System.out.println(roleDesc);
 		System.out.println(rolePriv);*/
 		if(result==-1){
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			response.sendRedirect("error.jsp");
 			return;
 		}else if(result==1){
 			request.setAttribute("addResult", result);
