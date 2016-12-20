@@ -67,7 +67,7 @@ public class NewsDelete extends HttpServlet {
 		}else{
 		int re=admin.deleteNews(news[a]);
 		if(re==-1){
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			response.sendRedirect("error.jsp");
 			return;
 		}else if(re==1){
 			request.setAttribute("result", re);

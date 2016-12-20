@@ -7,6 +7,7 @@ import com.dao.LoginDao;
 import com.dao.RoleDao;
 import com.dao.UserDao;
 import com.entity.Admin;
+import com.entity.AirportResource;
 import com.entity.DepartureFlightInfo;
 import com.entity.Role;
 
@@ -39,8 +40,8 @@ public class UserdaoTest {
 	     /*System.out.println(test[0].getCheckinCounter()[1]);*/
 	     DepartureFlightInfo[] test1 = userDao.searchDepartureFlightInfo0("MF8601");
 	     /*System.out.println(test1[0].getCheckinCounter()[1]);*/
-	    
-	     
+	     AirportResource[] resourceInfo = userDao.searchAirportResource("登机门23", "");
+	     /*System.out.println(resourceInfo[0].getName());*/
 	     
 	     
 	     

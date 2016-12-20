@@ -72,11 +72,13 @@ public class login extends HttpServlet {
 		Regex regex=new Regex();
 		if(!regex.isValid(username)){
 			System.out.println("username not valid");
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+//			response.sendRedirect("error.jsp");
+			response.sendRedirect("error.jsp");
 		}
 		else if(!regex.isValid(password)){
 			System.out.println("password not valid");
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+//			response.sendRedirect("error.jsp");
+			response.sendRedirect("error.jsp");
 		}else{
 		HttpSession session = request.getSession();
 		LoginDao loginDao = new LoginDao();

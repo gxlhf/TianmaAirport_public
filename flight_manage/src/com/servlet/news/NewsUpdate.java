@@ -58,7 +58,7 @@ public class NewsUpdate extends HttpServlet {
 		News news=new News(title, df.format(new Date()), context, classified, null,admin.getEmpno() , id);
 		int re=admin.modifyNews(news);
 		if(re==-1){
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			response.sendRedirect("error.jsp");
 		}else if(re==1){
 			request.setAttribute("result", re);
 			request.setAttribute("forward", "update");

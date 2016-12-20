@@ -43,7 +43,7 @@ public class SearchResource extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	//	request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 	//	response.setContentType("text/html");
 		String name = request.getParameter("resource-name");
 		String type = request.getParameter("resource-type");

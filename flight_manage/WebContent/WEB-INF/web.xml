@@ -8,8 +8,7 @@
     <servlet-name>login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
- 
-    <servlet>
+  <servlet>
     <servlet-name>VerifyCode</servlet-name>
     <servlet-class>com.servlet.VerifyCode</servlet-class>
   </servlet>
@@ -17,7 +16,6 @@
     <servlet-name>VerifyCode</servlet-name>
     <url-pattern>/VerifyCode</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <servlet-name>logout</servlet-name>
     <servlet-class>com.servlet.logout</servlet-class>
@@ -51,12 +49,60 @@
     <url-pattern>/ArrivalFlightSearch</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AddArrivalFlightInfo</servlet-name>
+    <servlet-class>com.servlet.flight.AddArrivalFlightInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddArrivalFlightInfo</servlet-name>
+    <url-pattern>/AddArrivalFlightInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ModifyArrivalFlightInfo</servlet-name>
+    <servlet-class>com.servlet.flight.ModifyArrivalFlightInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyArrivalFlightInfo</servlet-name>
+    <url-pattern>/ModifyArrivalFlightInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteArrivalFlightInfo</servlet-name>
+    <servlet-class>com.servlet.flight.DeleteArrivalFlightInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteArrivalFlightInfo</servlet-name>
+    <url-pattern>/DeleteArrivalFlightInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>DepartureFlightSearch</servlet-name>
     <servlet-class>com.servlet.flight.DepartureFlightSearch</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DepartureFlightSearch</servlet-name>
     <url-pattern>/DepartureFlightSearch</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddDepartureFlightInfo</servlet-name>
+    <servlet-class>com.servlet.flight.AddDepartureFlightInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddDepartureFlightInfo</servlet-name>
+    <url-pattern>/AddDepartureFlightInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ModifyDepartureFlightInfo</servlet-name>
+    <servlet-class>com.servlet.flight.ModifyDepartureFlightInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyDepartureFlightInfo</servlet-name>
+    <url-pattern>/ModifyDepartureFlightInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteDepartureFlightInfo</servlet-name>
+    <servlet-class>com.servlet.flight.DeleteDepartureFlightInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteDepartureFlightInfo</servlet-name>
+    <url-pattern>/DeleteDepartureFlightInfo</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SearchResource</servlet-name>

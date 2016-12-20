@@ -40,7 +40,7 @@ public class DeleteAdmin extends HttpServlet {
 		int result = admin.deleteAdmin(adminModifyInfo[0]);
 //		System.out.println(result);
 		if(result==-1){
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			response.sendRedirect("error.jsp");
 			return;
 		}else if(result==1){
 			request.setAttribute("deleteResult", result);

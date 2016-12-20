@@ -68,7 +68,7 @@ public class AddAdmin extends HttpServlet {
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		int result = admin.addAdmin(adminAddInfo);
 		if(result==-1){
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			response.sendRedirect("error.jsp");
 			return;
 		}else if(result==1){
 			request.setAttribute("addResult", result);

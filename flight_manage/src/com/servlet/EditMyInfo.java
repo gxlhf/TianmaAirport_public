@@ -74,7 +74,7 @@ public class EditMyInfo extends HttpServlet {
 		request.setAttribute("modifyResult", result);
 		request.getRequestDispatcher("/EditMyInfo.jsp").forward(request,response);
 		/*if(result==-1){
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			response.sendRedirect("error.jsp");
 			return;
 		}else if(result==1){
 			request.setAttribute("modifyResult", result);
