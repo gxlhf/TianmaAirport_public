@@ -485,25 +485,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	int flag = 1;
             	for(String checkincounteroutput:departureFlightModifyInfo[0].getCheckinCounter())
             	{
+            		/* System.out.println(checkincounteroutput); */
             		if(checkincounteroutput!=null)
             		{
-            			String t3[] = checkincounteroutput.split("台");
+            			
+            			/* String t3[] = checkincounteroutput.split("台"); */
             			if(flag==1)
             			{
-            				checkincounters = checkincounters + t3[1];
+            				checkincounters = checkincounters + checkincounteroutput;
             				flag = 0;
             			}
             			else
-            				checkincounters = checkincounters + ", " + t3[1];
+            				checkincounters = checkincounters + "," + checkincounteroutput;
             		}
             			
             	}
+            	/* System.out.println(checkincounters); */
             %>
             <div class="form-group">
               <label for="flight-counter" class="col-sm-2 control-label">值机柜台：</label>
               <div class="col-sm-6">
                 <input type="text" class="form-control no-height" name="flight-counter" id="inp-flight-counter-mirror" data-required-error='请选择值机柜台*' required>
-                <input type="text" class="form-control" id="inp-flight-counter">
+                <input type="text" class="form-control" id="inp-flight-counter" >
               </div>
 
 
@@ -520,7 +523,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	}
             	String json_arr_String = JSON.toJSONString(checkinCounterName,true); 
             	JSONArray jsonArray = JSON.parseArray(json_arr_String);
-            	System.out.println(jsonArray);
+            	String selectedCounterListTemp = JSON.toJSONString(departureFlightModifyInfo[0].getCheckinCounter(),true);
+            	JSONArray selectedCounterListJson = JSON.parseArray(selectedCounterListTemp);
+            	System.out.println(selectedCounterListJson);
+            	/* System.out.println(jsonArray); */
             	/* System.out.println(checkinCounterName[5]); */
             	/* JSONArray jsonarray = JSONArray.fromObject(checkinCounterName); */
             	/* System.out.println(jsonarray); */
@@ -528,6 +534,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <script>
                 /* var counterList = ['值机柜台01', '值机柜台02', '值机柜台03', '值机柜台04', '值机柜台05', '值机柜台06', '值机柜台08', '值机柜台09', '值机柜台10']; */
                 var counterList = <%=jsonArray %>;
+                var selectedCounterList = <%=selectedCounterListJson %>;
               </script>
 
               <div class="col-sm-2 help-block with-errors">*</div>

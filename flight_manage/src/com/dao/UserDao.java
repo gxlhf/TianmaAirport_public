@@ -533,6 +533,7 @@ public class UserDao {
 		            ret.beforeFirst();
 		            departureFlightInfo = new DepartureFlightInfo[rowNumber];
 		            int j=0;
+		            time=null;
 		            while (ret.next()) { 
 		            	if(ret.getString("Flight_No2").equals(flightNumber) && ret.getString("Time").equals(time))
                         {  
@@ -551,7 +552,7 @@ public class UserDao {
 		            	airline=ret.getString("Airline");
 		            	boardingGate=ret.getString("Bname");
 		            	checkinCounter[j]=ret.getString("Cname");
-//		            	time=ret.getString("Time");
+		            	time=ret.getString("Time");
 		            	FlightCourse flightCourse=new FlightCourse(internationalOrLocal,false,flightNumber,airline,from,to,stop);
 		            	departureFlightInfo[i]=new DepartureFlightInfo(flightCourse,checkinCounter,boardingGate,time);
 		            }
