@@ -506,7 +506,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <label for="flight-counter" class="col-sm-2 control-label">值机柜台：</label>
               <div class="col-sm-6">
                 <input type="text" class="form-control no-height" name="flight-counter" id="inp-flight-counter-mirror" data-required-error='请选择值机柜台*' required>
-                <input type="text" class="form-control" id="inp-flight-counter" >
+                <input type="text" class="form-control" id="inp-flight-counter">
               </div>
 
 

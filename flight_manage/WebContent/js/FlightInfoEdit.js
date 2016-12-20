@@ -37,8 +37,11 @@ $(function () {
             autoFocus: true
         },
         showAutocompleteOnFocus: true,
+        delimiter: [",", " ", "-", "_"],
         limit: 5
     });
+
+    $('#inp-flight-counter').tokenfield('setTokens', selectedCounterList);
 
     $('#inp-flight-counter-tokenfield').blur(function () {
         $('#inp-flight-counter-mirror').val($('#inp-flight-counter').val());
