@@ -127,25 +127,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="col-md-8" id="sidebar">
           </div>
           <div class="col-md-4" id="content">
-          <h4>管理员登陆</h4>
-            <form role="form" class="form-login" action="login" method="post">
+          <h4>忘记密码</h4>
+            <form role="form" class="form-login" action="ForgetPassword" method="post">
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                  <input name="username" class="form-control" type="text" placeholder="用户名">
+                  <input name="userid" class="form-control" type="text" placeholder="员工号">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
-                  <input name="password" class="form-control" type="password" placeholder="密码">
+                  <input name="email" class="form-control" type="text" placeholder="邮箱">
                 </div>
               </div>
               <div class="form-group" id="captcha-group">
                 <input name="veryCode" class="form-control" id="veryCode" type="text" placeholder="验证码">
                 <img id="imgObj" src="VerifyCode" onclick="changeImg()" />
               </div>
-              <button type="submit" class="btn btn-primary btn-block" >登陆</button>
+              <button type="submit" class="btn btn-primary btn-block" >发送邮件</button>
             </form>
             
             <script type="text/javascript">
@@ -182,7 +182,6 @@ function chgUrl(url){
             		out.println("<p class='text-danger'>"+request.getAttribute("result")+"</p>");
             }
             %>
-            <a href="<%=basePath%>forget.jsp">忘记密码</a>
           </div>
         </div>
       </div>
