@@ -1,237 +1,137 @@
-<%@ page language="java" import="java.util.*,java.io.*,java.lang.reflect.*,javax.servlet.*,org.dom4j.*,com.entity.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,java.io.*,javax.servlet.*,com.entity.*" pageEncoding="utf-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+	response.setCharacterEncoding("UTF-8");
 	System.out.println("");
+	String respStr = request.getParameter("echostr");
+	int respType = 1;//0 text, 1 news
+	String respTitle = new String();
+	String respDesc = new String();
+	
+	User port = new User();
 
-	/* 读取接收到的xml消息 */
-	StringBuffer sb = new StringBuffer();
-	InputStream is = request.getInputStream();
-	InputStreamReader isr = new InputStreamReader(is, "UTF-8");
-	BufferedReader br = new BufferedReader(isr);
-	String s = "";
-	while ((s = br.readLine()) != null) {
-		sb.append(s);
-	}
-	String xml = sb.toString();	//接收到微信端发送过来的xml数据
-	System.out.println(xml);
+	if(!(respStr != null && respStr.length() > 1)){
 
-	/* xml实体 */
-	class ReceiveXmlEntity {
-		private String ToUserName="";
-		private String FromUserName="";
-		private String CreateTime="";
-		private String MsgType="";
-		private String MsgId="";
-		private String Event="";
-		private String EventKey="";
-		private String Ticket="";
-		private String Latitude="";
-		private String Longitude="";
-		private String Precision="";
-		private String PicUrl="";
-		private String MediaId="";
-		private String Title="";
-		private String Description="";
-		private String Url="";
-		private String Location_X="";
-		private String Location_Y="";
-		private String Scale="";
-		private String Label="";
-		private String Content="";
-		private String Format="";
-		private String Recognition="";
+		/* 读取接收到的xml消息 */
+		StringBuffer sb = new StringBuffer();
+		InputStream is = request.getInputStream();
+		InputStreamReader isr = new InputStreamReader(is, "UTF-8");
+		BufferedReader br = new BufferedReader(isr);
+		String s = "";
+		while ((s = br.readLine()) != null) {
+			sb.append(s);
+		}
+		String xml = sb.toString();	//接收到微信端发送过来的xml数据
+		//System.out.println(xml);
 		
-		public String getRecognition() {
-			return Recognition;
+		String toName = xml.split("<ToUserName>")[1].split("CDATA")[1].split("]></ToUserName>")[0];//[0]
+		String fromName = xml.split("<FromUserName>")[1].split("CDATA")[1].split("]></FromUserName>")[0];//[0]
+		String content = xml.split("<Content>")[1].split("CDATA")[1].split("></Content>")[0].split("\\[")[1].split("\\]")[0];//[0]
+		String time = xml.split("<CreateTime>")[1].split("</CreateTime>")[0];//[0]
+
+		/* System.out.println(toName);
+		System.out.println(fromName);
+		System.out.println(content);
+		System.out.println(time); */
+
+		if(content.matches("[a-zA-Z]{2}[0-9]{4}|[a-zA-Z][0-9]{5}|[0-9][a-zA-Z][0-9]{4}")){
+			respTitle = "航班信息查询";
+			
+			content = content.toUpperCase();
+
+			ArrivalFlightInfo[] arrResult = port.searchArrivalFlightInfo("", content, "", "");	
+			if(arrResult.length != 0){
+				// System.out.println("arr");
+				respDesc = content + " " + arrResult[0].getFlightCourse().getAirline() + "\n" + 
+							arrResult[0].getFlightCourse().getFrom() + " -> " + arrResult[0].getFlightCourse().getTo() + "\n" +
+							"降落时间：" + arrResult[0].getTime() + "\n" +
+							"行李转盘：" + arrResult[0].getLuggageCarousel() + "\n\n";
+			}			
+
+			DepartureFlightInfo[] depResult = port.searchDepartureFlightInfo("", content, "", "");
+			if(depResult.length != 0){
+				// System.out.println("dep");
+				String[] counterList = depResult[0].getCheckinCounter();
+				String counterStr = new String();
+				counterStr = counterList[0];
+				for(int i = 1; i < counterList.length; i++){
+					if(counterList[i] != null)
+						counterStr += " " + counterList[i];
+				}
+				respDesc += content + " " + depResult[0].getFlightCourse().getAirline() + "\n" + 
+							depResult[0].getFlightCourse().getFrom() + " -> " + depResult[0].getFlightCourse().getTo()+ "\n" +
+							"起飞时间：" + depResult[0].getTime() + "\n" +
+							"值机柜台：" + counterStr + "\n" +
+							"登机门：" + depResult[0].getBoardingGate();
+			}
+
+			if(depResult.length + arrResult.length == 0)
+				respType = 0;
+		}else if(content.matches("登机门[0-9]{1,2}")){
+			respTitle = "登机门位置查询";
+			
+			AirportResource[] gateList = port.searchAirportResource(content, "登机门");
+			if(gateList.length != 0){		
+				respDesc = content + "位置：" + gateList[0].getLocation();
+			}else{
+				respType = 0;
+			}
+		}else if(content.matches("值机柜台[0-9]{1,2}")){
+			respTitle = "值机柜台位置查询";
+			
+			if(content.length() == 5){
+				StringBuilder stringBuilder =new StringBuilder(content);
+				stringBuilder.insert(4,"0");
+				content = stringBuilder.toString();
+			}
+			
+			AirportResource[] gateList = port.searchAirportResource(content, "值机柜台");
+			if(gateList.length != 0){		
+				respDesc = content + "位置：" + gateList[0].getLocation();
+			}else{
+				respType = 0;
+			}
+		}else if(content.matches("行李转盘[0-9]{1,2}")){
+			respTitle = "行李转盘位置查询";
+			
+			if(content.length() == 5){
+				StringBuilder stringBuilder =new StringBuilder(content);
+				stringBuilder.insert(4,"0");
+				content = stringBuilder.toString();
+			}
+			
+			AirportResource[] gateList = port.searchAirportResource(content, "行李转盘");
+			if(gateList.length != 0){		
+				respDesc = content + "位置：" + gateList[0].getLocation();
+			}else{
+				respType = 0;
+			}
+		}else{
+			respType = 0;
 		}
-		public void setRecognition(String recognition) {
-			Recognition = recognition;
+		
+		if(respType == 1){
+			respStr="<xml>" + 
+						"<ToUserName><![CDATA" + fromName + "]></ToUserName>" + 
+						"<FromUserName><![CDATA" + toName + "]></FromUserName>" +
+						"<CreateTime>" + new Date().getTime() + "</CreateTime>" +
+						"<MsgType><![CDATA[news]]></MsgType>" +
+						"<ArticleCount>1</ArticleCount>" + 
+						"<Articles>" + 
+							"<item>" + 
+								"<Title><![CDATA[" + respTitle + "]]></Title>" + 
+								"<Description><![CDATA[" + respDesc + "]]></Description>" +
+							"</item>" + 
+						"</Articles>" +
+					"</xml>";
+		}else if(respType == 0){
+			respStr = "<xml><ToUserName><![CDATA" + fromName + "]></ToUserName><FromUserName><![CDATA" + toName + "]></FromUserName><CreateTime>" + time +"</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[好像没有你想要的东西[尴尬]\n请检查你要搜索的关键字再问问小天哦~]]></Content></xml>";
 		}
-		public String getFormat() {
-			return Format;
-		}
-		public void setFormat(String format) {
-			Format = format;
-		}
-		public String getContent() {
-			return Content;
-		}
-		public void setContent(String content) {
-			Content = content;
-		}
-		public String getLocation_X() {
-			return Location_X;
-		}
-		public void setLocation_X(String locationX) {
-			Location_X = locationX;
-		}
-		public String getLocation_Y() {
-			return Location_Y;
-		}
-		public void setLocation_Y(String locationY) {
-			Location_Y = locationY;
-		}
-		public String getScale() {
-			return Scale;
-		}
-		public void setScale(String scale) {
-			Scale = scale;
-		}
-		public String getLabel() {
-			return Label;
-		}
-		public void setLabel(String label) {
-			Label = label;
-		}
-		public String getTitle() {
-			return Title;
-		}
-		public void setTitle(String title) {
-			Title = title;
-		}
-		public String getDescription() {
-			return Description;
-		}
-		public void setDescription(String description) {
-			Description = description;
-		}
-		public String getUrl() {
-			return Url;
-		}
-		public void setUrl(String url) {
-			Url = url;
-		}
-		public String getPicUrl() {
-			return PicUrl;
-		}
-		public void setPicUrl(String picUrl) {
-			PicUrl = picUrl;
-		}
-		public String getMediaId() {
-			return MediaId;
-		}
-		public void setMediaId(String mediaId) {
-			MediaId = mediaId;
-		}
-		public String getEventKey() {
-			return EventKey;
-		}
-		public void setEventKey(String eventKey) {
-			EventKey = eventKey;
-		}
-		public String getTicket() {
-			return Ticket;
-		}
-		public void setTicket(String ticket) {
-			Ticket = ticket;
-		}
-		public String getLatitude() {
-			return Latitude;
-		}
-		public void setLatitude(String latitude) {
-			Latitude = latitude;
-		}
-		public String getLongitude() {
-			return Longitude;
-		}
-		public void setLongitude(String longitude) {
-			Longitude = longitude;
-		}
-		public String getPrecision() {
-			return Precision;
-		}
-		public void setPrecision(String precision) {
-			Precision = precision;
-		}
-		public String getEvent() {
-			return Event;
-		}
-		public void setEvent(String event) {
-			Event = event;
-		}
-		public String getMsgId() {
-			return MsgId;
-		}
-		public void setMsgId(String msgId) {
-			MsgId = msgId;
-		}
-		public String getToUserName() {
-			return ToUserName;
-		}
-		public void setToUserName(String toUserName) {
-			ToUserName = toUserName;
-		}
-		public String getFromUserName() {
-			return FromUserName;
-		}
-		public void setFromUserName(String fromUserName) {
-			FromUserName = fromUserName;
-		}
-		public String getCreateTime() {
-			return CreateTime;
-		}
-		public void setCreateTime(String createTime) {
-			CreateTime = createTime;
-		}
-		public String getMsgType() {
-			return MsgType;
-		}
-		public void setMsgType(String msgType) {
-			MsgType = msgType;
-		}
+		
+		//System.out.println(respStr);
 	}
 	
-	/* 解析器 */
-	class ReceiveXmlProcess {
-	/**
-	 * 解析微信xml消息
-	 * @param strXml
-	 * @return
-	 */
-	public ReceiveXmlEntity getMsgEntity(String strXml){
-			ReceiveXmlEntity msg = null;
-			try {
-				if (strXml.length() <= 0 || strXml == null)
-					return null;
-				 
-				// 将字符串转化为XML文档对象
-				Document document = DocumentHelper.parseText(strXml);
-				// 获得文档的根节点
-				Element root = document.getRootElement();
-				// 遍历根节点下所有子节点
-				Iterator<?> iter = root.elementIterator();
-				
-				// 遍历所有结点
-				msg = new ReceiveXmlEntity();
-				//利用反射机制，调用set方法
-				//获取该实体的元类型
-				Class<?> c = Class.forName("demo.entity.ReceiveXmlEntity");
-				msg = (ReceiveXmlEntity)c.newInstance();//创建这个实体的对象
-				
-				while(iter.hasNext()){
-					Element ele = (Element)iter.next();
-					//获取set方法中的参数字段（实体类的属性）
-					Field field = c.getDeclaredField(ele.getName());
-					//获取set方法，field.getType())获取它的参数数据类型
-					Method method = c.getDeclaredMethod("set"+ele.getName(), field.getType());
-					//调用set方法
-					method.invoke(msg, ele.getText());
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println("xml 格式异常: "+ strXml);
-				e.printStackTrace();
-			}
-			return msg;
-		}
-	}	
-	
-	ReceiveXmlProcess receiveXmlProcess = new ReceiveXmlProcess();
-	ReceiveXmlEntity receiveXmlEntity = receiveXmlProcess.getMsgEntity(xml);
-	String fromName = receiveXmlEntity.getFromUserName();
-	System.out.println("fromName:" + fromName);
-	
-	response.getWriter().print("123");
+	response.getWriter().print(respStr);
 	response.getWriter().flush();
 	response.getWriter().close();
 %>
