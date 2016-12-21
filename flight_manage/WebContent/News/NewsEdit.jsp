@@ -100,13 +100,31 @@ String id=request.getParameter("news-id");
                 <li>
                   <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
                 </li>
-                <li>
+                <%
+                if(type!=null&&type.equals("flightInformation"))
+                	out.println("<li class='curmenu'>");
+                else
+                	out.println("<li>");
+                %>
+                <!-- <li> -->
                   <a href="<%=basePath%>Public/News/NewsList.jsp?type=flightInformation">航班信息</a>
                 </li>
-                <li>
+                <%
+                if(type!=null&&type.equals("airportResource"))
+                	out.println("<li class='curmenu'>");
+                else
+                	out.println("<li>");
+                %>
+                <!-- <li> -->
                   <a href="<%=basePath%>Public/News/NewsList.jsp?type=airportResource">机场资源</a>
                 </li>
-                <li>
+                <%
+                if(type!=null&&type.equals("facilityResource"))
+                	out.println("<li class='curmenu'>");
+                else
+                	out.println("<li>");
+                %>
+                <!-- <li> -->
                   <a href="<%=basePath%>Public/News/NewsList.jsp?type=facilityResource">物业资源</a>
                 </li>
                 <%
@@ -273,13 +291,14 @@ String id=request.getParameter("news-id");
          	    	out.println("<input type='text' style='display:none' name='type' value='物业资源' >");
          	}
             %>
-            <div class="form-group">
+            <%-- <div class="form-group">
               <label for="news-context" class="col-sm-2 control-label">新闻id：</label>
               <div class="col-sm-6">
                  <input type='text' class='form-control' name='id'  data-error='请输入id*' autocomplete='off' value="<%if(id!=null&&!id.equals("null")) out.print(id); %>" required>
               </div>
               <div class="help-block with-errors">*</div>
-            </div>
+            </div> --%>
+            <input type='text' class='hide' name='id' value="<%if(id!=null&&!id.equals("null")) out.print(id); %>">
             <div class="form-group">
               <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
               <div class="col-sm-6">
@@ -337,7 +356,7 @@ String id=request.getParameter("news-id");
                   	out.print("新增");
                 %>
                 </a>
-                <a class="btn btn-primary" href="">取消</a>
+                <a class="btn btn-primary" href="<%=basePath%>Public/News/NewsList.jsp?type=<%=type %>">取消</a>
               </div>
             </div>
           </form>

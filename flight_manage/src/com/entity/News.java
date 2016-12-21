@@ -20,8 +20,7 @@ public class News {
 	String publisher_id;
 	String publisher_name;
 	String newsId;
-	public News(String title, String time, String content, String kind, String attachment, String publisher_id,
-			String newsId) {
+	public News(String title, String time, String content, String kind, String attachment, String publisher_id, String newsId) {
 		this.title = title;
 		this.time = time;
 		this.content = content;
@@ -32,6 +31,17 @@ public class News {
 		Admin[] publisher = adminDao.searchAdmin0(publisher_id);
 		this.publisher_name = publisher[0].getName();
 		this.newsId = newsId;
+	}
+	public News(String title, String time, String content, String kind, String attachment, String publisher_id) {
+		this.title = title;
+		this.time = time;
+		this.content = content;
+		this.kind = kind;
+		this.attachment = attachment;
+		this.publisher_id = publisher_id;
+		AdminDao adminDao = new AdminDao();
+		Admin[] publisher = adminDao.searchAdmin0(publisher_id);
+		this.publisher_name = publisher[0].getName();
 	}
 	public String getTitle() {
 		return title;

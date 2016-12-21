@@ -46,7 +46,7 @@ public class NewsDelete extends HttpServlet {
 	}
 	
 	void processrequest(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
-		System.out.println("news delete");
+//		System.out.println("news delete");
 		if(request.getParameter("news-id")==null){
 			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
 			return;
@@ -65,19 +65,21 @@ public class NewsDelete extends HttpServlet {
 			request.setAttribute("forward", "delete");
 			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request,response);
 		}else{
-		int re=admin.deleteNews(news[a]);
-		if(re==-1){
-			response.sendRedirect("error.jsp");
-			return;
-		}else if(re==1){
-			request.setAttribute("result", re);
-			request.setAttribute("forward", "delete");
-			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
-		}else {
-			request.setAttribute("result", re);
-			request.setAttribute("forward", "delete");
-			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request,response);
-		}
+			int re=admin.deleteNews(news[a]);
+			String classified = news[a].getKind();
+			if(re==-1){
+				response.sendRedirect("error.jsp");
+				return;
+			}else {
+				request.setAttribute("result", re);
+				request.setAttribute("forward", "delete");
+				if(classified.equals("航班信息"))
+					request.getRequestDispatcher("/Public/News/NewsList.jsp?type=flightInformation").forward(request,response);
+				if(classified.equals("机场资源"))
+					request.getRequestDispatcher("/Public/News/NewsList.jsp?type=airportResource").forward(request,response);
+				if(classified.equals("物业资源"))
+					request.getRequestDispatcher("/Public/News/NewsList.jsp?type=facilityResource").forward(request,response);
+			}
 		}
 	}
 

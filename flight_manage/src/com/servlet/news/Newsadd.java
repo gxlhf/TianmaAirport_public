@@ -46,26 +46,28 @@ public class Newsadd extends HttpServlet {
 	}
 
 	void processrequest(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
+		request.setCharacterEncoding("UTF-8");
 		String title=request.getParameter("news-title");
 		String classified=request.getParameter("type");
 		String context=request.getParameter("news-context");
-		String id=request.getParameter("id");
+//		String id=request.getParameter("id");
 		HttpSession session=request.getSession();
 		Admin admin=(Admin)session.getAttribute("admin");
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		News news=new News(title, df.format(new Date()), context, classified, null,admin.getEmpno() , id);
+		News news=new News(title, df.format(new Date()), context, classified, null,admin.getEmpno());
 		int re=admin.addNews(news);
 		if(re==-1){
 			response.sendRedirect("error.jsp");
 			return;
-		}else if(re==1){
-			request.setAttribute("result", re);
-			request.setAttribute("forward", "add");
-			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
 		}else {
 			request.setAttribute("result", re);
 			request.setAttribute("forward", "add");
-			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request,response);
+			if(classified.equals("航班信息"))
+				request.getRequestDispatcher("/Public/News/NewsList.jsp?type=flightInformation").forward(request,response);
+			if(classified.equals("机场资源"))
+				request.getRequestDispatcher("/Public/News/NewsList.jsp?type=airportResource").forward(request,response);
+			if(classified.equals("物业资源"))
+				request.getRequestDispatcher("/Public/News/NewsList.jsp?type=facilityResource").forward(request,response);
 		}
 	}
 
