@@ -59,20 +59,17 @@ public class NewsUpdate extends HttpServlet {
 		int re=admin.modifyNews(news);
 		if(re==-1){
 			response.sendRedirect("error.jsp");
-		}else if(re==1){
-			request.setAttribute("result", re);
-			request.setAttribute("forward", "update");
-			if(classified.equals("机场介绍")){
-				request.getRequestDispatcher("/Public/News/Intro.jsp").forward(request, response);
-			}else
-				request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
 		}else {
 			request.setAttribute("result", re);
 			request.setAttribute("forward", "update");
-			if(classified.equals("机场介绍")){
+			if(classified.equals("机场介绍"))
 				request.getRequestDispatcher("/Public/News/Intro.jsp").forward(request, response);
-			}else
-				request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
+			if(classified.equals("航班信息"))
+				request.getRequestDispatcher("/Public/News/NewsList.jsp?type=flightInformation").forward(request,response);
+			if(classified.equals("机场资源"))
+				request.getRequestDispatcher("/Public/News/NewsList.jsp?type=airportResource").forward(request,response);
+			if(classified.equals("物业资源"))
+				request.getRequestDispatcher("/Public/News/NewsList.jsp?type=facilityResource").forward(request,response);
 		}
 	}
 
