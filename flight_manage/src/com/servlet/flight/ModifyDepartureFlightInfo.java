@@ -42,7 +42,6 @@ public class ModifyDepartureFlightInfo extends HttpServlet {
 //		doGet(request, response);
 		request.setCharacterEncoding("UTF-8");
 		boolean area = false;
-//		String area = request.getParameter("flight-area");
 		if(request.getParameter("flight-area").equals("true"))
 			area= true;
 		if(request.getParameter("flight-area").equals("false"))
@@ -55,15 +54,6 @@ public class ModifyDepartureFlightInfo extends HttpServlet {
 		String airline = request.getParameter("flight-airline");
 		String checkinCounter = request.getParameter("flight-counter");
 		String boardingGate = request.getParameter("flight-gate");
-		/*System.out.println(area);
-		System.out.println(flightNumber);
-		System.out.println(time);
-		System.out.println(from);
-		System.out.println(stop);
-		System.out.println(to);
-		System.out.println(airline);
-		System.out.println(checkinCounter);
-		System.out.println(boardingGate);*/
 		FlightCourse departureFlightCourse = new FlightCourse(area, false, flightNumber, airline, from, to, stop);
 		String[] checkinCounterArray = checkinCounter.split(", ");
 		DepartureFlightInfo departureFlightModifyInfo = new DepartureFlightInfo(departureFlightCourse, checkinCounterArray, boardingGate, time);
@@ -79,8 +69,6 @@ public class ModifyDepartureFlightInfo extends HttpServlet {
 			if(area==false)
 				request.getRequestDispatcher("/Public/Flight/DepartureFlightInfoCheck.jsp?area=local").forward(request,response);
 		}
-		/*System.out.println(checkinCounterArray.length);
-		System.out.println(checkinCounterArray[1]);*/
 	}
 
 }
