@@ -169,7 +169,7 @@ newsId=news.getNewsId();
             <div class="form-group">
               <label for="news-title"  class="col-sm-2 control-label">新闻标题：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="news-title" value="<%=title %>" >
+                <input type="text" class="form-control" name="news-title" value="<%=title %>" readonly>
               </div>
             </div>
 			<input type="text" style="display:none" name="type" value="机场介绍">

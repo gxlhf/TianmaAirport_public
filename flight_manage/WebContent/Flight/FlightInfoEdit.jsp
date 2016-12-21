@@ -762,7 +762,12 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">      
                 <a id="btn-save" class="btn btn-success">修改</a>
-                <a class="btn btn-primary" href="">取消</a>
+                <a class="btn btn-primary" href="<%
+                if(request.getParameter("type").equals("arrival"))
+                	out.println(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area="+request.getParameter("area"));
+            	if(request.getParameter("type").equals("departure"))
+            		out.println(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+request.getParameter("area"));
+                %>">取消</a>
               </div>
             </div>
           </form>
@@ -1052,7 +1057,12 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">      
                 <a id="btn-save" class="btn btn-success">新增</a>
-                <a class="btn btn-primary" href="">取消</a>
+                <a class="btn btn-primary" href="<%
+                if(request.getParameter("type").equals("arrival"))
+                	out.println(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area="+request.getParameter("area"));
+            	if(request.getParameter("type").equals("departure"))
+            		out.println(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+request.getParameter("area"));
+                %>">取消</a>
               </div>
             </div>
           </form>

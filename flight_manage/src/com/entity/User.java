@@ -5,6 +5,30 @@ package com.entity;
 import com.dao.*;
 
 public class User {
+	//返回所有国内离港航班信息
+	public DepartureFlightInfo[] returnAllLocalDepartureFlightInfo()
+	{
+		UserDao userDao = new UserDao();
+		return userDao.returnAllLocalDepartureFlightInfo();
+	}
+	//返回所有国际离港航班信息
+	public DepartureFlightInfo[] returnAllInternationalDepartureFlightInfo()
+	{
+		UserDao userDao = new UserDao();
+		return userDao.returnAllInternationalDepartureFlightInfo();
+	}
+	//返回所有国内到港航班信息
+	public ArrivalFlightInfo[] returnAllLocalArrivalFlightInfo()
+	{
+		UserDao userDao = new UserDao();
+		return userDao.returnAllLocalArrivalFlightInfo();
+	}
+	//返回所有国际到港航班信息
+	public ArrivalFlightInfo[] returnAllInternationalArrivalFlightInfo()
+	{
+		UserDao userDao = new UserDao();
+		return userDao.returnAllInternationalArrivalFlightInfo();
+	}
 	//离港航班信息查询函数，输入三个参数依次为目的地、航班号、航空公司，返回一个DepartureFlightInfo对象数组
 	public DepartureFlightInfo[] searchDepartureFlightInfo(String city, String flightNumber, String airline, String time)
 	{
