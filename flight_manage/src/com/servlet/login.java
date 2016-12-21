@@ -54,7 +54,7 @@ public class login extends HttpServlet {
 		String result;
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String validateC=(String)request.getSession().getAttribute("validateCode");
+		/*String validateC=(String)request.getSession().getAttribute("validateCode");
 		String veryCode=request.getParameter("veryCode");
 		if(veryCode==null||"".equals(veryCode)){
 			result="验证码为空";
@@ -68,7 +68,7 @@ public class login extends HttpServlet {
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 				return;
 			}
-		}
+		}*/
 		Regex regex=new Regex();
 		if(!regex.isValid(username)){
 			System.out.println("username not valid");
