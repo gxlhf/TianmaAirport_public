@@ -139,7 +139,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	out.println("<a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a>");
                 }
                 %> --%>
-                  <a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a>
+                  <a href="<%=basePath%>Public/PassengerGuide.jsp">乘机指引</a>
                 </li>
                 <li role="presentation">
                   <a href="<%=basePath%>Public/Facility/Facility.jsp">物业设施</a>
@@ -374,7 +374,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li> --%>
           </ul>
 
-          <div>
+          <!-- <div>
             <ul class="pager">
               <li class="previous">
                 <a href="#">← 上一页</a>
@@ -383,7 +383,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <a href="#">下一页 →</a>
               </li>
             </ul>
-          </div>
+          </div> -->
           <%
           if(session.getAttribute("priv0")!=null){
         	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"Facility/FacilityEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
