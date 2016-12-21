@@ -13,7 +13,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
-  </head><body>
+  </head>
+  <body>
   
    <%
   	Integer modifyResult=(Integer)request.getAttribute("modifyResult");
@@ -334,6 +335,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!-- /.modal-dialog -->
       </div>
       <!-- 确认信息弹框结束 -->      
+
+
+      <!-- 报错弹框开始 -->
+      <div id="errorBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h5 class="modal-title" id="myModalLabel">提示</h5>
+            </div>
+            <div class="modal-body">
+              <p class="text-center">请选择机场设施</p>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 报错弹框结束 -->
+      
+
     </div>
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
