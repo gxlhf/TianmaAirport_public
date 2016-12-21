@@ -175,7 +175,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="resource-type" class="col-sm-2 control-label">资源分类：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="resource-type" data-error="请选择资源分类*"  required>
+              	<input type="text" class="form-control" name="resource-type" data-error="请填写分类*"  value="<%=resourceModify[0].getType() %>"required readonly>
+                <%-- <select class="form-control" name="resource-type" data-error="请选择资源分类*"  required>
                   <option value="<%=resourceModify[0].getType() %>" ><%=resourceModify[0].getType() %></option>  
 				
                 
@@ -205,7 +206,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 %>
                   
                   
-                </select>
+                </select> --%>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>

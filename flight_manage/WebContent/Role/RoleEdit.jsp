@@ -159,7 +159,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="rolename" class="col-sm-2 control-label">角色名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="roleName" value="<%=roleModify.getName() %>" data-error="请填写角色名称*" required>
+                <input type="text" class="form-control" name="roleName" value="<%=roleModify.getName() %>" data-error="请填写角色名称*" required readonly>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
