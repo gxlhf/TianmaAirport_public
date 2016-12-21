@@ -9,6 +9,14 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ForgetPassword</servlet-name>
+    <servlet-class>com.servlet.FindPassword</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ForgetPassword</servlet-name>
+    <url-pattern>/ForgetPassword</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>VerifyCode</servlet-name>
     <servlet-class>com.servlet.VerifyCode</servlet-class>
   </servlet>

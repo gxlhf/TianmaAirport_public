@@ -902,17 +902,17 @@ public class AdminDao {
     }
     public boolean addNews(News news)  
     {//数据库操作：新增新闻，形参为新闻对象，返回值为布尔值
-		sql = "INSERT INTO newscenter (News_id,Em_No,NCname,Title,Edit_time,Attachments,Content) " +
-				"VALUES (?,?,?,?,?,?,?);";//SQL语句  
+		sql = "INSERT INTO newscenter (Em_No,NCname,Title,Edit_time,Attachments,Content) " +
+				"VALUES (?,?,?,?,?,?);";//SQL语句  
         db1= new db_connection(sql);//创建db_connection对象  
          try {
-        	db1.pst.setString(1, news.getNewsId());
-        	db1.pst.setString(2, news.getPublisher_id());
-         	db1.pst.setString(3, news.getKind());
-         	db1.pst.setString(4, news.getTitle());
-         	db1.pst.setString(5, news.getTime());
-         	db1.pst.setString(6, news.getAttachment());
-         	db1.pst.setString(7, news.getContent());      	
+//        	db1.pst.setString(1, news.getNewsId());
+        	db1.pst.setString(1, news.getPublisher_id());
+         	db1.pst.setString(2, news.getKind());
+         	db1.pst.setString(3, news.getTitle());
+         	db1.pst.setString(4, news.getTime());
+         	db1.pst.setString(5, news.getAttachment());
+         	db1.pst.setString(6, news.getContent());      	
             db1.pst.executeUpdate();//执行语句，得到结果集  
        } catch (SQLException e) {  
             e.printStackTrace();  

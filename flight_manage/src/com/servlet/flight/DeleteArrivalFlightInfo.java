@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.entity.Admin;
+import com.entity.ArrivalFlightInfo;
+import com.entity.FlightCourse;
+import com.entity.User;
+
 /**
  * Servlet implementation class DeleteArrivalFlightInfo
  */
@@ -27,7 +32,24 @@ public class DeleteArrivalFlightInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String[] t1 = request.getParameter("time").split(":");
+  	  	String time = t1[0]+":"+t1[1];
+  	  	User user = new User();
+//  	ArrivalFlightInfo[] arrivalFlightModifyInfo = null;
+  	  	ArrivalFlightInfo[] arrivalFlightDeleteInfo = user.searchArrivalFlightInfo("", request.getParameter("flightNumber"), "", time);
+  	  	Admin admin=(Admin)request.getSession().getAttribute("admin");
+  	  	int result = admin.deleteArrivalFlightInfo(arrivalFlightDeleteInfo[0]);
+  	  	if(result==-1){
+			response.sendRedirect("error.jsp");
+			return;
+		}else {
+			request.setAttribute("deleteResult", result);
+			if(arrivalFlightDeleteInfo[0].getFlightCourse().isInternationalOrLocal()==true)	
+				request.getRequestDispatcher("/Public/Flight/ArrivalFlightInfoCheck.jsp?area=international").forward(request,response);
+			if(arrivalFlightDeleteInfo[0].getFlightCourse().isInternationalOrLocal()==false)
+				request.getRequestDispatcher("/Public/Flight/ArrivalFlightInfoCheck.jsp?area=local").forward(request,response);
+		}
 	}
 
 	/**
@@ -35,7 +57,8 @@ public class DeleteArrivalFlightInfo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+//		doGet(request, response);
+		
 	}
 
 }

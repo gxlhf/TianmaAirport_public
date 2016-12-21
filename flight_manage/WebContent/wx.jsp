@@ -228,7 +228,8 @@
 	
 	ReceiveXmlProcess receiveXmlProcess = new ReceiveXmlProcess();
 	ReceiveXmlEntity receiveXmlEntity = receiveXmlProcess.getMsgEntity(xml);
-	System.out.println(receiveXmlEntity.getFromUserName());
+	String fromName = receiveXmlEntity.getFromUserName();
+	System.out.println("fromName:" + fromName);
 	
 	response.getWriter().print("123");
 	response.getWriter().flush();

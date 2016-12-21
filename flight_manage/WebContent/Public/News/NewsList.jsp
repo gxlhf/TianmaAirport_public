@@ -288,7 +288,7 @@ else
             <tbody>
 			<%
 				News[] news=(News[])request.getAttribute("news");
-			session.setAttribute("news", news);
+				session.setAttribute("news", news);
 				if(news!=null){
 					for(int i=0;i<news.length;i++){
 						if(news[i]!=null){

@@ -293,13 +293,13 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
             	if(request.getParameter("type")!=null&request.getParameter("type").equals("arrival"))
             	{
             %>
-            		<a href="#">国内到港</a>
+            		<a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=local">国内到港</a>
             <%
             	}
             	if(request.getParameter("type")!=null&request.getParameter("type").equals("departure"))
             	{
             %>
-            		<a href="#">国内离港</a>
+            		<a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=local">国内离港</a>
             <%
             	}
             }
@@ -308,13 +308,13 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
             	if(request.getParameter("type")!=null&request.getParameter("type").equals("arrival"))
             	{
             %>
-            		<a href="#">国际到港</a>
+            		<a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=international">国际到港</a>
             <%
             	}
             	if(request.getParameter("type")!=null&request.getParameter("type").equals("departure"))
             	{
             %>
-            		<a href="#">国际离港</a>
+            		<a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=international">国际离港</a>
             <%
             	}
             }
@@ -654,6 +654,10 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
+            <script>
+            var counterList = null;
+            var selectedCounterList = null;
+            </script>
             <%
             }
             if(request.getParameter("type").equals("departure"))
@@ -767,7 +771,18 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
           else
           {
           %>
-          <form action="" method="post" class="form-horizontal" role="form" data-toggle="validator">
+          <form action="<%
+            		if(request.getParameter("type").equals("departure"))
+                    	out.println(basePath+"AddDepartureFlightInfo");
+                    if(request.getParameter("type").equals("arrival"))
+                    	out.println(basePath+"AddArrivalFlightInfo");
+            %>" method="post" class="form-horizontal" role="form" data-toggle="validator">
+            <input class="hide" name="flight-area" value="<%
+            		if(request.getParameter("area").equals("international"))
+                    	out.println("true");
+                    if(request.getParameter("area").equals("local"))
+                    	out.println("false");
+            %>">
             <div class="form-group">
               <label for="flight-no" class="col-sm-2 control-label">航班号：</label>
               <div class="col-sm-6">
@@ -957,6 +972,10 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
+            <script>
+            var counterList = null;
+            var selectedCounterList = null;
+            </script>
             <%
             }
             %>
