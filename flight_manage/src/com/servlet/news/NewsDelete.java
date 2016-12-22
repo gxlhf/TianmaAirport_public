@@ -47,6 +47,7 @@ public class NewsDelete extends HttpServlet {
 	
 	void processrequest(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
 //		System.out.println("news delete");
+		request.setCharacterEncoding("UTF-8");
 		if(request.getParameter("news-id")==null){
 			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request, response);
 			return;

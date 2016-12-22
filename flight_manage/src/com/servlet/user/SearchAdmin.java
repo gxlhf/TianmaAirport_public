@@ -42,6 +42,7 @@ public class SearchAdmin extends HttpServlet {
 
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
+		request.setCharacterEncoding("UTF-8");
 		String empno = request.getParameter("search-empno");
 		String name = request.getParameter("search-name");
 		int sex;
