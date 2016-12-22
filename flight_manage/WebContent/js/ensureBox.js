@@ -1,22 +1,49 @@
+function html2n() {
+	//将新闻页面新闻正文的html标签替换为换行
+	if($('[name="news-context"]').length != 0){
+		var newsContext = $('[name="news-context"]').val();
+		while(newsContext.search('</p><p>') != -1){
+			newsContext = newsContext.replace('</p><p>', "\n");
+		}
+		$('[name="news-context"]').val(newsContext);
+	}
+}
+
+function n2html() {
+	//将新闻页面新闻正文的换行替换为html标签
+	if($('[name="news-context"]').length != 0){
+		var newsContext = $('[name="news-context"]').val();
+		newsContext = newsContext.replace(/\n/g, '</p><p>');
+		$('[name="news-context"]').val(newsContext);
+	}
+}
+
 $(function () {
+	html2n();
+
 	//信息编辑页面-点击保存时弹框
 	$('#btn-save').click(function (e) {
 		$(this).parents('form').validator('validate');
 		var validator_passed = !($('.has-error').length);
 		if (validator_passed) {			
+
+			n2html();
+
 			//填写确认弹框
 			var dataElem = $(this).parents('form').find('input, textarea, select');
 			dataElem.each(function () {
 				if($(this).attr('type') == 'radio' && (!this.checked))
 					return;
-				$('#' + $(this).attr('name') + '-ensure').text($(this).val());
+				$('#' + $(this).attr('name') + '-ensure').html($(this).val());
 			});
 			$('#ensureBox').modal('show');
+			html2n();
 		}
 	});
 
 	//信息编辑页面-点击模态框提交按钮时提交表单
 	$('.modal-footer > .btn-primary').click(function () {
+		n2html();
 		$('form').submit();
 	});
  
@@ -34,7 +61,7 @@ $(function () {
 		for (var i = 1; i < deletingElem.length; i++) {
 			console.log($('.modal-body').find('label:contains("' + $(thElem[i]).text() + '：")').next().find('p'));
 			//console.log($('.modal-body').find('label'));
-			$('.modal-body').find('label:contains("' + $(thElem[i]).text() + '：")').next().find('p').text($(deletingElem[i]).text());
+			$('.modal-body').find('label:contains("' + $(thElem[i]).text() + '：")').next().find('p').html($(deletingElem[i]).text());
 		}
 		$('#ensureBox').modal('show');
 		return false;

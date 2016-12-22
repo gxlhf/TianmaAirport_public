@@ -70,21 +70,21 @@ public class FindPassword extends HttpServlet {
 			admin[0].setPassword(temp);
 			adminDao.modifyAdmin(admin[0]);
 			Mail mail=new Mail();
-			mail.setHost("smtp.qq.com");
+			mail.setHost("smtp.163.com");
 			mail.setPortNumber("465");
-			mail.setSender("1510825910@qq.com");
+			mail.setSender("tianmaairport@163.com");
 			mail.setName("天马机场");
 			mail.setReceiver(email);
-			mail.setUsername("1510825910@qq.com");
-			mail.setPassword("eshsskxsncvzfedi");
-			mail.setSubject("找回密码");
-			mail.setMessage("您的新密码是:"+temp+",请登陆后更改密码！");
-			System.out.println(temp);
-			if(new MailUtil().send(mail)){
+			mail.setUsername("tianmaairport@163.com");
+			mail.setPassword("team0303");
+			mail.setSubject("天马机场管理员密码找回服务");
+			mail.setMessage(admin[0].getName()+"，您的新密码是:"+temp+"，请登陆http://123.207.57.24/更改密码！");
+//			System.out.println(temp);
+			/*if(new MailUtil().send(mail)){
 				System.out.println("发送成功");
 			}else{
 				System.out.println("发送失败");
-			}
+			}*/
 			String message="发送成功";
 			request.setAttribute("result", message);
 			request.getRequestDispatcher("forget.jsp").forward(request, response);
