@@ -877,7 +877,7 @@ public class UserDao {
                   }
              }
         	 }else if(name.equals("")||name==null){
-        		 if(type=="登机门")
+        		 if(type.equals("登机门"))
         	    	{
         	    	     sql = "SELECT * FROM boardinggate";
         		         //SQL语句  
@@ -896,7 +896,7 @@ public class UserDao {
         	                i++;
         	          }
         	    	}
-        	    	else if(type=="值机柜台")
+        	    	else if(type.equals("值机柜台"))
         	    	{
         	    		sql = "SELECT * FROM checkincounter";
         	    		//SQL语句 
@@ -916,7 +916,7 @@ public class UserDao {
                            i++;
                          }
         	    	}
-        	    	else if(type=="行李转盘")
+        	    	else if(type.equals("行李转盘"))
         	    	{
         	    		sql = "SELECT * FROM luggagecarousel";
         	    		//SQL语句 
