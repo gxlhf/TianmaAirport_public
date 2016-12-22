@@ -83,4 +83,14 @@ $(function () {
 	$('.modal-footer > .btn-danger').click(function () {
 		location.href = $('#btn-delete').attr('href') + linkWord + opValue;
 	});
+
+
+
+	// 未保存离开当前页提示
+	if((window.location.href).search("Edit.jsp") != -1){
+		window.onbeforeunload = function(){
+			return "当前页面信息尚未保存，确认离开？";
+		}
+	}
+
 });

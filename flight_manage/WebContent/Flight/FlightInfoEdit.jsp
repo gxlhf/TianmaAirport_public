@@ -462,7 +462,7 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
             <div class="form-group">
               <label for="flight-via" class="col-sm-2 control-label">经停地：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="flight-via">
+                <select class="form-control" name="flight-via" data-unequals="unequals" data-validate="true">
                   <%
                   if(request.getParameter("type").equals("departure"))
                   {
