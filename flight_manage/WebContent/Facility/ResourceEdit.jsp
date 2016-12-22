@@ -213,7 +213,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="resource-name" class="col-sm-2 control-label">资源名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="resource-name" data-error="请填写资源名称*"  value="<%=resourceModify[0].getName() %>" required readonly>
+                <input type="text" class="form-control" name="resource-name" data-error="请填写资源名称*" value="<%=resourceModify[0].getName() %>" required readonly>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -268,7 +268,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="resource-name" class="col-sm-2 control-label">资源名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="resource-name" data-error="请填写资源名称*"  required>
+                <input type="text" class="form-control" name="resource-name"  data-required-error="请填写资源名称*" data-checkname="checkname" data-validate="true" required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -380,6 +380,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
+      <script type="text/javascript">
+        // 验证名称
+        $('form').validator({
+          custom: {
+            checkname: function ($el) {
+              var name = $el.val();
+              var type = $('[name="resource-type"]').val();
+              if(name.search(new RegExp(type + "[0-9]+")) != 0)
+                return "请按照资源类别+编号填写资源名称*";
+            }
+          }
+        });
+      </script>
   
 
 </body></html>

@@ -232,7 +232,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="facility-phone" class="col-sm-2 control-label">电话：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="facility-phone" data-error="请填写电话*" value="<%=facilityModify[0].getPhone() %>"  required>
+                <input type="number" class="form-control" name="facility-phone" data-error="请填写电话*" value="<%=facilityModify[0].getPhone() %>"  required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>

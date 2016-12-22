@@ -331,7 +331,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-email" class="col-sm-2 control-label">电子邮箱：</label>
               <div class="col-sm-6">
-                <input type="email" class="form-control" name="user-email" data-error="请填写正确的电子邮箱*" value="<%=adminModify[0].getEmail() %>" required>
+                <input type="text" pattern="^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$" class="form-control" name="user-email" data-error="请填写正确的电子邮箱*" value="<%=adminModify[0].getEmail() %>" required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -464,7 +464,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-email" class="col-sm-2 control-label">电子邮箱：</label>
               <div class="col-sm-6">
-                <input type="email" class="form-control" name="user-email" data-error="请填写正确的电子邮箱*" required>
+                <input type="text" pattern="^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$" class="form-control" name="user-email" data-error="请填写正确的电子邮箱*" required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
