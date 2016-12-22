@@ -158,7 +158,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <div id="main-text">
 			<%
 				User user=new User();
-				News[] news=user.searchNews("机场介绍", null);
+				News[] news=user.searchNews("机场介绍", "");
 				if(news.length!=0){
 					session.setAttribute("intro", news[0]);
 					out.println("<p>发布时间："+news[0].getTime()+"</p>");
@@ -212,8 +212,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 尾部结束 -->
     <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
-    <script src="<%=basePath%>/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
     <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
   
