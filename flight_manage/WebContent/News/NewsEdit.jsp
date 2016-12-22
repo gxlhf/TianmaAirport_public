@@ -3,6 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String type;
+request.setCharacterEncoding("UTF-8");
 if(request.getParameter("type")==null||(!request.getParameter("type").equals("flightInformation")&&!request.getParameter("type").equals("airportResource")&&!request.getParameter("type").equals("facilityResource")))
 	type = null;
 else
@@ -285,7 +286,7 @@ String id=request.getParameter("news-id");
          	}else{
          	    if(type.equals("flightInformation"))
          	    	out.println("<input type='text' style='display:none' name='type' value='航班信息' >");
-         	    if(type.equals("airportResource"))
+         	    else if(type.equals("airportResource"))
          	    	out.println("<input type='text' style='display:none' name='type' value='机场资源' >");
          	    else
          	    	out.println("<input type='text' style='display:none' name='type' value='物业资源' >");
