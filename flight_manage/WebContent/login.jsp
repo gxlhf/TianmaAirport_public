@@ -143,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
               <div class="form-group" id="captcha-group">
                 <input name="veryCode" class="form-control" id="veryCode" type="text" placeholder="验证码">
-                <img id="imgObj" src="VerifyCode" onclick="changeImg()" />
+                <img id="imgObj" src="VerifyCode" onclick="changeImg()" alt="正在加载验证码">
               </div>
               <button type="submit" class="btn btn-primary btn-block" >登陆</button>
             </form>
