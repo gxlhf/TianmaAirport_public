@@ -34,12 +34,12 @@ public class User {
 	{
 		DepartureFlightInfo[] departureFlightInfo = null;
 		UserDao userDao = new UserDao();
-		if((city==null||city=="")&&(airline==null||airline=="")&&(flightNumber!=null&&flightNumber!="")&&(time!=null&&time!="")){
+		if((city==null||city.equals(""))&&(airline==null||airline.equals(""))&&(flightNumber!=null&&!flightNumber.equals(""))&&(time!=null&&!time.equals(""))){
 			//用于修改离港航班信息时取出修改前的数据，正常情况下只返回一条结果
 			departureFlightInfo = userDao.searchDepartureFlightInfo4(flightNumber, time);
 			return departureFlightInfo;
 		}
-		if(flightNumber!=null&&flightNumber!=""){//查询该航班号的离港航班信息
+		if(flightNumber!=null&&!flightNumber.equals("")){//查询该航班号的离港航班信息
 			/*
 			 * DepartureFlightInfo[] searchDepartureFlightInfo0(String flightnumber);
 			 * 数据库操作：查询航班号为flightnumber的离港航班信息
@@ -50,7 +50,7 @@ public class User {
 			return departureFlightInfo;
 		}
 		else{
-			if(!(city==null||city=="")&&!(airline==null||airline=="")){//查询目的地为该city，航空公司为该airline的离港航班信息
+			if(!(city==null||city.equals(""))&&!(airline==null||airline.equals(""))){//查询目的地为该city，航空公司为该airline的离港航班信息
 				/*
 				 * DepartureFlightInfo[] searchDepartureFlightInfo1(String city,String airline);
 				 * 数据库操作：查询 目的地为该city，航空公司为该airline的离港航班信息
@@ -60,7 +60,7 @@ public class User {
 				departureFlightInfo=userDao.searchDepartureFlightInfo1(city,airline); 
 				return departureFlightInfo;
 			}
-			if((city==null||city=="")&&!(airline==null||airline=="")){//查询航空公司为该airline的离港航班信息
+			if((city==null||city.equals(""))&&!(airline==null||airline.equals(""))){//查询航空公司为该airline的离港航班信息
 				/*
 				 * DepartureFlightInfo[] searchDepartureFlightInfo2(String airline); 
 				 * 数据库操作：查询航空公司为该airline的离港航班信息
@@ -70,7 +70,7 @@ public class User {
 				departureFlightInfo=userDao.searchDepartureFlightInfo2(airline);
 				return departureFlightInfo;
 			}
-			if(!(city==null||city=="")&&(airline==null||airline=="")){//查询目的地为该city的离港航班信息
+			if(!(city==null||city.equals(""))&&(airline==null||airline.equals(""))){//查询目的地为该city的离港航班信息
 				/*
 				 * DepartureFlightInfo[] searchDepartureFlightInfo3(String city); 
 				 * 数据库操作：查询目的地为该city的离港航班信息
@@ -88,12 +88,12 @@ public class User {
 	{
 		ArrivalFlightInfo[] arrivalFlightInfo = null;
 		UserDao userDao = new UserDao();
-		if((city==null||city=="")&&(airline==null||airline=="")&&(flightNumber!=null&&flightNumber!="")&&(time!=null&&time!="")){
+		if((city==null||city.equals(""))&&(airline==null||airline.equals(""))&&(flightNumber!=null&&!flightNumber.equals(""))&&(time!=null&&!time.equals(""))){
 			//用于修改到港航班信息时取出修改前的数据，正常情况下只返回一条结果
 			arrivalFlightInfo=userDao.searchArrivalFlightInfo4(flightNumber, time);
 			return arrivalFlightInfo;
 		}
-		if(flightNumber!=null&&flightNumber!=""){//查询该航班号的到港航班信息
+		if(flightNumber!=null&&!flightNumber.equals("")){//查询该航班号的到港航班信息
 			/*
 			 * ArrivalFlightInfo[] searchArrivalFlightInfo0(String flightnumber); 
 			 * 数据库操作：查询航班号为flightnumber的到港航班信息
@@ -104,7 +104,7 @@ public class User {
 			return arrivalFlightInfo;
 		}
 		else{
-			if(!(city==null||city=="")&&!(airline==null||airline=="")){//查询出发地为该city，航空公司为该airline的到港航班信息
+			if(!(city==null||city.equals(""))&&!(airline==null||airline.equals(""))){//查询出发地为该city，航空公司为该airline的到港航班信息
 				/*
 				 * ArrivalFlightInfo[] searchArrivalFlightInfo1(String city,String airline); 
 				 * 数据库操作：查询 出发地为该city，航空公司为该airline的到港航班信息
@@ -114,7 +114,7 @@ public class User {
 				arrivalFlightInfo=userDao.searchArrivalFlightInfo1(city,airline);
 				return arrivalFlightInfo;
 			}
-			if((city==null||city=="")&&!(airline==null||airline=="")){//查询航空公司为该airline的到港航班信息
+			if((city==null||city.equals(""))&&!(airline==null||airline.equals(""))){//查询航空公司为该airline的到港航班信息
 				/*
 				 * ArrivalFlightInfo[] searchArrivalFlightInfo2(String airline); 
 				 * 数据库操作：查询航空公司为该airline的到港航班信息
@@ -124,7 +124,7 @@ public class User {
 				arrivalFlightInfo=userDao.searchArrivalFlightInfo2(airline); 
 				return arrivalFlightInfo;
 			}
-			if(!(city==null||city=="")&&(airline==null||airline=="")){//查询出发地为该city的到港航班信息
+			if(!(city==null||city.equals(""))&&(airline==null||airline.equals(""))){//查询出发地为该city的到港航班信息
 				/*
 				 * ArrivalFlightInfo[] searchArrivalFlightInfo3(String city); 
 				 * 数据库操作：查询出发地为该city的到港航班信息

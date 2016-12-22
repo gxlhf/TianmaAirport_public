@@ -216,7 +216,7 @@ public class Admin extends User implements Serializable{
 			admin = new Admin[1];
 			admin[0].setEmpno("-1");
 		}
-		if(empno!=""&&empno!=null){
+		if(!empno.equals("")&&empno!=null){
 			/*
 			 * Admin[] searchAdmin0(String empno);
 			 * 数据库操作：查询员工号为该empno的管理员信息
