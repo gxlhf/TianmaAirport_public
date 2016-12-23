@@ -346,7 +346,7 @@ else
                 	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true)
                 		count++;
                 }
-                System.out.println(count);
+                /* System.out.println(count); */
                 ArrivalFlightInfo[] arrivalFlightInfosOutput = new ArrivalFlightInfo[count];
                 int j = 0;
                 for(ArrivalFlightInfo output:arrivalFlightInfos)
@@ -362,7 +362,7 @@ else
                 		j++;
                 	}
                 }
-                String ul_path = "ArrivalFlightSearch?flight-id="+request.getParameter("flight-id")+"&from-site="+request.getParameter("from-site")+"&airCompany-name="+request.getParameter("airCompany-name")+"&area=local&page=";
+                String ul_path = "ArrivalFlightSearch?flight-id="+request.getParameter("flight-id")+"&from-site="+request.getParameter("from-site")+"&airCompany-name="+request.getParameter("airCompany-name")+"&area="+area+"&page=";
                 if(arrivalFlightInfosOutput.length%10==0)
             	{
             		if(Integer.parseInt(p)>arrivalFlightInfosOutput.length/10)

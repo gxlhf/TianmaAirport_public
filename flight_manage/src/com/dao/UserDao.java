@@ -2,6 +2,8 @@ package com.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.entity.AirportResource;
 import com.entity.ArrivalFlightInfo;
@@ -1455,5 +1457,29 @@ public class UserDao {
       }
     	 return propertyFacility;
     }
-  
+    public Map<String,String> returnFlightnumberAirlineMap(){
+    	/*
+    	 * Map<String,String> returnFlightnumberAirlineMap()
+    	 * 取航空公司的二字代码和航空公司名字的对应关系
+    	 * 返回Map
+    	 */
+    	Map<String,String> allFlightnumberAirlineMap = new HashMap();
+    	    
+         sql = "SELECT SUBSTR(Flight_No,1,2) sub,Airline A FROM `flight_arrival` GROUP BY Airline" +
+         		" UNION SELECT SUBSTR(Flight_No2,1,2) sub,Airline A FROM `flight_off` GROUP BY Airline";//SQL语句  
+         db1= new db_connection(sql);//创建db_connection对象        
+         try {  
+             ret = db1.pst.executeQuery();//执行语句，得到结果集 
+             while (ret.next()) {  
+               allFlightnumberAirlineMap.put(ret.getString("A"),ret.getString("sub") );
+             }
+             ret.close();  
+              
+         } catch (SQLException e) {  
+             e.printStackTrace();  
+         } finally{
+       	   db1.close();//关闭连接
+         }
+      	return allFlightnumberAirlineMap; 	
+      }
   }

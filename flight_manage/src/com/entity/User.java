@@ -2,6 +2,8 @@
  * 普通用户类
  */
 package com.entity;
+import java.util.Map;
+
 import com.dao.*;
 
 public class User {
@@ -298,5 +300,14 @@ public class User {
 		*/
     	UserDao userDao=new UserDao();
     	return userDao.returnAllNews();
+    }
+    public Map<String,String> returnFlightnumberAirlineMap(){
+    	/*
+    	 * Map<String,String> returnFlightnumberAirlineMap()
+    	 * 取航空公司的二字代码和航空公司名字的对应关系
+    	 * 返回Map
+    	 */
+		UserDao userDao=new UserDao();
+    	return userDao.returnFlightnumberAirlineMap(); 	
     }
 }
