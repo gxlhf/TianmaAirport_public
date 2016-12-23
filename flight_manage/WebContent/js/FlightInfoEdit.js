@@ -75,11 +75,11 @@ $(function () {
             $('#inp-flight-counter-mirror').blur();
         });
 
-        // $('#btn-save').click(function () {
-        //     $('#inp-flight-counter-mirror').val($('#inp-flight-counter').val());
-        //     $('#inp-flight-counter-mirror').focus();
-        //     $('#inp-flight-counter-mirror').blur();
-        // });
+        $('#btn-save').click(function () {
+            $('#inp-flight-counter-mirror').val($('#inp-flight-counter').val());
+            $('#inp-flight-counter-mirror').focus();
+            $('#inp-flight-counter-mirror').blur();
+        });
     }
 
 });

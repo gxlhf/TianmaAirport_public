@@ -1215,8 +1215,8 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
     <script type="text/javascript" src="<%=basePath%>/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-tokenfield.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/FlightInfoEdit.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
 
 </body>
 </html>

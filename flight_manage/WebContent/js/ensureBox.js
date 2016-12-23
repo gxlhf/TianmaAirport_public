@@ -32,6 +32,11 @@ $(function () {
 
 		$(this).parents('form').validator('validate');
 		var validator_passed = !($('.has-error').length);
+
+		if($('#inp-flight-counter-mirror').length != 0){
+			validator_passed = ($('#inp-flight-counter-mirror').val() != '');
+		}
+
 		if (validator_passed) {			
 
 			n2html();
