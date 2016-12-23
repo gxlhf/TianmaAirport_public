@@ -3,10 +3,12 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String id="";
+String title="";
 id=request.getParameter("id");
 int a=0;
 String type="";
 News[] news=(News[])request.getSession().getAttribute("news");
+request.removeAttribute("news");
 %>
 <%
 if(id!=null){
@@ -26,6 +28,8 @@ if(id!=null){
 		}
 	}
 }
+if(news[a].getTitle()!=null)
+	title=news[a].getTitle();
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -188,11 +192,11 @@ if(id!=null){
               %>
               </a>
             </li>
-            <li class="active"><%=news[a].getTitle() %></li>
+            <li class="active"><%=title %></li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <div class="page-header">
-            <h2 class="text-center"><%=news[a].getTitle() %></h2>
+            <h2 class="text-center"><%=title %></h2>
           </div>
           <div id="main-text">
           <% 

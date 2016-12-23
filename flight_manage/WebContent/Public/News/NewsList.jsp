@@ -325,6 +325,7 @@ else
 				}*/
 				}
 				request.setAttribute("news", news);
+				request.getSession().setAttribute("news", news);
 				String p=request.getParameter("page");
 				if(p==null){
 					if(news.length>10){
