@@ -288,10 +288,7 @@ else
             <tbody>
 			<%
 				News[] news=(News[])request.getAttribute("news");
-				session.setAttribute("news", news);
-				if(news!=null){
-					for(int i=0;i<news.length;i++){
-						if(news[i]!=null){
+							/*
 						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
 						out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
 						if(session.getAttribute("priv2")!=null){
@@ -299,13 +296,20 @@ else
 			                }else{
 			              	  out.println("<td></td>");
 			                }
-							/* out.println(" <td>"+(i+1)+"</td>"); */
 			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
+						}*/
+				if(news==null){
+					List<News>newslist=new LinkedList<News>();
+					User user=new User();
+					News[] n=user.returnAllNews();
+					for(int i=0;i<n.length;i++){
+						if(n[i].getKind().equals("航班信息")&&type.equals("flightInformation")||n[i].getKind().equals("机场资源")&&type.equals("airportResource")||n[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
+							newslist.add(n[i]);
 						}
 					}
-				}
-				}else if(news==null){
-					User user=new User();
+					int size=newslist.size();
+					news=(News[])newslist.toArray(new News[size]);
+					/*
 					news=user.returnAllNews();
 					session.setAttribute("news", news);
 					for(int i=0;i<news.length;i++){
@@ -316,26 +320,75 @@ else
 			                }else{
 			              	  out.println("<td></td>");
 			                }
-							/* out.println(" <td>"+(i+1)+"</td>"); */
 			                out.println(" <td><a href='"+basePath+"Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
 					}
+				}*/
 				}
+				request.setAttribute("news", news);
+				String p=request.getParameter("page");
+				if(p==null){
+					if(news.length>10){
+						for(int i=0;i<10;i++){
+							out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
+							 if(session.getAttribute("priv2")!=null){
+				                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+				                }else{
+				              	  out.println("<td></td>");
+				                }
+				                out.println(" <td><a href='"+basePath+"Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
+						}
+						
+						out.println("  </tbody> </table>");
+						out.println("          <div><ul class='pager'> <li class='next'><a href='"+basePath+"Public/News/NewsList.jsp?type="+type+"&page=2'>下一页 →</a></li></ul></div>");
+					}else{
+						for(int i=0;i<news.length;i++){
+							out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
+							 if(session.getAttribute("priv2")!=null){
+				                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+				                }else{
+				              	  out.println("<td></td>");
+				                }
+				                out.println(" <td><a href='"+basePath+"Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
+						}
+						
+						out.println("  </tbody> </table>");
+					}
+				
+				}else{
+					int pageNum=1;
+				    try {       
+				        pageNum=Integer.valueOf(p);   
+				        
+				    } catch (Exception e) {   
+				          
+				    }
+					if(pageNum<1||pageNum>(int)((news.length+9)/10)){
+						out.println("  </tbody> </table>");
+					}else{
+						int from=(pageNum-1)*10+1;
+						int end=pageNum*10+1<news.length?pageNum+10:news.length;
+						for(int i=from;i<end;i++){
+							 if(session.getAttribute("priv2")!=null){
+				                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
+				                }else{
+				              	  out.println("<td></td>");
+				                }
+				                out.println(" <td><a href='"+basePath+"Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
+						}
+						out.println("  </tbody> </table>");
+						if(pageNum==1&&news.length>10){
+							out.println("          <div><ul class='pager'> <li class='next'><a href='"+basePath+"Public/News/NewsList.jsp?type="+type+"&page=2'>下一页 →</a></li></ul></div>");
+						}else if(pageNum>1&&(pageNum+1)<=(news.length+9)/10){
+							out.println("<div><ul class='pager'><li class='previous'><a href='"+basePath+"Public/News/NewsList.jsp?type="+type+"&page="+(pageNum-1)+"'>← 上一页</a></li><li class='next'><a href='"+basePath+"Public/News/NewsList.jsp?type="+type+"&page="+(pageNum+1)+"'>下一页 →</a></li></ul></div>");
+						}else{
+							out.println("<div><ul class='pager'><li class='previous'><a href='"+basePath+"Public/News/NewsList.jsp?type="+type+"&page="+(pageNum-1)+"'>← 上一页</a></li></ul></div>");
+						}
+					}
+					
 				}
+				
 			%>
-
-
-            </tbody>
-          </table>
-          <div>
-            <ul class="pager">
-              <li class="previous">
-                <a href="#">← 上一页</a>
-              </li>
-              <li class="next">
-                <a href="#">下一页 →</a>
-              </li>
-            </ul>
-          </div>
+          
           <%
           if(session.getAttribute("priv2")!=null){
         	  out.println(" <div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-success' href='"+basePath+"News/NewsEdit.jsp?type="+type+"&todo=add'>新增</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"News/NewsDelete?type=null'>删除</a><a id='btn-modify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"'>修改</a></div></div>");

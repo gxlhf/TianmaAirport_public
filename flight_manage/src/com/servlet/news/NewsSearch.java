@@ -1,6 +1,9 @@
 package com.servlet.news;
 
+import java.awt.List;
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,33 +54,53 @@ public class NewsSearch extends HttpServlet {
 		String name=request.getParameter("news-name");
 		com.entity.User user = new com.entity.User();
 		News[] news=user.searchNews(title, time);
-		News[] news2=new News[30];
+		java.util.List<News> newslist=new LinkedList<News>();
+		int n=0,t=0;
 		if(name!=null&&!name.equals("")){
-			int a=0;
+			n=1;
 			for(int i=0;i<news.length;i++){
 				if(news[i].getPublisher_name().equals(name)){
-					news2[a++]=news[i];
+					newslist.add(news[i]);
 				}
 			}
-			news=news2;
 			/*for(ArrivalFlightInfo out:arrivalFlightInfos)
 			{
 			System.out.println(out.getFlightCourse().getAirline());;
 			}*/
 		}		
-		News[] news3=new News[30];
 		if(time!=null&&!time.equals("")){
-			int a=0;
-			for(int i=0;i<news.length;i++){
-				if(news[i]!=null){
-				if(news[i].getTime().equals(time)){
-					news3[a++]=news[i];
+			t=1;
+			if(n==0){
+				for(int i=0;i<news.length;i++){
+					if(news[i].getTime().equals(name)){
+						newslist.add(news[i]);
+					}
+				}
+			}else{
+				for(int i=0;i<newslist.size();i++){
+					if(!newslist.get(i).getTime().equals(name)){
+						newslist.remove(i--);
+					}
 				}
 			}
-			}
-			news=news3;
+
 		}
-		request.setAttribute("news", news);
+		if(t==0&&n==0){
+			for(int i=0;i<news.length;i++){
+				if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
+					newslist.add(news[i]);
+				}
+			}
+		}else{
+			for(int i=0;i<newslist.size();i++){
+				if(!(newslist.get(i).getKind().equals("航班信息")&&type.equals("flightInformation"))||!(newslist.get(i).getKind().equals("机场资源")&&type.equals("airportResource"))||!(newslist.get(i).getKind().equals("物业资源")&&type.equals("facilityResource"))){
+					newslist.remove(i--);
+				}
+			}
+		}
+		int size=newslist.size();
+		News[] news2=(News[])newslist.toArray(new News[size]);
+		request.setAttribute("news", news2);
 		request.getRequestDispatcher("NewsList.jsp?type="+type).forward(request, response);
 	}
 }
