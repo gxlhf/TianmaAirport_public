@@ -44,6 +44,7 @@ public class SearchFacility extends HttpServlet {
 	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("facility-name");
 		User user = new User();
 		

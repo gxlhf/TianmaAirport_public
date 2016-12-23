@@ -23,6 +23,13 @@ $(function () {
 
 	//信息编辑页面-点击保存时弹框
 	$('#btn-save').click(function (e) {
+		console.log('click1');
+
+		//if($('#inp-flight-counter-mirror').length != 0){
+			// $('#inp-flight-counter-mirror').focus();
+   //      	$('#inp-flight-counter-mirror').blur();
+		//}
+
 		$(this).parents('form').validator('validate');
 		var validator_passed = !($('.has-error').length);
 		if (validator_passed) {			
@@ -40,6 +47,11 @@ $(function () {
 			html2n();
 		}
 	});
+    $('#btn-save').click(function (e) {
+        console.log('click2');
+        $('#inp-flight-counter-mirror').focus();
+        $('#inp-flight-counter-mirror').blur();
+    });
 
 	//信息编辑页面-点击模态框提交按钮时提交表单
 	$('.modal-footer > .btn-primary').click(function () {
@@ -71,4 +83,14 @@ $(function () {
 	$('.modal-footer > .btn-danger').click(function () {
 		location.href = $('#btn-delete').attr('href') + linkWord + opValue;
 	});
+
+
+
+	// 未保存离开当前页提示
+	if((window.location.href).search("Edit.jsp") != -1){
+		window.onbeforeunload = function(){
+			return "当前页面信息尚未保存，确认离开？";
+		}
+	}
+
 });

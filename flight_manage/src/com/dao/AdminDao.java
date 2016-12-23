@@ -244,91 +244,91 @@ public class AdminDao {
 			" WHERE 1=1";//SQL语句  
         db1= new db_connection(sql);//创建db_connection对象  
         try {  
-        	if((name!=null&&name!="")&&(sex!=1&&sex!=0)&&(position==null||position=="")&&(roleName==null||roleName==""))
+        	if((name!=null&&!name.equals(""))&&(sex!=1&&sex!=0)&&(position==null||position.equals(""))&&(roleName==null||roleName.equals("")))
         	{	
         		sql=sql+" AND user_info.Name=?";
         		db1.pst = db1.conn.prepareStatement(sql);
         		db1.pst.setString(1, name);
-        	}else if((name==null||name=="")&&(sex==1||sex==0)&&(position==null||position=="")&&(roleName==null||roleName==""))
+        	}else if((name==null||name.equals(""))&&(sex==1||sex==0)&&(position==null||position.equals(""))&&(roleName==null||roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Sex=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setInt(1, sex);
-            	}else if((name==null||name=="")&&(sex!=1&&sex!=0)&&(position!=null&&position!="")&&(roleName==null||roleName==""))
+            	}else if((name==null||name.equals(""))&&(sex!=1&&sex!=0)&&(position!=null&&!position.equals(""))&&(roleName==null||roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Position=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, position);
-            	}else if((name==null||name=="")&&(sex!=1&&sex!=0)&&(position==null||position=="")&&(roleName!=null&&roleName!=""))
+            	}else if((name==null||name.equals(""))&&(sex!=1&&sex!=0)&&(position==null||position.equals(""))&&(roleName!=null&&!roleName.equals("")))
             	{	
             		sql=sql+" AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, roleName);
-            	}else if((name!=null&&name!="")&&(sex==1||sex==0)&&(position==null||position=="")&&(roleName==null||roleName==""))
+            	}else if((name!=null&&!name.equals(""))&&(sex==1||sex==0)&&(position==null||position.equals(""))&&(roleName==null||roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Name=? AND user_info.Sex=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setInt(2, sex);
-            	}else if((name!=null&&name!="")&&(sex!=1&&sex!=0)&&(position!=null&&position!="")&&(roleName==null||roleName==""))
+            	}else if((name!=null&&!name.equals(""))&&(sex!=1&&sex!=0)&&(position!=null&&!position.equals(""))&&(roleName==null||roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Name=? AND user_info.Position=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setString(2, position);
-            	}else if((name!=null&&name!="")&&(sex!=1&&sex!=0)&&(position==null||position=="")&&(roleName!=null&&roleName!=""))
+            	}else if((name!=null&&!name.equals(""))&&(sex!=1&&sex!=0)&&(position==null||position.equals(""))&&(roleName!=null&&!roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Name=? AND user_actor.A_name";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setString(2, roleName);
-            	}else if((name==null||name=="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName==null||roleName==""))
+            	}else if((name==null||name.equals(""))&&(sex==1||sex==0)&&(position!=null&&!position.equals(""))&&(roleName==null||roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Sex=? AND user_info.Position=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setInt(1, sex);
             		db1.pst.setString(2, position);
-            	}else if((name==null||name=="")&&(sex==1||sex==0)&&(position==null||position=="")&&(roleName!=null&&roleName!=""))
+            	}else if((name==null||name.equals(""))&&(sex==1||sex==0)&&(position==null||position.equals(""))&&(roleName!=null&&!roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Sex=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setInt(1, sex);
             		db1.pst.setString(2, roleName);
-            	}else if((name==null||name=="")&&(sex!=1&&sex!=0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
+            	}else if((name==null||name.equals(""))&&(sex!=1&&sex!=0)&&(position!=null&&!position.equals(""))&&(roleName!=null&&!roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Position=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, position);
             		db1.pst.setString(2, roleName);
-            	}else if((name!=null&&name!="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName==null||roleName==""))
+            	}else if((name!=null&&!name.equals(""))&&(sex==1||sex==0)&&(position!=null&&!position.equals(""))&&(roleName==null||roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Name=? AND user_info.Sex=? AND user_info.Position=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setInt(2, sex);
             		db1.pst.setString(3, position);
-            	}else if((name!=null&&name!="")&&(sex==1||sex==0)&&(position==null||position=="")&&(roleName!=null&&roleName!=""))
+            	}else if((name!=null&&!name.equals(""))&&(sex==1||sex==0)&&(position==null||position.equals(""))&&(roleName!=null&&!roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Name=? AND user_info.Sex=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setInt(2, sex);
             		db1.pst.setString(3, roleName);
-            	}else if((name!=null&&name!="")&&(sex!=1&&sex!=0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
+            	}else if((name!=null&&!name.equals(""))&&(sex!=1&&sex!=0)&&(position!=null&&!position.equals(""))&&(roleName!=null&&!roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Name=? AND user_info.Position=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setString(1, name);
             		db1.pst.setString(2, position);
             		db1.pst.setString(3, roleName);
-            	}else if((name==null||name=="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
+            	}else if((name==null||name.equals(""))&&(sex==1||sex==0)&&(position!=null&&!position.equals(""))&&(roleName!=null&&!roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Sex=? AND user_info.Position=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
             		db1.pst.setInt(1, sex);
             		db1.pst.setString(2, position);
             		db1.pst.setString(3, roleName);
-            	}else if((name!=null&&name!="")&&(sex==1||sex==0)&&(position!=null&&position!="")&&(roleName!=null&&roleName!=""))
+            	}else if((name!=null&&!name.equals(""))&&(sex==1||sex==0)&&(position!=null&&!position.equals(""))&&(roleName!=null&&!roleName.equals("")))
             	{	
             		sql=sql+" AND user_info.Name=? AND user_info.Sex=? AND user_info.Position=? AND user_actor.A_name=?";
             		db1.pst = db1.conn.prepareStatement(sql);
@@ -972,19 +972,19 @@ public class AdminDao {
 //       */
    	 News[] news =null;
    	 int i=0;
-   	 if((title!=""&&title!=null)&&(time!=""&&time!=null)&&(publisher!=null&&publisher!=""))
+   	 if((!title.equals("")&&title!=null)&&(!time.equals("")&&time!=null)&&(publisher!=null&&!publisher.equals("")))
    	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%' AND newscenter.Edit_time='"+time+"' AND user_info.Name = '"+publisher+"'";//SQL语句
-   	 else if((title!=""&&title!=null)&&(time==""||time==null)&&(publisher==null||publisher==""))
+   	 else if((!title.equals("")&&title!=null)&&(time.equals("")||time==null)&&(publisher==null||publisher.equals("")))
    		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%'";//SQL语句
-   	 else if((title==""||title==null)&&(time!=""&&time!=null)&&(publisher==null||publisher==""))
+   	 else if((title.equals("")||title==null)&&(!time.equals("")&&time!=null)&&(publisher==null||publisher.equals("")))
    		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time='"+time+"'";//SQL语句
-   	 else if((title==""||title==null)&&(time==""||time==null)&&(publisher!=null&&publisher!=""))
+   	 else if((title.equals("")||title==null)&&(time.equals("")||time==null)&&(publisher!=null&&!publisher.equals("")))
    	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE user_info.Name = '"+publisher+"'";//SQL语句
-   	 else if((title!=""&&title!=null)&&(time!=""&&time!=null)&&(publisher==null||publisher==""))
+   	 else if((!title.equals("")&&title!=null)&&(!time.equals("")&&time!=null)&&(publisher==null||publisher.equals("")))
    	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%' AND newscenter.Edit_time='"+time+"'";//SQL语句
-   	 else if((title!=""&&title!=null)&&(time==""||time==null)&&(publisher!=null&&publisher!=""))
+   	 else if((!title.equals("")&&title!=null)&&(time.equals("")||time==null)&&(publisher!=null&&!publisher.equals("")))
    	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%' AND user_info.Name = '"+publisher+"'";//SQL语句
-   	 else  if((title==""||title==null)&&(time!=""&&time!=null)&&(publisher!=null&&publisher!=""))
+   	 else  if((title.equals("")||title==null)&&(!time.equals("")&&time!=null)&&(publisher!=null&&!publisher.equals("")))
    	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time='"+time+"' AND user_info.Name = '"+publisher+"'";//SQL语句
    	 else 
    		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No";//SQL语句

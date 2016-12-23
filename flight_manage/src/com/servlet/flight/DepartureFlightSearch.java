@@ -41,6 +41,7 @@ public class DepartureFlightSearch extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
+		request.setCharacterEncoding("UTF-8");
 		String flightNumber = request.getParameter("flight-id");
 		String to = request.getParameter("to-site");
 		String airline = request.getParameter("airCompany-name");

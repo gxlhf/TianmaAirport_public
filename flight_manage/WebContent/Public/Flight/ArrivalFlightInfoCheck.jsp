@@ -338,7 +338,66 @@ else
                 }
             	out.println("<th>航空公司</th><th>航班号</th><th>始发地</th><th>经停地</th><th>目的地</th><th>到港时间</th><th>行李转盘</th></tr></thead><tbody>");
             	ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
+                int count = 0;
                 for(ArrivalFlightInfo output:arrivalFlightInfos)
+                {
+                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false)
+                		count++;
+                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true)
+                		count++;
+                }
+                System.out.println(count);
+                ArrivalFlightInfo[] arrivalFlightInfosOutput = new ArrivalFlightInfo[count];
+                int j = 0;
+                for(ArrivalFlightInfo output:arrivalFlightInfos)
+                {
+                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false)
+                	{
+                		arrivalFlightInfosOutput[j] = output;
+                		j++;
+                	}
+                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true)
+                	{
+                		arrivalFlightInfosOutput[j] = output;
+                		j++;
+                	}
+                }
+                String ul_path = "ArrivalFlightSearch?flight-id="+request.getParameter("flight-id")+"&from-site="+request.getParameter("from-site")+"&airCompany-name="+request.getParameter("airCompany-name")+"&area=local&page=";
+                if(arrivalFlightInfosOutput.length%10==0)
+            	{
+            		if(Integer.parseInt(p)>arrivalFlightInfosOutput.length/10)
+            			response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfosOutput.length/10)); 
+            			/* response.sendRedirect(basePath+"error.jsp"); */
+            	}
+            	else
+            	{
+            		if(Integer.parseInt(p)>arrivalFlightInfosOutput.length/10 + 1)
+            			response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfosOutput.length/10 + 1)); 
+            			/* response.sendRedirect(basePath+"error.jsp"); */
+            	}
+                for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
+        		{
+        			if(i>=arrivalFlightInfosOutput.length)
+        				break;
+        			out.println("<tr data-id='flightNumber="+arrivalFlightInfosOutput[i].getFlightCourse().getFlightNumber()+"&time="+arrivalFlightInfosOutput[i].getTime()+"&area="+area+"&type=arrival"+"'>");
+                	if(session.getAttribute("priv1")!=null){
+                    	out.println("<td><span class='glyphicon'></span></td>");
+                    }else{
+                  	  out.println("<td></td>");
+                    }
+            		out.println("<td>"+arrivalFlightInfosOutput[i].getFlightCourse().getAirline()+"</td>");
+                	out.println("<td>"+arrivalFlightInfosOutput[i].getFlightCourse().getFlightNumber()+"</td>");
+                	out.println("<td>"+arrivalFlightInfosOutput[i].getFlightCourse().getFrom()+"</td>");
+                	out.println("<td>"+arrivalFlightInfosOutput[i].getFlightCourse().getStop()+"</td>");
+                	out.println("<td>"+arrivalFlightInfosOutput[i].getFlightCourse().getTo()+"</td>");
+                	String[] t1 = arrivalFlightInfosOutput[i].getTime().split("-", 2);
+                	String[] t2 = t1[1].split(":");
+                	out.println("<td>"+t2[0]+":"+t2[1]+"</td>");
+                	String[] t3 = arrivalFlightInfosOutput[i].getLuggageCarousel().split("盘");
+                	out.println("<td>"+t3[1]+"</td>");
+    				out.println("</tr>");
+        		}
+            	/* for(ArrivalFlightInfo output:arrivalFlightInfos)
                 {
                 	
                 	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
@@ -378,12 +437,26 @@ else
                     	String[] t3 = output.getLuggageCarousel().split("盘");
                     	out.println("<td>"+t3[1]+"</td>");
         				out.println("</tr>");
-                	}         
-                }
+                	}       
+                } */
                 out.println("</tbody></table>");
                 /* out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>"); */
+                out.println("<div><ul class='pager'>");
+            	if(!p.equals("1"))
+                    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+            	if(arrivalFlightInfosOutput.length%10==0)
+                {
+                    if(Integer.parseInt(p)!=arrivalFlightInfosOutput.length/10)
+                		out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                else
+                {
+                    if(Integer.parseInt(p)!=arrivalFlightInfosOutput.length/10 + 1)
+                		out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                out.println("</ul></div>");
                 if(session.getAttribute("priv1")!=null)
-              	  out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"Flight/FlightInfoEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteArrivalFlightInfo'>删除</a><a class='btn btn-success' href='"+basePath+"Flight/FlightInfoEdit.jsp?type=arrival&area="+area+"'>新增</a></div></div>");
+              	    out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"Flight/FlightInfoEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteArrivalFlightInfo'>删除</a><a class='btn btn-success' href='"+basePath+"Flight/FlightInfoEdit.jsp?type=arrival&area="+area+"'>新增</a></div></div>");
             }
             else
             {

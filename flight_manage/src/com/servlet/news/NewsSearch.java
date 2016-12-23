@@ -44,6 +44,7 @@ public class NewsSearch extends HttpServlet {
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
 		response.setContentType("text/html");
+		request.setCharacterEncoding("UTF-8");
 		String title = request.getParameter("news-title");
 		String time = request.getParameter("news-outtime");
 		String type=request.getParameter("type");

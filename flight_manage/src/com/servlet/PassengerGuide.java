@@ -30,6 +30,7 @@ public class PassengerGuide extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
 		String key = request.getParameter("key");
 		String is_flightNo =request.getParameter("is_flightNo");
 		String flight_type = request.getParameter("flight_type");

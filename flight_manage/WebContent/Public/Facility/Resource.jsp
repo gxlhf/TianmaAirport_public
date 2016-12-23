@@ -2,6 +2,15 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String p;
+if(request.getParameter("page")==null)
+	p = "1";
+else
+{
+	p = request.getParameter("page");
+	if(!request.getParameter("page").matches("^\\d+$")||Integer.parseInt(p)<1)
+		p = "1";
+}
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -241,8 +250,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     out.println("<td>" + output.getLocation() + "</td>");
                     out.println("<td>" + output.getRemark() + "</td></tr>");
                     i++;
-                }
-        	 
+              }
+        	  out.println("</tbody></table>");
+              out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
           }
           
           else{
@@ -257,27 +267,70 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	  
         	  User user = new User();
         	  AirportResource[] resourceInfos = user.returnAllAirportResource();
-        	  int i=1;
-        	  for (AirportResource output:resourceInfos) {
+        	  /* int i=1; */
+        	  if(resourceInfos.length%10==0)
+              {
+                	if(Integer.parseInt(p)>resourceInfos.length/10)
+                		response.sendRedirect(basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(resourceInfos.length/10)); 
+                			/* response.sendRedirect(basePath+"error.jsp"); */
+              }
+              else
+              {
+                	if(Integer.parseInt(p)>resourceInfos.length/10 + 1)
+                		response.sendRedirect(basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(resourceInfos.length/10 + 1)); 
+                			/* response.sendRedirect(basePath+"error.jsp"); */
+              }
+        	  for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
+        	  {
+        		  if(i>=resourceInfos.length)
+      		          break;
+        		  out.println("<tr data-id='rname="+ resourceInfos[i].getName() + "'>");
+        		  if(session.getAttribute("priv0")!=null){
+                      out.println("<td><span class='glyphicon glyphicon'></span></td>");
+                  }else{
+                      out.println("<td></td>");
+                  }
+                  //out.println("<td>"+ i +"</td>");
+                  out.println("<td>" + resourceInfos[i].getName() + "</td>");
+                  out.println("<td>" + resourceInfos[i].getLocation() + "</td>");
+                  out.println("<td>" + resourceInfos[i].getRemark() + "</td></tr>");
+                  //i++;
+        	  }
+        	  out.println("</tbody></table>");
+        	  out.println("<div><ul class='pager'>");
+      		if(!p.equals("1"))
+              	out.println("<li class='previous'><a href='"+basePath+"Public/Facility/Resource.jsp?area=local&page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+      		if(resourceInfos.length%10==0)
+              {
+              	if(Integer.parseInt(p)!=resourceInfos.length/10)
+          			out.println("<li class='next'><a href='"+basePath+"Public/Facility/Resource.jsp?area=local&page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+              }
+              else
+              {
+              	if(Integer.parseInt(p)!=resourceInfos.length/10 + 1)
+          			out.println("<li class='next'><a href='"+basePath+"Public/Facility/Resource.jsp?area=local&page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+              }
+              out.println("</ul></div>");
+        	  /* for (AirportResource output:resourceInfos) 
+        	  {
                   out.println("<tr data-id='rname="+ output.getName() + "'>");
                   if(session.getAttribute("priv0")!=null){
                       out.println("<td><span class='glyphicon glyphicon'></span></td>");
                     }else{
                       out.println("<td></td>");
                     }
-                    /* out.println("<td>"+ i +"</td>"); */
+                    //out.println("<td>"+ i +"</td>");
                     out.println("<td>" + output.getName() + "</td>");
                     out.println("<td>" + output.getLocation() + "</td>");
                     out.println("<td>" + output.getRemark() + "</td></tr>");
-                    i++;
-                }
+                    //i++;
+              } */
         	 
          }
              
           
             
-          out.println("</tbody></table>");
-          out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+          
           if(session.getAttribute("priv0")!=null){
             out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a  id='btn-modify' class='btn btn-primary' href='"+basePath+"Facility/ResourceEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"ResourceDelete'>删除</a><a class='btn btn-success' href='"+basePath+"Facility/ResourceEdit.jsp'>新增</a></div></div>");
           }

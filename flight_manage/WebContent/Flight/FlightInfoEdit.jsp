@@ -462,7 +462,7 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
             <div class="form-group">
               <label for="flight-via" class="col-sm-2 control-label">经停地：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="flight-via">
+                <select class="form-control" name="flight-via" data-unequals="unequals" data-validate="true">
                   <%
                   if(request.getParameter("type").equals("departure"))
                   {
@@ -516,6 +516,7 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
                   <option>信息技术员</option> -->
                 </select>
               </div>
+              <div class="col-sm-2 help-block with-errors"></div>
             </div>
             <div class="form-group">
               <label for="flight-to" class="col-sm-2 control-label">目的地：</label>
@@ -862,7 +863,7 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
             <div class="form-group">
               <label for="flight-via" class="col-sm-2 control-label">经停地：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="flight-via">
+                <select class="form-control" name="flight-via" data-unequals="unequals" data-validate="true">
                   <option value=""></option>
                   <%
                   if(request.getParameter("area").equals("local"))
@@ -884,6 +885,7 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
                   <option>信息技术员</option> -->
                 </select>
               </div>
+              <div class="col-sm-2 help-block with-errors"></div>
             </div>
             
             <div class="form-group">
@@ -1213,8 +1215,8 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
     <script type="text/javascript" src="<%=basePath%>/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-tokenfield.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/FlightInfoEdit.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/FlightInfoEdit.js"></script>
 
 </body>
 </html>

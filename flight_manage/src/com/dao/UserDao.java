@@ -820,7 +820,7 @@ public class UserDao {
          String remark;
          int rowNumber=0;
          try {  
-        	 if(name!=null&&name!=""){
+        	 if(name!=null&&!name.equals("")){
  		     sql= "SELECT * FROM boardinggate WHERE boardinggate.Bname='"+name+"'";
              db1= new db_connection(sql);//创建db_connection对象                  
              ret = db1.pst.executeQuery();//执行语句，得到结果集  
@@ -876,8 +876,8 @@ public class UserDao {
                     i++;
                   }
              }
-        	 }else if(name==""||name==null){
-        		 if(type=="登机门")
+        	 }else if(name.equals("")||name==null){
+        		 if(type.equals("登机门"))
         	    	{
         	    	     sql = "SELECT * FROM boardinggate";
         		         //SQL语句  
@@ -896,7 +896,7 @@ public class UserDao {
         	                i++;
         	          }
         	    	}
-        	    	else if(type=="值机柜台")
+        	    	else if(type.equals("值机柜台"))
         	    	{
         	    		sql = "SELECT * FROM checkincounter";
         	    		//SQL语句 
@@ -916,7 +916,7 @@ public class UserDao {
                            i++;
                          }
         	    	}
-        	    	else if(type=="行李转盘")
+        	    	else if(type.equals("行李转盘"))
         	    	{
         	    		sql = "SELECT * FROM luggagecarousel";
         	    		//SQL语句 
@@ -994,7 +994,7 @@ public class UserDao {
 //        */
     	 News[] news =null;
     	 int i=0;
-    	 if(title!=""&&title!=null&&time!=""&&time!=null)
+    	 if(!title.equals("")&&title!=null&&!time.equals("")&&time!=null)
     	     sql = "SELECT* FROM newscenter WHERE newscenter.title like '%"+title+"%' AND newscenter.Edit_time='"+time+"'";//SQL语句
     	 else
     		 sql = "SELECT* FROM newscenter WHERE newscenter.title like '%"+title+"%' OR newscenter.Edit_time='"+time+"'";//SQL语句

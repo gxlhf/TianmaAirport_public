@@ -33,6 +33,7 @@ public class DeleteDepartureFlightInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
 		String[] t1 = request.getParameter("time").split(":");
   	  	String time = t1[0]+":"+t1[1];
   	  	User user = new User();

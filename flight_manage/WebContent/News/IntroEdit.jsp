@@ -172,13 +172,14 @@ newsId=news.getNewsId();
                 <input type="text" class="form-control" name="news-title" value="<%=title %>" readonly>
               </div>
             </div>
-			<input type="text" style="display:none" name="type" value="机场介绍">
-               <input type="text" class="form-control" style="display:none" name="id" value="<%=newsId %>">
+            <input type="text" style="display:none" name="type" value="机场介绍">
+            <input type="text" style="display:none" name="id" value="<%=newsId %>">
             <div class="form-group">
               <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
               <div class="col-sm-6">
-                <textarea rows="20" class="form-control" name="news-context"><%=content %></textarea>
+                <textarea rows="20" class="form-control" name="news-context" required><%=content %></textarea>
               </div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <div class="col-sm-2"></div>
@@ -223,7 +224,7 @@ newsId=news.getNewsId();
           <div></div>
           <div class="col-sm-6 btn-modify">
             <div class="btn-group btn-group-justified">
-              <a class="btn btn-success" href="#" onclick="$('form').submit()">修改</a>
+              <a id="btn-save" class="btn btn-success">修改</a>
               <a class="btn btn-primary" href="<%=basePath %>Public/News/Intro.jsp">取消</a>
             </div>
           </div>
@@ -233,6 +234,49 @@ newsId=news.getNewsId();
       <div id="backToTop-btn" onclick="scroll(0,0)">
         <span class="glyphicon glyphicon-chevron-up"></span>
       </div>
+
+
+      <!-- 确认信息弹框开始 -->
+      <div id="ensureBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- <div class="modal-header"> -->
+              <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button> -->
+              <!-- <h4 class="modal-title" id="myModalLabel">确认需要保存的信息</h4> -->
+            <!-- </div> -->
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4>以下是即将保存的信息，请确认。<br></h4>
+              <strong class="text-danger">提交后将无法撤销</strong>
+
+              <hr>
+
+              <div class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">新闻标题：</label>
+                  <div class="col-xs-9">
+                    <p id="news-title-ensure" class="form-control-static">321</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">新闻正文：</label>
+                  <div class="col-xs-9">
+                    <p id="news-context-ensure" class="form-control-static">123</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-primary">保存</button>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 确认信息弹框结束 -->
+
     </div>
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
@@ -246,10 +290,9 @@ newsId=news.getNewsId();
     <!-- 尾部结束 -->
     <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+      <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
   
 
 </body></html>

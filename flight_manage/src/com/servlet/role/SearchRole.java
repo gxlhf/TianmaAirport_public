@@ -40,6 +40,7 @@ public class SearchRole extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
+		request.setCharacterEncoding("UTF-8");
 		String roleName = request.getParameter("role-name");
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		Role roleInfo = admin.searchRole(roleName);
