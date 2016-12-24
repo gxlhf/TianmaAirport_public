@@ -30,7 +30,7 @@ public class SearchResource extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//processRequest(request, response);
+		processRequest(request, response);
 	}
 
 	/**

@@ -2,6 +2,15 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String p;
+if(request.getParameter("page")==null)
+	p = "1";
+else
+{
+	p = request.getParameter("page");
+	if(!request.getParameter("page").matches("^\\d+$")||Integer.parseInt(p)<1)
+		p = "1";
+}
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -185,7 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active">物业设施</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <form class="form-horizontal" role="form" action = "<%=basePath%>SearchFacility" method="post" >
+          <form class="form-horizontal" role="form" action = "<%=basePath%>SearchFacility" method="get" >
             <div class="form-group">
               <label for="facility-name" class="col-sm-2 control-label">设施名称：</label>
               <div class="col-sm-6">
@@ -203,17 +212,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <%
          out.println("<table class='table table-hover select-table'><thead> <tr>");
          if(session.getAttribute("priv0")!=null){
-                  out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
+             out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
          }else{
-                  out.println("<th></th>");
+             out.println("<th></th>");
          }
          out.println("<th>设施名称</th><th>设施分类</th><th>联系电话</th> <th>位置</th> <th>备注</th></tr></thead> <tbody>");
 
          if (request.getAttribute("facilityInfo")!=null ) {
-             PropertyFacility[]facilityInfos = (PropertyFacility[])request.getAttribute("facilityInfo");
-             int i=1;
-
-             for(PropertyFacility output:facilityInfos)
+             PropertyFacility[] facilityInfos = (PropertyFacility[])request.getAttribute("facilityInfo");
+             //int i=1;
+			 String ul_path = "SearchFacility?facility-name="+request.getParameter("facility-name");
+			 if(facilityInfos.length%10==0)
+             {
+               	if(Integer.parseInt(p)>facilityInfos.length/10)
+               		response.sendRedirect(basePath+ul_path+Integer.toString(facilityInfos.length/10)); 
+               			/* response.sendRedirect(basePath+"error.jsp"); */
+             }
+             else
+             {
+               	if(Integer.parseInt(p)>facilityInfos.length/10 + 1)
+               		response.sendRedirect(basePath+ul_path+Integer.toString(facilityInfos.length/10 + 1)); 
+               			/* response.sendRedirect(basePath+"error.jsp"); */
+             }
+			 for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
+			 {
+				 if(i>=facilityInfos.length)
+     		         break;
+				 out.println("<tr data-id='fname="+ facilityInfos[i].getName() + "'>");
+	             if(session.getAttribute("priv0")!=null){
+	                 out.println("<td><span class='glyphicon'></span></td>");
+	             }else{
+	                 out.println("<td></td>");
+	             }
+	             //out.println("<td>"+ i +"</td>");
+	             out.println("<td>" + facilityInfos[i].getName() + "</td>");
+	             out.println("<td>" + facilityInfos[i].getType() + "</td>");
+	             out.println("<td>" + facilityInfos[i].getPhone() + "</td>");
+	             out.println("<td>" + facilityInfos[i].getLocation() + "</td>");
+	             if(facilityInfos[i].getRemark()==null)
+	               	out.println("<td></td></tr>");
+	             else
+	               	out.println("<td>" + facilityInfos[i].getRemark() + "</td></tr>");
+       		  	 
+			 }
+             /* for(PropertyFacility output:facilityInfos)
              {
                 out.println("<tr data-id='fname="+ output.getName() + "'>");
                 if(session.getAttribute("priv0")!=null){
@@ -221,7 +263,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }else{
                   out.println("<td></td>");
                 }
-                /* out.println("<td>"+ i +"</td>"); */
+                //out.println("<td>"+ i +"</td>");
                 out.println("<td>" + output.getName() + "</td>");
                	out.println("<td>" + output.getType() + "</td>");
                 out.println("<td>" + output.getPhone() + "</td>");
@@ -230,43 +272,80 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                	 out.println("<td></td></tr>");
                 else
                 	out.println("<td>" + output.getRemark() + "</td></tr>");
-                i++;
+                //i++;
+             } */
+             out.println("</tbody></table>");
+             out.println("<div><ul class='pager'>");
+     		  if(!p.equals("1"))
+             	  out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+     		  if(facilityInfos.length%10==0)
+             {
+             	  if(Integer.parseInt(p)!=facilityInfos.length/10)
+         			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
              }
+             else
+             {
+             	  if(Integer.parseInt(p)!=facilityInfos.length/10 + 1)
+         			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+             }
+             out.println("</ul></div>");
          }
 
          else{
               User user = new User();
-              PropertyFacility[]facilityInfos = user.returnAllPropertyFacility();
-              int i=1;
-
-              for(PropertyFacility output:facilityInfos)
+              PropertyFacility[] facilityInfos = user.returnAllPropertyFacility();
+              //int i=1;
+			  if(facilityInfos.length%10==0)
               {
-                 out.println("<tr data-id='fname="+ output.getName() + "'>");
-                 if(session.getAttribute("priv0")!=null){
-                   out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                 }else{
-                   out.println("<td></td>");
-                 }
-                 /* out.println("<td>"+ i +"</td>"); */
-                 out.println("<td>" + output.getName() + "</td>");
-                 out.println("<td>" + output.getType() + "</td>");
-                 out.println("<td>" + output.getPhone() + "</td>");
-                 out.println("<td>" + output.getLocation() + "</td>");
-                 if(output.getRemark()==null)
-                	 out.println("<td></td></tr>");
-                 else
-                 	out.println("<td>" + output.getRemark() + "</td></tr>");
-                 i++;
+                	if(Integer.parseInt(p)>facilityInfos.length/10)
+                		response.sendRedirect(basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(facilityInfos.length/10)); 
+                			/* response.sendRedirect(basePath+"error.jsp"); */
               }
+              else
+              {
+                	if(Integer.parseInt(p)>facilityInfos.length/10 + 1)
+                		response.sendRedirect(basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(facilityInfos.length/10 + 1)); 
+                			/* response.sendRedirect(basePath+"error.jsp"); */
+              }
+			  for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
+        	  {
+				  if(i>=facilityInfos.length)
+      		          break;
+				  out.println("<tr data-id='fname="+ facilityInfos[i].getName() + "'>");
+	              if(session.getAttribute("priv0")!=null){
+	                  out.println("<td><span class='glyphicon'></span></td>");
+	              }else{
+	                  out.println("<td></td>");
+	              }
+	              //out.println("<td>"+ i +"</td>");
+	              out.println("<td>" + facilityInfos[i].getName() + "</td>");
+	              out.println("<td>" + facilityInfos[i].getType() + "</td>");
+	              out.println("<td>" + facilityInfos[i].getPhone() + "</td>");
+	              out.println("<td>" + facilityInfos[i].getLocation() + "</td>");
+	              if(facilityInfos[i].getRemark()==null)
+	                  out.println("<td></td></tr>");
+	              else
+	                  out.println("<td>" + facilityInfos[i].getRemark() + "</td></tr>");
+        	 }
+             out.println("</tbody></table>");
+             out.println("<div><ul class='pager'>");
+       		 if(!p.equals("1"))
+                 out.println("<li class='previous'><a href='"+basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+       		 if(facilityInfos.length%10==0)
+             {
+               	 if(Integer.parseInt(p)!=facilityInfos.length/10)
+           			out.println("<li class='next'><a href='"+basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+             }
+             else
+             {
+                 if(Integer.parseInt(p)!=facilityInfos.length/10 + 1)
+           		 	out.println("<li class='next'><a href='"+basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+             }
+             out.println("</ul></div>");
        }
 
-
-       out.println("</tbody></table>");
-             out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
-
-       if(session.getAttribute("priv0")!=null){
+       if(session.getAttribute("priv0")!=null)
             out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"Facility/FacilityEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"FacilityDelete'>删除</a><a class='btn btn-success' href='"+basePath+"Facility/FacilityEdit.jsp'>新增</a></div></div>");
-          }
  %>
           
          
