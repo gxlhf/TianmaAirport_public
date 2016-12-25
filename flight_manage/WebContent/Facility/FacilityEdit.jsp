@@ -2,6 +2,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道","自动扶梯","公共电梯","登机牌自动柜员机","自动银行柜员机","公共卫生间","残障卫生间","更衣室","母婴室","行李打包处","行李寄存处","医疗急救站"};
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -185,9 +186,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-6">
                 <select class="form-control" name="facility-type" data-error="请选择设施分类*" required>
                 <option value="<%=facilityModify[0].getType() %>" ><%=facilityModify[0].getType() %></option>  
-				
-                
-                  <%
+					<%
+					for(String output:facilityType)
+					{
+						if(!facilityModify[0].getType().equals(output))
+						{
+					%>
+					<option value = "<%=output %>"><%=output %></option>
+                	<%
+						}
+					}
+                	%>
+                  <%-- <%
                     if(!facilityModify[0].getType().equals("商店"))
                     {
                   %> 
@@ -210,7 +220,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <option value = "吸烟室">吸烟室</option>
                 <%
                     }
-                %>
+                %> --%>
                 
                 </select>
               </div>
@@ -283,9 +293,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <label for="facility-type" class="col-sm-2 control-label">设施分类：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="facility-type" data-error="请选择设施分类*" required>
-                  <option value = "商店">商店</option>
-                  <option value = "邮局">邮局</option>
-                  <option value = "吸烟室">吸烟室</option>
+                  <%
+					for(String output:facilityType)
+					{
+				  %>
+					<option value = "<%=output %>"><%=output %></option>
+                	<%
+					}
+                	%>
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
