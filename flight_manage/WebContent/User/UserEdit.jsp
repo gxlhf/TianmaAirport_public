@@ -338,16 +338,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-password" class="col-sm-2 control-label">登录密码：</label>
               <div class="col-sm-6">
-                <input type="password" class="form-control" name="user-password" data-minlength="6" data-required-error="请填写密码*" data-minlength-error="密码长度至少为6位*" required>
+                <input type="password" class="form-control" name="user-password" data-minlength="6" data-required-error="请填写密码*" data-minlength-error="密码长度至少为6位*">
               </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors"></div>
             </div>
             <div class="form-group">
               <label for="user-password-check" class="col-sm-2 control-label">密码确认：</label>
               <div class="col-sm-6">
-                <input type="password" class="form-control" data-match='[name="user-password"]' data-required-error="请确认密码*" data-match-error="密码不一致*" required>
+                <input type="password" class="form-control" data-match='[name="user-password"]' data-required-error="请确认密码*" data-match-error="密码不一致*">
               </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors"></div>
             </div>
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">

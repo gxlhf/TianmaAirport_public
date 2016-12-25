@@ -53,7 +53,15 @@ public class ModifyAdmin extends HttpServlet {
 		String phone = request.getParameter("user-phone");
 		String mobile = request.getParameter("user-tel");
 		String email = request.getParameter("user-email");
-		String password = request.getParameter("user-password");
+		String password = "";
+		Admin admin=(Admin)request.getSession().getAttribute("admin");
+		if(request.getParameter("user-password").equals(""))
+		{
+			Admin[] adminOriginInfo = admin.searchAdmin(empno, "", -1, "", "");
+			password = adminOriginInfo[0].getPassword();
+		}
+		else
+			password = request.getParameter("user-password");
 		Role roleModifyInfo = new Role(roleName);
 		Admin adminModifyInfo = new Admin(empno, name, sex, email, roleModifyInfo, mobile, phone, department, position, password);
 		/*System.out.println(empno);
@@ -66,7 +74,6 @@ public class ModifyAdmin extends HttpServlet {
 		System.out.println(phone);
 		System.out.println(email);
 		System.out.println(password);*/
-		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		int result = admin.modifyAdmin(adminModifyInfo);
 		if(result==-1){
 			response.sendRedirect("error.jsp");

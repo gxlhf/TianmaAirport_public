@@ -183,6 +183,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
+            <%
+            session.setAttribute("empnoValidate", admin.getEmpno());
+            %>
             <div class="form-group">
               <label for="user-name" class="col-sm-2 control-label">姓名：</label>
               <div class="col-sm-6">
@@ -304,26 +307,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-roles" class="col-sm-2 control-label">角色：</label>
               <div class="col-sm-6">
-                <select class="form-control" name="user-role" data-error="请选择角色*" required>
-                  <option value="<%=admin.getRole().getName() %>"><%=admin.getRole().getName() %></option>
-                  <%
-                  	for(Role output:admin.returnAllRole())
-                  	{
-                  		if(!output.getName().equals(admin.getRole().getName()))
-                  		{
-                  %>
-                  			<option value="<%=output.getName() %>"><%=output.getName() %></option>
-                  <%
-                  	
-                  		}
-                  	}
-                  %>
-                  <!-- <option value="机场地勤人员">机场地勤人员</option>
-                  <option value="信息技术员">信息技术员</option> -->
-                </select>
+              	<input type="text" class="form-control" name="user-role" data-error="请选择角色*" value="<%=admin.getRole().getName() %>" required readonly>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
+            <%
+            session.setAttribute("roleValidate", admin.getRole().getName());
+            %>
             <div class="form-group">
               <label for="user-phone" class="col-sm-2 control-label">电话：</label>
               <div class="col-sm-6">
@@ -348,16 +338,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-password" class="col-sm-2 control-label">登录密码：</label>
               <div class="col-sm-6">
-                <input type="password" class="form-control" name="user-password" data-minlength="6" data-required-error="请填写密码*" data-minlength-error="密码长度至少为6位*" required>
+                <input type="password" class="form-control" name="user-password" data-minlength="6" data-required-error="请填写密码*" data-minlength-error="密码长度至少为6位*">
               </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors"></div>
             </div>
             <div class="form-group">
               <label for="user-password-check" class="col-sm-2 control-label">密码确认：</label>
               <div class="col-sm-6">
-                <input type="password" class="form-control" data-match='[name="user-password"]' data-required-error="请确认密码*" data-match-error="密码不一致*" required>
+                <input type="password" class="form-control" data-match='[name="user-password"]' data-required-error="请确认密码*" data-match-error="密码不一致*">
               </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors"></div>
             </div>
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
