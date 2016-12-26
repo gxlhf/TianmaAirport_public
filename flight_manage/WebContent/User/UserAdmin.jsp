@@ -267,18 +267,24 @@ else
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Admin[] adminInfos = (Admin[])request.getAttribute("adminsInfo");
             	String ul_path = "SearchAdmin?search-empno="+request.getParameter("search-empno")+"&search-name="+request.getParameter("search-name")+"&search-sex="+request.getParameter("search-sex")+"&search-position="+request.getParameter("search-position")+"&search-role="+request.getParameter("search-role")+"&page=";
-   			    if(adminInfos.length%10==0)
-                {
-                  	if(Integer.parseInt(p)>adminInfos.length/10)
-                  		response.sendRedirect(basePath+ul_path+Integer.toString(adminInfos.length/10)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
-                else
-                {
-                  	if(Integer.parseInt(p)>adminInfos.length/10 + 1)
-                  		response.sendRedirect(basePath+ul_path+Integer.toString(adminInfos.length/10 + 1)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
+            	if(adminInfos.length==0)
+   			    	response.sendRedirect(basePath+"User/UserAdmin.jsp");
+            	else
+            	{
+            		if(adminInfos.length%10==0)
+                    {
+                      	if(Integer.parseInt(p)>adminInfos.length/10)
+                      		response.sendRedirect(basePath+ul_path+Integer.toString(adminInfos.length/10)); 
+                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                    }
+                    else
+                    {
+                      	if(Integer.parseInt(p)>adminInfos.length/10 + 1)
+                      		response.sendRedirect(basePath+ul_path+Integer.toString(adminInfos.length/10 + 1)); 
+                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                    }
+            	}
+            	
             	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
             		if(i>=adminInfos.length)
@@ -355,18 +361,24 @@ else
             {
             	Admin[] admins = admin.searchAdmin("", "", -1, "", "");
             	String ul_path = "User/UserAdmin.jsp?page=";
-   			    if(admins.length%10==0)
-                {
-                  	if(Integer.parseInt(p)>admins.length/10)
-                  		response.sendRedirect(basePath+ul_path+Integer.toString(admins.length/10)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
-                else
-                {
-                  	if(Integer.parseInt(p)>admins.length/10 + 1)
-                  		response.sendRedirect(basePath+ul_path+Integer.toString(admins.length/10 + 1)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
+   			    if(admins.length==0)
+   			    	response.sendRedirect(basePath+"User/UserAdmin.jsp");
+   			    else
+   			    {
+   			    	if(admins.length%10==0)
+   	                {
+   	                  	if(Integer.parseInt(p)>admins.length/10)
+   	                  		response.sendRedirect(basePath+ul_path+Integer.toString(admins.length/10)); 
+   	                  			/* response.sendRedirect(basePath+"error.jsp"); */
+   	                }
+   	                else
+   	                {
+   	                  	if(Integer.parseInt(p)>admins.length/10 + 1)
+   	                  		response.sendRedirect(basePath+ul_path+Integer.toString(admins.length/10 + 1)); 
+   	                  			/* response.sendRedirect(basePath+"error.jsp"); */
+   	                }
+   			    }
+            	
             	out.println("<table class='table table-hover select-table'><thead><tr>");
               	out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
             	out.println("<th>员工号</th><th>姓名</th><th>性别</th><th>电话</th><th>手机</th><th>邮箱</th><th>部门</th><th>职位</th><th>角色</th></tr></thead><tbody>");

@@ -239,18 +239,24 @@ else
         	  
         	  //int i=1;
         	  AirportResource[] resourceInfos = (AirportResource[])request.getAttribute("resourceInfo");
-        	  if(resourceInfos.length%10==0)
-              {
-                	if(Integer.parseInt(p)>resourceInfos.length/10)
-                		response.sendRedirect(basePath+ul_path+Integer.toString(resourceInfos.length/10)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
-              }
-              else
-              {
-                	if(Integer.parseInt(p)>resourceInfos.length/10 + 1)
-                		response.sendRedirect(basePath+ul_path+Integer.toString(resourceInfos.length/10 + 1)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
-              }
+        	  if(resourceInfos.length==0)
+ 		          response.sendRedirect(basePath+"Public/Facility/Resource.jsp");
+        	  else
+        	  {
+        		  if(resourceInfos.length%10==0)
+                  {
+                      if(Integer.parseInt(p)>resourceInfos.length/10)
+                          response.sendRedirect(basePath+ul_path+Integer.toString(resourceInfos.length/10)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                  }
+                  else
+                  {
+                      if(Integer.parseInt(p)>resourceInfos.length/10 + 1)
+                          response.sendRedirect(basePath+ul_path+Integer.toString(resourceInfos.length/10 + 1)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                  }
+        	  }
+        	  
         	  /* for (AirportResource output:resourceInfos) {
                   out.println("<tr data-id='rname="+ output.getName() + "'>");
                   if(session.getAttribute("priv0")!=null){
@@ -311,18 +317,24 @@ else
         	  User user = new User();
         	  AirportResource[] resourceInfos = user.returnAllAirportResource();
         	  /* int i=1; */
-        	  if(resourceInfos.length%10==0)
-              {
-                	if(Integer.parseInt(p)>resourceInfos.length/10)
-                		response.sendRedirect(basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(resourceInfos.length/10)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
-              }
-              else
-              {
-                	if(Integer.parseInt(p)>resourceInfos.length/10 + 1)
-                		response.sendRedirect(basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(resourceInfos.length/10 + 1)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
-              }
+        	  if(resourceInfos.length==0)
+ 		          response.sendRedirect(basePath+"Public/Facility/Resource.jsp");
+        	  else
+        	  {
+        		  if(resourceInfos.length%10==0)
+                  {
+                      if(Integer.parseInt(p)>resourceInfos.length/10)
+                          response.sendRedirect(basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(resourceInfos.length/10)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                  }
+                  else
+                  {
+                      if(Integer.parseInt(p)>resourceInfos.length/10 + 1)
+                          response.sendRedirect(basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(resourceInfos.length/10 + 1)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                  }
+        	  }
+        	  
         	  for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
         	  {
         		  if(i>=resourceInfos.length)

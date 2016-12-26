@@ -364,17 +364,23 @@ else
                 }
                 String ul_path = "ArrivalFlightSearch?flight-id="+request.getParameter("flight-id")+"&from-site="+request.getParameter("from-site")+"&airCompany-name="+request.getParameter("airCompany-name")+"&area="+area+"&page=";
                 if(arrivalFlightInfosOutput.length%10==0)
-            	{
-            		if(Integer.parseInt(p)>arrivalFlightInfosOutput.length/10)
-            			response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfosOutput.length/10)); 
-            			/* response.sendRedirect(basePath+"error.jsp"); */
-            	}
-            	else
-            	{
-            		if(Integer.parseInt(p)>arrivalFlightInfosOutput.length/10 + 1)
-            			response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfosOutput.length/10 + 1)); 
-            			/* response.sendRedirect(basePath+"error.jsp"); */
-            	}
+                	response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area="+area);
+                else
+                {
+                	if(arrivalFlightInfosOutput.length%10==0)
+                	{
+                		if(Integer.parseInt(p)>arrivalFlightInfosOutput.length/10)
+                			response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfosOutput.length/10)); 
+                			/* response.sendRedirect(basePath+"error.jsp"); */
+                	}
+                	else
+                	{
+                		if(Integer.parseInt(p)>arrivalFlightInfosOutput.length/10 + 1)
+                			response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfosOutput.length/10 + 1)); 
+                			/* response.sendRedirect(basePath+"error.jsp"); */
+                	}
+                }
+                
                 for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
         		{
         			if(i>=arrivalFlightInfosOutput.length)
@@ -471,17 +477,23 @@ else
                 	out.println("<th>航空公司</th><th>航班号</th><th>始发地</th><th>经停地</th><th>目的地</th><th>到港时间</th><th>行李转盘</th></tr></thead><tbody>");
             		ArrivalFlightInfo[] allLocalArrivalFlightInfos = user.returnAllLocalArrivalFlightInfo();
             		if(allLocalArrivalFlightInfos.length%10==0)
-                	{
-                		if(Integer.parseInt(p)>allLocalArrivalFlightInfos.length/10)
-                			response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalArrivalFlightInfos.length/10)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
-                	}
-                	else
-                	{
-                		if(Integer.parseInt(p)>allLocalArrivalFlightInfos.length/10 + 1)
-                			response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalArrivalFlightInfos.length/10 + 1)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
-                	}
+                    	response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area="+area);
+            		else
+            		{
+            			if(allLocalArrivalFlightInfos.length%10==0)
+                    	{
+                    		if(Integer.parseInt(p)>allLocalArrivalFlightInfos.length/10)
+                    			response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalArrivalFlightInfos.length/10)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    	}
+                    	else
+                    	{
+                    		if(Integer.parseInt(p)>allLocalArrivalFlightInfos.length/10 + 1)
+                    			response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalArrivalFlightInfos.length/10 + 1)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    	}
+            		}
+            		
             		/* System.out.println(allLocalArrivalFlightInfos.length); */
             		for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             		{
@@ -532,6 +544,23 @@ else
                 	out.println("<th>航空公司</th><th>航班号</th><th>始发地</th><th>经停地</th><th>目的地</th><th>到港时间</th><th>行李转盘</th></tr></thead><tbody>");
             		ArrivalFlightInfo[] allInternationalArrivalFlightInfos = user.returnAllInternationalArrivalFlightInfo();
             		/* System.out.println(allLocalArrivalFlightInfos.length); */
+            		if(allInternationalArrivalFlightInfos.length%10==0)
+                    	response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area="+area);
+            		else
+            		{
+            			if(allInternationalArrivalFlightInfos.length%10==0)
+                    	{
+                    		if(Integer.parseInt(p)>allInternationalArrivalFlightInfos.length/10)
+                    			response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area=international&page="+Integer.toString(allInternationalArrivalFlightInfos.length/10)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    	}
+                    	else
+                    	{
+                    		if(Integer.parseInt(p)>allInternationalArrivalFlightInfos.length/10 + 1)
+                    			response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area=international&page="+Integer.toString(allInternationalArrivalFlightInfos.length/10 + 1)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    	}
+            		}
             		for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             		{
             			if(i>=allInternationalArrivalFlightInfos.length)

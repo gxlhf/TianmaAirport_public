@@ -211,18 +211,24 @@ else
             		}
             	}
             	String ul_path = "PassengerGuide?key="+request.getParameter("key")+"&flight_type="+request.getParameter("flight_type")+"&is_flightNo="+request.getParameter("is_flightNo")+"&page=";
-            	if(departureFlightInfosOutput.length%10==0)
-                {
-                  	if(Integer.parseInt(p)>departureFlightInfosOutput.length/10)
-                  		response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
-                else
-                {
-                  	if(Integer.parseInt(p)>departureFlightInfosOutput.length/10 + 1)
-                  		response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10 + 1)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
+            	if(departureFlightInfosOutput.length==0)
+            		response.sendRedirect(basePath+"Public/PassengerGuide.jsp");
+            	else
+            	{
+            		if(departureFlightInfosOutput.length%10==0)
+                    {
+                      	if(Integer.parseInt(p)>departureFlightInfosOutput.length/10)
+                      		response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10)); 
+                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                    }
+                    else
+                    {
+                      	if(Integer.parseInt(p)>departureFlightInfosOutput.length/10 + 1)
+                      		response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10 + 1)); 
+                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                    }
+            	}
+            	
             	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
             		if(i>=departureFlightInfosOutput.length)
@@ -329,18 +335,24 @@ else
             	ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	User user = new User();
             	String ul_path = "PassengerGuide?key="+request.getParameter("key")+"&flight_type="+request.getParameter("flight_type")+"&is_flightNo="+request.getParameter("is_flightNo")+"&page=";
-            	if(arrivalFlightInfos.length%10==0)
-                {
-                  	if(Integer.parseInt(p)>arrivalFlightInfos.length/10)
-                  		response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfos.length/10)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
-                else
-                {
-                  	if(Integer.parseInt(p)>arrivalFlightInfos.length/10 + 1)
-                  		response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfos.length/10 + 1)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
+            	if(arrivalFlightInfos.length==0)
+            		response.sendRedirect(basePath+"Public/PassengerGuide.jsp");
+            	else
+            	{
+            		if(arrivalFlightInfos.length%10==0)
+                    {
+                      	if(Integer.parseInt(p)>arrivalFlightInfos.length/10)
+                      		response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfos.length/10)); 
+                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                    }
+                    else
+                    {
+                      	if(Integer.parseInt(p)>arrivalFlightInfos.length/10 + 1)
+                      		response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfos.length/10 + 1)); 
+                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                    }
+            	}
+            	
             	
             	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{

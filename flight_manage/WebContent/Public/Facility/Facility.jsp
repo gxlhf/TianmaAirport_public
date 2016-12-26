@@ -222,18 +222,23 @@ else
              PropertyFacility[] facilityInfos = (PropertyFacility[])request.getAttribute("facilityInfo");
              //int i=1;
 			 String ul_path = "SearchFacility?facility-name="+request.getParameter("facility-name");
-			 if(facilityInfos.length%10==0)
-             {
-               	if(Integer.parseInt(p)>facilityInfos.length/10)
-               		response.sendRedirect(basePath+ul_path+Integer.toString(facilityInfos.length/10)); 
-               			/* response.sendRedirect(basePath+"error.jsp"); */
-             }
-             else
-             {
-               	if(Integer.parseInt(p)>facilityInfos.length/10 + 1)
-               		response.sendRedirect(basePath+ul_path+Integer.toString(facilityInfos.length/10 + 1)); 
-               			/* response.sendRedirect(basePath+"error.jsp"); */
-             }
+			 if(facilityInfos.length==0)
+				 response.sendRedirect(basePath+"Public/Facility/Facility.jsp");
+			 else
+			 {
+				 if(facilityInfos.length%10==0)
+	             {
+	               	if(Integer.parseInt(p)>facilityInfos.length/10)
+	               		response.sendRedirect(basePath+ul_path+Integer.toString(facilityInfos.length/10)); 
+	               			/* response.sendRedirect(basePath+"error.jsp"); */
+	             }
+	             else
+	             {
+	               	if(Integer.parseInt(p)>facilityInfos.length/10 + 1)
+	               		response.sendRedirect(basePath+ul_path+Integer.toString(facilityInfos.length/10 + 1)); 
+	               			/* response.sendRedirect(basePath+"error.jsp"); */
+	             }
+			 }
 			 for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
 			 {
 				 if(i>=facilityInfos.length)
@@ -295,18 +300,24 @@ else
               User user = new User();
               PropertyFacility[] facilityInfos = user.returnAllPropertyFacility();
               //int i=1;
-			  if(facilityInfos.length%10==0)
-              {
-                	if(Integer.parseInt(p)>facilityInfos.length/10)
-                		response.sendRedirect(basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(facilityInfos.length/10)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
-              }
+              if(facilityInfos.length==0)
+				 response.sendRedirect(basePath+"Public/Facility/Facility.jsp");
               else
               {
-                	if(Integer.parseInt(p)>facilityInfos.length/10 + 1)
-                		response.sendRedirect(basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(facilityInfos.length/10 + 1)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
+            	  if(facilityInfos.length%10==0)
+                  {
+                    	if(Integer.parseInt(p)>facilityInfos.length/10)
+                    		response.sendRedirect(basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(facilityInfos.length/10)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                  }
+                  else
+                  {
+                    	if(Integer.parseInt(p)>facilityInfos.length/10 + 1)
+                    		response.sendRedirect(basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(facilityInfos.length/10 + 1)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                  }
               }
+			  
 			  for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
         	  {
 				  if(i>=facilityInfos.length)

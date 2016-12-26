@@ -363,18 +363,24 @@ else
                 	}
                 }
                 String ul_path = "DepartureFlightSearch?flight-id="+request.getParameter("flight-id")+"&to-site="+request.getParameter("to-site")+"&airCompany-name="+request.getParameter("airCompany-name")+"&area="+area+"&page=";
-                if(departureFlightInfosOutput.length%10==0)
-            	{
-            		if(Integer.parseInt(p)>departureFlightInfosOutput.length/10)
-            			response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10)); 
-            			/* response.sendRedirect(basePath+"error.jsp"); */
-            	}
-            	else
-            	{
-            		if(Integer.parseInt(p)>departureFlightInfosOutput.length/10 + 1)
-            			response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10 + 1)); 
-            			/* response.sendRedirect(basePath+"error.jsp"); */
-            	}
+                if(departureFlightInfosOutput.length==0)
+                	response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area);
+                else
+                {
+                	if(departureFlightInfosOutput.length%10==0)
+                	{
+                		if(Integer.parseInt(p)>departureFlightInfosOutput.length/10)
+                			response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10)); 
+                			/* response.sendRedirect(basePath+"error.jsp"); */
+                	}
+                	else
+                	{
+                		if(Integer.parseInt(p)>departureFlightInfosOutput.length/10 + 1)
+                			response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10 + 1)); 
+                			/* response.sendRedirect(basePath+"error.jsp"); */
+                	}
+                }
+                
                 for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
         		{
         			if(i>=departureFlightInfosOutput.length)
@@ -547,18 +553,24 @@ else
                 			j++;
                 		}
                 	}
-                	if(allLocalDepartureFlightInfos.length%10==0)
-                	{
-                		if(Integer.parseInt(p)>allLocalDepartureFlightInfos.length/10)
-                			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalDepartureFlightInfos.length/10)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
-                	}
+                	if(allLocalDepartureFlightInfos.length==0)
+                		response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area);
                 	else
                 	{
-                		if(Integer.parseInt(p)>allLocalDepartureFlightInfos.length/10 + 1)
-                			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalDepartureFlightInfos.length/10 + 1)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
+                		if(allLocalDepartureFlightInfos.length%10==0)
+                    	{
+                    		if(Integer.parseInt(p)>allLocalDepartureFlightInfos.length/10)
+                    			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalDepartureFlightInfos.length/10)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    	}
+                    	else
+                    	{
+                    		if(Integer.parseInt(p)>allLocalDepartureFlightInfos.length/10 + 1)
+                    			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalDepartureFlightInfos.length/10 + 1)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    	}
                 	}
+                	
                 		
                 	/* System.out.println(allLocalDepartureFlightInfos.length); */
                 	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
@@ -645,18 +657,24 @@ else
                 			j++;
                 		}
                 	}
-                	if(allInternationalDepartureFlightInfos.length%10==0)
-                	{
-                		if(Integer.parseInt(p)>allInternationalDepartureFlightInfos.length/10)
-                			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(allInternationalDepartureFlightInfos.length/10)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
-                	}
+                	if(allInternationalDepartureFlightInfos.length==0)
+                		response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area);
                 	else
                 	{
-                		if(Integer.parseInt(p)>allInternationalDepartureFlightInfos.length/10 + 1)
-                			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(allInternationalDepartureFlightInfos.length/10 + 1)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
+                		if(allInternationalDepartureFlightInfos.length%10==0)
+                    	{
+                    		if(Integer.parseInt(p)>allInternationalDepartureFlightInfos.length/10)
+                    			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(allInternationalDepartureFlightInfos.length/10)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    	}
+                    	else
+                    	{
+                    		if(Integer.parseInt(p)>allInternationalDepartureFlightInfos.length/10 + 1)
+                    			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(allInternationalDepartureFlightInfos.length/10 + 1)); 
+                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    	}
                 	}
+                	
                 		
                 	/* System.out.println(allLocalDepartureFlightInfos.length); */
                 	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
