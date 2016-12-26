@@ -14,6 +14,35 @@ String[] localTo = {"成都","宁波","昆明","哈尔滨","重庆","温州","�
 String[] internationalTo = {"首尔","法兰克福","曼谷","吉隆坡","新加坡"};
 String[] localAirline = {"四川航空公司","祥鹏航空公司","奥凯航空公司","中国国际航空公司","中国南方航空公司","成都航空公司","上海航空公司","天津航空公司","吉祥航空公司","海南航空公司","首都航空公司","昆明航空公司","厦门航空公司","中国东方航空公司","河北航空公司","重庆航空公司","西部航空公司","青岛航空公司","山东航空公司","深圳航空公司"};
 String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空公司","大韩航空公司","胜安航空(新加坡)","泰国东方航空公司","韩亚航空公司"};
+HashMap<String, String> airlineCode = new HashMap<String, String>() {
+{
+	 put("奥凯航空公司", "BK"); 
+	 put("四川航空公司", "3U");
+	 put("吉祥航空公司", "HO");  
+   	 put("中国东方航空公司", "MU");
+   	 put("山东航空公司", "SC");
+   	 put("泰国亚洲航空公司", "FD");
+   	 put("西部航空公司", "PN");
+   	 put("青岛航空公司", "QW");
+   	 put("昆明航空公司", "KY");
+	 put("中国南方航空公司", "CZ");
+	 put("首都航空公司", "JD");
+	 put("河北航空公司", "4889983");
+	 put("胜安航空(新加坡)", "MI");
+	 put("上海航空公司", "FM");
+	 put("成都航空公司", "EU");
+	 put("厦门航空公司", "MF");
+	 put("天津航空公司", "GS");
+	 put("海南航空公司", "HU");
+	 put("韩亚航空公司", "OZ");
+	 put("大韩航空公司", "KE");
+	 put("泰国东方航空公司", "OX");
+	 put("重庆航空公司", "OQ");
+	 put("深圳航空公司", "ZH");
+	 put("中国国际航空公司", "CA");
+	 put("祥鹏航空公司", "8L");
+}
+};
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -578,13 +607,13 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
                   <%
                   if(request.getParameter("type").equals("departure"))
                   {
-                	  out.println("<option value='"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
+                	  out.println("<option airline-code='"+airlineCode.get(departureFlightModifyInfo[0].getFlightCourse().getAirline())+"' value='"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
                   	  if(request.getParameter("area").equals("local"))
                   	  {
                   		  for(String output:localAirline)
                   		  {
                   			  if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getAirline()))
-                  			      out.println("<option value='"+output+"'>"+output+"</option>");
+                  			      out.println("<option airline-code='"+airlineCode.get(output)+"' value='"+output+"'>"+output+"</option>");
                   		  }
                   	  }
                   	  if(request.getParameter("area").equals("international"))
@@ -592,7 +621,7 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
                 		  for(String output:internationalAirline)
                 		  {
                 			  if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getAirline()))
-                			      out.println("<option value='"+output+"'>"+output+"</option>");
+                			      out.println("<option airline-code='"+airlineCode.get(output)+"' value='"+output+"'>"+output+"</option>");
                 		  }
                 	  }
                   }
@@ -933,7 +962,7 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
               	  {
               		  for(String output:localAirline)
               		  {
-              			  out.println("<option value='"+output+"'>"+output+"</option>");
+              			  out.println("<option airline-code='"+airlineCode.get(output)+"' value='"+output+"'>"+output+"</option>");
               		  }
               	  }
               	  if(request.getParameter("area").equals("international"))
@@ -941,7 +970,7 @@ String[] internationalAirline = {"中国南方航空公司","泰国亚洲航空�
             		  for(String output:internationalAirline)
             		  {
             			  
-            			  out.println("<option value='"+output+"'>"+output+"</option>");
+            			  out.println("<option airline-code='"+airlineCode.get(output)+"' value='"+output+"'>"+output+"</option>");
             		  }
             	  }
                   %>

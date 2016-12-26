@@ -1,5 +1,7 @@
 package com.test;
 
+import java.util.*;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.dao.AdminDao;
@@ -10,6 +12,7 @@ import com.entity.Admin;
 import com.entity.AirportResource;
 import com.entity.DepartureFlightInfo;
 import com.entity.Role;
+import com.entity.User;
 
 public class UserdaoTest {
 	public static void main(String[] args){
@@ -42,9 +45,20 @@ public class UserdaoTest {
 	     /*System.out.println(test1[0].getCheckinCounter()[1]);*/
 	     AirportResource[] resourceInfo = userDao.searchAirportResource("登机门23", "");
 	     /*System.out.println(resourceInfo[0].getName());*/
-	     
-	     
-	     
+	     User user = new User();
+	     Map<String, String> airlineCode = user.returnFlightnumberAirlineMap();
+	     for (String s : airlineCode.keySet()) 
+	     {
+	    	 System.out.println("key:" + s);
+	    	 System.out.println("values:" + airlineCode.get(s));
+	     }
+	     /*HashMap<String, String> map = new HashMap<String, String>() {
+	     {
+	    	 put("Name", "June");  
+	    	 put("QQ", "4889983");  
+	     }
+	     };
+	     System.out.println(map.get("QQ"));*/
 	     
 	}
 }
