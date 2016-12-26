@@ -193,6 +193,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
         </div>
       </div>
+
+      <!-- 报错弹框开始 -->
+      <div id="errorBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h5 class="modal-title" id="myModalLabel">提示</h5>
+            </div>
+            <div class="modal-body">
+              <p class="text-center">请输入查询的关键字</p>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- 报错弹框结束 -->
     </div>
     <!-- 内容结束 -->
 
