@@ -94,7 +94,9 @@ $(function () {
 	// 未保存离开当前页提示
 	if((window.location.href).search("Edit.jsp") != -1){
 		window.onbeforeunload = function(e){
-			if($(e.srcElement.activeElement).parents("#ensureBox").length != 0)
+			console.log(e.originalTarget);
+			var srcElem = document.activeElement;
+			if($(srcElem).parents("#ensureBox").length != 0)
 				return;
 			else
 				return "当前页面信息尚未保存，确认离开？";

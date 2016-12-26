@@ -450,14 +450,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-phone" class="col-sm-2 control-label">电话：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-phone" >
+                <input type="text" pattern="\d*" class="form-control" name="user-phone" >
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>
             <div class="form-group">
               <label for="user-tel" class="col-sm-2 control-label">手机号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-tel" >
+                <input type="text" pattern="\d*" class="form-control" name="user-tel" >
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>

@@ -242,9 +242,9 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
             <div class="form-group">
               <label for="facility-phone" class="col-sm-2 control-label">电话：</label>
               <div class="col-sm-6">
-                <input type="number" class="form-control" name="facility-phone" data-error="请填写电话*" value="<%=facilityModify[0].getPhone() %>"  required>
+                <input type="text" pattern="\d*" data-error="请输入正确的号码" class="form-control" name="facility-phone" value="<%=facilityModify[0].getPhone() %>">
               </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors"></div>
             </div>
 
             
@@ -321,9 +321,9 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
             <div class="form-group">
               <label for="facility-phone" class="col-sm-2 control-label">电话：</label>
               <div class="col-sm-6">
-                <input type="number" class="form-control" name="facility-phone" data-error="请填写电话*" required>
+                <input type="text" pattern="\d*" data-error="请输入正确的号码" class="form-control" name="facility-phone">
               </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors"></div>
             </div>
 
             
