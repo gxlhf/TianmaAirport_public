@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
 import com.entity.*;
 
@@ -58,12 +59,26 @@ public class PassengerGuide extends HttpServlet {
 		}
 		else if(flight_type.equals("arrival"))
 		{
-			if(is_flightNo.equals("true"))
-				arrivalFlightInfos = user.searchArrivalFlightInfo("", key, "", "");
+			if(key.equals(""))
+			{
+				ArrivalFlightInfo[] allLocalArrivalInfos = user.returnAllLocalArrivalFlightInfo();
+				ArrivalFlightInfo[] allInternationalArrivalInfos = user.returnAllInternationalArrivalFlightInfo();
+				arrivalFlightInfos = new ArrivalFlightInfo[allLocalArrivalInfos.length+allInternationalArrivalInfos.length];
+				System.arraycopy(allLocalArrivalInfos, 0, arrivalFlightInfos, 0, allLocalArrivalInfos.length);
+				System.arraycopy(allInternationalArrivalInfos, 0, arrivalFlightInfos, allLocalArrivalInfos.length, allInternationalArrivalInfos.length);
+				request.setAttribute("arrivalFlightInfos", arrivalFlightInfos);
+				request.getRequestDispatcher("Public/PassengerGuide.jsp").forward(request, response);
+			}
 			else
-				arrivalFlightInfos = user.searchArrivalFlightInfo(key, "", "", "");
-			request.setAttribute("arrivalFlightInfos", arrivalFlightInfos);
-			request.getRequestDispatcher("Public/PassengerGuide.jsp").forward(request, response);
+			{
+				if(is_flightNo.equals("true"))
+					arrivalFlightInfos = user.searchArrivalFlightInfo("", key, "", "");
+				else
+					arrivalFlightInfos = user.searchArrivalFlightInfo(key, "", "", "");
+				request.setAttribute("arrivalFlightInfos", arrivalFlightInfos);
+				request.getRequestDispatcher("Public/PassengerGuide.jsp").forward(request, response);
+			}
+			
 		}
 	}
 

@@ -3,6 +3,15 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String p;
+if(request.getParameter("page")==null)
+	p = "1";
+else
+{
+	p = request.getParameter("page");
+	if(!request.getParameter("page").matches("^\\d+$")||Integer.parseInt(p)<1)
+		p = "1";
+}
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -257,23 +266,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	out.println("<th>员工号</th><th>姓名</th><th>性别</th><th>电话</th><th>手机</th><th>邮箱</th><th>部门</th><th>职位</th><th>角色</th></tr></thead><tbody>");
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Admin[] adminInfos = (Admin[])request.getAttribute("adminsInfo");
-            	for(Admin output:adminInfos)
+            	String ul_path = "SearchAdmin?search-empno="+request.getParameter("search-empno")+"&search-name="+request.getParameter("search-name")+"&search-sex="+request.getParameter("search-sex")+"&search-position="+request.getParameter("search-position")+"&search-role="+request.getParameter("search-role")+"&page=";
+   			    if(adminInfos.length%10==0)
+                {
+                  	if(Integer.parseInt(p)>adminInfos.length/10)
+                  		response.sendRedirect(basePath+ul_path+Integer.toString(adminInfos.length/10)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
+                else
+                {
+                  	if(Integer.parseInt(p)>adminInfos.length/10 + 1)
+                  		response.sendRedirect(basePath+ul_path+Integer.toString(adminInfos.length/10 + 1)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
+            	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
-            		out.println("<tr data-id='empno="+output.getEmpno()+"'>");
+            		if(i>=adminInfos.length)
+        		         break;
+            		out.println("<tr data-id='empno="+adminInfos[i].getEmpno()+"'>");
             		out.println("<td><span class='glyphicon'></span></td>");
-            		out.println("<td>"+output.getEmpno()+"</td>");
-            		out.println("<td>"+output.getName()+"</td>");
+            		out.println("<td>"+adminInfos[i].getEmpno()+"</td>");
+            		out.println("<td>"+adminInfos[i].getName()+"</td>");
             		
-            		if(output.getSex()==1)
+            		if(adminInfos[i].getSex()==1)
             			out.println("<td>男</td>");
             		else
             			out.println("<td>女</td>");
-            		out.println("<td>"+output.getPhone()+"</td>");
-            		out.println("<td>"+output.getMobile()+"</td>");
-            		out.println("<td>"+output.getEmail()+"</td>");
-            		out.println("<td>"+output.getDepartment()+"</td>");
-            		out.println("<td>"+output.getPosition()+"</td>");
-            		out.println("<td>"+output.getRole().getName()+"</td>");
+            		out.println("<td>"+adminInfos[i].getPhone()+"</td>");
+            		out.println("<td>"+adminInfos[i].getMobile()+"</td>");
+            		out.println("<td>"+adminInfos[i].getEmail()+"</td>");
+            		out.println("<td>"+adminInfos[i].getDepartment()+"</td>");
+            		out.println("<td>"+adminInfos[i].getPosition()+"</td>");
+            		out.println("<td>"+adminInfos[i].getRole().getName()+"</td>");
             		out.println("</tr>");
             	}
             	/* out.println("<tr data-id='"+roleInfo.getName()+"'>");
@@ -311,36 +335,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	}         
                 } */
                 out.println("</tbody></table>");
-                out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+                out.println("<div><ul class='pager'>");
+       		    if(!p.equals("1"))
+               	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+       		    if(adminInfos.length%10==0)
+                {
+               	    if(Integer.parseInt(p)!=adminInfos.length/10)
+           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                else
+                {
+               	    if(Integer.parseInt(p)!=adminInfos.length/10 + 1)
+           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                out.println("</ul></div>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteAdmin'>删除</a><a class='btn btn-success' href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
             }
             else
             {
             	Admin[] admins = admin.searchAdmin("", "", -1, "", "");
+            	String ul_path = "User/UserAdmin.jsp?page=";
+   			    if(admins.length%10==0)
+                {
+                  	if(Integer.parseInt(p)>admins.length/10)
+                  		response.sendRedirect(basePath+ul_path+Integer.toString(admins.length/10)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
+                else
+                {
+                  	if(Integer.parseInt(p)>admins.length/10 + 1)
+                  		response.sendRedirect(basePath+ul_path+Integer.toString(admins.length/10 + 1)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
             	out.println("<table class='table table-hover select-table'><thead><tr>");
               	out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
             	out.println("<th>员工号</th><th>姓名</th><th>性别</th><th>电话</th><th>手机</th><th>邮箱</th><th>部门</th><th>职位</th><th>角色</th></tr></thead><tbody>");
-            	for(Admin output:admins)
+            	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
-            		out.println("<tr data-id='empno="+output.getEmpno()+"'>");
+            		if(i>=admins.length)
+        		         break;
+            		out.println("<tr data-id='empno="+admins[i].getEmpno()+"'>");
             		out.println("<td><span class='glyphicon glyphicon'></span></td>");
-            		out.println("<td>"+output.getEmpno()+"</td>");
-            		out.println("<td>"+output.getName()+"</td>");
+            		out.println("<td>"+admins[i].getEmpno()+"</td>");
+            		out.println("<td>"+admins[i].getName()+"</td>");
             		
-            		if(output.getSex()==1)
+            		if(admins[i].getSex()==1)
             			out.println("<td>男</td>");
             		else
             			out.println("<td>女</td>");
-            		out.println("<td>"+output.getPhone()+"</td>");
-            		out.println("<td>"+output.getMobile()+"</td>");
-            		out.println("<td>"+output.getEmail()+"</td>");
-            		out.println("<td>"+output.getDepartment()+"</td>");
-            		out.println("<td>"+output.getPosition()+"</td>");
-            		out.println("<td>"+output.getRole().getName()+"</td>");
+            		out.println("<td>"+admins[i].getPhone()+"</td>");
+            		out.println("<td>"+admins[i].getMobile()+"</td>");
+            		out.println("<td>"+admins[i].getEmail()+"</td>");
+            		out.println("<td>"+admins[i].getDepartment()+"</td>");
+            		out.println("<td>"+admins[i].getPosition()+"</td>");
+            		out.println("<td>"+admins[i].getRole().getName()+"</td>");
             		out.println("</tr>");
             	}
             	out.println("</tbody></table>");
-                out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+            	out.println("<div><ul class='pager'>");
+       		    if(!p.equals("1"))
+               	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+       		    if(admins.length%10==0)
+                {
+               	    if(Integer.parseInt(p)!=admins.length/10)
+           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                else
+                {
+               	    if(Integer.parseInt(p)!=admins.length/10 + 1)
+           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                out.println("</ul></div>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteAdmin'>删除</a><a class='btn btn-success' href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
             	
             }

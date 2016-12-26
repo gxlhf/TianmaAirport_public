@@ -2,6 +2,15 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String p;
+if(request.getParameter("page")==null)
+	p = "1";
+else
+{
+	p = request.getParameter("page");
+	if(!request.getParameter("page").matches("^\\d+$")||Integer.parseInt(p)<1)
+		p = "1";
+}
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -185,40 +194,69 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             if(request.getAttribute("departureFlightInfos")!=null)
             {
             	DepartureFlightInfo[] departureFlightInfos = (DepartureFlightInfo[])request.getAttribute("departureFlightInfos");
+            	int count = 0;
+            	for(DepartureFlightInfo output:departureFlightInfos)
+            	{
+            		if(output!=null)
+            			count++;
+            	}
+            	DepartureFlightInfo[] departureFlightInfosOutput = new DepartureFlightInfo[count];
+            	int j=0;
             	for(DepartureFlightInfo output:departureFlightInfos)
             	{
             		if(output!=null)
             		{
+            			departureFlightInfosOutput[j] = output;
+            			j++;
+            		}
+            	}
+            	String ul_path = "PassengerGuide?key="+request.getParameter("key")+"&flight_type="+request.getParameter("flight_type")+"&is_flightNo="+request.getParameter("is_flightNo")+"&page=";
+            	if(departureFlightInfosOutput.length%10==0)
+                {
+                  	if(Integer.parseInt(p)>departureFlightInfosOutput.length/10)
+                  		response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
+                else
+                {
+                  	if(Integer.parseInt(p)>departureFlightInfosOutput.length/10 + 1)
+                  		response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10 + 1)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
+            	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
+            	{
+            		if(i>=departureFlightInfosOutput.length)
+      		            break;
             %>
             <li>
               <div class="header-box">
               <%
               	
-              	String airlineFlag = output.getFlightCourse().getFlightNumber().substring(0, 2).toLowerCase();
+              	String airlineFlag = departureFlightInfosOutput[i].getFlightCourse().getFlightNumber().substring(0, 2).toLowerCase();
               %>
                 <img src="img/airlineLogo/<%=airlineFlag %>.png">
-                <p><%=output.getFlightCourse().getAirline() %> <strong><%=output.getFlightCourse().getFlightNumber() %></strong></p>
+                <p><%=departureFlightInfosOutput[i].getFlightCourse().getAirline() %> <strong><%=departureFlightInfosOutput[i].getFlightCourse().getFlightNumber() %></strong></p>
               </div>
               <div class="detail-box depature">
                 <div>
-                  <p><%=output.getFlightCourse().getFrom() %>
+                  <p><%=departureFlightInfosOutput[i].getFlightCourse().getFrom() %>
                   <%
-                  		if(output.getFlightCourse().getStop().equals("")||output.getFlightCourse().getStop()==null)
+                  		if(departureFlightInfosOutput[i].getFlightCourse().getStop().equals("")||departureFlightInfosOutput[i].getFlightCourse().getStop()==null)
                   			out.println("<span class='iconfont icon-plane'></span>");
                   		else
                   		{
                   			out.println("<span class='iconfont icon-plane'></span>");
-                  			out.println(output.getFlightCourse().getStop());
+                  			out.println(departureFlightInfosOutput[i].getFlightCourse().getStop());
                   			out.println("<span class='iconfont icon-plane'></span>");
                   		}
                   %> 
                   <!-- <span class="iconfont icon-plane"></span> -->
-                  <%=output.getFlightCourse().getTo() %></p>
+                  <%=departureFlightInfosOutput[i].getFlightCourse().getTo() %></p>
                 </div>
                 <div>
                   <p>起飞时间</p>
                   <%
-                  	String[] t1 = output.getTime().split("-", 2);
+                  	String[] t1 = departureFlightInfosOutput[i].getTime().split("-", 2);
               		String[] t2 = t1[1].split(":");
                   %>
                   <h6><%=t2[0]+":"+t2[1] %></h6>
@@ -230,7 +268,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   	User user = new User();
               		int flag = 1;
               		String checkincountersAndLocations = "";
-              		for(String checkincounteroutput:output.getCheckinCounter())
+              		for(String checkincounteroutput:departureFlightInfosOutput[i].getCheckinCounter())
               		{
               			if(checkincounteroutput!=null)
               			{
@@ -258,17 +296,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div>
                   <p>登机门</p>
                   <%
-                  	String[] t4 = output.getBoardingGate().split("门");
-                  	AirportResource[] airportResources = user.searchAirportResource(output.getBoardingGate(), "");
+                  	String[] t4 = departureFlightInfosOutput[i].getBoardingGate().split("门");
+                  	AirportResource[] airportResources = user.searchAirportResource(departureFlightInfosOutput[i].getBoardingGate(), "");
                   %>
                   <h6><%=t4[1] %></h6>
-                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong><%=output.getBoardingGate() %></strong> <%=airportResources[0].getLocation() %>">查看位置</span>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong><%=departureFlightInfosOutput[i].getBoardingGate() %></strong> <%=airportResources[0].getLocation() %>">查看位置</span>
                 </div>
               </div>
             </li>
-            <%
-            		}
+            <%	
             	}
+            	out.println("<div><ul class='pager'>");
+         		if(!p.equals("1"))
+                    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+         		if(departureFlightInfosOutput.length%10==0)
+                {
+                 	if(Integer.parseInt(p)!=departureFlightInfosOutput.length/10)
+             			out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                else
+                {
+                    if(Integer.parseInt(p)!=departureFlightInfosOutput.length/10 + 1)
+             		 	out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                out.println("</ul></div>");
             }
             %>
             
@@ -277,37 +328,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             {
             	ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	User user = new User();
-            	for(ArrivalFlightInfo output:arrivalFlightInfos)
+            	String ul_path = "PassengerGuide?key="+request.getParameter("key")+"&flight_type="+request.getParameter("flight_type")+"&is_flightNo="+request.getParameter("is_flightNo")+"&page=";
+            	if(arrivalFlightInfos.length%10==0)
+                {
+                  	if(Integer.parseInt(p)>arrivalFlightInfos.length/10)
+                  		response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfos.length/10)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
+                else
+                {
+                  	if(Integer.parseInt(p)>arrivalFlightInfos.length/10 + 1)
+                  		response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfos.length/10 + 1)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
+            	
+            	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
+            		if(i>=arrivalFlightInfos.length)
+        		          break;
             %>
             <li>
               <div class="header-box">
               <%	
-              	String airlineFlag = output.getFlightCourse().getFlightNumber().substring(0, 2).toLowerCase();
+              	String airlineFlag = arrivalFlightInfos[i].getFlightCourse().getFlightNumber().substring(0, 2).toLowerCase();
               %>
                 <img src="img/airlineLogo/<%=airlineFlag %>.png">
-                <p><%=output.getFlightCourse().getAirline() %> <strong><%=output.getFlightCourse().getFlightNumber() %></strong></p>
+                <p><%=arrivalFlightInfos[i].getFlightCourse().getAirline() %> <strong><%=arrivalFlightInfos[i].getFlightCourse().getFlightNumber() %></strong></p>
               </div>
               <div class="detail-box arrival">
                 <div>
-                  <p><%=output.getFlightCourse().getFrom() %>
+                  <p><%=arrivalFlightInfos[i].getFlightCourse().getFrom() %>
                   <%
-                  		if(output.getFlightCourse().getStop().equals("")||output.getFlightCourse().getStop()==null)
+                  		if(arrivalFlightInfos[i].getFlightCourse().getStop().equals("")||arrivalFlightInfos[i].getFlightCourse().getStop()==null)
                   			out.println("<span class='iconfont icon-plane'></span>");
                   		else
                   		{
                   			out.println("<span class='iconfont icon-plane'></span>");
-                  			out.println(output.getFlightCourse().getStop());
+                  			out.println(arrivalFlightInfos[i].getFlightCourse().getStop());
                   			out.println("<span class='iconfont icon-plane'></span>");
                   		}
                   %> 
                   <!-- <span class="iconfont icon-plane"></span> -->
-                  <%=output.getFlightCourse().getTo() %></p>
+                  <%=arrivalFlightInfos[i].getFlightCourse().getTo() %></p>
                 </div>
                 <div>
                   <p>降落时间</p>
                   <%
-                  	String[] t1 = output.getTime().split("-", 2);
+                  	String[] t1 = arrivalFlightInfos[i].getTime().split("-", 2);
               		String[] t2 = t1[1].split(":");
                   %>
                   <h6><%=t2[0]+":"+t2[1] %></h6>
@@ -315,8 +382,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div>
                   <p>行李转盘</p>
                   <%
-                  String[] t3 = output.getLuggageCarousel().split("盘");
-                  AirportResource[] airportResources = user.searchAirportResource(output.getLuggageCarousel(), "");
+                  String[] t3 = arrivalFlightInfos[i].getLuggageCarousel().split("盘");
+                  AirportResource[] airportResources = user.searchAirportResource(arrivalFlightInfos[i].getLuggageCarousel(), "");
                   %>
                   <h6><%=t3[1] %></h6>
                   <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<%=airportResources[0].getLocation() %>">查看位置</span>
@@ -325,6 +392,170 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
             <%
             	}
+            	out.println("<div><ul class='pager'>");
+         	    if(!p.equals("1"))
+                    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+         		if(arrivalFlightInfos.length%10==0)
+                {
+                	if(Integer.parseInt(p)!=arrivalFlightInfos.length/10)
+             			out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                else
+                {
+                    if(Integer.parseInt(p)!=arrivalFlightInfos.length/10 + 1)
+             		 	out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                out.println("</ul></div>");
+            }
+            %>
+            
+            <%
+            if(request.getAttribute("departureFlightInfos")==null&&request.getAttribute("arrivalFlightInfos")==null)
+            {
+            	User user = new User();
+            	DepartureFlightInfo[] allLocalDepartureFlightInfos = user.returnAllLocalDepartureFlightInfo();
+            	DepartureFlightInfo[] allInternationalDepartureFlightInfos = user.returnAllInternationalDepartureFlightInfo();
+            	int count = 0;
+            	for(DepartureFlightInfo output:allLocalDepartureFlightInfos)
+            	{
+            		if(output!=null)
+            			count++;
+            	}
+            	for(DepartureFlightInfo output:allInternationalDepartureFlightInfos)
+            	{
+            		if(output!=null)
+            			count++;
+            	}
+            	int j=0;
+            	DepartureFlightInfo[] defaultDepartureFlightInfos = new DepartureFlightInfo[count];
+            	for(DepartureFlightInfo output:allLocalDepartureFlightInfos)
+            	{
+            		if(output!=null)
+            		{
+            			defaultDepartureFlightInfos[j] = output;
+            			j++;
+            		}
+            	}
+            	for(DepartureFlightInfo output:allInternationalDepartureFlightInfos)
+            	{
+            		if(output!=null)
+            		{
+            			defaultDepartureFlightInfos[j] = output;
+            			j++;
+            		}
+            	}
+            	if(defaultDepartureFlightInfos.length%10==0)
+                {
+                  	if(Integer.parseInt(p)>defaultDepartureFlightInfos.length/10)
+                  		response.sendRedirect(basePath+"Public/PassengerGuide.jsp?page="+Integer.toString(defaultDepartureFlightInfos.length/10)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
+                else
+                {
+                  	if(Integer.parseInt(p)>defaultDepartureFlightInfos.length/10 + 1)
+                  		response.sendRedirect(basePath+"Public/PassengerGuide.jsp?page="+Integer.toString(defaultDepartureFlightInfos.length/10 + 1)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
+            	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
+            	{
+            		if(i>=defaultDepartureFlightInfos.length)
+        		          break;
+            	
+            %>
+            <li>
+              <div class="header-box">
+              <%
+              	
+              	String airlineFlag = defaultDepartureFlightInfos[i].getFlightCourse().getFlightNumber().substring(0, 2).toLowerCase();
+              %>
+                <img src="img/airlineLogo/<%=airlineFlag %>.png">
+                <p><%=defaultDepartureFlightInfos[i].getFlightCourse().getAirline() %> <strong><%=defaultDepartureFlightInfos[i].getFlightCourse().getFlightNumber() %></strong></p>
+              </div>
+              <div class="detail-box depature">
+                <div>
+                  <p><%=defaultDepartureFlightInfos[i].getFlightCourse().getFrom() %>
+                  <%
+                  		if(defaultDepartureFlightInfos[i].getFlightCourse().getStop().equals("")||defaultDepartureFlightInfos[i].getFlightCourse().getStop()==null)
+                  			out.println("<span class='iconfont icon-plane'></span>");
+                  		else
+                  		{
+                  			out.println("<span class='iconfont icon-plane'></span>");
+                  			out.println(defaultDepartureFlightInfos[i].getFlightCourse().getStop());
+                  			out.println("<span class='iconfont icon-plane'></span>");
+                  		}
+                  %> 
+                  <!-- <span class="iconfont icon-plane"></span> -->
+                  <%=defaultDepartureFlightInfos[i].getFlightCourse().getTo() %></p>
+                </div>
+                <div>
+                  <p>起飞时间</p>
+                  <%
+                  	String[] t1 = defaultDepartureFlightInfos[i].getTime().split("-", 2);
+              		String[] t2 = t1[1].split(":");
+                  %>
+                  <h6><%=t2[0]+":"+t2[1] %></h6>
+                </div>
+                <div>
+                  <p>值机柜台</p>
+                  <%
+                  	String checkincounters = "";
+                  	//User user = new User();
+              		int flag = 1;
+              		String checkincountersAndLocations = "";
+              		for(String checkincounteroutput:defaultDepartureFlightInfos[i].getCheckinCounter())
+              		{
+              			if(checkincounteroutput!=null)
+              			{
+              				AirportResource[] airportResources = user.searchAirportResource(checkincounteroutput, "");     				
+              				/* checkincountersAndLocations = checkincountersAndLocations + "<strong>" + checkincounteroutput + "</strong>" + airportResources[0].getLocation(); */
+              				String t3[] = checkincounteroutput.split("台");
+              				if(flag==1)
+              				{
+              					checkincounters = checkincounters + t3[1];
+              					checkincountersAndLocations = checkincountersAndLocations + "<strong>" + checkincounteroutput + "</strong> " + airportResources[0].getLocation();
+              					flag = 0;
+              				}
+              				else
+              				{
+              					checkincounters = checkincounters + ", " + t3[1];
+              					checkincountersAndLocations = checkincountersAndLocations + "<br><strong>" + checkincounteroutput + "</strong> " + airportResources[0].getLocation();
+              				}		
+              			}			
+              		}
+                  %>
+                  <h6><%=checkincounters %></h6>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<%=checkincountersAndLocations %>">查看位置</span>
+                  <%-- <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>值机柜台1</strong> 出发大厅东侧<br><strong>值机柜台3</strong> 出发大厅东侧<br><strong>值机柜台5</strong> 出发大厅东侧">查看位置</span> --%>
+                </div>
+                <div>
+                  <p>登机门</p>
+                  <%
+                  	String[] t4 = defaultDepartureFlightInfos[i].getBoardingGate().split("门");
+                  	AirportResource[] airportResources = user.searchAirportResource(defaultDepartureFlightInfos[i].getBoardingGate(), "");
+                  %>
+                  <h6><%=t4[1] %></h6>
+                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong><%=defaultDepartureFlightInfos[i].getBoardingGate() %></strong> <%=airportResources[0].getLocation() %>">查看位置</span>
+                </div>
+              </div>
+            </li>
+            <%
+            	}
+                out.println("<div><ul class='pager'>");
+          		 if(!p.equals("1"))
+                    out.println("<li class='previous'><a href='"+basePath+"Public/PassengerGuide.jsp?page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+          		 if(defaultDepartureFlightInfos.length%10==0)
+                {
+                  	 if(Integer.parseInt(p)!=defaultDepartureFlightInfos.length/10)
+              			out.println("<li class='next'><a href='"+basePath+"Public/PassengerGuide.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                else
+                {
+                    if(Integer.parseInt(p)!=defaultDepartureFlightInfos.length/10 + 1)
+              		 	out.println("<li class='next'><a href='"+basePath+"Public/PassengerGuide.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                out.println("</ul></div>");
+            %>
+            <%
             }
             %>
             <%-- <li>

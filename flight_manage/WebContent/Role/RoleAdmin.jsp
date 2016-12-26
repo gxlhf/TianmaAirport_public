@@ -2,6 +2,15 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String p;
+if(request.getParameter("page")==null)
+	p = "1";
+else
+{
+	p = request.getParameter("page");
+	if(!request.getParameter("page").matches("^\\d+$")||Integer.parseInt(p)<1)
+		p = "1";
+}
 %>
 <html><head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
@@ -237,7 +246,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	}         
                 } */
                 out.println("</tbody></table>");
-                out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' id='btn-modify' href='"+basePath+"Role/RoleEdit.jsp'>修改</a><a class='btn btn-danger' id='btn-delete' href='"+basePath+"DeleteRole'>删除</a><a class='btn btn-success' href='"+basePath+"Role/RoleEdit.jsp'>新增</a></div></div>");
             }
             else
@@ -247,24 +255,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	out.println("<th>序号</th><th>角色名称</th><th>描述</th><th>拥有权限</th></tr></thead><tbody>");
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Role[] roleInfos = admin.returnAllRole();
+            	String ul_path = "Role/Role.jsp?page=";
+   			    if(roleInfos.length%10==0)
+                {
+                  	if(Integer.parseInt(p)>roleInfos.length/10)
+                  		response.sendRedirect(basePath+ul_path+Integer.toString(roleInfos.length/10)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
+                else
+                {
+                  	if(Integer.parseInt(p)>roleInfos.length/10 + 1)
+                  		response.sendRedirect(basePath+ul_path+Integer.toString(roleInfos.length/10 + 1)); 
+                  			/* response.sendRedirect(basePath+"error.jsp"); */
+                }
             	int count=1;
-            	for(Role output:roleInfos)
+            	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
-            		out.println("<tr data-id='roleName="+output.getName()+"'>");
+            		if(i>=roleInfos.length)
+        		         break;
+            		out.println("<tr data-id='roleName="+roleInfos[i].getName()+"'>");
                 	out.println("<td><span class='glyphicon'></span></td>");
                 	out.println("<td>"+count+"</td>");
-                	out.println("<td>"+output.getName()+"</td>");
-                	out.println("<td>"+output.getDescription()+"</td>");
+                	out.println("<td>"+roleInfos[i].getName()+"</td>");
+                	out.println("<td>"+roleInfos[i].getDescription()+"</td>");
                 	out.println("<td>");
-                	if(output.getAuthorityMap().get("用户管理")!=null)
+                	if(roleInfos[i].getAuthorityMap().get("用户管理")!=null)
                 		out.println("用户管理 ");
-                	if(output.getAuthorityMap().get("角色管理")!=null)
+                	if(roleInfos[i].getAuthorityMap().get("角色管理")!=null)
                 		out.println("角色管理 ");
-                	if(output.getAuthorityMap().get("航班信息管理")!=null)
+                	if(roleInfos[i].getAuthorityMap().get("航班信息管理")!=null)
                 		out.println("航班信息管理 ");
-                	if(output.getAuthorityMap().get("机场设施管理")!=null)
+                	if(roleInfos[i].getAuthorityMap().get("机场设施管理")!=null)
                 		out.println("机场设施管理 ");
-                	if(output.getAuthorityMap().get("新闻管理")!=null)
+                	if(roleInfos[i].getAuthorityMap().get("新闻管理")!=null)
                 		out.println("新闻管理 ");
                 	out.println("</td>");
                 	out.println("</tr>");
@@ -305,7 +328,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	}         
                 } */
                 out.println("</tbody></table>");
-                out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
+                out.println("<div><ul class='pager'>");
+       		    if(!p.equals("1"))
+               	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+       		    if(roleInfos.length%10==0)
+                {
+               	    if(Integer.parseInt(p)!=roleInfos.length/10)
+           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                else
+                {
+               	    if(Integer.parseInt(p)!=roleInfos.length/10 + 1)
+           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                }
+                out.println("</ul></div>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' id='btn-modify' href='"+basePath+"Role/RoleEdit.jsp'>修改</a><a class='btn btn-danger' id='btn-delete' href='"+basePath+"DeleteRole'>删除</a><a class='btn btn-success' href='"+basePath+"Role/RoleEdit.jsp'>新增</a></div></div>");
             }
             %>
