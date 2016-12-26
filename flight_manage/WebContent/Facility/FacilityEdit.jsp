@@ -257,7 +257,7 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
                 	out.println(facilityModify[0].getRemark());
                 %></textarea>
               </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors"></div>
             </div>
               <!--
               <div class="form-group">

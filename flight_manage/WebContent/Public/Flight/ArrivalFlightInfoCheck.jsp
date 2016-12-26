@@ -476,7 +476,7 @@ else
                     }
                 	out.println("<th>航空公司</th><th>航班号</th><th>始发地</th><th>经停地</th><th>目的地</th><th>到港时间</th><th>行李转盘</th></tr></thead><tbody>");
             		ArrivalFlightInfo[] allLocalArrivalFlightInfos = user.returnAllLocalArrivalFlightInfo();
-            		if(allLocalArrivalFlightInfos.length%10==0)
+            		if(allLocalArrivalFlightInfos.length==0)
                     	response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area="+area);
             		else
             		{
