@@ -216,7 +216,7 @@ else
          }else{
              out.println("<th></th>");
          }
-         out.println("<th>设施名称</th><th>设施分类</th><th>联系电话</th> <th>位置</th> <th>备注</th></tr></thead> <tbody>");
+         out.println("<th>设施名称</th><th>联系电话</th> <th>位置</th> <th>备注</th></tr></thead> <tbody>");
 
          if (request.getAttribute("facilityInfo")!=null ) {
              PropertyFacility[] facilityInfos = (PropertyFacility[])request.getAttribute("facilityInfo");
@@ -251,7 +251,7 @@ else
 	             }
 	             //out.println("<td>"+ i +"</td>");
 	             out.println("<td>" + facilityInfos[i].getName() + "</td>");
-	             out.println("<td>" + facilityInfos[i].getType() + "</td>");
+	             /* out.println("<td>" + facilityInfos[i].getType() + "</td>"); */
 	             out.println("<td>" + facilityInfos[i].getPhone() + "</td>");
 	             out.println("<td>" + facilityInfos[i].getLocation() + "</td>");
 	             if(facilityInfos[i].getRemark()==null)
@@ -330,7 +330,7 @@ else
 	              }
 	              //out.println("<td>"+ i +"</td>");
 	              out.println("<td>" + facilityInfos[i].getName() + "</td>");
-	              out.println("<td>" + facilityInfos[i].getType() + "</td>");
+	              /* out.println("<td>" + facilityInfos[i].getType() + "</td>"); */
 	              out.println("<td>" + facilityInfos[i].getPhone() + "</td>");
 	              out.println("<td>" + facilityInfos[i].getLocation() + "</td>");
 	              if(facilityInfos[i].getRemark()==null)
