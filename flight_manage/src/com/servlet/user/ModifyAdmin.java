@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.entity.Admin;
 import com.entity.Role;
+import com.servlet.GetMD5;
 
 /**
  * Servlet implementation class ModifyAdmin
@@ -61,7 +62,8 @@ public class ModifyAdmin extends HttpServlet {
 			password = adminOriginInfo[0].getPassword();
 		}
 		else
-			password = request.getParameter("user-password");
+			password = GetMD5.getMd5(request.getParameter("user-password"));
+//			password = request.getParameter("user-password");
 		Role roleModifyInfo = new Role(roleName);
 		Admin adminModifyInfo = new Admin(empno, name, sex, email, roleModifyInfo, mobile, phone, department, position, password);
 		/*System.out.println(empno);

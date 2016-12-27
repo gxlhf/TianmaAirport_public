@@ -67,7 +67,8 @@ public class FindPassword extends HttpServlet {
 			for(int i=0;i<6;i++){
 				temp+=random.nextInt(10);
 			}
-			admin[0].setPassword(temp);
+//			admin[0].setPassword(temp);
+			admin[0].setPassword(GetMD5.getMd5(temp));
 			adminDao.modifyAdmin(admin[0]);
 			Mail mail=new Mail();
 			mail.setHost("smtp.163.com");

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.entity.Admin;
 import com.entity.Role;
+import com.servlet.GetMD5;
 
 /**
  * Servlet implementation class AddAdmin
@@ -52,7 +53,7 @@ public class AddAdmin extends HttpServlet {
 		String phone = request.getParameter("user-phone");
 		String mobile = request.getParameter("user-tel");
 		String email = request.getParameter("user-email");
-		String password = request.getParameter("user-password");
+		String password = GetMD5.getMd5(request.getParameter("user-password"));
 		Role roleAddInfo = new Role(roleName);
 		Admin adminAddInfo = new Admin(empno, name, sex, email, roleAddInfo, mobile, phone, department, position, password);
 		/*System.out.println(empno);

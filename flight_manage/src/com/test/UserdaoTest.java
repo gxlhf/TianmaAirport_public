@@ -13,6 +13,7 @@ import com.entity.AirportResource;
 import com.entity.DepartureFlightInfo;
 import com.entity.Role;
 import com.entity.User;
+import com.servlet.GetMD5;
 
 public class UserdaoTest {
 	public static void main(String[] args){
@@ -47,11 +48,11 @@ public class UserdaoTest {
 	     /*System.out.println(resourceInfo[0].getName());*/
 	     User user = new User();
 	     Map<String, String> airlineCode = user.returnFlightnumberAirlineMap();
-	     for (String s : airlineCode.keySet()) 
+	     /*for (String s : airlineCode.keySet()) 
 	     {
 	    	 System.out.println("key:" + s);
 	    	 System.out.println("values:" + airlineCode.get(s));
-	     }
+	     }*/
 	     /*HashMap<String, String> map = new HashMap<String, String>() {
 	     {
 	    	 put("Name", "June");  
@@ -59,6 +60,6 @@ public class UserdaoTest {
 	     }
 	     };
 	     System.out.println(map.get("QQ"));*/
-	     
+//	     System.out.println(GetMD5.getMd5(""));
 	}
 }

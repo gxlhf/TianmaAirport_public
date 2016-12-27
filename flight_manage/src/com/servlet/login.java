@@ -53,7 +53,8 @@ public class login extends HttpServlet {
 		response.setContentType("text/html");
 		String result;
 		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+//		String password = request.getParameter("password");
+		String password = GetMD5.getMd5(request.getParameter("password"));
 		String validateC=(String)request.getSession().getAttribute("validateCode");
 		String veryCode=request.getParameter("veryCode");
 		if(veryCode==null||"".equals(veryCode)){
