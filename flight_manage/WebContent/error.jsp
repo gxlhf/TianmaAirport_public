@@ -27,7 +27,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         margin-top: 30px;
       }
     </style>
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
+
   <!-- The structure of this file is exactly the same as 2col_rightNav.html;
    the only difference between the two is the stylesheet they use -->
   <body>

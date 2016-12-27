@@ -14,7 +14,13 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-datetimepicker.min.css">
     <!-- 支持时间控件 -->
-  </head><body>
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<body>
     <!-- 头部开始 -->
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
@@ -428,7 +434,16 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
           <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
       </footer>
       <!-- 尾部结束 -->
-      <script src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
+      <!--[if lt IE 9]>
+      <script type="text/javascript" src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]>
+      <script type="text/javascript" src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
+    <![endif]-->
+    <!--[if !IE]><!-->
+      <script type="text/javascript" src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
+    <!--<![endif]-->
+
       <script src="<%=basePath%>/js/bootstrap.min.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
       <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>

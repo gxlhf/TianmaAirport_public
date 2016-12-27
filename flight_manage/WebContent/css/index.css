@@ -76,7 +76,19 @@ footer {
 		font-size: 15px;
 	}
 }
-.carousel-inner > div:nth-child(1) {
+.carousel-inner > div {
+	background-image: url(../img/1.jpg);
+}
+.carousel-inner > div+div {
+	background-image: url(../img/2.jpg);
+}
+.carousel-inner > div+div+div {
+	background-image: url(../img/3.jpg);
+}
+.carousel-inner > div+div+div+div {
+	background-image: url(../img/4.jpg);
+}
+/* .carousel-inner > div:nth-child(1) {
 	background-image: url(../img/1.jpg);
 }
 .carousel-inner > div:nth-child(2) {
@@ -87,7 +99,7 @@ footer {
 }
 .carousel-inner > div:nth-child(4) {
 	background-image: url(../img/4.jpg);
-}
+} */
 #box-flight {
 	background: transparent;
 }

@@ -16,7 +16,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" href="css/bootstrap.min.css" >
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"><!-- 支持时间控件 -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
   </head>
+
   <!-- The structure of this file is exactly the same as 2col_rightNav.html;
    the only difference between the two is the stylesheet they use -->
   <body>
@@ -219,7 +226,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </footer>
     <!-- 尾部结束 -->
 
-    <script src="js/jquery-3.1.1.min.js"></script>
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]>
+      <script type="text/javascript" src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
+    <![endif]-->
+    <!--[if !IE]><!-->
+      <script type="text/javascript" src="<%=basePath%>/js/jquery-3.1.1.min.js"></script>
+    <!--<![endif]-->
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>

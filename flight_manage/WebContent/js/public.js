@@ -28,6 +28,8 @@ $('#btn-modify').click(function (e) {
 // });
 
 $(function () {
+	console.log(navigator.userAgent);
+	
 	//绑定时间控件
 	var datetimeInputs = $('[type="datetime"]:input');
 	if(datetimeInputs.length > 0)
