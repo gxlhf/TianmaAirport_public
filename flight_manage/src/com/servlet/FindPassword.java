@@ -80,6 +80,7 @@ public class FindPassword extends HttpServlet {
 			mail.setPassword("team0303");
 			mail.setSubject("天马机场管理员密码找回服务");
 			mail.setMessage(admin[0].getName()+"，您的新密码是:"+temp+"，请登陆http://123.207.57.24/更改密码！");
+			new MailUtil().send(mail);
 //			System.out.println(temp);
 			/*if(new MailUtil().send(mail)){
 				System.out.println("发送成功");
