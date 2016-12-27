@@ -369,7 +369,7 @@ else
                 	}
                 }
                 String ul_path = "ArrivalFlightSearch?flight-id="+request.getParameter("flight-id")+"&from-site="+request.getParameter("from-site")+"&airCompany-name="+request.getParameter("airCompany-name")+"&area="+area+"&page=";
-                if(arrivalFlightInfosOutput.length%10==0)
+                if(arrivalFlightInfosOutput.length==0)
                 	response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area="+area);
                 else
                 {

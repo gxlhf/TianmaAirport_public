@@ -462,18 +462,24 @@ else
             			j++;
             		}
             	}
-            	if(defaultDepartureFlightInfos.length%10==0)
-                {
-                  	if(Integer.parseInt(p)>defaultDepartureFlightInfos.length/10)
-                  		response.sendRedirect(basePath+"Public/PassengerGuide.jsp?page="+Integer.toString(defaultDepartureFlightInfos.length/10)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
-                else
-                {
-                  	if(Integer.parseInt(p)>defaultDepartureFlightInfos.length/10 + 1)
-                  		response.sendRedirect(basePath+"Public/PassengerGuide.jsp?page="+Integer.toString(defaultDepartureFlightInfos.length/10 + 1)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
+            	if(defaultDepartureFlightInfos.length==0)
+            		response.sendRedirect(basePath+"Public/PassengerGuide.jsp");
+            	else
+            	{
+            		if(defaultDepartureFlightInfos.length%10==0)
+                    {
+                      	if(Integer.parseInt(p)>defaultDepartureFlightInfos.length/10)
+                      		response.sendRedirect(basePath+"Public/PassengerGuide.jsp?page="+Integer.toString(defaultDepartureFlightInfos.length/10)); 
+                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                    }
+                    else
+                    {
+                      	if(Integer.parseInt(p)>defaultDepartureFlightInfos.length/10 + 1)
+                      		response.sendRedirect(basePath+"Public/PassengerGuide.jsp?page="+Integer.toString(defaultDepartureFlightInfos.length/10 + 1)); 
+                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                    }
+            	}
+            	
             	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
             		if(i>=defaultDepartureFlightInfos.length)

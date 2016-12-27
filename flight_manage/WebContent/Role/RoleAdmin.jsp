@@ -262,18 +262,24 @@ else
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Role[] roleInfos = admin.returnAllRole();
             	String ul_path = "Role/Role.jsp?page=";
-   			    if(roleInfos.length%10==0)
-                {
-                  	if(Integer.parseInt(p)>roleInfos.length/10)
-                  		response.sendRedirect(basePath+ul_path+Integer.toString(roleInfos.length/10)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
-                else
-                {
-                  	if(Integer.parseInt(p)>roleInfos.length/10 + 1)
-                  		response.sendRedirect(basePath+ul_path+Integer.toString(roleInfos.length/10 + 1)); 
-                  			/* response.sendRedirect(basePath+"error.jsp"); */
-                }
+   			    if(roleInfos.length==0)
+   			    	response.sendRedirect(basePath+"Role/Role.jsp"); 
+   			    else
+   			    {
+   			    	if(roleInfos.length%10==0)
+   	                {
+   	                  	if(Integer.parseInt(p)>roleInfos.length/10)
+   	                  		response.sendRedirect(basePath+ul_path+Integer.toString(roleInfos.length/10)); 
+   	                  			/* response.sendRedirect(basePath+"error.jsp"); */
+   	                }
+   	                else
+   	                {
+   	                  	if(Integer.parseInt(p)>roleInfos.length/10 + 1)
+   	                  		response.sendRedirect(basePath+ul_path+Integer.toString(roleInfos.length/10 + 1)); 
+   	                  			/* response.sendRedirect(basePath+"error.jsp"); */
+   	                }
+   			    }
+            	
             	int count=1;
             	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
