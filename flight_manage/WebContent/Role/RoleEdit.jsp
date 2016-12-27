@@ -3,7 +3,8 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<html><head>
+<html>
+<head>
     <!-- Copyright 2016 软件1401第三组, Inc. All rights reserved. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>用户与角色管理 - 角色管理 - 天马机场</title>
@@ -193,7 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       	if(roleModify.getAuthorityMap().get("用户管理")!=null)
                       	{
                       %>
-                      		<span class="glyphicon glyphicon-check"></span>
+                      		<span class="glyphicon glyphicon-check td-check"></span>
                       <%
                       	}
                       	else{
@@ -211,7 +212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       	if(roleModify.getAuthorityMap().get("角色管理")!=null)
                       	{
                       %>
-                      		<span class="glyphicon glyphicon-check"></span>
+                      		<span class="glyphicon glyphicon-check td-check"></span>
                       <%
                       	}
                       	else{
@@ -229,7 +230,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       	if(roleModify.getAuthorityMap().get("航班信息管理")!=null)
                       	{
                       %>
-                      		<span class="glyphicon glyphicon-check"></span>
+                      		<span class="glyphicon glyphicon-check td-check"></span>
                       <%
                       	}
                       	else{
@@ -247,7 +248,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       	if(roleModify.getAuthorityMap().get("机场设施管理")!=null)
                       	{
                       %>
-                      		<span class="glyphicon glyphicon-check"></span>
+                      		<span class="glyphicon glyphicon-check td-check"></span>
                       <%
                       	}
                       	else{
@@ -265,7 +266,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       	if(roleModify.getAuthorityMap().get("新闻管理")!=null)
                       	{
                       %>
-                      		<span class="glyphicon glyphicon-check"></span>
+                      		<span class="glyphicon glyphicon-check td-check"></span>
                       <%
                       	}
                       	else{
@@ -294,7 +295,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       <th>
                         <span class="glyphicon glyphicon-check th-check"></span>
                       </th>
-                      <th>已分配权限 *</th>
+                      <th>
+                        已分配权限
+                        <div class="no-height form-group">
+                        <div class="no-height">
+                            <input class="form-control no-height" type="text" name="rolePriv" class="hide" data-error="请分配权限*" required>
+                          </div>
+                          <div class="no-height help-block with-errors">*</div>
+                        </div>
+                      </th>                      
                     </tr>
                   </thead>
                   <tbody>
@@ -371,6 +380,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   %>
                   
                   <%
+                    int privCount = count;
                   	count = 5 - count;
                   	while(count>0)
                   	{
@@ -452,12 +462,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div> 
             </div>
 
-            <div class="form-group">
+            <script type="text/javascript">
+              // var selected_count = <%=privCount%>;
+            </script>
+  
+            <!-- <div class="form-group">
               <div>
-                <input class="form-control no-height" type="text" name="rolePriv" class="hide" data-error="请分配权限" required>
+                <input class="form-control no-height" type="text" name="rolePriv" class="hide" data-error="请分配权限*" required>
               </div>
               <div class="col-sm-2 help-block with-errors"></div>
-            </div>
+            </div> -->
 
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
@@ -545,7 +559,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       <th>
                         <span class="glyphicon glyphicon-check th-check"></span>
                       </th>
-                      <th>已分配权限 *</th>
+                      <th>
+                        已分配权限
+                        <div class="no-height form-group">
+                        <div class="no-height">
+                            <input class="form-control no-height" type="text" name="rolePriv" class="hide" data-error="请分配权限*" required>
+                          </div>
+                          <div class="no-height help-block with-errors">*</div>
+                        </div>
+                      </th>      
                     </tr>
                   </thead>
                   <tbody>
@@ -591,12 +613,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div> 
             </div>
 
-            <div class="form-group">
-              <div>
-                <input class="form-control no-height" type="text" name="rolePriv" class="hide" data-error="请分配权限" required>
-              </div>
-              <div class="col-sm-2 help-block with-errors"></div>
-            </div>
+            <script type="text/javascript">
+              // var selected_count = 0;
+            </script>
 
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
@@ -683,12 +702,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--<![endif]-->
 
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
-    <script src="<%=basePath%>/js/CharacterEdit.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
+    <script src="<%=basePath%>/js/CharacterEdit.js"></script>
     <script src="<%=basePath%>/js/ensureBox.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
-  
-
 </body></html>

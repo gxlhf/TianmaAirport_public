@@ -34,7 +34,7 @@ $(function () {
 		var validator_passed = !($('.has-error').length);
 
 		if($('#inp-flight-counter-mirror').length != 0){
-			validator_passed = ($('#inp-flight-counter-mirror').val() != '');
+			validator_passed = ($('#inp-flight-counter-mirror').val() != '') && validator_passed;
 		}
 
 		if (validator_passed) {			

@@ -18,17 +18,47 @@ $('#btn-modify').click(function (e) {
 		$('#errorBox').modal('show');
 		return false;
 	}
-
-
 	$(this).attr('href', $('#btn-modify').attr('href') + linkWord + opValue);
 });
 
-// $('#btn-delete').click(function (e) {
-// 	$(this).attr('href', $('#btn-modify').attr('href') + linkWord + opValue);
-// });
+function getBrowser(){
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+    var isSafari = userAgent.indexOf("Safari") > -1; //判断是否Safari浏览器
+    if (isIE) {
+        var IE5 = IE55 = IE6 = IE7 = IE8 = false;
+        var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+        reIE.test(userAgent);
+        var fIEVersion = parseFloat(RegExp["$1"]);
+        IE55 = fIEVersion == 5.5;
+        IE6 = fIEVersion == 6.0;
+        IE7 = fIEVersion == 7.0;
+        IE8 = fIEVersion == 8.0;
+        IE9 = fIEVersion == 9.0;
+        IE10 = fIEVersion == 10.0;
+        if (IE55 | IE6 | IE7 | IE8 | IE9) {
+            return "IE9";
+        }
+        if (IE10) {
+            return "IE10";
+        }
+    }//isIE end
+    if (isFF) {
+        return "FF";
+    }
+    if (isOpera) {
+        return "Opera";
+    }
+}
 
 $(function () {
-	console.log(navigator.userAgent);
+	if(getBrowser() == 'IE9'){
+		alert("本网站不支持使用IE9及更旧版本的IE浏览器访问，请升级您的浏览器");
+		if((window.location.href).search("Edit.jsp") != -1)
+			window.location.href = "../index.jsp";
+	}
 	
 	//绑定时间控件
 	var datetimeInputs = $('[type="datetime"]:input');
