@@ -132,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                  <input name="username" class="form-control" type="text" placeholder="用户名">
+                  <input name="username" class="form-control" type="text" placeholder="员工号">
                 </div>
               </div>
               <div class="form-group">

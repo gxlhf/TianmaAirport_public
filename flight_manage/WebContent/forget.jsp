@@ -137,7 +137,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
               <div class="form-group">
                 <div class="input-group">
-                  <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
+                  <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
                   <input name="email" class="form-control" type="text" placeholder="邮箱">
                 </div>
               </div>
@@ -149,33 +149,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </form>
             
             <script type="text/javascript">
- function changeImg(){
-    var imgSrc = $("#imgObj");
-    console.log(imgSrc);
-    var src = imgSrc.attr("src");    
-    imgSrc.attr("src",chgUrl(src));    
-}    
-//时间戳    
-//为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳    
-function chgUrl(url){    
-    var timestamp = (new Date()).valueOf();
-    urlurl = url.substring(0,10);
-    // console.log(urlurl);
-    if((url.indexOf("&")>=0)){
-        urlurl = urlurl + "×tamp=" + timestamp;
-    }else{
-        urlurl = urlurl + "?timestamp=" + timestamp;
-    }
-    console.log(urlurl);
-    return urlurl;
-}    
-
-</script> 
-            
-            
-            
-            
-            
+              function changeImg(){
+                  var imgSrc = $("#imgObj");
+                  console.log(imgSrc);
+                  var src = imgSrc.attr("src");    
+                  imgSrc.attr("src",chgUrl(src));    
+              }    
+              //时间戳    
+              //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳    
+              function chgUrl(url){    
+                  var timestamp = (new Date()).valueOf();
+                  urlurl = url.substring(0,10);
+                  // console.log(urlurl);
+                  if((url.indexOf("&")>=0)){
+                      urlurl = urlurl + "×tamp=" + timestamp;
+                  }else{
+                      urlurl = urlurl + "?timestamp=" + timestamp;
+                  }
+                  console.log(urlurl);
+                  return urlurl;
+              }    
+            </script> 
             
             <%
             if(request.getAttribute("result")!=null){

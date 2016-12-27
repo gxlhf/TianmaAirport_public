@@ -1,18 +1,25 @@
 $(function () {
-    $('[name="flight-no"]').blur(function () {
+
+    $('[name="flight-id"]').blur(function () {
         $(this).val($(this).val().toUpperCase());
     });
 
-    //经停地不相同
     $('form').validator({
         custom: {
+            //经停地不相同
             unequals: function ($el) {
                 var start = $('[name="flight-from"]').val();
                 var to = $('[name="flight-to"]').val();
                 var via = $el.val();
-                console.log($el);
                 if(start == via || to == via)
                     return "经停地不能与始发地相同";
+            },
+            //检查航空公司代码
+            checkcode: function ($el) {
+                var selectedCode = $('[name="flight-airline"]').children(':checked').attr('airline-code');
+                var flightNo = $el.val().toUpperCase();
+                if(selectedCode != undefined && flightNo.substr(0, 2) != selectedCode)
+                    return '请填写正确的航班号*';
             }
         }
     });
@@ -32,7 +39,6 @@ $(function () {
     if ($('#inp-flight-counter').length != 0){
         $('#inp-flight-counter')
         .on('tokenfield:createtoken', function (e) {
-            console.log('createtoken');
             var valid = false;
             for (var i = 0; i < counterList.length; i++) {
                 if(counterList[i] == e.attrs.value){
@@ -69,7 +75,6 @@ $(function () {
         $('#inp-flight-counter').tokenfield('setTokens', selectedCounterList);
 
         $('#inp-flight-counter-tokenfield').blur(function () {
-            console.log('blur');
             $('#inp-flight-counter-mirror').val($('#inp-flight-counter').val());
             $('#inp-flight-counter-mirror').focus();
             $('#inp-flight-counter-mirror').blur();
