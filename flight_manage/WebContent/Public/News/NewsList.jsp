@@ -250,7 +250,7 @@ else
             <div class="form-group">
               <label for="news-outtime" class="col-sm-2 control-label">发布时间：</label>
               <div class="col-sm-6">
-                <input type="text" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="news-outtime">
+                <input type="datetime" format="yyyy-mm-dd" startview="2" minview="2" maxview="4" class="form-control" name="news-outtime">
               </div>
             </div>
             <%
@@ -375,6 +375,7 @@ else
 						int from=(pageNum-1)*10+1;
 						int end=pageNum*10+1<news.length?pageNum+10:news.length;
 						for(int i=from;i<end;i++){
+							out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
 							 if(session.getAttribute("priv2")!=null){
 				                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
 				                }else{

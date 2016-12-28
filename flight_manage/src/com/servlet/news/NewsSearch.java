@@ -56,6 +56,16 @@ public class NewsSearch extends HttpServlet {
 		News[] news=user.searchNews(title, time);
 		java.util.List<News> newslist=new LinkedList<News>();
 		int n=0,t=0;
+		String ty;
+		if(type.equals("flightInformation"))
+			ty="航班信息";
+		else if(type.equals("airportResource"))
+			ty="机场资源";
+		else if(type.equals("facilityResource"))
+			ty="物业资源";
+		else {
+			ty="";
+		}
 		if(name!=null&&!name.equals("")){
 			n=1;
 			for(int i=0;i<news.length;i++){
@@ -72,13 +82,13 @@ public class NewsSearch extends HttpServlet {
 			t=1;
 			if(n==0){
 				for(int i=0;i<news.length;i++){
-					if(news[i].getTime().equals(name)){
+					if(news[i].getTime().equals(time)){
 						newslist.add(news[i]);
 					}
 				}
 			}else{
 				for(int i=0;i<newslist.size();i++){
-					if(!newslist.get(i).getTime().equals(name)){
+					if(!newslist.get(i).getTime().equals(time)){
 						newslist.remove(i--);
 					}
 				}
@@ -87,13 +97,13 @@ public class NewsSearch extends HttpServlet {
 		}
 		if(t==0&&n==0){
 			for(int i=0;i<news.length;i++){
-				if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
+				if(news[i].getKind().equals(ty)){
 					newslist.add(news[i]);
 				}
 			}
 		}else{
 			for(int i=0;i<newslist.size();i++){
-				if(!(newslist.get(i).getKind().equals("航班信息")&&type.equals("flightInformation"))||!(newslist.get(i).getKind().equals("机场资源")&&type.equals("airportResource"))||!(newslist.get(i).getKind().equals("物业资源")&&type.equals("facilityResource"))){
+				if(!newslist.get(i).getKind().equals(ty)){
 					newslist.remove(i--);
 				}
 			}
