@@ -52,6 +52,9 @@ footer {
 	.form-inline > .btn {
 		width: 22% !important;
 	}
+    .nav > li:hover .dropdown-menu {
+        margin-top: -3px !important;
+    }
 }
 @media (max-width: 767px){
 	.carousel-inner > div {
