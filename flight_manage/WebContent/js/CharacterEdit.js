@@ -149,4 +149,14 @@ $(function () {
 			$('[name="rolePriv"]').val(lastVal + $(select_elem[i]).text());
 		}
 	});
+
+	$("form").submit(function (e) {
+		var inputElem = $(e.currentTarget).find('input,textarea');
+		var ret = true;
+		for (var i = 0; i < inputElem.length; i++) {
+			if(inputElem[i].value.indexOf("+") != -1 || inputElem[i].value.indexOf("&") != -1 || inputElem[i].value.indexOf("?") != -1)
+				ret = false;
+		}
+		return ret;
+	});
 });
