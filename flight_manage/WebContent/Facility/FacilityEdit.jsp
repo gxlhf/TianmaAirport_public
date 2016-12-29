@@ -172,7 +172,7 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
             if(name!=null){
                 
                User user = new User();
-             PropertyFacility[] facilityModify = user.searchPropertyFacility(name);   
+             PropertyFacility[] facilityModify = user.searchPropertyFacility(name,"");   
             
                 
           %>
@@ -289,7 +289,7 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
             <div class="form-group">
               <label for="facility-name" class="col-sm-2 control-label">设施名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="facility-name"data-error="请填写设施名称*"  required>
+                <input type="text" class="form-control" name="facility-name"data-error="请填写设施名称*" data-remote="<%=basePath%>AddFacility" data-remote-error="该设施名称已被占用*" required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>

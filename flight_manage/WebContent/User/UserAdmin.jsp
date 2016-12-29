@@ -43,7 +43,7 @@ else
   	Integer addResult=(Integer)request.getAttribute("addResult");
   	if(addResult!=null){
   		if(addResult.equals(0)){
-			out.println("<script>alert('新增失败')</script>");
+			out.println("<script>alert('新增失败\\n若新增成功后刷新页面，也会出现此弹框。')</script>");
   		}else if(addResult.equals(1)){
 	  		out.println("<script>alert('新增成功')</script>");
   		}
@@ -52,7 +52,7 @@ else
   	Integer deleteResult=(Integer)request.getAttribute("deleteResult");
   	if(deleteResult!=null){
   		if(deleteResult.equals(0)){
-			out.println("<script>alert('删除失败')</script>");
+			out.println("<script>alert('删除失败\\n若删除成功后刷新页面，也会出现此弹框。')</script>");
   		}else if(deleteResult.equals(1)){
 	  		out.println("<script>alert('删除成功')</script>");
   		}

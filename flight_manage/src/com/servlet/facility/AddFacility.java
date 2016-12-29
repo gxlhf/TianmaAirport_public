@@ -28,6 +28,13 @@ public class AddFacility extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		User user = new User();
+		PropertyFacility[] propertyFacilities = user.searchPropertyFacility(request.getParameter("facility-name"), "");
+		if(propertyFacilities.length == 0)
+			response.setStatus(200);
+		else 
+			response.setStatus(400);
 	}
 
 	/**

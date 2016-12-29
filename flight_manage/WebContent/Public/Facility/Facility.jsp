@@ -44,7 +44,7 @@ else
   	Integer addResult=(Integer)request.getAttribute("addResult");
   	if(addResult!=null){
   		if(addResult.equals(0)){
-			out.println("<script>alert('新增失败')</script>");
+			out.println("<script>alert('新增失败\\n若新增成功后刷新页面，也会出现此弹框。')</script>");
   		}else if(addResult.equals(1)){
 	  		out.println("<script>alert('新增成功')</script>");
   		}
@@ -53,7 +53,7 @@ else
   	Integer deleteResult=(Integer)request.getAttribute("deleteResult");
   	if(deleteResult!=null){
   		if(deleteResult.equals(0)){
-			out.println("<script>alert('删除失败')</script>");
+			out.println("<script>alert('删除失败\\n若删除成功后刷新页面，也会出现此弹框。')</script>");
   		}else if(deleteResult.equals(1)){
 	  		out.println("<script>alert('删除成功')</script>");
   		}
@@ -208,6 +208,20 @@ else
               </div>
             </div>
             <div class="form-group">
+              <label for="facility-type" class="col-sm-2 control-label">设施分类：</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="facility-type">
+                  <option value ="">不限</option>
+                <%
+                User user = new User();
+                for(String output:user.returnAllPropertyFacilityType())
+                	out.println("<option value='"+output+"'>"+output+"</option>");
+                %>
+         
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
               <div class="col-sm-2"></div>
               <div class="col-sm-6">
                 <button type="submit" class="col-sm-12 btn btn-primary">查询</button>
@@ -227,7 +241,7 @@ else
          if (request.getAttribute("facilityInfo")!=null ) {
              PropertyFacility[] facilityInfos = (PropertyFacility[])request.getAttribute("facilityInfo");
              //int i=1;
-			 String ul_path = "SearchFacility?facility-name="+request.getParameter("facility-name");
+			 String ul_path = "SearchFacility?facility-name="+request.getParameter("facility-name")+"&facility-type="+request.getParameter("facility-type")+"&page=";
 			 if(facilityInfos.length==0)
 				 response.sendRedirect(basePath+"Public/Facility/Facility.jsp");
 			 else
@@ -303,7 +317,7 @@ else
          }
 
          else{
-              User user = new User();
+              
               PropertyFacility[] facilityInfos = user.returnAllPropertyFacility();
               //int i=1;
               if(facilityInfos.length==0)

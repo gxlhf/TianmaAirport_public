@@ -28,6 +28,13 @@ public class AddResource extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		User user = new User();
+		AirportResource[] airportResources = user.searchAirportResource(request.getParameter("resource-name"), "");
+		if(airportResources.length == 0)
+			response.setStatus(200);
+		else 
+			response.setStatus(400);
 	}
 
 	/**

@@ -44,7 +44,7 @@ else
 					}
 			}else if(forward.equals("delete")){
 				if(re.equals(0)){
-		  			out.println("<script>alert('删除失败')</script>");
+		  			out.println("<script>alert('删除失败\\n若删除成功后刷新页面，也会出现此弹框。')</script>");
 					}else if(re.equals(1)){
 		  			out.println("<script>alert('删除成功')</script>");
 					}

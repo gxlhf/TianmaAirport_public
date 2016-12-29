@@ -829,7 +829,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             <div class="form-group">
               <label for="flight-no" class="col-sm-2 control-label">航班号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="flight-id" pattern="([A-z]{2}[0-9]{3,4}|[A-z][0-9]{4,5}|[0-9][A-z]{1}[0-9]{3,4})" data-required-error='请填写航班号*' data-pattern-error='请填写正确的航班号*'  data-checkcode="checkcode" data-validate="true" required>
+                <input type="text" class="form-control" name="flight-id" pattern="([A-z]{2}[0-9]{3,4}|[A-z][0-9]{4,5}|[0-9][A-z]{1}[0-9]{3,4})" data-required-error='请填写航班号*' data-pattern-error='请填写正确的航班号*'  data-checkcode="checkcode" data-validate="true" <%-- data-remote="<%
+                		if(request.getParameter("type").equals("departure"))
+                        	out.println(basePath+"AddDepartureFlightInfo");
+                        if(request.getParameter("type").equals("arrival"))
+                        	out.println(basePath+"AddArrivalFlightInfo");
+                %>" data-remote-error="已存在重复的航班信息*" --%> required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>

@@ -274,7 +274,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="resource-name" class="col-sm-2 control-label">资源名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="resource-name"  data-required-error="请填写资源名称*" data-checkname="checkname" data-validate="true" required>
+                <input type="text" class="form-control" name="resource-name"  data-required-error="请填写资源名称*" data-checkname="checkname" data-validate="true" data-remote="<%=basePath%>AddResource" data-remote-error="该机场资源名称已被占用" required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>

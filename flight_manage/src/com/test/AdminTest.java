@@ -276,14 +276,14 @@ public class AdminTest {
 
 	@Test
 	public void test002ModifyPropertyFacility() {
-		PropertyFacility[] propertyFacilities=admin.searchPropertyFacility("test");
+		PropertyFacility[] propertyFacilities=admin.searchPropertyFacility("test","");
 		propertyFacilities[0].setLocation("test1");
 		assertEquals(1, admin.modifyPropertyFacility(propertyFacilities[0]));
 	}
 
 	@Test
 	public void test003DeletePropertyFacility() {
-		PropertyFacility[] propertyFacilities=admin.searchPropertyFacility("test");
+		PropertyFacility[] propertyFacilities=admin.searchPropertyFacility("test","");
 		assertEquals(1, admin.deletePropertyFacility(propertyFacilities[0]));
 	}
 /*
