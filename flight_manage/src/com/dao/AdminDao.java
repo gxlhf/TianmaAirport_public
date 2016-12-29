@@ -154,6 +154,19 @@ public class AdminDao {
     }
     public boolean deleteRole(Role role)
     {// 数据库操作：删除角色，形参为角色对象，返回值为布尔值
+    	sql = "SELECT * FROM `user_actor` WHERE A_name = ?";
+    	db1= new db_connection(sql);//创建db_connection对象
+    	try {
+			db1.pst = db1.conn.prepareStatement(sql);
+			db1.pst.setString(1, role.getName());
+			ret = db1.pst.executeQuery();
+			if(ret.next())
+				return false;
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+    	
     	sql = "DELETE FROM actor_privilege WHERE A_name='"+role.getName()+"'";//SQL语句  
     	db1= new db_connection(sql);//创建db_connection对象
         try {     
@@ -167,10 +180,10 @@ public class AdminDao {
         	try{
          		db1.conn.rollback();
          	}catch(SQLException e1){
-         		e1.printStackTrace();
+         		//e1.printStackTrace();
          		return false;
          	}
-             e.printStackTrace(); 
+             //e.printStackTrace(); 
              return false;
        }
         finally{
@@ -179,7 +192,7 @@ public class AdminDao {
                  db1.close();//关闭连接   
              } catch (SQLException e) {
                  // TODO Auto-generated catch block
-                 e.printStackTrace();
+                 //e.printStackTrace();
              }         
         }
         return true;
