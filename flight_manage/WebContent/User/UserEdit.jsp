@@ -323,14 +323,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-phone" class="col-sm-2 control-label">电话：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-phone" value="<%=adminModify[0].getPhone() %>">
+                <input type="text" pattern="\d*" data-pattern-error="请输入正确的电话" class="form-control" name="user-phone" value="<%=adminModify[0].getPhone() %>">
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>
             <div class="form-group">
               <label for="user-tel" class="col-sm-2 control-label">手机号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-tel"  value="<%=adminModify[0].getMobile() %>">
+                <input type="text" pattern="\d*" data-pattern-error="请输入正确的手机号" class="form-control" name="user-tel"  value="<%=adminModify[0].getMobile() %>">
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>
@@ -456,14 +456,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-phone" class="col-sm-2 control-label">电话：</label>
               <div class="col-sm-6">
-                <input type="text" pattern="\d*" class="form-control" name="user-phone" >
+                <input type="text" pattern="\d*" data-pattern-error="请输入正确的电话" class="form-control" name="user-phone" >
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>
             <div class="form-group">
               <label for="user-tel" class="col-sm-2 control-label">手机号：</label>
               <div class="col-sm-6">
-                <input type="text" pattern="\d*" class="form-control" name="user-tel" >
+                <input type="text" pattern="\d*" data-pattern-error="请输入正确的手机号" class="form-control" name="user-tel" >
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>
