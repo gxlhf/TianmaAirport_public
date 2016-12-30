@@ -552,14 +552,53 @@ public class AdminDao {
     {//数据库操作：删除机场资源，形参为机场资源对象，返回值为布尔值
     	if(airportResource.getType().equals("登机门"))
     	{
-    	     sql = "DELETE FROM boardinggate WHERE Bname=?";//SQL语句  
+    	    sql = "SELECT * FROM bc_allocation WHERE Bname=?";
+    	    db1= new db_connection(sql);//创建db_connection对象
+        	try {
+    			db1.pst = db1.conn.prepareStatement(sql);
+    			db1.pst.setString(1, airportResource.getName());
+    			ret = db1.pst.executeQuery();
+    			if(ret.next())
+    				return false;
+    		} catch (SQLException e2) {
+    			// TODO Auto-generated catch block
+    			e2.printStackTrace();
+    		}
+    		
+    		sql = "DELETE FROM boardinggate WHERE Bname=?";//SQL语句  
     	}
     	else if(airportResource.getType().equals("值机柜台"))
     	{
+    		sql = "SELECT * FROM bc_allocation WHERE Cname=?";
+    	    db1= new db_connection(sql);//创建db_connection对象
+        	try {
+    			db1.pst = db1.conn.prepareStatement(sql);
+    			db1.pst.setString(1, airportResource.getName());
+    			ret = db1.pst.executeQuery();
+    			if(ret.next())
+    				return false;
+    		} catch (SQLException e2) {
+    			// TODO Auto-generated catch block
+    			e2.printStackTrace();
+    		}
+    		
     		sql = "DELETE FROM checkincounter WHERE Cname=?";//SQL语句
     	}
     	else if(airportResource.getType().equals("行李转盘"))
     	{
+    		sql = "SELECT * FROM lc_allocation WHERE Lname=?";
+    	    db1= new db_connection(sql);//创建db_connection对象
+        	try {
+    			db1.pst = db1.conn.prepareStatement(sql);
+    			db1.pst.setString(1, airportResource.getName());
+    			ret = db1.pst.executeQuery();
+    			if(ret.next())
+    				return false;
+    		} catch (SQLException e2) {
+    			// TODO Auto-generated catch block
+    			e2.printStackTrace();
+    		}
+    		
     		sql = "DELETE FROM luggagecarousel WHERE Lname=?";//SQL语句
     	}
     	db1= new db_connection(sql);//创建db_connection对象  
