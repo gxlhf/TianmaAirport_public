@@ -245,9 +245,9 @@ else
         	  
         	  //int i=1;
         	  AirportResource[] resourceInfos = (AirportResource[])request.getAttribute("resourceInfo");
-        	  if(resourceInfos.length==0)
- 		          response.sendRedirect(basePath+"Public/Facility/Resource.jsp");
-        	  else
+        	  /* if(resourceInfos.length==0)
+ 		          response.sendRedirect(basePath+"Public/Facility/Resource.jsp"); */
+ 		      if(resourceInfos.length!=0)
         	  {
         		  if(resourceInfos.length%10==0)
                   {
@@ -279,7 +279,7 @@ else
         	  out.println("</tbody></table>"); */
         	  for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
         	  {
-        		  if(i>=resourceInfos.length)
+        		  if(i>=resourceInfos.length||resourceInfos.length==0)
       		          break;
         		  out.println("<tr data-id='rname="+ resourceInfos[i].getName() + "'>");
         		  if(session.getAttribute("priv0")!=null){
@@ -295,18 +295,22 @@ else
         	  }
         	  out.println("</tbody></table>");
         	  out.println("<div><ul class='pager'>");
-      		  if(!p.equals("1"))
-              	  out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-      		  if(resourceInfos.length%10==0)
-              {
-              	  if(Integer.parseInt(p)!=resourceInfos.length/10)
-          			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-              }
-              else
-              {
-              	  if(Integer.parseInt(p)!=resourceInfos.length/10 + 1)
-          			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-              }
+        	  if(resourceInfos.length!=0)
+        	  {
+        		  if(!p.equals("1"))
+                  	  out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+          		  if(resourceInfos.length%10==0)
+                  {
+                  	  if(Integer.parseInt(p)!=resourceInfos.length/10)
+              			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                  }
+                  else
+                  {
+                  	  if(Integer.parseInt(p)!=resourceInfos.length/10 + 1)
+              			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                  }
+        	  }
+      		  
               out.println("</ul></div>");
           }
           
@@ -323,9 +327,9 @@ else
         	  User user = new User();
         	  AirportResource[] resourceInfos = user.returnAllAirportResource();
         	  /* int i=1; */
-        	  if(resourceInfos.length==0)
- 		          response.sendRedirect(basePath+"Public/Facility/Resource.jsp");
-        	  else
+        	  /* if(resourceInfos.length==0)
+ 		          response.sendRedirect(basePath+"Public/Facility/Resource.jsp"); */
+ 		      if(resourceInfos.length!=0)
         	  {
         		  if(resourceInfos.length%10==0)
                   {
@@ -343,7 +347,7 @@ else
         	  
         	  for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
         	  {
-        		  if(i>=resourceInfos.length)
+        		  if(i>=resourceInfos.length||resourceInfos.length==0)
       		          break;
         		  out.println("<tr data-id='rname="+ resourceInfos[i].getName() + "'>");
         		  if(session.getAttribute("priv0")!=null){
@@ -359,18 +363,22 @@ else
         	  }
         	  out.println("</tbody></table>");
         	  out.println("<div><ul class='pager'>");
-      		if(!p.equals("1"))
-              	out.println("<li class='previous'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-      		if(resourceInfos.length%10==0)
-              {
-              	if(Integer.parseInt(p)!=resourceInfos.length/10)
-          			out.println("<li class='next'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-              }
-              else
-              {
-              	if(Integer.parseInt(p)!=resourceInfos.length/10 + 1)
-          			out.println("<li class='next'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-              }
+        	  if(resourceInfos.length!=0)
+        	  {
+        		  if(!p.equals("1"))
+                  	  out.println("<li class='previous'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+          		  if(resourceInfos.length%10==0)
+                  {
+                  	  if(Integer.parseInt(p)!=resourceInfos.length/10)
+              			  out.println("<li class='next'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                  }
+                  else
+                  {
+                  	  if(Integer.parseInt(p)!=resourceInfos.length/10 + 1)
+              			  out.println("<li class='next'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                  }
+        	  }
+      		  
               out.println("</ul></div>");
         	  /* for (AirportResource output:resourceInfos) 
         	  {

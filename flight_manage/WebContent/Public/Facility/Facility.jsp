@@ -242,9 +242,9 @@ else
              PropertyFacility[] facilityInfos = (PropertyFacility[])request.getAttribute("facilityInfo");
              //int i=1;
 			 String ul_path = "SearchFacility?facility-name="+request.getParameter("facility-name")+"&facility-type="+request.getParameter("facility-type")+"&page=";
-			 if(facilityInfos.length==0)
-				 response.sendRedirect(basePath+"Public/Facility/Facility.jsp");
-			 else
+			 /* if(facilityInfos.length==0)
+				 response.sendRedirect(basePath+"Public/Facility/Facility.jsp"); */
+		     if(facilityInfos.length!=0)
 			 {
 				 if(facilityInfos.length%10==0)
 	             {
@@ -261,7 +261,7 @@ else
 			 }
 			 for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
 			 {
-				 if(i>=facilityInfos.length)
+				 if(i>=facilityInfos.length||facilityInfos.length==0)
      		         break;
 				 out.println("<tr data-id='fname="+ facilityInfos[i].getName() + "'>");
 	             if(session.getAttribute("priv0")!=null){
@@ -301,18 +301,22 @@ else
              } */
              out.println("</tbody></table>");
              out.println("<div><ul class='pager'>");
-     		  if(!p.equals("1"))
-             	  out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-     		  if(facilityInfos.length%10==0)
+             if(facilityInfos.length!=0)
              {
-             	  if(Integer.parseInt(p)!=facilityInfos.length/10)
-         			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+            	 if(!p.equals("1"))
+                     out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+         		 if(facilityInfos.length%10==0)
+                 {
+                 	 if(Integer.parseInt(p)!=facilityInfos.length/10)
+             			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                 }
+                 else
+                 {
+                     if(Integer.parseInt(p)!=facilityInfos.length/10 + 1)
+             		     out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                 }
              }
-             else
-             {
-             	  if(Integer.parseInt(p)!=facilityInfos.length/10 + 1)
-         			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-             }
+     		 
              out.println("</ul></div>");
          }
 
@@ -320,9 +324,9 @@ else
               
               PropertyFacility[] facilityInfos = user.returnAllPropertyFacility();
               //int i=1;
-              if(facilityInfos.length==0)
-				 response.sendRedirect(basePath+"Public/Facility/Facility.jsp");
-              else
+              /* if(facilityInfos.length==0)
+				 response.sendRedirect(basePath+"Public/Facility/Facility.jsp"); */
+			  if(facilityInfos.length!=0)
               {
             	  if(facilityInfos.length%10==0)
                   {
@@ -340,7 +344,7 @@ else
 			  
 			  for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
         	  {
-				  if(i>=facilityInfos.length)
+				  if(i>=facilityInfos.length||facilityInfos.length==0)
       		          break;
 				  out.println("<tr data-id='fname="+ facilityInfos[i].getName() + "'>");
 	              if(session.getAttribute("priv0")!=null){
@@ -360,18 +364,22 @@ else
         	 }
              out.println("</tbody></table>");
              out.println("<div><ul class='pager'>");
-       		 if(!p.equals("1"))
-                 out.println("<li class='previous'><a href='"+basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-       		 if(facilityInfos.length%10==0)
+             if(facilityInfos.length!=0)
              {
-               	 if(Integer.parseInt(p)!=facilityInfos.length/10)
-           			out.println("<li class='next'><a href='"+basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+            	 if(!p.equals("1"))
+                     out.println("<li class='previous'><a href='"+basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+           		 if(facilityInfos.length%10==0)
+                 {
+                   	 if(Integer.parseInt(p)!=facilityInfos.length/10)
+               			out.println("<li class='next'><a href='"+basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                 }
+                 else
+                 {
+                     if(Integer.parseInt(p)!=facilityInfos.length/10 + 1)
+               		 	out.println("<li class='next'><a href='"+basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                 }
              }
-             else
-             {
-                 if(Integer.parseInt(p)!=facilityInfos.length/10 + 1)
-           		 	out.println("<li class='next'><a href='"+basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-             }
+       		 
              out.println("</ul></div>");
        }
 

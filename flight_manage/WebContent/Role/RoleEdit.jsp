@@ -157,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
           </ol>
           <%
-          	if(request.getParameter("roleName")!=null)
+          	if(request.getParameter("roleName")!=null&&admin.searchRole(request.getParameter("roleName"))!=null)
           	{
           		Role roleModify = admin.searchRole(request.getParameter("roleName"));
           		/* System.out.println(request.getParameter("roleName")); */

@@ -167,10 +167,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <%
 
             String name = request.getParameter("rname");
-
-            if(name!=null){
+          User user = new User();
+            if(name!=null&&user.searchAirportResource(name, "").length!=0){
                 
-               User user = new User();
+               
                AirportResource[] resourceModify = user.searchAirportResource(name, ""); 
             
                 

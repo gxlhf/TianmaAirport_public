@@ -273,9 +273,9 @@ else
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Admin[] adminInfos = (Admin[])request.getAttribute("adminsInfo");
             	String ul_path = "SearchAdmin?search-empno="+request.getParameter("search-empno")+"&search-name="+request.getParameter("search-name")+"&search-sex="+request.getParameter("search-sex")+"&search-position="+request.getParameter("search-position")+"&search-role="+request.getParameter("search-role")+"&page=";
-            	if(adminInfos.length==0)
-   			    	response.sendRedirect(basePath+"User/UserAdmin.jsp");
-            	else
+            	/* if(adminInfos.length==0)
+   			    	response.sendRedirect(basePath+"User/UserAdmin.jsp"); */
+   			    if(adminInfos.length!=0)
             	{
             		if(adminInfos.length%10==0)
                     {
@@ -293,7 +293,7 @@ else
             	
             	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
-            		if(i>=adminInfos.length)
+            		if(i>=adminInfos.length||adminInfos.length==0)
         		         break;
             		out.println("<tr data-id='empno="+adminInfos[i].getEmpno()+"'>");
             		out.println("<td><span class='glyphicon'></span></td>");
@@ -348,18 +348,22 @@ else
                 } */
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'>");
-       		    if(!p.equals("1"))
-               	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-       		    if(adminInfos.length%10==0)
+                if(adminInfos.length!=0)
                 {
-               	    if(Integer.parseInt(p)!=adminInfos.length/10)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                	if(!p.equals("1"))
+                   	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+           		    if(adminInfos.length%10==0)
+                    {
+                   	    if(Integer.parseInt(p)!=adminInfos.length/10)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
+                    else
+                    {
+                   	    if(Integer.parseInt(p)!=adminInfos.length/10 + 1)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
                 }
-                else
-                {
-               	    if(Integer.parseInt(p)!=adminInfos.length/10 + 1)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                }
+       		    
                 out.println("</ul></div>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteAdmin'>删除</a><a class='btn btn-success' href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
             }
@@ -367,9 +371,9 @@ else
             {
             	Admin[] admins = admin.searchAdmin("", "", -1, "", "");
             	String ul_path = "User/UserAdmin.jsp?page=";
-   			    if(admins.length==0)
-   			    	response.sendRedirect(basePath+"User/UserAdmin.jsp");
-   			    else
+   			    /* if(admins.length==0)
+   			    	response.sendRedirect(basePath+"User/UserAdmin.jsp"); */
+   			    if(admins.length!=0)
    			    {
    			    	if(admins.length%10==0)
    	                {
@@ -390,7 +394,7 @@ else
             	out.println("<th>员工号</th><th>姓名</th><th>性别</th><th>电话</th><th>手机</th><th>邮箱</th><th>部门</th><th>职位</th><th>角色</th></tr></thead><tbody>");
             	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
-            		if(i>=admins.length)
+            		if(i>=admins.length||admins.length==0)
         		         break;
             		out.println("<tr data-id='empno="+admins[i].getEmpno()+"'>");
             		out.println("<td><span class='glyphicon glyphicon'></span></td>");
@@ -411,18 +415,22 @@ else
             	}
             	out.println("</tbody></table>");
             	out.println("<div><ul class='pager'>");
-       		    if(!p.equals("1"))
-               	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-       		    if(admins.length%10==0)
-                {
-               	    if(Integer.parseInt(p)!=admins.length/10)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                }
-                else
-                {
-               	    if(Integer.parseInt(p)!=admins.length/10 + 1)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                }
+            	if(admins.length!=0)
+            	{
+            		if(!p.equals("1"))
+                   	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+           		    if(admins.length%10==0)
+                    {
+                   	    if(Integer.parseInt(p)!=admins.length/10)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
+                    else
+                    {
+                   	    if(Integer.parseInt(p)!=admins.length/10 + 1)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
+            	}
+       		    
                 out.println("</ul></div>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteAdmin'>删除</a><a class='btn btn-success' href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
             	

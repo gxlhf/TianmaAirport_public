@@ -133,7 +133,7 @@ public class login extends HttpServlet {
 			}*/
 			
 		}else{
-			result ="登陆失败，请重新登陆";
+			result ="员工号或密码不正确";
 			request.setAttribute("result", result);
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			//response.sendRedirect("login.jsp");

@@ -368,9 +368,9 @@ else
                 	}
                 }
                 String ul_path = "DepartureFlightSearch?flight-id="+request.getParameter("flight-id")+"&to-site="+request.getParameter("to-site")+"&airCompany-name="+request.getParameter("airCompany-name")+"&area="+area+"&page=";
-                if(departureFlightInfosOutput.length==0)
-                	response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area);
-                else
+                /* if(departureFlightInfosOutput.length==0)
+                	response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area); */
+                if(departureFlightInfosOutput.length!=0)
                 {
                 	if(departureFlightInfosOutput.length%10==0)
                 	{
@@ -388,7 +388,7 @@ else
                 
                 for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
         		{
-        			if(i>=departureFlightInfosOutput.length)
+        			if(i>=departureFlightInfosOutput.length||departureFlightInfosOutput.length==0)
         				break;
         			out.println("<tr data-id='flightNumber="+departureFlightInfosOutput[i].getFlightCourse().getFlightNumber()+"&time="+departureFlightInfosOutput[i].getTime()+"&area="+area+"&type=departure"+"'>");
                 	if(session.getAttribute("priv1")!=null){
@@ -513,18 +513,22 @@ else
                 out.println("</tbody></table>");
                 //out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
                 out.println("<div><ul class='pager'>");
-            	if(!p.equals("1"))
-                    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-            	if(departureFlightInfosOutput.length%10==0)
-                {
-                    if(Integer.parseInt(p)!=departureFlightInfosOutput.length/10)
-                		out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                }
-                else
-                {
-                    if(Integer.parseInt(p)!=departureFlightInfosOutput.length/10 + 1)
-                		out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                }
+            	if(departureFlightInfosOutput.length!=0)
+            	{
+            		if(!p.equals("1"))
+                        out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+                	if(departureFlightInfosOutput.length%10==0)
+                    {
+                        if(Integer.parseInt(p)!=departureFlightInfosOutput.length/10)
+                    		out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
+                    else
+                    {
+                        if(Integer.parseInt(p)!=departureFlightInfosOutput.length/10 + 1)
+                    		out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
+            	}
+                
                 out.println("</ul></div>");
                 if(session.getAttribute("priv1")!=null)
               	  out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"Flight/FlightInfoEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteDepartureFlightInfo'>删除</a><a class='btn btn-success' href='"+basePath+"Flight/FlightInfoEdit.jsp?type=departure&area="+area+"'>新增</a></div></div>");
@@ -558,9 +562,9 @@ else
                 			j++;
                 		}
                 	}
-                	if(allLocalDepartureFlightInfos.length==0)
-                		response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area);
-                	else
+                	/* if(allLocalDepartureFlightInfos.length==0)
+                		response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area); */
+                	if(allLocalDepartureFlightInfos.length!=0)
                 	{
                 		if(allLocalDepartureFlightInfos.length%10==0)
                     	{
@@ -580,7 +584,7 @@ else
                 	/* System.out.println(allLocalDepartureFlightInfos.length); */
                 	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             		{
-            			if(i>=allLocalDepartureFlightInfos.length)
+            			if(i>=allLocalDepartureFlightInfos.length||allLocalDepartureFlightInfos.length==0)
             				break;
             			out.println("<tr data-id='flightNumber="+allLocalDepartureFlightInfos[i].getFlightCourse().getFlightNumber()+"&time="+allLocalDepartureFlightInfos[i].getTime()+"&area="+area+"&type=departure"+"'>");
                     	if(session.getAttribute("priv1")!=null){
@@ -621,17 +625,21 @@ else
             		}
             		out.println("</tbody></table>");
             		out.println("<div><ul class='pager'>");
-            		if(!p.equals("1"))
-                    	out.println("<li class='previous'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-                    if(allLocalDepartureFlightInfos.length%10==0)
-                    {
-                    	if(Integer.parseInt(p)!=allLocalDepartureFlightInfos.length/10)
-                			out.println("<li class='next'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                    }
-                    else{
-                    	if(Integer.parseInt(p)!=allLocalDepartureFlightInfos.length/10 + 1)
-                			out.println("<li class='next'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                    }
+            		if(allLocalDepartureFlightInfos.length!=0)
+            		{
+            			if(!p.equals("1"))
+                        	out.println("<li class='previous'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+                        if(allLocalDepartureFlightInfos.length%10==0)
+                        {
+                        	if(Integer.parseInt(p)!=allLocalDepartureFlightInfos.length/10)
+                    			out.println("<li class='next'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                        }
+                        else{
+                        	if(Integer.parseInt(p)!=allLocalDepartureFlightInfos.length/10 + 1)
+                    			out.println("<li class='next'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                        }
+            		}
+            		
             		
                     out.println("</ul></div>");
             	}
@@ -662,9 +670,9 @@ else
                 			j++;
                 		}
                 	}
-                	if(allInternationalDepartureFlightInfos.length==0)
-                		response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area);
-                	else
+                	/* if(allInternationalDepartureFlightInfos.length==0)
+                		response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area); */
+                	if(allInternationalDepartureFlightInfos.length!=0)
                 	{
                 		if(allInternationalDepartureFlightInfos.length%10==0)
                     	{
@@ -684,7 +692,7 @@ else
                 	/* System.out.println(allLocalDepartureFlightInfos.length); */
                 	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             		{
-            			if(i>=allInternationalDepartureFlightInfos.length)
+            			if(i>=allInternationalDepartureFlightInfos.length||allInternationalDepartureFlightInfos.length==0)
             				break;
             			out.println("<tr data-id='flightNumber="+allInternationalDepartureFlightInfos[i].getFlightCourse().getFlightNumber()+"&time="+allInternationalDepartureFlightInfos[i].getTime()+"&area="+area+"&type=departure"+"'>");
                     	if(session.getAttribute("priv1")!=null){
@@ -725,17 +733,21 @@ else
             		}
             		out.println("</tbody></table>");
             		out.println("<div><ul class='pager'>");
-            		if(!p.equals("1"))
-                    	out.println("<li class='previous'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-                    if(allInternationalDepartureFlightInfos.length%10==0)
-                    {
-                    	if(Integer.parseInt(p)!=allInternationalDepartureFlightInfos.length/10)
-                			out.println("<li class='next'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                    }
-                    else{
-                    	if(Integer.parseInt(p)!=allInternationalDepartureFlightInfos.length/10 + 1)
-                			out.println("<li class='next'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                    }
+            		if(allInternationalDepartureFlightInfos.length!=0)
+            		{
+            			if(!p.equals("1"))
+                        	out.println("<li class='previous'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+                        if(allInternationalDepartureFlightInfos.length%10==0)
+                        {
+                        	if(Integer.parseInt(p)!=allInternationalDepartureFlightInfos.length/10)
+                    			out.println("<li class='next'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                        }
+                        else{
+                        	if(Integer.parseInt(p)!=allInternationalDepartureFlightInfos.length/10 + 1)
+                    			out.println("<li class='next'><a href='"+basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                        }
+            		}
+            		
             		
                     out.println("</ul></div>");
             	}

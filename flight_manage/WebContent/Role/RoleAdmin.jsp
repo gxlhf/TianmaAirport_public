@@ -262,9 +262,9 @@ else
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Role[] roleInfos = admin.returnAllRole();
             	String ul_path = "Role/Role.jsp?page=";
-   			    if(roleInfos.length==0)
-   			    	response.sendRedirect(basePath+"Role/Role.jsp"); 
-   			    else
+   			    /* if(roleInfos.length==0)
+   			    	response.sendRedirect(basePath+"Role/Role.jsp"); */ 
+   			    if(roleInfos.length!=0)
    			    {
    			    	if(roleInfos.length%10==0)
    	                {
@@ -283,7 +283,7 @@ else
             	int count=1;
             	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
-            		if(i>=roleInfos.length)
+            		if(i>=roleInfos.length||roleInfos.length==0)
         		         break;
             		out.println("<tr data-id='roleName="+roleInfos[i].getName()+"'>");
                 	out.println("<td><span class='glyphicon'></span></td>");
@@ -341,18 +341,22 @@ else
                 } */
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'>");
-       		    if(!p.equals("1"))
-               	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-       		    if(roleInfos.length%10==0)
+                if(roleInfos.length!=0)
                 {
-               	    if(Integer.parseInt(p)!=roleInfos.length/10)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                	if(!p.equals("1"))
+                   	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+           		    if(roleInfos.length%10==0)
+                    {
+                   	    if(Integer.parseInt(p)!=roleInfos.length/10)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
+                    else
+                    {
+                   	    if(Integer.parseInt(p)!=roleInfos.length/10 + 1)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
                 }
-                else
-                {
-               	    if(Integer.parseInt(p)!=roleInfos.length/10 + 1)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                }
+       		    
                 out.println("</ul></div>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' id='btn-modify' href='"+basePath+"Role/RoleEdit.jsp'>修改</a><a class='btn btn-danger' id='btn-delete' href='"+basePath+"DeleteRole'>删除</a><a class='btn btn-success' href='"+basePath+"Role/RoleEdit.jsp'>新增</a></div></div>");
             }

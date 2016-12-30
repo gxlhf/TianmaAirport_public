@@ -162,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <%
-          	if(request.getParameter("empno")!=null){
+          	if(request.getParameter("empno")!=null&&admin.searchAdmin(request.getParameter("empno"), "", -1, "", "")!=null){
           		
           		Admin[] adminModify = admin.searchAdmin(request.getParameter("empno"), "", -1, "", "");
           	

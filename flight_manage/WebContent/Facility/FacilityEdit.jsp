@@ -168,10 +168,10 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
           <%
 
             String name = request.getParameter("fname");
-
-            if(name!=null){
+            User user = new User();
+            if(name!=null&&user.searchPropertyFacility(name,"").length!=0){
                 
-               User user = new User();
+               
              PropertyFacility[] facilityModify = user.searchPropertyFacility(name,"");   
             
                 
