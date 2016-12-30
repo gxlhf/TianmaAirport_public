@@ -372,7 +372,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
           <%
           if(request.getParameter("flightNumber")!=null&&request.getParameter("time")!=null&&request.getParameter("area")!=null&&request.getParameter("type")!=null)
           {
-        	  /* System.out.println(request.getParameter("time")); */
+        	  
         	  String[] t1 = request.getParameter("time").split(":");
         	  String time = t1[0]+":"+t1[1];
         	  User user = new User();
@@ -381,15 +381,15 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
         	  if(request.getParameter("type").equals("departure"))
         	  {
         		  departureFlightModifyInfo = user.searchDepartureFlightInfo("", request.getParameter("flightNumber"), "", time);
-        	      /* System.out.println(departureFlightModifyInfo[0].getFlightCourse().getAirline()); */
+        	      
         	  }
         	  if(request.getParameter("type").equals("arrival"))
         	  {
         		  arrivalFlightModifyInfo = user.searchArrivalFlightInfo("", request.getParameter("flightNumber"), "", time);
-        		  /* System.out.println(arrivalFlightModifyInfo[0].getFlightCourse().getAirline()); */
+        		  
         	  }
         		  
-        	  /* System.out.println(t1[0]+":"+t1[1]); */
+        	  
           %>
           <form action="<%
             		if(request.getParameter("type").equals("departure"))
@@ -454,7 +454,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             		  out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getFrom()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getFrom()+"</option>");
             		  if(request.getParameter("area").equals("local"))
                       {
-                		  /* String[] result = user.returnAllLocalFrom(); */
+                		  
                 		  for(String output:localFrom)
                 		  {
                 			  if(request.getParameter("type").equals("departure"))
@@ -567,7 +567,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             		  out.println("<option value='"+departureFlightModifyInfo[0].getFlightCourse().getTo()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getTo()+"</option>");
             		  if(request.getParameter("area").equals("local"))
                       {
-                		  /* String[] result = user.returnAllLocalFrom(); */
+                		  
                 		  for(String output:localTo)
                 		  {
                 			  if(request.getParameter("type").equals("departure"))
@@ -705,11 +705,11 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	int count=0;
             	for(String checkincounteroutput:departureFlightModifyInfo[0].getCheckinCounter())
             	{
-            		/* System.out.println(checkincounteroutput); */
+            		
             		if(checkincounteroutput!=null)
             		{
             			
-            			/* String t3[] = checkincounteroutput.split("台"); */
+            			
             			if(flag==1)
             			{
             				checkincounters = checkincounters + checkincounteroutput;
@@ -732,7 +732,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             			j++;
             		}
             	}
-            	/* System.out.println(checkincounters); */
+            	
             %>
             <div class="form-group">
               <label for="flight-counter" class="col-sm-2 control-label">值机柜台：</label>
@@ -745,7 +745,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
               <!-- 放置值机柜台信息 -->
               <%
               	AirportResource[] checkinCounter = user.searchAirportResource("", "值机柜台");
-                /* int count = checkinCounter.length; */
+                
             	int i=0;
                 String[] checkinCounterName = new String[checkinCounter.length];
             	for(AirportResource output:checkinCounter)
@@ -757,14 +757,14 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	JSONArray jsonArray = JSON.parseArray(json_arr_String);
             	String selectedCounterListTemp = JSON.toJSONString(selectedCounters,true);
             	JSONArray selectedCounterListJson = JSON.parseArray(selectedCounterListTemp);
-            	/* System.out.println(selectedCounterListJson); */
-            	/* System.out.println(jsonArray); */
-            	/* System.out.println(checkinCounterName[5]); */
-            	/* JSONArray jsonarray = JSONArray.fromObject(checkinCounterName); */
-            	/* System.out.println(jsonarray); */
+            	
+            	
+            	
+            	
+            	
               %>
               <script>
-                /* var counterList = ['值机柜台01', '值机柜台02', '值机柜台03', '值机柜台04', '值机柜台05', '值机柜台06', '值机柜台08', '值机柜台09', '值机柜台10']; */
+                
                 var counterList = <%=jsonArray %>;
                 var selectedCounterList = <%=selectedCounterListJson %>;
               </script>
@@ -880,7 +880,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             		  out.println("<option value=''></option>");
             		  if(request.getParameter("area").equals("local"))
                       {
-                		  /* String[] result = user.returnAllLocalFrom(); */
+                		  
                 		  for(String output:localFrom)
                 		  {
                 			  out.println("<option value='"+output+"'>"+output+"</option>");
@@ -941,7 +941,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                 	  out.println("<option value=''></option>");
                 	  if(request.getParameter("area").equals("local"))
                       {
-                		  /* String[] result = user.returnAllLocalFrom(); */
+                		  
                 		  for(String output:localTo)
                 		  {
                 			  out.println("<option value='"+output+"'>"+output+"</option>");
@@ -1044,7 +1044,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
               <%
               	User user = new User();
               	AirportResource[] checkinCounter = user.searchAirportResource("", "值机柜台");
-                /* int count = checkinCounter.length; */
+                
             	int i=0;
                 String[] checkinCounterName = new String[checkinCounter.length];
             	for(AirportResource output:checkinCounter)
@@ -1055,11 +1055,11 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	String json_arr_String = JSON.toJSONString(checkinCounterName,true); 
             	JSONArray jsonArray = JSON.parseArray(json_arr_String);
             	
-            	/* System.out.println(selectedCounterListJson); */
-            	/* System.out.println(jsonArray); */
-            	/* System.out.println(checkinCounterName[5]); */
-            	/* JSONArray jsonarray = JSONArray.fromObject(checkinCounterName); */
-            	/* System.out.println(jsonarray); */
+            	
+            	
+            	
+            	
+            	
               %>
               <script>
               	var counterList = <%=jsonArray %>;

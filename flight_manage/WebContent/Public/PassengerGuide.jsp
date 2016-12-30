@@ -217,21 +217,20 @@ else
             		}
             	}
             	String ul_path = "PassengerGuide?key="+request.getParameter("key")+"&flight_type="+request.getParameter("flight_type")+"&is_flightNo="+request.getParameter("is_flightNo")+"&page=";
-            	/* if(departureFlightInfosOutput.length==0)
-            		response.sendRedirect(basePath+"Public/PassengerGuide.jsp"); */
+            	
             	if(departureFlightInfosOutput.length!=0)
             	{
             		if(departureFlightInfosOutput.length%10==0)
                     {
                       	if(Integer.parseInt(p)>departureFlightInfosOutput.length/10)
                       		response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10)); 
-                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                      			
                     }
                     else
                     {
                       	if(Integer.parseInt(p)>departureFlightInfosOutput.length/10 + 1)
                       		response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10 + 1)); 
-                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                      			
                     }
             	}
             	
@@ -285,7 +284,7 @@ else
               			if(checkincounteroutput!=null)
               			{
               				AirportResource[] airportResources = user.searchAirportResource(checkincounteroutput, "");     				
-              				/* checkincountersAndLocations = checkincountersAndLocations + "<strong>" + checkincounteroutput + "</strong>" + airportResources[0].getLocation(); */
+              				
               				String t3[] = checkincounteroutput.split("台");
               				if(flag==1)
               				{
@@ -345,21 +344,20 @@ else
             	ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	User user = new User();
             	String ul_path = "PassengerGuide?key="+request.getParameter("key")+"&flight_type="+request.getParameter("flight_type")+"&is_flightNo="+request.getParameter("is_flightNo")+"&page=";
-            	/* if(arrivalFlightInfos.length==0)
-            		response.sendRedirect(basePath+"Public/PassengerGuide.jsp"); */
+            	
             	if(arrivalFlightInfos.length!=0)
             	{
             		if(arrivalFlightInfos.length%10==0)
                     {
                       	if(Integer.parseInt(p)>arrivalFlightInfos.length/10)
                       		response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfos.length/10)); 
-                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                      			
                     }
                     else
                     {
                       	if(Integer.parseInt(p)>arrivalFlightInfos.length/10 + 1)
                       		response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfos.length/10 + 1)); 
-                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                      			
                     }
             	}
             	
@@ -470,21 +468,20 @@ else
             			j++;
             		}
             	}
-            	/* if(defaultDepartureFlightInfos.length==0)
-            		response.sendRedirect(basePath+"Public/PassengerGuide.jsp"); */
+            	
             	if(defaultDepartureFlightInfos.length!=0)
             	{
             		if(defaultDepartureFlightInfos.length%10==0)
                     {
                       	if(Integer.parseInt(p)>defaultDepartureFlightInfos.length/10)
                       		response.sendRedirect(basePath+"Public/PassengerGuide.jsp?page="+Integer.toString(defaultDepartureFlightInfos.length/10)); 
-                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                      			
                     }
                     else
                     {
                       	if(Integer.parseInt(p)>defaultDepartureFlightInfos.length/10 + 1)
                       		response.sendRedirect(basePath+"Public/PassengerGuide.jsp?page="+Integer.toString(defaultDepartureFlightInfos.length/10 + 1)); 
-                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                      			
                     }
             	}
             	
@@ -539,7 +536,7 @@ else
               			if(checkincounteroutput!=null)
               			{
               				AirportResource[] airportResources = user.searchAirportResource(checkincounteroutput, "");     				
-              				/* checkincountersAndLocations = checkincountersAndLocations + "<strong>" + checkincounteroutput + "</strong>" + airportResources[0].getLocation(); */
+              				
               				String t3[] = checkincounteroutput.split("台");
               				if(flag==1)
               				{

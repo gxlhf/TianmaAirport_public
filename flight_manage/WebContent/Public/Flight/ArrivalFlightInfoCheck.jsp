@@ -352,7 +352,7 @@ else
                 	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true)
                 		count++;
                 }
-                /* System.out.println(count); */
+                
                 ArrivalFlightInfo[] arrivalFlightInfosOutput = new ArrivalFlightInfo[count];
                 int j = 0;
                 for(ArrivalFlightInfo output:arrivalFlightInfos)
@@ -369,21 +369,20 @@ else
                 	}
                 }
                 String ul_path = "ArrivalFlightSearch?flight-id="+request.getParameter("flight-id")+"&from-site="+request.getParameter("from-site")+"&airCompany-name="+request.getParameter("airCompany-name")+"&area="+area+"&page=";
-                /* if(arrivalFlightInfosOutput.length==0)
-                	response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area="+area); */
+                
                 if(arrivalFlightInfosOutput.length!=0)
                 {
                 	if(arrivalFlightInfosOutput.length%10==0)
                 	{
                 		if(Integer.parseInt(p)>arrivalFlightInfosOutput.length/10)
                 			response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfosOutput.length/10)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
+                			
                 	}
                 	else
                 	{
                 		if(Integer.parseInt(p)>arrivalFlightInfosOutput.length/10 + 1)
                 			response.sendRedirect(basePath+ul_path+Integer.toString(arrivalFlightInfosOutput.length/10 + 1)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
+                			
                 	}
                 }
                 
@@ -409,50 +408,9 @@ else
                 	out.println("<td>"+t3[1]+"</td>");
     				out.println("</tr>");
         		}
-            	/* for(ArrivalFlightInfo output:arrivalFlightInfos)
-                {
-                	
-                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                		out.println("<tr data-id='flightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"&area="+area+"&type=arrival"+"'>");
-                    	if(session.getAttribute("priv1")!=null){
-                        	out.println("<td><span class='glyphicon'></span></td>");
-                        }else{
-                      	  out.println("<td></td>");
-                        }
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	String[] t1 = output.getTime().split("-", 2);
-                    	String[] t2 = t1[1].split(":");
-                    	out.println("<td>"+t2[0]+":"+t2[1]+"</td>");
-                    	String[] t3 = output.getLuggageCarousel().split("盘");
-                    	out.println("<td>"+t3[1]+"</td>");
-        				out.println("</tr>");
-                	}
-                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
-                		out.println("<tr data-id='flightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"&area="+area+"&type=arrival"+"'>");
-                    	if(session.getAttribute("priv1")!=null){
-                        	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                        }else{
-                      	  out.println("<td></td>");
-                        }
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	String[] t1 = output.getTime().split("-", 2);
-                    	String[] t2 = t1[1].split(":");
-                    	out.println("<td>"+t2[0]+":"+t2[1]+"</td>");
-                    	String[] t3 = output.getLuggageCarousel().split("盘");
-                    	out.println("<td>"+t3[1]+"</td>");
-        				out.println("</tr>");
-                	}       
-                } */
+            	
                 out.println("</tbody></table>");
-                /* out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>"); */
+                
                 out.println("<div><ul class='pager'>");
                 if(arrivalFlightInfosOutput.length!=0)
                 {
@@ -486,25 +444,24 @@ else
                     }
                 	out.println("<th>航空公司</th><th>航班号</th><th>始发地</th><th>经停地</th><th>目的地</th><th>到港时间</th><th>行李转盘</th></tr></thead><tbody>");
             		ArrivalFlightInfo[] allLocalArrivalFlightInfos = user.returnAllLocalArrivalFlightInfo();
-            		/* if(allLocalArrivalFlightInfos.length==0)
-                    	response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area="+area); */
+            		
                     if(allLocalArrivalFlightInfos.length!=0)
             		{
             			if(allLocalArrivalFlightInfos.length%10==0)
                     	{
                     		if(Integer.parseInt(p)>allLocalArrivalFlightInfos.length/10)
                     			response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalArrivalFlightInfos.length/10)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                     	}
                     	else
                     	{
                     		if(Integer.parseInt(p)>allLocalArrivalFlightInfos.length/10 + 1)
                     			response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalArrivalFlightInfos.length/10 + 1)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                     	}
             		}
             		
-            		/* System.out.println(allLocalArrivalFlightInfos.length); */
+            		
             		for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             		{
             			if(i>=allLocalArrivalFlightInfos.length||allLocalArrivalFlightInfos.length==0)
@@ -557,22 +514,21 @@ else
                     }
                 	out.println("<th>航空公司</th><th>航班号</th><th>始发地</th><th>经停地</th><th>目的地</th><th>到港时间</th><th>行李转盘</th></tr></thead><tbody>");
             		ArrivalFlightInfo[] allInternationalArrivalFlightInfos = user.returnAllInternationalArrivalFlightInfo();
-            		/* System.out.println(allLocalArrivalFlightInfos.length); */
-            		/* if(allInternationalArrivalFlightInfos.length==0)
-                    	response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area="+area); */
+            		
+            		
                     if(allInternationalArrivalFlightInfos.length!=0)
             		{
             			if(allInternationalArrivalFlightInfos.length%10==0)
                     	{
                     		if(Integer.parseInt(p)>allInternationalArrivalFlightInfos.length/10)
                     			response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area=international&page="+Integer.toString(allInternationalArrivalFlightInfos.length/10)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                     	}
                     	else
                     	{
                     		if(Integer.parseInt(p)>allInternationalArrivalFlightInfos.length/10 + 1)
                     			response.sendRedirect(basePath+"Public/Flight/ArrivalFlightInfoCheck.jsp?area=international&page="+Integer.toString(allInternationalArrivalFlightInfos.length/10 + 1)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                     	}
             		}
             		for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)

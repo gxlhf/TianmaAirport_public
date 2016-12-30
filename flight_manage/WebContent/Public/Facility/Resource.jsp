@@ -245,38 +245,24 @@ else
         	  
         	  //int i=1;
         	  AirportResource[] resourceInfos = (AirportResource[])request.getAttribute("resourceInfo");
-        	  /* if(resourceInfos.length==0)
- 		          response.sendRedirect(basePath+"Public/Facility/Resource.jsp"); */
+        	  
  		      if(resourceInfos.length!=0)
         	  {
         		  if(resourceInfos.length%10==0)
                   {
                       if(Integer.parseInt(p)>resourceInfos.length/10)
                           response.sendRedirect(basePath+ul_path+Integer.toString(resourceInfos.length/10)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                   }
                   else
                   {
                       if(Integer.parseInt(p)>resourceInfos.length/10 + 1)
                           response.sendRedirect(basePath+ul_path+Integer.toString(resourceInfos.length/10 + 1)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                   }
         	  }
         	  
-        	  /* for (AirportResource output:resourceInfos) {
-                  out.println("<tr data-id='rname="+ output.getName() + "'>");
-                  if(session.getAttribute("priv0")!=null){
-                      out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                    }else{
-                      out.println("<td></td>");
-                    }
-                    //out.println("<td>"+ i +"</td>");
-                    out.println("<td>" + output.getName() + "</td>");
-                    out.println("<td>" + output.getLocation() + "</td>");
-                    out.println("<td>" + output.getRemark() + "</td></tr>");
-                    //i++;
-              }
-        	  out.println("</tbody></table>"); */
+        	  
         	  for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
         	  {
         		  if(i>=resourceInfos.length||resourceInfos.length==0)
@@ -326,22 +312,21 @@ else
         	  
         	  User user = new User();
         	  AirportResource[] resourceInfos = user.returnAllAirportResource();
-        	  /* int i=1; */
-        	  /* if(resourceInfos.length==0)
- 		          response.sendRedirect(basePath+"Public/Facility/Resource.jsp"); */
+        	  
+        	  
  		      if(resourceInfos.length!=0)
         	  {
         		  if(resourceInfos.length%10==0)
                   {
                       if(Integer.parseInt(p)>resourceInfos.length/10)
                           response.sendRedirect(basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(resourceInfos.length/10)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                   }
                   else
                   {
                       if(Integer.parseInt(p)>resourceInfos.length/10 + 1)
                           response.sendRedirect(basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(resourceInfos.length/10 + 1)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                   }
         	  }
         	  
@@ -380,20 +365,7 @@ else
         	  }
       		  
               out.println("</ul></div>");
-        	  /* for (AirportResource output:resourceInfos) 
-        	  {
-                  out.println("<tr data-id='rname="+ output.getName() + "'>");
-                  if(session.getAttribute("priv0")!=null){
-                      out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                    }else{
-                      out.println("<td></td>");
-                    }
-                    //out.println("<td>"+ i +"</td>");
-                    out.println("<td>" + output.getName() + "</td>");
-                    out.println("<td>" + output.getLocation() + "</td>");
-                    out.println("<td>" + output.getRemark() + "</td></tr>");
-                    //i++;
-              } */
+        	  
         	 
          }
              

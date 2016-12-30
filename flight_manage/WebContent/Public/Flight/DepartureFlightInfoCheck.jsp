@@ -368,21 +368,20 @@ else
                 	}
                 }
                 String ul_path = "DepartureFlightSearch?flight-id="+request.getParameter("flight-id")+"&to-site="+request.getParameter("to-site")+"&airCompany-name="+request.getParameter("airCompany-name")+"&area="+area+"&page=";
-                /* if(departureFlightInfosOutput.length==0)
-                	response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area); */
+                
                 if(departureFlightInfosOutput.length!=0)
                 {
                 	if(departureFlightInfosOutput.length%10==0)
                 	{
                 		if(Integer.parseInt(p)>departureFlightInfosOutput.length/10)
                 			response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
+                			
                 	}
                 	else
                 	{
                 		if(Integer.parseInt(p)>departureFlightInfosOutput.length/10 + 1)
                 			response.sendRedirect(basePath+ul_path+Integer.toString(departureFlightInfosOutput.length/10 + 1)); 
-                			/* response.sendRedirect(basePath+"error.jsp"); */
+                			
                 	}
                 }
                 
@@ -422,94 +421,12 @@ else
                 			
                 	}
                 	out.println("<td>"+checkincounters+"</td>");
-                	/* out.println("<td>"+output.getCheckinCounter()+"</td>"); */
+                	
                 	String[] t4 = departureFlightInfosOutput[i].getBoardingGate().split("门");
                 	out.println("<td>"+t4[1]+"</td>");
     				out.println("</tr>");
         		}
-                /* for(DepartureFlightInfo output:departureFlightInfos)
-                {
-                	if(output!=null)
-                	{
-                		if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                			out.println("<tr data-id='flightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"&area="+area+"&type=departure"+"'>");
-                        	if(session.getAttribute("priv1")!=null){
-                            	out.println("<td><span class='glyphicon'></span></td>");
-                            }else{
-                          	  out.println("<td></td>");
-                            }
-                    		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                        	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                        	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                        	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                        	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                        	String[] t1 = output.getTime().split("-", 2);
-                        	String[] t2 = t1[1].split(":");
-                        	out.println("<td>"+t2[0]+":"+t2[1]+"</td>");
-                        	String checkincounters = "";
-                        	int flag = 1;
-                        	for(String checkincounteroutput:output.getCheckinCounter())
-                        	{
-                        		if(checkincounteroutput!=null)
-                        		{
-                        			String t3[] = checkincounteroutput.split("台");
-                        			if(flag==1)
-                        			{
-                        				checkincounters = checkincounters + t3[1];
-                        				flag = 0;
-                        			}
-                        			else
-                        				checkincounters = checkincounters + ", " + t3[1];
-                        		}
-                        			
-                        	}
-                        	out.println("<td>"+checkincounters+"</td>");
-                        	//out.println("<td>"+output.getCheckinCounter()+"</td>"); 
-                        	String[] t4 = output.getBoardingGate().split("门");
-                        	out.println("<td>"+t4[1]+"</td>");
-            				out.println("</tr>");
-                    	}
-                    	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
-                    		out.println("<tr data-id='flightNumber="+output.getFlightCourse().getFlightNumber()+"&time="+output.getTime()+"&area="+area+"&type=departure"+"'>");
-                        	if(session.getAttribute("priv1")!=null){
-                            	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                            }else{
-                          	  out.println("<td></td>");
-                            }
-                    		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                        	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                        	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                        	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                        	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                        	String[] t1 = output.getTime().split("-", 2);
-                        	String[] t2 = t1[1].split(":");
-                        	out.println("<td>"+t2[0]+":"+t2[1]+"</td>");
-                        	String checkincounters = "";
-                        	int flag = 1;
-                        	for(String checkincounteroutput:output.getCheckinCounter())
-                        	{
-                        		if(checkincounteroutput!=null)
-                        		{
-                        			String t3[] = checkincounteroutput.split("台");
-                        			if(flag==1)
-                        			{
-                        				checkincounters = checkincounters + t3[1];
-                        				flag = 0;
-                        			}
-                        			else
-                        				checkincounters = checkincounters + ", " + t3[1];
-                        		}
-                        			
-                        	}
-                        	out.println("<td>"+checkincounters+"</td>");
-                        	//out.println("<td>"+output.getCheckinCounter()+"</td>");
-                        	String[] t4 = output.getBoardingGate().split("门");
-                        	out.println("<td>"+t4[1]+"</td>");
-            				out.println("</tr>");
-                    	}
-                	}
-                	         
-                } */
+                
                 out.println("</tbody></table>");
                 //out.println("<div><ul class='pager'><li class='previous'><a href='#'>← 上一页</a></li><li class='next'><a href='#'>下一页 →</a></li></ul></div>");
                 out.println("<div><ul class='pager'>");
@@ -544,8 +461,7 @@ else
                   	  out.println("<th></th>");
                     }
                 	out.println("<th>航空公司</th><th>航班号</th><th>始发地</th><th>经停地</th><th>目的地</th><th>离港时间</th><th>值机柜台</th><th>登机门</th></tr></thead><tbody>");
-                	/* DepartureFlightInfo[] allLocalDepartureFlightTempInfos = user.returnAllLocalDepartureFlightInfo();
-                	System.out.println(allLocalDepartureFlightTempInfos.length); */
+                	
                 	int count = 0;
                 	for(DepartureFlightInfo output:user.returnAllLocalDepartureFlightInfo())
                 	{
@@ -562,26 +478,25 @@ else
                 			j++;
                 		}
                 	}
-                	/* if(allLocalDepartureFlightInfos.length==0)
-                		response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area); */
+                	
                 	if(allLocalDepartureFlightInfos.length!=0)
                 	{
                 		if(allLocalDepartureFlightInfos.length%10==0)
                     	{
                     		if(Integer.parseInt(p)>allLocalDepartureFlightInfos.length/10)
                     			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalDepartureFlightInfos.length/10)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                     	}
                     	else
                     	{
                     		if(Integer.parseInt(p)>allLocalDepartureFlightInfos.length/10 + 1)
                     			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=local&page="+Integer.toString(allLocalDepartureFlightInfos.length/10 + 1)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                     	}
                 	}
                 	
                 		
-                	/* System.out.println(allLocalDepartureFlightInfos.length); */
+                	
                 	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             		{
             			if(i>=allLocalDepartureFlightInfos.length||allLocalDepartureFlightInfos.length==0)
@@ -618,7 +533,7 @@ else
                     			
                     	}
                     	out.println("<td>"+checkincounters+"</td>");
-                    	/* out.println("<td>"+output.getCheckinCounter()+"</td>"); */
+                    	
                     	String[] t4 = allLocalDepartureFlightInfos[i].getBoardingGate().split("门");
                     	out.println("<td>"+t4[1]+"</td>");
         				out.println("</tr>");
@@ -652,8 +567,7 @@ else
                   	  out.println("<th></th>");
                     }
                 	out.println("<th>航空公司</th><th>航班号</th><th>始发地</th><th>经停地</th><th>目的地</th><th>离港时间</th><th>值机柜台</th><th>登机门</th></tr></thead><tbody>");
-                	/* DepartureFlightInfo[] allLocalDepartureFlightTempInfos = user.returnAllLocalDepartureFlightInfo();
-                	System.out.println(allLocalDepartureFlightTempInfos.length); */
+                	
                 	int count = 0;
                 	for(DepartureFlightInfo output:user.returnAllInternationalDepartureFlightInfo())
                 	{
@@ -670,26 +584,25 @@ else
                 			j++;
                 		}
                 	}
-                	/* if(allInternationalDepartureFlightInfos.length==0)
-                		response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area="+area); */
+                	
                 	if(allInternationalDepartureFlightInfos.length!=0)
                 	{
                 		if(allInternationalDepartureFlightInfos.length%10==0)
                     	{
                     		if(Integer.parseInt(p)>allInternationalDepartureFlightInfos.length/10)
                     			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(allInternationalDepartureFlightInfos.length/10)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                     	}
                     	else
                     	{
                     		if(Integer.parseInt(p)>allInternationalDepartureFlightInfos.length/10 + 1)
                     			response.sendRedirect(basePath+"Public/Flight/DepartureFlightInfoCheck.jsp?area=international&page="+Integer.toString(allInternationalDepartureFlightInfos.length/10 + 1)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                     	}
                 	}
                 	
                 		
-                	/* System.out.println(allLocalDepartureFlightInfos.length); */
+                	
                 	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             		{
             			if(i>=allInternationalDepartureFlightInfos.length||allInternationalDepartureFlightInfos.length==0)
@@ -726,7 +639,7 @@ else
                     			
                     	}
                     	out.println("<td>"+checkincounters+"</td>");
-                    	/* out.println("<td>"+output.getCheckinCounter()+"</td>"); */
+                    	
                     	String[] t4 = allInternationalDepartureFlightInfos[i].getBoardingGate().split("门");
                     	out.println("<td>"+t4[1]+"</td>");
         				out.println("</tr>");

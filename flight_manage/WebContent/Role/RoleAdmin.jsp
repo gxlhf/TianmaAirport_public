@@ -222,35 +222,7 @@ else
             		out.println("新闻管理 ");
             	out.println("</td>");
             	out.println("</tr>");
-                /* for(ArrivalFlightInfo output:arrivalFlightInfos)
-                {
-                	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
-                	if(session.getAttribute("priv1")!=null){
-                    	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                    }else{
-                  	  out.println("<td></td>");
-                    }
-                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
-        				out.println("</tr>");
-                	}
-                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
-        				out.println("</tr>");
-                	}         
-                } */
+                
                 out.println("</tbody></table>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' id='btn-modify' href='"+basePath+"Role/RoleEdit.jsp'>修改</a><a class='btn btn-danger' id='btn-delete' href='"+basePath+"DeleteRole'>删除</a><a class='btn btn-success' href='"+basePath+"Role/RoleEdit.jsp'>新增</a></div></div>");
             }
@@ -262,21 +234,20 @@ else
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Role[] roleInfos = admin.returnAllRole();
             	String ul_path = "Role/Role.jsp?page=";
-   			    /* if(roleInfos.length==0)
-   			    	response.sendRedirect(basePath+"Role/Role.jsp"); */ 
+   			     
    			    if(roleInfos.length!=0)
    			    {
    			    	if(roleInfos.length%10==0)
    	                {
    	                  	if(Integer.parseInt(p)>roleInfos.length/10)
    	                  		response.sendRedirect(basePath+ul_path+Integer.toString(roleInfos.length/10)); 
-   	                  			/* response.sendRedirect(basePath+"error.jsp"); */
+   	                  			
    	                }
    	                else
    	                {
    	                  	if(Integer.parseInt(p)>roleInfos.length/10 + 1)
    	                  		response.sendRedirect(basePath+ul_path+Integer.toString(roleInfos.length/10 + 1)); 
-   	                  			/* response.sendRedirect(basePath+"error.jsp"); */
+   	                  			
    	                }
    			    }
             	
@@ -305,40 +276,8 @@ else
                 	out.println("</tr>");
                 	count++;
             	}
-            	/* out.println("<tr data-id='"+roleInfo.getName()+"'>");
-            	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-            	out.println("<td>"+"1"+"</td>");
-            	out.println("<td>"+roleInfo.getName()+"</td>");
-            	out.println("<td>"+roleInfo.getDescription()+"</td>"); */
-                /* for(ArrivalFlightInfo output:arrivalFlightInfos)
-                {
-                	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
-                	if(session.getAttribute("priv1")!=null){
-                    	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                    }else{
-                  	  out.println("<td></td>");
-                    }
-                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
-        				out.println("</tr>");
-                	}
-                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
-        				out.println("</tr>");
-                	}         
-                } */
+            	
+                
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'>");
                 if(roleInfos.length!=0)

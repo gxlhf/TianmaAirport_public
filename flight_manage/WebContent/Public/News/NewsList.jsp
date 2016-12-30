@@ -294,16 +294,7 @@ else
             <tbody>
 			<%
 				News[] news=(News[])request.getAttribute("news");
-							/*
-						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
-						out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
-						if(session.getAttribute("priv2")!=null){
-			                	out.println("<td><span class='glyphicon'></span></td>");
-			                }else{
-			              	  out.println("<td></td>");
-			                }
-			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
-						}*/
+							
 				if(news==null){
 					List<News>newslist=new LinkedList<News>();
 					User user=new User();
@@ -315,20 +306,7 @@ else
 					}
 					int size=newslist.size();
 					news=(News[])newslist.toArray(new News[size]);
-					/*
-					news=user.returnAllNews();
-					session.setAttribute("news", news);
-					for(int i=0;i<news.length;i++){
-						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
-						out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
-						 if(session.getAttribute("priv2")!=null){
-			                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-			                }else{
-			              	  out.println("<td></td>");
-			                }
-			                out.println(" <td><a href='"+basePath+"Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
-					}
-				}*/
+					
 				}
 				request.setAttribute("news", news);
 				request.getSession().setAttribute("news", news);

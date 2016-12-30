@@ -242,21 +242,20 @@ else
              PropertyFacility[] facilityInfos = (PropertyFacility[])request.getAttribute("facilityInfo");
              //int i=1;
 			 String ul_path = "SearchFacility?facility-name="+request.getParameter("facility-name")+"&facility-type="+request.getParameter("facility-type")+"&page=";
-			 /* if(facilityInfos.length==0)
-				 response.sendRedirect(basePath+"Public/Facility/Facility.jsp"); */
+			 
 		     if(facilityInfos.length!=0)
 			 {
 				 if(facilityInfos.length%10==0)
 	             {
 	               	if(Integer.parseInt(p)>facilityInfos.length/10)
 	               		response.sendRedirect(basePath+ul_path+Integer.toString(facilityInfos.length/10)); 
-	               			/* response.sendRedirect(basePath+"error.jsp"); */
+	               			
 	             }
 	             else
 	             {
 	               	if(Integer.parseInt(p)>facilityInfos.length/10 + 1)
 	               		response.sendRedirect(basePath+ul_path+Integer.toString(facilityInfos.length/10 + 1)); 
-	               			/* response.sendRedirect(basePath+"error.jsp"); */
+	               			
 	             }
 			 }
 			 for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
@@ -271,7 +270,7 @@ else
 	             }
 	             //out.println("<td>"+ i +"</td>");
 	             out.println("<td>" + facilityInfos[i].getName() + "</td>");
-	             /* out.println("<td>" + facilityInfos[i].getType() + "</td>"); */
+	             
 	             out.println("<td>" + facilityInfos[i].getPhone() + "</td>");
 	             out.println("<td>" + facilityInfos[i].getLocation() + "</td>");
 	             if(facilityInfos[i].getRemark()==null)
@@ -280,25 +279,7 @@ else
 	               	out.println("<td>" + facilityInfos[i].getRemark() + "</td></tr>");
        		  	 
 			 }
-             /* for(PropertyFacility output:facilityInfos)
-             {
-                out.println("<tr data-id='fname="+ output.getName() + "'>");
-                if(session.getAttribute("priv0")!=null){
-                  out.println("<td><span class='glyphicon'></span></td>");
-                }else{
-                  out.println("<td></td>");
-                }
-                //out.println("<td>"+ i +"</td>");
-                out.println("<td>" + output.getName() + "</td>");
-               	out.println("<td>" + output.getType() + "</td>");
-                out.println("<td>" + output.getPhone() + "</td>");
-                out.println("<td>" + output.getLocation() + "</td>");
-                if(output.getRemark()==null)
-               	 out.println("<td></td></tr>");
-                else
-                	out.println("<td>" + output.getRemark() + "</td></tr>");
-                //i++;
-             } */
+             
              out.println("</tbody></table>");
              out.println("<div><ul class='pager'>");
              if(facilityInfos.length!=0)
@@ -324,21 +305,20 @@ else
               
               PropertyFacility[] facilityInfos = user.returnAllPropertyFacility();
               //int i=1;
-              /* if(facilityInfos.length==0)
-				 response.sendRedirect(basePath+"Public/Facility/Facility.jsp"); */
+              
 			  if(facilityInfos.length!=0)
               {
             	  if(facilityInfos.length%10==0)
                   {
                     	if(Integer.parseInt(p)>facilityInfos.length/10)
                     		response.sendRedirect(basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(facilityInfos.length/10)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                   }
                   else
                   {
                     	if(Integer.parseInt(p)>facilityInfos.length/10 + 1)
                     		response.sendRedirect(basePath+"Public/Facility/Facility.jsp?page="+Integer.toString(facilityInfos.length/10 + 1)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                   }
               }
 			  
@@ -354,7 +334,7 @@ else
 	              }
 	              //out.println("<td>"+ i +"</td>");
 	              out.println("<td>" + facilityInfos[i].getName() + "</td>");
-	              /* out.println("<td>" + facilityInfos[i].getType() + "</td>"); */
+	              
 	              out.println("<td>" + facilityInfos[i].getPhone() + "</td>");
 	              out.println("<td>" + facilityInfos[i].getLocation() + "</td>");
 	              if(facilityInfos[i].getRemark()==null)
