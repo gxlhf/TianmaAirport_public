@@ -160,6 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           	if(request.getParameter("roleName")!=null)
           	{
           		Role roleModify = admin.searchRole(request.getParameter("roleName"));
+          		/* System.out.println(request.getParameter("roleName")); */
           %>
           <form action="<%=basePath%>ModifyRole" method="post" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
