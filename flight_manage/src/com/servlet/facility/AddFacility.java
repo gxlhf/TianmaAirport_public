@@ -30,7 +30,7 @@ public class AddFacility extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
 		User user = new User();
-		PropertyFacility[] propertyFacilities = user.searchPropertyFacility(request.getParameter("facility-name"), "");
+		PropertyFacility[] propertyFacilities = user.searchPropertyFacility(request.getParameter("facility-name"), "", 1);
 		if(propertyFacilities.length == 0)
 			response.setStatus(200);
 		else 

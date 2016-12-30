@@ -48,11 +48,9 @@ public class SearchFacility extends HttpServlet {
 		String name = request.getParameter("facility-name");
 		String type = request.getParameter("facility-type");
 		User user = new User();
-		
-		
-		PropertyFacility[] facilityInfo = user.searchPropertyFacility(name,type);	 
-			request.setAttribute("facilityInfo", facilityInfo);
-			request.getRequestDispatcher("Public/Facility/Facility.jsp").forward(request, response);
+		PropertyFacility[] facilityInfo = user.searchPropertyFacility(name,type,0);	 
+		request.setAttribute("facilityInfo", facilityInfo);
+		request.getRequestDispatcher("Public/Facility/Facility.jsp").forward(request, response);
 		
 	}
 	

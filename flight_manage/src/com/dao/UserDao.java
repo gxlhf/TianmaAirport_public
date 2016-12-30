@@ -972,11 +972,11 @@ public class UserDao {
          }
          return airportResource;
     }
-    public PropertyFacility[] searchPropertyFacility(String name,String type){
+    public PropertyFacility[] searchPropertyFacility(String name,String type,int mode){
     	/*
-//       * PropertyFacility[] searchP(String name);
-//       * 数据库操作：查询物业设施名称为该name的物业设施信息
-//       * 形参为物业设施名称，返回类型为PropertyFacility对象数组
+//       * PropertyFacility[] searchPropertyFacility(String name,String type,int mode);
+//       * 数据库操作：查询物业设施名称为该name,类型为该type的物业设施信息；mode=1表示精确查询，mode=0表示模糊查询
+//       * 形参为物业设施名称、物业设施类型、查询模式，返回类型为PropertyFacility对象数组
 //       */
     	 PropertyFacility[] propertyFacility = null;
       
@@ -989,9 +989,15 @@ public class UserDao {
       try {  
     	  if((name!=null&&!name.equals(""))&&(type.equals("")||type==null))
     	  {
-    		  sql = "SELECT* FROM facility WHERE facility.Fname like ?";//SQL语句
+    		  if(mode==1)
+    			  sql = "SELECT* FROM facility WHERE facility.Fname = ?";//SQL语句
+    		  else
+    			  sql = "SELECT* FROM facility WHERE facility.Fname like ?";//SQL语句
     		  db1.pst=db1.conn.prepareStatement(sql);
-    		  db1.pst.setString(1, "%"+name+"%");
+    		  if(mode==1)
+    			  db1.pst.setString(1, name);
+    		  else
+    			  db1.pst.setString(1, "%"+name+"%");
     	  }
     	  else if((name==null||name.equals(""))&&(!type.equals("")&&type!=null))
     	  {

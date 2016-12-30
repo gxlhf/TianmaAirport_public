@@ -156,7 +156,7 @@ public class User {
 	}
 	
 	//物业设施查询函数，输入参数为物业设施名称，返回一个PropertyFacility对象数组
-	public PropertyFacility[] searchPropertyFacility(String name,String type)
+	public PropertyFacility[] searchPropertyFacility(String name,String type,int mode)
 	{
 		UserDao userDao = new UserDao();
 		PropertyFacility[] propertyFacility = null;
@@ -165,7 +165,7 @@ public class User {
 		 * 数据库操作：查询物业设施名称为该name的物业设施信息
 		 * 形参为物业设施名称，返回类型为PropertyFacility对象数组
 		 */
-		propertyFacility=userDao.searchPropertyFacility(name,type);
+		propertyFacility=userDao.searchPropertyFacility(name,type,mode);
 		return propertyFacility;
 	}
 	
