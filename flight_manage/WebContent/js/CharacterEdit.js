@@ -150,5 +150,10 @@ $(function () {
 		}
 	});
 
+	$("form").submit(function (e) {
+		var inputElem = $(e.currentTarget).find('input,textarea');
+		console.log(inputElem.val());
+		//inputElem.val(inputElem.val().encodeURI());
+	});
 	
 });

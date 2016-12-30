@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
@@ -270,7 +271,7 @@ else
 	                 out.println("<td></td>");
 	             }
 	             //out.println("<td>"+ i +"</td>");
-	             out.println("<td>" + facilityInfos[i].getName() + "</td>");
+	             out.println("<td>" + URLDecoder.decode(facilityInfos[i].getName(), "utf-8") + "</td>");
 	             /* out.println("<td>" + facilityInfos[i].getType() + "</td>"); */
 	             out.println("<td>" + facilityInfos[i].getPhone() + "</td>");
 	             out.println("<td>" + facilityInfos[i].getLocation() + "</td>");
@@ -349,7 +350,7 @@ else
 	                  out.println("<td></td>");
 	              }
 	              //out.println("<td>"+ i +"</td>");
-	              out.println("<td>" + facilityInfos[i].getName() + "</td>");
+	              out.println("<td>" + URLDecoder.decode(facilityInfos[i].getName(), "utf-8") + "</td>");
 	              /* out.println("<td>" + facilityInfos[i].getType() + "</td>"); */
 	              out.println("<td>" + facilityInfos[i].getPhone() + "</td>");
 	              out.println("<td>" + facilityInfos[i].getLocation() + "</td>");
