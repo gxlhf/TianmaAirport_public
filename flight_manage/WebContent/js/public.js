@@ -117,12 +117,6 @@ $(function () {
 		trigger : 'hover'
 	});
 
-	$("form").submit(function (e) {
-		var inputElem = $(e.currentTarget).find('input,textarea');
-		for (var i = 0; i < inputElem.length; i++) {
-			inputElem[i].value = encodeURIComponent(inputElem[i].value);
-		}
-	});
 	
 
 });

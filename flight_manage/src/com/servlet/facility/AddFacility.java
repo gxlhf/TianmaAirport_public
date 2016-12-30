@@ -1,8 +1,6 @@
 package com.servlet.facility;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +30,7 @@ public class AddFacility extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
 		User user = new User();
-		PropertyFacility[] propertyFacilities = user.searchPropertyFacility(URLEncoder.encode(request.getParameter("facility-name"), "utf-8"), "");
+		PropertyFacility[] propertyFacilities = user.searchPropertyFacility(request.getParameter("facility-name"), "");
 		if(propertyFacilities.length == 0)
 			response.setStatus(200);
 		else 

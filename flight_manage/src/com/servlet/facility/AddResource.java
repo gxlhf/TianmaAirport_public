@@ -1,8 +1,6 @@
 package com.servlet.facility;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +30,7 @@ public class AddResource extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
 		User user = new User();
-		AirportResource[] airportResources = user.searchAirportResource(URLEncoder.encode(request.getParameter("resource-name"), "utf-8"), "");
+		AirportResource[] airportResources = user.searchAirportResource(request.getParameter("resource-name"), "");
 		if(airportResources.length == 0)
 			response.setStatus(200);
 		else 

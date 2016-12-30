@@ -1,8 +1,6 @@
 package com.servlet.facility;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,12 +30,12 @@ public class FacilityDelete extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		String name = URLEncoder.encode(request.getParameter("fname"), "utf-8");
+		String name = request.getParameter("fname");
+//		System.out.println(name);
 		
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		User user = new User();
 		PropertyFacility[] facilityModifyInfo = user.searchPropertyFacility(name,"");
-		System.out.println("facilityModifyInfo[0].getName():" + facilityModifyInfo[0].getName());
 		int result = admin.deletePropertyFacility(facilityModifyInfo[0]);
 		
 		if(result==-1){
