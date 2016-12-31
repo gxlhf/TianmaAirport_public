@@ -191,7 +191,7 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
               <label for="facility-type" class="col-sm-2 control-label">设施分类：</label>
               <div class="col-sm-6">
                 <select class="form-control" name="facility-type" data-error="请选择设施分类*" required>
-                <option value="<%=facilityModify[0].getType() %>" ><%=facilityModify[0].getType() %></option>  
+                	<option value="<%=facilityModify[0].getType() %>" ><%=facilityModify[0].getType() %></option>  
 					<%
 					for(String output:facilityType)
 					{
@@ -203,31 +203,6 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
 						}
 					}
                 	%>
-                  <%-- <%
-                    if(!facilityModify[0].getType().equals("商店"))
-                    {
-                  %> 
-                  <option value = "商店">商店</option>
-                <%
-                    }
-                %>
-                <%
-                    if(!facilityModify[0].getType().equals("邮局"))
-                    {
-                  %> 
-                  <option value = "邮局">邮局</option>
-                <%
-                    }
-                %>
-                <%
-                    if(!facilityModify[0].getType().equals("吸烟室"))
-                    {
-                  %> 
-                  <option value = "吸烟室">吸烟室</option>
-                <%
-                    }
-                %> --%>
-                
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>

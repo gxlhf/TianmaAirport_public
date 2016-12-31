@@ -396,61 +396,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   	count--;
                   	}
                   %>
-                    <%-- <tr>
-                      <td>
-                        <span class="glyphicon"></span>
-                      </td>
-                      <td>
-                      <%
-                      	if(roleModify.getAuthorityMap().get("用户管理")!=null)
-                      		out.println("用户管理");
-                      %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="glyphicon"></span>
-                      </td>
-                      <td>
-                      <%
-                      	if(roleModify.getAuthorityMap().get("角色管理")!=null)
-                      		out.println("角色管理");
-                      %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="glyphicon"></span>
-                      </td>
-                      <td>
-                      <%
-                      	if(roleModify.getAuthorityMap().get("航班信息管理")!=null)
-                      		out.println("航班信息管理");
-                      %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="glyphicon"></span>
-                      </td>
-                      <td>
-                      <%
-                      	if(roleModify.getAuthorityMap().get("机场设施管理")!=null)
-                      		out.println("机场设施管理");
-                      %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="glyphicon"></span>
-                      </td>
-                      <td>
-                      <%
-                      	if(roleModify.getAuthorityMap().get("新闻管理")!=null)
-                      		out.println("新闻管理");
-                      %>
-                      </td>
-                    </tr> --%>
                     <tr>
                       <td>
                       </td>

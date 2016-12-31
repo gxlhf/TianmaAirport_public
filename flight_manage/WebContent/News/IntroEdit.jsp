@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 News news;
 news=(News)session.getAttribute("intro");
-String newsId="NX10001";
+String newsId="";
 String title="";
 String id="";
 String content="";

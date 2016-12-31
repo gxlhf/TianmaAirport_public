@@ -287,8 +287,8 @@ else
                 </th> -->
                 <!-- <th>序号</th> -->
                 <th>新闻标题</th>
-                <th>发布时间</th>
-                <th>发布人</th>
+                <th>最后修改时间</th>
+                <th>最后修改人</th>
               </tr>
             </thead>
             <tbody>
@@ -380,11 +380,6 @@ else
         	  out.println(" <div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-success' href='"+basePath+"News/NewsEdit.jsp?type="+type+"&todo=add'>新增</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"News/NewsDelete?type=null'>删除</a><a id='btn-modify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"'>修改</a></div></div>");
           }
           %>
-          <%-- <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="<%=basePath%>News/NewsEdit.jsp">修改</a>
-            </div>
-          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
@@ -415,13 +410,13 @@ else
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-xs-3 control-label">发布时间：</label>
+                  <label class="col-xs-3 control-label">最后修改时间：</label>
                   <div class="col-xs-9">
                     <p class="form-control-static">321</p>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-xs-3 control-label">发布人：</label>
+                  <label class="col-xs-3 control-label">最后修改人：</label>
                   <div class="col-xs-9">
                     <p class="form-control-static">123</p>
                   </div>

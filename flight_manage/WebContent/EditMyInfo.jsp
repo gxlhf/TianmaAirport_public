@@ -139,52 +139,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li role="presentation" class="first-menu">
               <strong>修改个人信息</strong>
             </li>
-            <%-- <li>
-              <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
-                <%
-              if(session.getAttribute("priv4")==null)
-            	  out.println("<li role='presentation'><a href='"+basePath+"Role/RoleAdmin.jsp'>角色管理</a></li>");
-              if(session.getAttribute("priv3")==null)
-            	  out.println("<li role='presentation' class='second-menu-cur'><a href='"+basePath+"User/UserAdmin.jsp'>用户管理</a></li>");
-              if(session.getAttribute("priv3")!=null&&session.getAttribute("priv4")!=null)
-            	  out.println("<li role='presentation' class='second-menu-cur'><a href='"+basePath+"User/UserAdmin.jsp'>用户管理</a></li><li role='presentation'><a href='"+basePath+"Role/RoleAdmin.jsp'>角色管理</a></li>");
-              %>
-              </ul>
-            </li> --%>
           </ul>
         </div>
         <div class="col-md-10" id="content">
-          <%-- <ol class="breadcrumb">
-            <li>
-              <a>用户与角色管理</a>
-            </li>
-            <li>
-              <a href="<%=basePath%>User/UserEdit.jsp">用户管理</a>
-            </li>
-            <li class="active">
-            <%
-            	if(request.getParameter("empno")!=null)
-            		out.println("修改用户");
-            	else
-            		out.println("新增用户");
-            %>
-            </li>
-          </ol> --%>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <%
           	if(admin!=null){
-          		
-          		/* Admin[] adminModify = admin.searchAdmin(request.getParameter("empno"), "", -1, "", ""); */
-          	
           		
           %>
           <form action="<%=basePath%>EditMyInfo" method="post" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-              <%-- <%
-              	out.println("<input type='text' class='form-control' name='user-id' pattern='\\d{4}' data-error='请填写4位员工号*' value='"+adminModify[0].getEmpno()+"' required disabled>");
-              %> --%>
                  <input type="text" class="form-control" name="user-id" pattern='\\d{4}' data-error="请填写4位员工号*" value="<%=admin.getEmpno() %>" required readonly> 
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -276,12 +242,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   		<option value="系统维护部">系统维护部</option>
                   <%
                   	}
-                  %>        
-                  <!-- <option value="信息部">信息部</option>
-                  <option value="空管部">空管部</option>
-                  <option value="后勤部">后勤部</option>
-                  <option value="人力资源部">人力资源部</option>
-                  <option value="系统维护部">系统维护部</option> --> 
+                  %>         
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>

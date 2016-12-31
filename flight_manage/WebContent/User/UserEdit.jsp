@@ -172,9 +172,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-              <%-- <%
-              	out.println("<input type='text' class='form-control' name='user-id' pattern='\\d{4}' data-error='请填写4位员工号*' value='"+adminModify[0].getEmpno()+"' required disabled>");
-              %> --%>
                  <input type="text" class="form-control" name="user-id" pattern='\\d{4}' data-error="请填写4位员工号*" value="<%=adminModify[0].getEmpno() %>" required readonly> 
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -370,9 +367,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-              <%-- <%
-              	out.println("<input type='text' class='form-control' name='user-id' pattern='\\d{4}' data-error='请填写4位员工号*' value='"+adminModify[0].getEmpno()+"' required disabled>");
-              %> --%>
                  <input type="text" class="form-control" name="user-id" pattern="\d{4}" data-pattern-error="请填写4位员工号*" data-required-error="请填写4位员工号*" data-remote="<%=basePath%>AddAdmin" data-remote-error="该员工号已被占用*" required> 
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>

@@ -310,30 +310,6 @@ else
               </div>
             </div>
           </form>
-          <%-- <table class="table table-hover select-table">
-            <thead>
-              <tr>
-                <%
-              if(session.getAttribute("priv1")!=null){
-            	  out.println("<th><span class='glyphicon glyphicon-check th-check'></span></th>");
-              }else{
-            	  out.println("<th></th>");
-              }
-              %>
-                <!-- <th>
-                  <span class="glyphicon glyphicon-check th-check"></span>
-                </th> -->
-                <th>航空公司</th>
-                <th>航班号</th>
-                <th>始发地</th>
-                <th>经停地</th>
-                <th>目的地</th>
-                <th>到港时间</th>
-                <th>行李转盘</th>
-                
-              </tr>
-            </thead>
-            <tbody> --%>
             <%
             if(request.getAttribute("arrivalFlightInfos")!=null)
             {

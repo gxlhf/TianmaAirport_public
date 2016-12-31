@@ -300,13 +300,6 @@ else
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' id='btn-modify' href='"+basePath+"Role/RoleEdit.jsp'>修改</a><a class='btn btn-danger' id='btn-delete' href='"+basePath+"DeleteRole'>删除</a><a class='btn btn-success' href='"+basePath+"Role/RoleEdit.jsp'>新增</a></div></div>");
             }
             %>
-          <%-- <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="<%=basePath%>Role/RoleEdit.jsp">修改</a>
-              <a class="btn btn-danger" href="">删除</a>
-              <a class="btn btn-success" href="">新增</a>
-            </div>
-          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">

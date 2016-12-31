@@ -182,37 +182,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <label for="resource-type" class="col-sm-2 control-label">资源分类：</label>
               <div class="col-sm-6">
               	<input type="text" class="form-control" name="resource-type" data-error="请填写分类*"  value="<%=resourceModify[0].getType() %>"required readonly>
-                <%-- <select class="form-control" name="resource-type" data-error="请选择资源分类*"  required>
-                  <option value="<%=resourceModify[0].getType() %>" ><%=resourceModify[0].getType() %></option>  
-				
-                
-                  <%
-                    if(!resourceModify[0].getType().equals("登机门"))
-                    {
-                  %> 
-                  <option value = "登机门">登机门</option>
-                <%
-                    }
-                %>
-                <%
-                    if(!resourceModify[0].getType().equals("值机柜台"))
-                    {
-                  %> 
-                  <option value = "值机柜台">值机柜台</option>
-                <%
-                    }
-                %>
-                <%
-                    if(!resourceModify[0].getType().equals("行李转盘"))
-                    {
-                  %> 
-                  <option value = "行李转盘">行李转盘</option>
-                <%
-                    }
-                %>
-                  
-                  
-                </select> --%>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>

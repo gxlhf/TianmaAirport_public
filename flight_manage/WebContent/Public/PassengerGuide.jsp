@@ -135,25 +135,11 @@ else
         <div class="col-md-2" id="sidebar">
           <ul class="nav nav-pills nav-stacked" role="tablist">
             <li role="presentation" class="first-menu">
-            <%-- <%
-            if(session.getAttribute("priv0")!=null){
-            	out.println("<strong>机场设施管理</strong>");
-            }else{
-            	out.println("<strong>乘机指南</strong>");
-            }
-            %> --%>
               <strong>乘机指南</strong>
             </li>
             <li>
               <ul class="nav nav-pills nav-stacked sub-menu" role="tablist">
                 <li role="presentation" class="second-menu-cur">
-                <%-- <%
-                if(session.getAttribute("priv0")!=null){
-                	out.println("<a href='"+basePath+"Public/Facility/Resource.jsp'>机场资源</a>");
-                }else{
-                	out.println("<a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a>");
-                }
-                %> --%>
                   <a href="<%=basePath%>Public/PassengerGuide.jsp">乘机指引</a>
                 </li>
                 <li role="presentation">

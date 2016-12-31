@@ -187,9 +187,6 @@ else
             <li class="active">用户管理</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <%-- <%
-          Admin[] admins = admin.searchAdmin("", "", -1, "", "");
-          %> --%>
           <form class="form-horizontal" role="form" action="<%=basePath%>SearchAdmin" data-toggle="validator">
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
@@ -227,14 +224,6 @@ else
                   <%
                   	}
                   %>
-                  <%-- <%
-                  for(Admin output:admins)
-                  {
-                	  out.println("<option value='"+output.getPosition()+"'>"+output.getPosition()+"</option>");
-                  }
-                  %> --%>
-                  <!-- <option value="机场地勤人员">机场地勤人员</option>
-                  <option value="信息技术员">信息技术员</option> -->
                 </select>
               </div>
             </div>
@@ -251,10 +240,6 @@ else
                   <%
                   	}
                   %>
-                  <!-- <option value="系统管理员">系统管理员</option>
-                  <option value="航班信息管理员">航班信息管理员</option>
-                  <option value="机场设施管理员">机场设施管理员</option>
-                  <option value="新闻管理员">新闻管理员</option> -->
                 </select>
               </div>
             </div>
@@ -406,13 +391,6 @@ else
             // 例如需要将变量名为"EmpNo"值为"1004"和变量名为"Type"值为"1"的两个参数传送到jsp页面，则data-id填写的是"EmpNo=1004&Type=1"
             
             %>
-          <%-- <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="<%=basePath%>Role/RoleEdit.jsp">修改</a>
-              <a class="btn btn-danger" href="">删除</a>
-              <a class="btn btn-success" href="">新增</a>
-            </div>
-          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
