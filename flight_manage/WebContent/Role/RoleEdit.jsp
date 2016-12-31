@@ -157,9 +157,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
           </ol>
           <%
-          	if(request.getParameter("roleName")!=null&&admin.searchRole(request.getParameter("roleName"))!=null)
+          	if(request.getParameter("roleName")!=null)
           	{
-          		Role roleModify = admin.searchRole(request.getParameter("roleName"));
+          		if(admin.searchRole(request.getParameter("roleName"))!=null)
+          		{
+          			Role roleModify = admin.searchRole(request.getParameter("roleName"));
           		
           %>
           <form action="<%=basePath%>ModifyRole" method="post" class="form-horizontal" role="form" data-toggle="validator">
@@ -427,6 +429,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
           </form>
           <%
+          		}
           	}
           	else
           	{

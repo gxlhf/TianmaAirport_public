@@ -191,7 +191,7 @@ else
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-empno" pattern='\d{4}' data-error='请填写4位员工号'>
+                <input type="text" class="form-control" name="search-empno" pattern='\d{4}' data-error='请填写4位纯数字员工号'>
               </div>
               <div class="col-sm-2 help-block with-errors"></div>
             </div>

@@ -165,15 +165,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <%
-
             String name = request.getParameter("rname");
-          User user = new User();
-            if(name!=null&&user.searchAirportResource(name, "").length!=0){
-                
-               
-               AirportResource[] resourceModify = user.searchAirportResource(name, ""); 
-            
-                
+          	User user = new User();
+            if(name!=null)
+            {
+                if(user.searchAirportResource(name, "").length!=0)
+                {
+            		AirportResource[] resourceModify = user.searchAirportResource(name, ""); 
           %>
           
           <!--修改资源-->
@@ -225,6 +223,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </form>
           
            <%
+                }
             }
             else{
           %>

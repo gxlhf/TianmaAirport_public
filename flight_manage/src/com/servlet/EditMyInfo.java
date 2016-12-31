@@ -40,7 +40,6 @@ public class EditMyInfo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
 		request.setCharacterEncoding("UTF-8");
 		String empno = request.getParameter("user-id");
 		String empnoValidate = (String)request.getSession().getAttribute("empnoValidate");
@@ -57,10 +56,7 @@ public class EditMyInfo extends HttpServlet {
 		String phone = request.getParameter("user-phone");
 		String mobile = request.getParameter("user-tel");
 		String email = request.getParameter("user-email");
-//		String password = request.getParameter("user-password");
 		String password = "";
-		/*System.out.println(empnoValidate);
-		System.out.println(roleValidate);*/
 		if(!empno.equals(empnoValidate)||!roleName.equals(roleValidate))
 			response.sendRedirect("error.jsp");
 		else
@@ -73,34 +69,14 @@ public class EditMyInfo extends HttpServlet {
 			}
 			else
 				password = GetMD5.getMd5(request.getParameter("user-password"));
-//				password = request.getParameter("user-password");
 			Role roleModifyInfo = new Role(roleName);
 			Admin adminModifyInfo = new Admin(empno, name, sex, email, roleModifyInfo, mobile, phone, department, position, password);
-			/*System.out.println(empno);
-			System.out.println(name);
-			System.out.println(sex);
-			System.out.println(department);
-			System.out.println(position);
-			System.out.println(roleName);
-			System.out.println(mobile);
-			System.out.println(phone);
-			System.out.println(email);
-			System.out.println(password);*/
-//			Admin admin=(Admin)request.getSession().getAttribute("admin");
-//			int result = admin.modifyAdmin(adminModifyInfo);
 			boolean result = adminDao.modifyAdmin(adminModifyInfo);
+			if(result==true)
+				request.getSession().setAttribute("admin", adminModifyInfo);
 			request.setAttribute("modifyResult", result);
 			request.getRequestDispatcher("/EditMyInfo.jsp").forward(request,response);
-			/*if(result==-1){
-				response.sendRedirect("error.jsp");
-				return;
-			}else if(result==1){
-				request.setAttribute("modifyResult", result);
-				request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request, response);
-			}else {
-				request.setAttribute("modifyResult", result);
-				request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request,response);
-			}*/
+			
 		}
 		
 	}
