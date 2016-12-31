@@ -45,12 +45,12 @@ function getBrowser(){
             return "IE10";
         }
     }//isIE end
-    if (isFF) {
+    if (isFF) 
         return "FF";
-    }
-    if (isOpera) {
+    if (isOpera) 
         return "Opera";
-    }
+    if(isSafari)
+    	return "Safari";
 }
 
 $(function () {
@@ -82,8 +82,6 @@ $(function () {
 		        forceParse: 1,
 		        minuteStep: 1
 		    };
-
-		    console.log(min, max, start, date_config);
 
 			$(this).datetimepicker(date_config);
 		})
