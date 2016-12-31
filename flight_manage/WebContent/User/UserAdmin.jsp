@@ -190,12 +190,13 @@ else
           <%-- <%
           Admin[] admins = admin.searchAdmin("", "", -1, "", "");
           %> --%>
-          <form class="form-horizontal" role="form" action="<%=basePath%>SearchAdmin">
+          <form class="form-horizontal" role="form" action="<%=basePath%>SearchAdmin" data-toggle="validator">
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-empno">
+                <input type="text" class="form-control" name="search-empno" pattern='\d{4}' data-error='请填写4位员工号'>
               </div>
+              <div class="col-sm-2 help-block with-errors"></div>
             </div>
             <div class="form-group">
               <label for="user-name" class="col-sm-2 control-label">姓名：</label>
@@ -521,11 +522,7 @@ else
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      <p class="text-center">©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
     <!--[if lt IE 9]>
@@ -539,6 +536,7 @@ else
     <!--<![endif]-->
 
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>

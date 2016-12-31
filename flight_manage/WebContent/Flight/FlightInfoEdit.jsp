@@ -829,12 +829,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             <div class="form-group">
               <label for="flight-no" class="col-sm-2 control-label">航班号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="flight-id" pattern="([A-z]{2}[0-9]{3,4}|[A-z][0-9]{4,5}|[0-9][A-z]{1}[0-9]{3,4})" data-required-error='请填写航班号*' data-pattern-error='请填写正确的航班号*'  data-checkcode="checkcode" data-validate="true" <%-- data-remote="<%
+                <input type="text" class="form-control" name="flight-id" pattern="([A-z]{2}[0-9]{3,4}|[A-z][0-9]{4,5}|[0-9][A-z]{1}[0-9]{3,4})" data-required-error='请填写航班号*' data-pattern-error='请填写正确的航班号*'  data-checkcode="checkcode" data-validate="true" data-checkonly="<%
                 		if(request.getParameter("type").equals("departure"))
                         	out.println(basePath+"AddDepartureFlightInfo");
                         if(request.getParameter("type").equals("arrival"))
                         	out.println(basePath+"AddArrivalFlightInfo");
-                %>" data-remote-error="已存在重复的航班信息*" --%> required>
+                %>" required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -845,7 +845,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             <div class="form-group">
               <label for="flight-dep-time" class="col-sm-2 control-label">离港时间：</label>
               <div class="col-sm-6">
-                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-dep-time" data-required-error='请填写离港时间*' required>
+                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-dep-time" data-required-error='请填写离港时间*'  data-validate="true" data-checkonly="<%
+                    if(request.getParameter("type").equals("departure"))
+                          out.println(basePath+"AddDepartureFlightInfo");
+                        if(request.getParameter("type").equals("arrival"))
+                          out.println(basePath+"AddArrivalFlightInfo");
+                %>" required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -859,7 +864,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             <div class="form-group">
               <label for="flight-arr-time" class="col-sm-2 control-label">到港时间：</label>
               <div class="col-sm-6">
-                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-arr-time" data-required-error='请填写到港时间*' required>
+                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-arr-time" data-required-error='请填写到港时间*' data-validate="true" data-checkonly="<%
+                    if(request.getParameter("type").equals("departure"))
+                          out.println(basePath+"AddDepartureFlightInfo");
+                        if(request.getParameter("type").equals("arrival"))
+                          out.println(basePath+"AddArrivalFlightInfo");
+                %>"  required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -1237,11 +1247,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组
+      <p class="text-center">©2016 软件1401班第三组
       </p>
     </footer>
     <!-- 尾部结束 -->

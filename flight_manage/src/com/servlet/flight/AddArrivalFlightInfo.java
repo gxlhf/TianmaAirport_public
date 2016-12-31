@@ -35,11 +35,15 @@ public class AddArrivalFlightInfo extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
 		User user = new User();
-		ArrivalFlightInfo[] arrivalFlightInfos = user.searchArrivalFlightInfo("", request.getParameter("flight-id"), "", request.getParameter("flight-arr-time"));
-		if(arrivalFlightInfos.length == 0)
-			response.setStatus(200);
-		else 
-			response.setStatus(400);
+		ArrivalFlightInfo[] arrivalFlightInfos = user.searchArrivalFlightInfo("", request.getParameter("id"), "", request.getParameter("time"));
+//		if(arrivalFlightInfos.length == 0)
+//			response.setStatus(200);
+//		else 
+//			response.setStatus(400);
+
+		response.getWriter().print(arrivalFlightInfos.length);
+		response.getWriter().flush();
+		response.getWriter().close();
 	}
 
 	/**
