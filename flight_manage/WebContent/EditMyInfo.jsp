@@ -303,7 +303,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
-              <label for="user-password" class="col-sm-2 control-label">登录密码：</label>
+              <label for="user-password" class="col-sm-2 control-label">修改密码：</label>
               <div class="col-sm-6">
                 <input type="password" class="form-control" name="user-password" data-minlength="6" data-required-error="请填写密码*" data-minlength-error="密码长度至少为6位*">
               </div>
@@ -442,7 +442,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>
-    <script type="text/javascript" src="https://api.thinkpage.cn/v3/weather/now.json?key=hoqbrzywjm37qvzd&amp;location=changsha"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/ensureBox.js"></script>
   
 
 </body></html>

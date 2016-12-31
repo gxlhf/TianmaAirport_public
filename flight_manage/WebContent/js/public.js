@@ -117,7 +117,29 @@ $(function () {
 		trigger : 'hover'
 	});
 
+	// $("form").submit(function (e) {
+	// 	var inputElem = $(e.currentTarget).find('input,textarea');
+	// 	var temp;
+	// 	for (var i = 0; i < inputElem.length; i++) {
+	// 		temp = inputElem.val().replace(/\+/g,"＋");
+	// 		temp = inputElem.val().replace(/\&/g,"＆");
+	// 		temp = inputElem.val().replace(/\#/g,"＃");
+	// 		inputElem.val(temp);
+	// 		temp = '';
+	// 	}
+	// });
 	
+	var inputElem = $('form').find('input,textarea');
+	for (var i = 0; i < inputElem.length; i++) {
+		$(inputElem[i]).blur(function (e) {
+			var temp;
+			temp = $(this).val().replace(/\+/g,"＋");
+			temp = temp.replace(/\&/g,"＆");
+			temp = temp.replace(/\#/g,"＃");
+			$(this).val(temp);
+			temp = '';
+		});
+	}
 
 });
 

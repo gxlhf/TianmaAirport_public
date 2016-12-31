@@ -1,10 +1,44 @@
 $(function () {
+    function addError(sel, msg){  //sel:input元素选择器  msg:要显示的信息
+        //2016-12-31 13:01
+        var elem = $(sel);
+        var helpblock = elem.parent().next();
+        var formgroup = elem.parents(".form-group");
+        if(helpblock.html() == "*"){  //无报错信息
+            formgroup.addClass("has-danger has-error");
+            helpblock.html("<ul class='list-unstyled'><li>" + msg + "</li></ul>")
+        }
+        else{  //已有报错信息
+            if(helpblock.find("li:contains(" + msg + ")").length == 0)
+                helpblock.find("ul").append('<li>' + msg + '</li>');
+        }
+    }
+    function removeError(sel, msg){  //sel:input元素选择器  msg:要显示的信息
+        var elem = $(sel);
+        var helpblock = elem.parent().next();
+        var formgroup = elem.parents(".form-group");
+        if(helpblock.html() == "*"){  //无报错信息
+            return;
+        }
+        else{  //已有报错信息
+            //移除所要求移除的报错信息
+            helpblock.find("li:contains(" + msg + ")").remove();
+
+            //若移除后无报错信息则移除has-danger has-error类
+            if(helpblock.find('li').length == 0){
+                helpblock.html("*");
+                formgroup.removeClass("has-error has-danger");
+            }
+        }
+    }
+
 
     $('[name="flight-id"]').blur(function () {
         $(this).val($(this).val().toUpperCase());
     });
 
     $('form').validator({
+        delay: 1000,
         custom: {
             //经停地不相同
             unequals: function ($el) {
@@ -23,25 +57,39 @@ $(function () {
             },
             //检查有无重复航班
             checkonly: function ($el) {
-                console.log("checkonly");
-                // var url_in = $el.data("checkonly");
-                // var id_in = $('[name="flight-id"]').val();
-                // var time_in = $('[name="flight-dep-time"]').length ? $('[name="flight-dep-time"]') : $('[name="flight-arr-time"]');
-                // if(id_in != '' && time_in != ''){
-                //     var valid = $.ajax({
-                //         url: url_in,
-                //         type: 'GET',
-                //         processData: true,
-                //         data: {
-                //             id: id_in,
-                //             time: time_in
-                //         },
-                //         async: false
-                //     });
-                // }
-                // console.log(valid);
-                // if(!valid)
-                //     return "已存在重复航班信息*";
+                var url_in = $el.data("checkonly");
+                var id_in = $('[name="flight-id"]').val().toUpperCase();
+                var time_in = $('[name="flight-dep-time"]').length ? $('[name="flight-dep-time"]').val() : $('[name="flight-arr-time"]').val();
+                var resp;
+                var valid = -1; //1:不通过  0:通过  -1:未验证
+                if(id_in.match("([A-z]{2}[0-9]{3,4}|[A-z][0-9]{4,5}|[0-9][A-z]{1}[0-9]{3,4})") && time_in != ''){
+                    resp = $.ajax({
+                        url: url_in,
+                        type: 'GET',
+                        processData: true,
+                        data: "id=" + id_in + "&time=" + time_in,
+                        async: false,
+                        success: function (e) {
+                            valid = e - 0;
+                        }
+                    });
+                }
+
+                var this_name = $el.attr('name');
+                var id_elem = '[name="flight-id"]';
+                var time_elem = $('[name="flight-dep-time"]').length ? '[name="flight-dep-time"]' : '[name="flight-arr-time"]';
+
+                if(valid > 0){  //验证不通过
+                    if(this_name == "flight-id")
+                        addError(time_elem, "已存在重复航班信息*");
+                    else
+                        addError(id_elem, "已存在重复航班信息*");
+                    return '已存在重复航班信息*';
+                }
+                else{  //验证通过或未验证
+                    removeError(id_elem, "已存在重复航班信息*");
+                    removeError(time_elem, "已存在重复航班信息*");
+                }
             }
         }
     });
