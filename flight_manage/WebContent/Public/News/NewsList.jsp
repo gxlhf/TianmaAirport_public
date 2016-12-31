@@ -352,7 +352,7 @@ else
 					}else{
 						int from=(pageNum-1)*10+1;
 						int end=pageNum*10+1<news.length?pageNum+10:news.length;
-						for(int i=from;i<end;i++){
+						for(int i=from-1;i<end;i++){
 							out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
 							 if(session.getAttribute("priv2")!=null){
 				                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
