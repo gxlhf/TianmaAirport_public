@@ -31,7 +31,7 @@ public class User {
 		UserDao userDao = new UserDao();
 		return userDao.returnAllInternationalArrivalFlightInfo();
 	}
-	//离港航班信息查询函数，输入三个参数依次为目的地、航班号、航空公司，返回一个DepartureFlightInfo对象数组
+	//离港航班信息查询函数，输入三个参数依次为目的地、航班号、航空公司、时间，返回一个DepartureFlightInfo对象数组
 	public DepartureFlightInfo[] searchDepartureFlightInfo(String city, String flightNumber, String airline, String time)
 	{
 		DepartureFlightInfo[] departureFlightInfo = null;
@@ -85,7 +85,7 @@ public class User {
 		}
 		return departureFlightInfo;
 	}
-	//到港航班信息查询函数，输入三个参数依次为出发地、航班号、航空公司，返回一个ArrivalFlightInfo对象数组
+	//到港航班信息查询函数，输入三个参数依次为出发地、航班号、航空公司、时间，返回一个ArrivalFlightInfo对象数组
 	public ArrivalFlightInfo[] searchArrivalFlightInfo(String city, String flightNumber, String airline, String time)
 	{
 		ArrivalFlightInfo[] arrivalFlightInfo = null;

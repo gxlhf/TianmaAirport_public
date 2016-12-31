@@ -107,7 +107,7 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
                 </li>
                 <%
                   if(session.getAttribute("priv2")!=null)
-                    out.println("<li><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                    out.println("<li><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
                 %>
                 
               </ul>
