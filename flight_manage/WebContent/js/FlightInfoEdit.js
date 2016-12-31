@@ -20,20 +20,31 @@ $(function () {
                 var flightNo = $el.val().toUpperCase();
                 if(selectedCode != undefined && flightNo.substr(0, 2) != selectedCode)
                     return '请填写正确的航班号*';
+            },
+            //检查有无重复航班
+            checkonly: function ($el) {
+                console.log("checkonly");
+                // var url_in = $el.data("checkonly");
+                // var id_in = $('[name="flight-id"]').val();
+                // var time_in = $('[name="flight-dep-time"]').length ? $('[name="flight-dep-time"]') : $('[name="flight-arr-time"]');
+                // if(id_in != '' && time_in != ''){
+                //     var valid = $.ajax({
+                //         url: url_in,
+                //         type: 'GET',
+                //         processData: true,
+                //         data: {
+                //             id: id_in,
+                //             time: time_in
+                //         },
+                //         async: false
+                //     });
+                // }
+                // console.log(valid);
+                // if(!valid)
+                //     return "已存在重复航班信息*";
             }
         }
     });
-
-    // $("form").validator().on('validate.bs.validator', function (e) {        
-    //     //$('#inp-flight-counter-mirror').val($('#inp-flight-counter').val());
-    //     $('#inp-flight-counter-mirror').focus();
-    //     $('#inp-flight-counter-mirror').blur();
-    // });
-    // $("form").validator().on('validated.bs.validator', function (e) {        
-    //     //$('#inp-flight-counter-mirror').val($('#inp-flight-counter').val());
-    //     //$('#inp-flight-counter-mirror').focus();
-    //     //$('[name="flight-id"]').focus();
-    // });
     
     //值机柜台tokenfield
     if ($('#inp-flight-counter').length != 0){
