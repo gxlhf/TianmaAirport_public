@@ -2,8 +2,6 @@ package com.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Savepoint;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.entity.*;
@@ -15,9 +13,10 @@ public class AdminDao {
     public Role searchRole(String name)
     {//数据库操作：查询角色名称为该name的角色信息
     	Role role=null;
-    	sql = "SELECT * FROM actor WHERE actor.A_name='"+name+"'";//SQL语句  
+    	sql = "SELECT * FROM actor WHERE actor.A_name=?";//SQL语句  
         db1= new db_connection(sql);//创建db_connection对象  
          try {  
+        	  db1.pst.setString(1, name);
               ret = db1.pst.executeQuery();//执行语句，得到结果集  
               if(!ret.next())
               {
@@ -65,11 +64,13 @@ public class AdminDao {
     public boolean addRole(Role role)
     {//数据库操作：新增角色，形参为角色对象，返回值为布尔值    
     	     sql = "INSERT INTO actor (A_name,A_describe) "+
-    		"VALUES ('"+role.getName()+"','"+role.getDescription()+"')";//SQL语句  
+    		"VALUES (?,?)";//SQL语句  
     	     db1= new db_connection(sql);//创建db_connection对象  
         try {        	
             
             db1.conn.setAutoCommit(false);
+            db1.pst.setString(1, role.getName());
+            db1.pst.setString(2, role.getDescription());
             db1.pst.executeUpdate();//执行语句
             //Savepoint savePoint=db1.conn.setSavepoint();
         	sql = "INSERT INTO actor_privilege (A_name,P_name ) " +
@@ -84,7 +85,7 @@ public class AdminDao {
         	db1.pst.executeBatch();
         	//db1.conn.rollback(savePoint);
         	db1.conn.commit();  
-        } catch (SQLException e) {  
+        } catch (SQLException e) {   
         	try{
         		db1.conn.rollback();
         	}catch(SQLException e1){
@@ -108,15 +109,18 @@ public class AdminDao {
     }
     public boolean modifyRole(Role role)
     {//数据库操作：修改角色，形参为角色对象，返回值为布尔值
-	     sql = "UPDATE actor SET A_describe='"+role.getDescription()+"' WHERE A_name='"+role.getName()+"'";//SQL语句  
+	     sql = "UPDATE actor SET A_describe= ? WHERE A_name= ?";//SQL语句  
  	     db1= new db_connection(sql);//创建db_connection对象  
      try {        	
          
          db1.conn.setAutoCommit(false);
+         db1.pst.setString(1, role.getDescription());
+  	     db1.pst.setString(2, role.getName());
          db1.pst.executeUpdate();//执行语句
          //Savepoint savePoint=db1.conn.setSavepoint();
-        sql = "DELETE FROM actor_privilege WHERE A_name='"+role.getName()+"'";//SQL语句  
+        sql = "DELETE FROM actor_privilege WHERE A_name=?";//SQL语句  
         db1.pst=db1.conn.prepareStatement(sql);
+        db1.pst.setString(1, role.getName());
         db1.pst.executeUpdate();
         sql = "INSERT INTO actor_privilege (A_name,P_name ) " +
 	    "VALUES (?,?)";//SQL语句
@@ -167,13 +171,15 @@ public class AdminDao {
 			e2.printStackTrace();
 		}
     	
-    	sql = "DELETE FROM actor_privilege WHERE A_name='"+role.getName()+"'";//SQL语句  
+    	sql = "DELETE FROM actor_privilege WHERE A_name= ?";//SQL语句  
     	db1= new db_connection(sql);//创建db_connection对象
         try {     
     	    db1.conn.setAutoCommit(false);
-            db1.pst.executeUpdate();//执行语句，得到结果集            
-        	sql = "DELETE FROM actor WHERE A_name='"+role.getName()+"'";//SQL语句          	
+    	    db1.pst.setString(1, role.getName());
+            db1.pst.executeUpdate();//执行语句          
+        	sql = "DELETE FROM actor WHERE A_name=?";//SQL语句          	
     	    db1.pst=db1.conn.prepareStatement(sql);
+    	    db1.pst.setString(1, role.getName());
             db1.pst.executeUpdate();
         	db1.conn.commit();            
         } catch (SQLException e) {  
@@ -484,20 +490,23 @@ public class AdminDao {
     	if(airportResource.getType().equals("登机门"))
     	{
     	     sql = "INSERT INTO boardinggate (Bname,Blocation,Bremarks) " +
-		     "VALUES ('"+airportResource.getName()+"','"+airportResource.getLocation()+"','"+airportResource.getRemark()+"');";//SQL语句  
+		     "VALUES (?,?,?);";//SQL语句  
     	}
     	else if(airportResource.getType().equals("值机柜台"))
     	{
     		sql = "INSERT INTO checkincounter (Cname,Clocation,Cremarks) " +
-    		"VALUES ('"+airportResource.getName()+"','"+airportResource.getLocation()+"','"+airportResource.getRemark()+"');";//SQL语句 
+    		"VALUES (?,?,?);";//SQL语句 
     	}
     	else if(airportResource.getType().equals("行李转盘"))
     	{
     		sql = "INSERT INTO luggagecarousel (Lname,Llocation,Lremarks) " +
-    		"VALUES ('"+airportResource.getName()+"','"+airportResource.getLocation()+"','"+airportResource.getRemark()+"');";//SQL语句 
+    		"VALUES (?,?,?);";//SQL语句 
     	}
     	db1= new db_connection(sql);//创建db_connection对象  
-        try {  
+        try { 
+        	 db1.pst.setString(1, airportResource.getName());
+        	 db1.pst.setString(2, airportResource.getLocation());
+        	 db1.pst.setString(3, airportResource.getRemark());
              db1.pst.executeUpdate();//执行语句，得到结果集  
         } catch (SQLException e) {  
            e.printStackTrace();  
@@ -512,21 +521,22 @@ public class AdminDao {
     {//数据库操作：修改机场资源，形参为机场资源对象，返回值为布尔值
     	if(airportResource.getType().equals("登机门"))
     	{
-    	     sql = "UPDATE boardinggate set Blocation='"+airportResource.getLocation()+"',Bremarks='"+airportResource.getRemark()+"' " +
-    	     		"WHERE boardinggate.Bname='"+airportResource.getName()+"'";//SQL语句  
+    	     sql = "UPDATE boardinggate set Blocation=?,Bremarks=? WHERE boardinggate.Bname=?";//SQL语句  
     	}
     	else if(airportResource.getType().equals("值机柜台"))
     	{
-    		sql = "UPDATE checkincounter set Clocation='"+airportResource.getLocation()+"',Cremarks='"+airportResource.getRemark()+"' " +
-    				"WHERE checkincounter.Cname='"+airportResource.getName()+"'";//SQL语句
+    		sql = "UPDATE checkincounter set Clocation=?,Cremarks=? WHERE checkincounter.Cname=?";//SQL语句
     	}
     	else if(airportResource.getType().equals("行李转盘"))
     	{
-    		sql = "UPDATE luggagecarousel set Llocation='"+airportResource.getLocation()+"',Lremarks='"+airportResource.getRemark()+"' " +
-    				"WHERE luggagecarousel.Lname='"+airportResource.getName()+"'";//SQL语句
+    		sql = "UPDATE luggagecarousel set Llocation=?,Lremarks=? WHERE luggagecarousel.Lname=?";//SQL语句
     	}
     	db1= new db_connection(sql);//创建db_connection对象  
         try {  
+        	
+        	 db1.pst.setString(1, airportResource.getLocation());
+        	 db1.pst.setString(2, airportResource.getRemark());
+        	 db1.pst.setString(3, airportResource.getName());
              db1.pst.executeUpdate();//执行语句，得到结果集  
 
         } catch (SQLException e) {  
@@ -542,18 +552,58 @@ public class AdminDao {
     {//数据库操作：删除机场资源，形参为机场资源对象，返回值为布尔值
     	if(airportResource.getType().equals("登机门"))
     	{
-    	     sql = "DELETE FROM boardinggate WHERE Bname='"+airportResource.getName()+"'";//SQL语句  
+    	    sql = "SELECT * FROM bc_allocation WHERE Bname=?";
+    	    db1= new db_connection(sql);//创建db_connection对象
+        	try {
+    			db1.pst = db1.conn.prepareStatement(sql);
+    			db1.pst.setString(1, airportResource.getName());
+    			ret = db1.pst.executeQuery();
+    			if(ret.next())
+    				return false;
+    		} catch (SQLException e2) {
+    			// TODO Auto-generated catch block
+    			e2.printStackTrace();
+    		}
+    		
+    		sql = "DELETE FROM boardinggate WHERE Bname=?";//SQL语句  
     	}
     	else if(airportResource.getType().equals("值机柜台"))
     	{
-    		sql = "DELETE FROM checkincounter WHERE Cname='"+airportResource.getName()+"'";//SQL语句
+    		sql = "SELECT * FROM bc_allocation WHERE Cname=?";
+    	    db1= new db_connection(sql);//创建db_connection对象
+        	try {
+    			db1.pst = db1.conn.prepareStatement(sql);
+    			db1.pst.setString(1, airportResource.getName());
+    			ret = db1.pst.executeQuery();
+    			if(ret.next())
+    				return false;
+    		} catch (SQLException e2) {
+    			// TODO Auto-generated catch block
+    			e2.printStackTrace();
+    		}
+    		
+    		sql = "DELETE FROM checkincounter WHERE Cname=?";//SQL语句
     	}
     	else if(airportResource.getType().equals("行李转盘"))
     	{
-    		sql = "DELETE FROM luggagecarousel WHERE Lname='"+airportResource.getName()+"'";//SQL语句
+    		sql = "SELECT * FROM lc_allocation WHERE Lname=?";
+    	    db1= new db_connection(sql);//创建db_connection对象
+        	try {
+    			db1.pst = db1.conn.prepareStatement(sql);
+    			db1.pst.setString(1, airportResource.getName());
+    			ret = db1.pst.executeQuery();
+    			if(ret.next())
+    				return false;
+    		} catch (SQLException e2) {
+    			// TODO Auto-generated catch block
+    			e2.printStackTrace();
+    		}
+    		
+    		sql = "DELETE FROM luggagecarousel WHERE Lname=?";//SQL语句
     	}
     	db1= new db_connection(sql);//创建db_connection对象  
         try {  
+        	 db1.pst.setString(1, airportResource.getName());
              db1.pst.executeUpdate();//执行语句，得到结果集  
           
         } catch (SQLException e) {  
@@ -569,11 +619,15 @@ public class AdminDao {
     public boolean addPropertyFacility(PropertyFacility propertyFacility)
     {//数据库操作：新增物业设施，形参为物业设施对象，返回值为布尔值
     	sql = "INSERT INTO facility (Fname,F_category,F_tel,Location,Remarks) " +
-        "VALUES ('"+propertyFacility.getName()+"','"+propertyFacility.getType()+"','"
-        +propertyFacility.getPhone()+"','"+propertyFacility.getLocation()+"','"+propertyFacility.getRemark()+"');";//SQL语句  
+        "VALUES (?,?,?,?,?);";//SQL语句  
         db1= new db_connection(sql);//创建db_connection对象  
          try {  
-              db1.pst.executeUpdate();//执行语句，得到结果集              
+        	 db1.pst.setString(1, propertyFacility.getName());
+        	 db1.pst.setString(2, propertyFacility.getType());
+        	 db1.pst.setString(3, propertyFacility.getPhone());
+        	 db1.pst.setString(4, propertyFacility.getLocation());
+        	 db1.pst.setString(5, propertyFacility.getRemark());
+             db1.pst.executeUpdate();//执行语句，得到结果集              
        } catch (SQLException e) {  
             e.printStackTrace();  
             return false;
@@ -585,10 +639,14 @@ public class AdminDao {
     }
     public boolean modifyPropertyFacility(PropertyFacility propertyFacility)
     {//数据库操作：修改物业设施，形参为物业设施对象，返回值为布尔值
-    	sql = "UPDATE facility SET F_category = '" +  propertyFacility.getType() + "',F_tel = '"+ propertyFacility.getPhone()+ "',Location = '"+ propertyFacility.getLocation()
-		+ "', Remarks = '"+propertyFacility.getRemark()+ "'"+ "WHERE Fname = '"+ propertyFacility.getName()+"'";
+    	sql = "UPDATE facility SET F_category = ?,F_tel = ?,Location = ?, Remarks = ? WHERE Fname = ?";
         db1 = new db_connection(sql);
         try{
+        	 db1.pst.setString(1, propertyFacility.getType());
+        	 db1.pst.setString(2, propertyFacility.getPhone());
+        	 db1.pst.setString(3, propertyFacility.getLocation());
+        	 db1.pst.setString(4, propertyFacility.getRemark());
+        	 db1.pst.setString(5, propertyFacility.getName());
 	           db1.pst.executeUpdate();
             }catch(SQLException e){
 	              e.printStackTrace();
@@ -602,10 +660,11 @@ public class AdminDao {
     }
     public boolean deletePropertyFacility(PropertyFacility propertyFacility)
     {//数据库操作：删除物业设施，形参为物业设施对象，返回值为布尔值
-    	sql = "DELETE FROM facility WHERE Fname = '" + propertyFacility.getName() + "'";
+    	sql = "DELETE FROM facility WHERE Fname = ?";
 		db1 = new db_connection(sql);
 		try{
-			db1.pst.executeUpdate();
+			 db1.pst.setString(1, propertyFacility.getName());
+			 db1.pst.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
 			return false;
@@ -748,25 +807,29 @@ public class AdminDao {
     }
     public boolean deleteDepartureFlightInfo(DepartureFlightInfo departureFlightInfo)
     {//数据库操作：删除离港航班信息，形参为离港航班信息对象，返回值为布尔值
-    	sql = "SELECT count( DISTINCT bc_allocation.Time) FROM bc_allocation WHERE bc_allocation.Flight_No2='"+departureFlightInfo.getFlightCourse().getFlightNumber()+"'";//SQL语句  
+    	sql = "SELECT count( DISTINCT bc_allocation.Time) FROM bc_allocation WHERE bc_allocation.Flight_No2=?";//SQL语句  
 	     db1= new db_connection(sql);//创建db_connection对象  
        try {  
     	   db1.conn.setAutoCommit(false);
     	   int countFlightInfo=0;
+    	   db1.pst.setString(1, departureFlightInfo.getFlightCourse().getFlightNumber());
            ret = db1.pst.executeQuery();
            while(ret.next()){
         	   countFlightInfo=ret.getInt("count( DISTINCT bc_allocation.Time)");
        		}
            ret.close();
-           sql = "delete FROM bc_allocation WHERE bc_allocation.Flight_No2='"+departureFlightInfo.getFlightCourse().getFlightNumber()+"' and bc_allocation.Time='"+departureFlightInfo.getTime()+"'";//SQL语句
+           sql = "delete FROM bc_allocation WHERE bc_allocation.Flight_No2=? and bc_allocation.Time=?";//SQL语句
            db1.pst=db1.conn.prepareStatement(sql);
+           db1.pst.setString(1, departureFlightInfo.getFlightCourse().getFlightNumber());
+           db1.pst.setString(2, departureFlightInfo.getTime());
            db1.pst.executeUpdate();//执行语句
            if(countFlightInfo<=1)
            {
-        	   sql = "delete  FROM  flight_off  " +
-        	   		"WHERE flight_off.Flight_No2='"+departureFlightInfo.getFlightCourse().getFlightNumber()+"'";//SQL语句
+        	   sql = "delete  FROM  flight_off WHERE flight_off.Flight_No2=?";//SQL语句
                db1.pst=db1.conn.prepareStatement(sql);
+               db1.pst.setString(1, departureFlightInfo.getFlightCourse().getFlightNumber());
        	       db1.pst.executeUpdate();//执行语句
+       	       
        		}
 	        db1.conn.commit();
           } catch (SQLException e) {  
@@ -785,11 +848,12 @@ public class AdminDao {
     }
     public boolean addArrivalFlightInfo(ArrivalFlightInfo arrivalFlightInfo)
     {//数据库操作：新增到港航班信息，形参为到港航班信息对象，返回值为布尔值
-    	sql = "SELECT COUNT(*) FROM flight_arrival WHERE flight_arrival.Flight_No= '"+ arrivalFlightInfo.getFlightCourse().getFlightNumber() + "'";
+    	sql = "SELECT COUNT(*) FROM flight_arrival WHERE flight_arrival.Flight_No= ?";
     	db1 = new db_connection(sql);//创建db_connection对象
     	try{
     		int countFilghtInfo = 0;
     		db1.conn.setAutoCommit(false);
+    		 db1.pst.setString(1, arrivalFlightInfo.getFlightCourse().getFlightNumber());
     		ret = db1.pst.executeQuery();
     		while(ret.next()){
     			countFilghtInfo = ret.getInt("COUNT(*)");
@@ -808,20 +872,15 @@ public class AdminDao {
     	    }
     	    else{
     	    	sql = "INSERT INTO flight_arrival (Flight_No, InternationalOrLocal,Starting_station,Destination,Staging_post,Airline) "
-    	    			+ "VALUES ('" + arrivalFlightInfo.getFlightCourse().getFlightNumber() 
-    	    			+ "',"
-    	    			+ arrivalFlightInfo.getFlightCourse().isInternationalOrLocal()
-    	    			+",'"
-    	    			+ arrivalFlightInfo.getFlightCourse().getFrom()
-    	    			+ "','"
-    	    			+ arrivalFlightInfo.getFlightCourse().getTo()
-    	    			+ "','"
-    	    			+ arrivalFlightInfo.getFlightCourse().getStop()
-    	    			+ "','"
-    	    			+ arrivalFlightInfo.getFlightCourse().getAirline()
-    	    			+ "')";//SQL语句
+    	    			+ "VALUES (?,?,?,?,?,?)";//SQL语句
     	    	db1.conn.setAutoCommit(false);
     	    	db1.pst = db1.conn.prepareStatement(sql);
+    	    	 db1.pst.setString(1, arrivalFlightInfo.getFlightCourse().getFlightNumber());
+    	    	 db1.pst.setBoolean(2, arrivalFlightInfo.getFlightCourse().isInternationalOrLocal());
+    	    	 db1.pst.setString(3, arrivalFlightInfo.getFlightCourse().getFrom());
+    	    	 db1.pst.setString(4, arrivalFlightInfo.getFlightCourse().getTo());
+    	    	 db1.pst.setString(5, arrivalFlightInfo.getFlightCourse().getStop());
+    	    	 db1.pst.setString(6, arrivalFlightInfo.getFlightCourse().getAirline());
     	    	db1.pst.executeUpdate();
     	    	sql = "INSERT INTO lc_allocation(Flight_No, Time, Lname)" +
     	      	      "VALUES(?,?,?)";//SQL语句
@@ -880,30 +939,35 @@ public class AdminDao {
     }
     public boolean deleteArrivalFlightInfo(ArrivalFlightInfo arrivalFlightInfo)
     {//数据库操作：删除到港航班信息，形参为到港航班信息对象，返回值为布尔值
-        	sql = "SELECT COUNT(*) FROM lc_allocation WHERE lc_allocation.Flight_No= '"+ arrivalFlightInfo.getFlightCourse().getFlightNumber() + "'";
+        	sql = "SELECT COUNT(*) FROM lc_allocation WHERE lc_allocation.Flight_No= ?";
         	db1= new db_connection(sql);//创建db_connection对象 
         	try{
         		int countFlightInfo = 0;
+        		db1.pst.setString(1, arrivalFlightInfo.getFlightCourse().getFlightNumber());
         		ret = db1.pst.executeQuery();
         		while(ret.next()){
         			countFlightInfo = ret.getInt("COUNT(*)");
         		}
         		ret.close();
         		if(countFlightInfo > 1)
-        			sql = "DELETE FROM lc_allocation WHERE lc_allocation.Flight_No = '"+ arrivalFlightInfo.getFlightCourse().getFlightNumber()
-        			+ "' and lc_allocation.Lname = '"+ arrivalFlightInfo.getLuggageCarousel()
-        			+ "' and lc_allocation.Time = '"
-        			+ arrivalFlightInfo.getTime()
-        			+ "'";//SQL语句
+        			{
+        			sql = "DELETE FROM lc_allocation WHERE lc_allocation.Flight_No = ? and lc_allocation.Lname = ? and lc_allocation.Time = ?";//SQL语句
+        			 db1.pst=db1.conn.prepareStatement(sql);
+        			 db1.pst.setString(1, arrivalFlightInfo.getFlightCourse().getFlightNumber());
+        			 db1.pst.setString(2, arrivalFlightInfo.getLuggageCarousel());
+        			 db1.pst.setString(3, arrivalFlightInfo.getTime());
+                     db1.pst.executeUpdate();//执行语句
+        			}
         		else
-        			sql = "DELETE lc_allocation,flight_arrival FROM lc_allocation INNER JOIN flight_arrival on lc_allocation.Flight_No = flight_arrival.Flight_No WHERE lc_allocation.Flight_No = '"
-        					 + arrivalFlightInfo.getFlightCourse().getFlightNumber()
-        			         + "' and lc_allocation.Lname = '"
-        					 + arrivalFlightInfo.getLuggageCarousel()
-        			         +  "' and lc_allocation.Time='"
-        					 + arrivalFlightInfo.getTime()+"'";//SQL语句
-                    db1.pst=db1.conn.prepareStatement(sql);
-                    db1.pst.executeUpdate();//执行语句
+        			{
+        			      sql = "DELETE lc_allocation,flight_arrival FROM lc_allocation INNER JOIN flight_arrival on lc_allocation.Flight_No = flight_arrival.Flight_No WHERE lc_allocation.Flight_No = ?" +
+        			      		" and lc_allocation.Lname = ? and lc_allocation.Time=?";//SQL语句
+        			      db1.pst=db1.conn.prepareStatement(sql);
+             			  db1.pst.setString(1, arrivalFlightInfo.getFlightCourse().getFlightNumber());
+             			  db1.pst.setString(2, arrivalFlightInfo.getLuggageCarousel());
+             			  db1.pst.setString(3, arrivalFlightInfo.getTime());
+                          db1.pst.executeUpdate();//执行语句 
+        			}
         	}catch(SQLException e){
         		e.printStackTrace();
         		return false;
@@ -978,37 +1042,74 @@ public class AdminDao {
     }
     public News[] searchNews(String title,String time,String publisher){
    	 
-//      /*
-//       * News[] searchN(String title,String time,String publisher);
-//       * 数据库操作：查询新闻标题为title，发布时间为time，发布人为publisher的新闻信息；若其中一形参值为空字符串，则表示无此限制条件
-//       * 形参为新闻标题、发布时间，返回类型为News对象数组
-//       */
+      /*
+       * News[] searchN(String title,String time,String publisher);
+       * 数据库操作：查询新闻标题为title，发布时间为time，发布人为publisher的新闻信息；若其中一形参值为空字符串，则表示无此限制条件
+       * 形参为新闻标题、发布时间，返回类型为News对象数组
+       */
    	 News[] news =null;
    	 int i=0;
-   	 if((!title.equals("")&&title!=null)&&(!time.equals("")&&time!=null)&&(publisher!=null&&!publisher.equals("")))
-   	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%' AND newscenter.Edit_time='"+time+"' AND user_info.Name = '"+publisher+"'";//SQL语句
-   	 else if((!title.equals("")&&title!=null)&&(time.equals("")||time==null)&&(publisher==null||publisher.equals("")))
-   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%'";//SQL语句
-   	 else if((title.equals("")||title==null)&&(!time.equals("")&&time!=null)&&(publisher==null||publisher.equals("")))
-   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time='"+time+"'";//SQL语句
-   	 else if((title.equals("")||title==null)&&(time.equals("")||time==null)&&(publisher!=null&&!publisher.equals("")))
-   	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE user_info.Name = '"+publisher+"'";//SQL语句
-   	 else if((!title.equals("")&&title!=null)&&(!time.equals("")&&time!=null)&&(publisher==null||publisher.equals("")))
-   	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%' AND newscenter.Edit_time='"+time+"'";//SQL语句
-   	 else if((!title.equals("")&&title!=null)&&(time.equals("")||time==null)&&(publisher!=null&&!publisher.equals("")))
-   	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like '%"+title+"%' AND user_info.Name = '"+publisher+"'";//SQL语句
-   	 else  if((title.equals("")||title==null)&&(!time.equals("")&&time!=null)&&(publisher!=null&&!publisher.equals("")))
-   	     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time='"+time+"' AND user_info.Name = '"+publisher+"'";//SQL语句
-   	 else 
-   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No";//SQL语句
-   	 db1= new db_connection(sql);//创建db_connection对象  
+     	sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No";//SQL语句
+   	 db1= new db_connection(sql);//创建db_connection对象 
    	 String newsId;
    	 String content;
    	 String kind;
    	 String publisher_id;
    	 String attachment;
    	 try {  
-   		 	ret = db1.pst.executeQuery();//执行语句，得到结果集  
+   		 if((!title.equals("")&&title!=null)&&(!time.equals("")&&time!=null)&&(publisher!=null&&!publisher.equals("")))
+   		 {
+   			 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ? AND newscenter.Edit_time=? AND user_info.Name = ?";//SQL语句   			  
+   			 db1.pst=db1.conn.prepareStatement(sql);
+   			 db1.pst.setString(1, "%"+title+"%");
+   			 db1.pst.setString(2, time);
+   			 db1.pst.setString(3, publisher);
+   		 }
+   	   	 else if((!title.equals("")&&title!=null)&&(time.equals("")||time==null)&&(publisher==null||publisher.equals("")))
+   	   	 {
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ?";//SQL语句
+   	       	 db1.pst=db1.conn.prepareStatement(sql);
+			 db1.pst.setString(1, "%"+title+"%");
+   	   	 }
+   	   	 else if((title.equals("")||title==null)&&(!time.equals("")&&time!=null)&&(publisher==null||publisher.equals("")))
+   	   	 {
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time=?";//SQL语句
+   	   	db1.pst=db1.conn.prepareStatement(sql);
+			 db1.pst.setString(1, time);
+   	   	 }
+   	   	 else if((title.equals("")||title==null)&&(time.equals("")||time==null)&&(publisher!=null&&!publisher.equals("")))
+   	   	 {
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE user_info.Name = ?";//SQL语句
+   	     	db1.pst=db1.conn.prepareStatement(sql);
+			 db1.pst.setString(1, publisher);
+   	   	 }
+   	   	 else if((!title.equals("")&&title!=null)&&(!time.equals("")&&time!=null)&&(publisher==null||publisher.equals("")))
+   	   	 {
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ? AND newscenter.Edit_time=?";//SQL语句
+   	    	db1.pst=db1.conn.prepareStatement(sql);
+			 db1.pst.setString(1, "%"+title+"%");
+			 db1.pst.setString(2, time);
+   	   	 }
+   	   	 else if((!title.equals("")&&title!=null)&&(time.equals("")||time==null)&&(publisher!=null&&!publisher.equals("")))
+   	   	 {
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ? AND user_info.Name = ?";//SQL语句
+   	    	db1.pst=db1.conn.prepareStatement(sql);
+			 db1.pst.setString(1, "%"+title+"%");
+			 db1.pst.setString(2, publisher);
+   	   	 }
+   	   	 else  if((title.equals("")||title==null)&&(!time.equals("")&&time!=null)&&(publisher!=null&&!publisher.equals("")))
+   	   	 {
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time=? AND user_info.Name = ?";//SQL语句
+   	    	db1.pst=db1.conn.prepareStatement(sql);
+			 db1.pst.setString(1, time);
+			 db1.pst.setString(2, publisher);
+   	   	 }
+   	   	 else 
+   	   		 {
+   	   		     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No";//SQL语句
+   	   		 }
+
+   		 	ret = db1.pst.executeQuery();
    		 	ret.last();
 	            int rowNumber=ret.getRow();
 	            ret.beforeFirst();

@@ -205,7 +205,7 @@ String id=request.getParameter("news-id");
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="<%=basePath %>Public/News/Intro.jsp">新闻中心</a>
+              <a>新闻中心</a>
             </li>
             
               <% 
@@ -298,13 +298,6 @@ String id=request.getParameter("news-id");
          	    	out.println("<input type='text' style='display:none' name='type' value='物业资源' >");
          	}
             %>
-            <%-- <div class="form-group">
-              <label for="news-context" class="col-sm-2 control-label">新闻id：</label>
-              <div class="col-sm-6">
-                 <input type='text' class='form-control' name='id'  data-error='请输入id*' autocomplete='off' value="<%if(id!=null&&!id.equals("null")) out.print(id); %>" required>
-              </div>
-              <div class="help-block with-errors">*</div>
-            </div> --%>
             <input type='text' class='hide' name='id' value="<%if(id!=null&&!id.equals("null")) out.print(id); %>">
             <div class="form-group">
               <label for="news-context" class="col-sm-2 control-label">新闻正文：</label>
@@ -317,42 +310,7 @@ String id=request.getParameter("news-id");
               <div class="col-sm-2"></div>
               <div class="col-sm-6"></div>
             </div>
-           <!-- 
-            <table class="table table-hover select-table">
-              <thead>
-                <tr>
-                  <th>附件</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr data-id="10001">
-                  <td>附件1</td>
-                  <td>
-                    <a href="">删除</a>
-                  </td>
-                </tr>
-                <tr data-id="10002">
-                  <td>附件二</td>
-                  <td>
-                    <a href="">删除</a>
-                  </td>
-                </tr>
-                <tr data-id="10003">
-                  <td>附件三</td>
-                  <td>
-                    <a href="">删除</a>
-                  </td>
-                </tr>
-                <tr data-id="10004">
-                  <td>上传新附件：</td>
-                  <td>
-                    <input name="" type="file">
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-             -->
+           
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">
                 <a id="btn-save" class="btn btn-success">            
@@ -426,11 +384,7 @@ String id=request.getParameter("news-id");
     
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      <p class="text-center">©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
     <!--[if lt IE 9]>

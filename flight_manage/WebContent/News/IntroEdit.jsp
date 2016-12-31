@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 News news;
 news=(News)session.getAttribute("intro");
-String newsId="NX10001";
+String newsId="";
 String title="";
 String id="";
 String content="";
@@ -163,7 +163,7 @@ newsId=news.getNewsId();
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="<%=basePath %>Public/News/Intro.jsp">新闻中心</a>
+              <a>新闻中心</a>
             </li>
             <li>
               <a href="<%=basePath%>Public/News/Intro.jsp">机场介绍</a>
@@ -287,11 +287,7 @@ newsId=news.getNewsId();
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      <p class="text-center">©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
     <!--[if lt IE 9]>

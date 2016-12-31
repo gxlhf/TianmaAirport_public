@@ -43,7 +43,7 @@ else
   	Integer addResult=(Integer)request.getAttribute("addResult");
   	if(addResult!=null){
   		if(addResult.equals(0)){
-			out.println("<script>alert('新增失败')</script>");
+			out.println("<script>alert('新增失败\\n若新增成功后刷新页面，也会出现此弹框。')</script>");
   		}else if(addResult.equals(1)){
 	  		out.println("<script>alert('新增成功')</script>");
   		}
@@ -52,7 +52,7 @@ else
   	Integer deleteResult=(Integer)request.getAttribute("deleteResult");
   	if(deleteResult!=null){
   		if(deleteResult.equals(0)){
-			out.println("<script>alert('删除失败')</script>");
+			out.println("<script>alert('删除失败\\n若删除成功后刷新页面，也会出现此弹框。')</script>");
   		}else if(deleteResult.equals(1)){
 	  		out.println("<script>alert('删除成功')</script>");
   		}
@@ -182,20 +182,18 @@ else
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">用户与角色管理</a>
+              <a>用户与角色管理</a>
             </li>
             <li class="active">用户管理</li>
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
-          <%-- <%
-          Admin[] admins = admin.searchAdmin("", "", -1, "", "");
-          %> --%>
-          <form class="form-horizontal" role="form" action="<%=basePath%>SearchAdmin">
+          <form class="form-horizontal" role="form" action="<%=basePath%>SearchAdmin" data-toggle="validator">
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="search-empno">
+                <input type="text" class="form-control" name="search-empno" pattern='\d{4}' data-error='请填写4位员工号'>
               </div>
+              <div class="col-sm-2 help-block with-errors"></div>
             </div>
             <div class="form-group">
               <label for="user-name" class="col-sm-2 control-label">姓名：</label>
@@ -226,14 +224,6 @@ else
                   <%
                   	}
                   %>
-                  <%-- <%
-                  for(Admin output:admins)
-                  {
-                	  out.println("<option value='"+output.getPosition()+"'>"+output.getPosition()+"</option>");
-                  }
-                  %> --%>
-                  <!-- <option value="机场地勤人员">机场地勤人员</option>
-                  <option value="信息技术员">信息技术员</option> -->
                 </select>
               </div>
             </div>
@@ -250,10 +240,6 @@ else
                   <%
                   	}
                   %>
-                  <!-- <option value="系统管理员">系统管理员</option>
-                  <option value="航班信息管理员">航班信息管理员</option>
-                  <option value="机场设施管理员">机场设施管理员</option>
-                  <option value="新闻管理员">新闻管理员</option> -->
                 </select>
               </div>
             </div>
@@ -273,27 +259,26 @@ else
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Admin[] adminInfos = (Admin[])request.getAttribute("adminsInfo");
             	String ul_path = "SearchAdmin?search-empno="+request.getParameter("search-empno")+"&search-name="+request.getParameter("search-name")+"&search-sex="+request.getParameter("search-sex")+"&search-position="+request.getParameter("search-position")+"&search-role="+request.getParameter("search-role")+"&page=";
-            	if(adminInfos.length==0)
-   			    	response.sendRedirect(basePath+"User/UserAdmin.jsp");
-            	else
+            	
+   			    if(adminInfos.length!=0)
             	{
             		if(adminInfos.length%10==0)
                     {
                       	if(Integer.parseInt(p)>adminInfos.length/10)
                       		response.sendRedirect(basePath+ul_path+Integer.toString(adminInfos.length/10)); 
-                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                      			
                     }
                     else
                     {
                       	if(Integer.parseInt(p)>adminInfos.length/10 + 1)
                       		response.sendRedirect(basePath+ul_path+Integer.toString(adminInfos.length/10 + 1)); 
-                      			/* response.sendRedirect(basePath+"error.jsp"); */
+                      			
                     }
             	}
             	
             	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
-            		if(i>=adminInfos.length)
+            		if(i>=adminInfos.length||adminInfos.length==0)
         		         break;
             		out.println("<tr data-id='empno="+adminInfos[i].getEmpno()+"'>");
             		out.println("<td><span class='glyphicon'></span></td>");
@@ -312,54 +297,26 @@ else
             		out.println("<td>"+adminInfos[i].getRole().getName()+"</td>");
             		out.println("</tr>");
             	}
-            	/* out.println("<tr data-id='"+roleInfo.getName()+"'>");
-            	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-            	out.println("<td>"+"1"+"</td>");
-            	out.println("<td>"+roleInfo.getName()+"</td>");
-            	out.println("<td>"+roleInfo.getDescription()+"</td>"); */
-                /* for(ArrivalFlightInfo output:arrivalFlightInfos)
-                {
-                	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
-                	if(session.getAttribute("priv1")!=null){
-                    	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                    }else{
-                  	  out.println("<td></td>");
-                    }
-                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
-        				out.println("</tr>");
-                	}
-                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
-        				out.println("</tr>");
-                	}         
-                } */
+            	
+                
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'>");
-       		    if(!p.equals("1"))
-               	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-       		    if(adminInfos.length%10==0)
+                if(adminInfos.length!=0)
                 {
-               	    if(Integer.parseInt(p)!=adminInfos.length/10)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                	if(!p.equals("1"))
+                   	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+           		    if(adminInfos.length%10==0)
+                    {
+                   	    if(Integer.parseInt(p)!=adminInfos.length/10)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
+                    else
+                    {
+                   	    if(Integer.parseInt(p)!=adminInfos.length/10 + 1)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
                 }
-                else
-                {
-               	    if(Integer.parseInt(p)!=adminInfos.length/10 + 1)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                }
+       		    
                 out.println("</ul></div>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteAdmin'>删除</a><a class='btn btn-success' href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
             }
@@ -367,21 +324,20 @@ else
             {
             	Admin[] admins = admin.searchAdmin("", "", -1, "", "");
             	String ul_path = "User/UserAdmin.jsp?page=";
-   			    if(admins.length==0)
-   			    	response.sendRedirect(basePath+"User/UserAdmin.jsp");
-   			    else
+   			    
+   			    if(admins.length!=0)
    			    {
    			    	if(admins.length%10==0)
    	                {
    	                  	if(Integer.parseInt(p)>admins.length/10)
    	                  		response.sendRedirect(basePath+ul_path+Integer.toString(admins.length/10)); 
-   	                  			/* response.sendRedirect(basePath+"error.jsp"); */
+   	                  			
    	                }
    	                else
    	                {
    	                  	if(Integer.parseInt(p)>admins.length/10 + 1)
    	                  		response.sendRedirect(basePath+ul_path+Integer.toString(admins.length/10 + 1)); 
-   	                  			/* response.sendRedirect(basePath+"error.jsp"); */
+   	                  			
    	                }
    			    }
             	
@@ -390,7 +346,7 @@ else
             	out.println("<th>员工号</th><th>姓名</th><th>性别</th><th>电话</th><th>手机</th><th>邮箱</th><th>部门</th><th>职位</th><th>角色</th></tr></thead><tbody>");
             	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
-            		if(i>=admins.length)
+            		if(i>=admins.length||admins.length==0)
         		         break;
             		out.println("<tr data-id='empno="+admins[i].getEmpno()+"'>");
             		out.println("<td><span class='glyphicon glyphicon'></span></td>");
@@ -411,18 +367,22 @@ else
             	}
             	out.println("</tbody></table>");
             	out.println("<div><ul class='pager'>");
-       		    if(!p.equals("1"))
-               	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-       		    if(admins.length%10==0)
-                {
-               	    if(Integer.parseInt(p)!=admins.length/10)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                }
-                else
-                {
-               	    if(Integer.parseInt(p)!=admins.length/10 + 1)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                }
+            	if(admins.length!=0)
+            	{
+            		if(!p.equals("1"))
+                   	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+           		    if(admins.length%10==0)
+                    {
+                   	    if(Integer.parseInt(p)!=admins.length/10)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
+                    else
+                    {
+                   	    if(Integer.parseInt(p)!=admins.length/10 + 1)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
+            	}
+       		    
                 out.println("</ul></div>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a id='btn-modify' class='btn btn-primary' href='"+basePath+"User/UserEdit.jsp'>修改</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"DeleteAdmin'>删除</a><a class='btn btn-success' href='"+basePath+"User/UserEdit.jsp'>新增</a></div></div>");
             	
@@ -431,13 +391,6 @@ else
             // 例如需要将变量名为"EmpNo"值为"1004"和变量名为"Type"值为"1"的两个参数传送到jsp页面，则data-id填写的是"EmpNo=1004&Type=1"
             
             %>
-          <%-- <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="<%=basePath%>Role/RoleEdit.jsp">修改</a>
-              <a class="btn btn-danger" href="">删除</a>
-              <a class="btn btn-success" href="">新增</a>
-            </div>
-          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
@@ -547,11 +500,7 @@ else
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      <p class="text-center">©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
     <!--[if lt IE 9]>
@@ -565,6 +514,7 @@ else
     <!--<![endif]-->
 
     <script src="<%=basePath%>/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/validator.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/public.js"></script>

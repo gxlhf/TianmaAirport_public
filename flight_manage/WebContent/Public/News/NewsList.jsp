@@ -44,7 +44,7 @@ else
 					}
 			}else if(forward.equals("delete")){
 				if(re.equals(0)){
-		  			out.println("<script>alert('删除失败')</script>");
+		  			out.println("<script>alert('删除失败\\n若删除成功后刷新页面，也会出现此弹框。')</script>");
 					}else if(re.equals(1)){
 		  			out.println("<script>alert('删除成功')</script>");
 					}
@@ -227,7 +227,7 @@ else
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="<%=basePath %>Public/News/Intro.jsp">新闻中心</a>
+              <a>新闻中心</a>
             </li>
             <li class="active"><%
             if(type.equals("flightInformation"))
@@ -287,23 +287,14 @@ else
                 </th> -->
                 <!-- <th>序号</th> -->
                 <th>新闻标题</th>
-                <th>发布时间</th>
-                <th>发布人</th>
+                <th>最后修改时间</th>
+                <th>最后修改人</th>
               </tr>
             </thead>
             <tbody>
 			<%
 				News[] news=(News[])request.getAttribute("news");
-							/*
-						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
-						out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
-						if(session.getAttribute("priv2")!=null){
-			                	out.println("<td><span class='glyphicon'></span></td>");
-			                }else{
-			              	  out.println("<td></td>");
-			                }
-			                out.println(" <td><a href='"+basePath+"/Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
-						}*/
+							
 				if(news==null){
 					List<News>newslist=new LinkedList<News>();
 					User user=new User();
@@ -315,20 +306,7 @@ else
 					}
 					int size=newslist.size();
 					news=(News[])newslist.toArray(new News[size]);
-					/*
-					news=user.returnAllNews();
-					session.setAttribute("news", news);
-					for(int i=0;i<news.length;i++){
-						if(news[i].getKind().equals("航班信息")&&type.equals("flightInformation")||news[i].getKind().equals("机场资源")&&type.equals("airportResource")||news[i].getKind().equals("物业资源")&&type.equals("facilityResource")){
-						out.println(" <tr data-id='&news-id="+news[i].getNewsId()+"'>");
-						 if(session.getAttribute("priv2")!=null){
-			                	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-			                }else{
-			              	  out.println("<td></td>");
-			                }
-			                out.println(" <td><a href='"+basePath+"Public/News/NewsDetail.jsp?id="+news[i].getNewsId()+"'>"+news[i].getTitle()+"</a></td><td>"+news[i].getTime()+"</td><td>"+news[i].getPublisher_name()+"</td> </tr>");
-					}
-				}*/
+					
 				}
 				request.setAttribute("news", news);
 				request.getSession().setAttribute("news", news);
@@ -402,11 +380,6 @@ else
         	  out.println(" <div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-success' href='"+basePath+"News/NewsEdit.jsp?type="+type+"&todo=add'>新增</a><a id='btn-delete' class='btn btn-danger' href='"+basePath+"News/NewsDelete?type=null'>删除</a><a id='btn-modify' class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"'>修改</a></div></div>");
           }
           %>
-          <%-- <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="<%=basePath%>News/NewsEdit.jsp">修改</a>
-            </div>
-          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
@@ -437,13 +410,13 @@ else
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-xs-3 control-label">发布时间：</label>
+                  <label class="col-xs-3 control-label">最后修改时间：</label>
                   <div class="col-xs-9">
                     <p class="form-control-static">321</p>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-xs-3 control-label">发布人：</label>
+                  <label class="col-xs-3 control-label">最后修改人：</label>
                   <div class="col-xs-9">
                     <p class="form-control-static">123</p>
                   </div>
@@ -485,11 +458,7 @@ else
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      <p class="text-center">©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
     <!--[if lt IE 9]>

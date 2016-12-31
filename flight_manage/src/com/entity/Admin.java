@@ -15,6 +15,10 @@ import java.io.Serializable;
 import com.dao.*;
 
 public class Admin extends User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String empno;
 	String name;
 	int sex;
@@ -133,7 +137,7 @@ public class Admin extends User implements Serializable{
 		return result;
 	}
 	
-	//查询角色函数，输入参数为角色名称，返回一个Role对象；若无权限操作，则返回含有一个Role对象的对象数组，其name成员值为-1；
+	//查询角色函数，输入参数为角色名称，返回一个Role对象；若无权限操作，则返回一个Role对象，其name成员值为-1；
 	public Role searchRole(String name)
 	{
 		Role role = null;

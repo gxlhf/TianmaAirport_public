@@ -189,18 +189,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
               	<%
               	}
               	%>
-                <%-- <li class="curmenu">
-                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=local">国内到港</a>
-                </li>
-                <li>
-                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=local">国内离港</a>
-                </li> --%>
-                <%-- <li>
-                  <a href="<%=basePath%>Public/Flight/ArrivalFlightInfoCheck.jsp?area=international">国际到港</a>
-                </li>
-                <li>
-                  <a href="<%=basePath%>Public/Flight/DepartureFlightInfoCheck.jsp?area=international">国际离港</a>
-                </li> --%>
               </ul>
             </li>
             <%
@@ -321,7 +309,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">航班信息</a>
+              <a>航班信息</a>
             </li>
             <li>
             <%
@@ -356,9 +344,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	}
             }
             %>
-            <!-- <li>
-              <a href="#">国内到港</a>
-            </li> -->
             </li>
             <%
             if(request.getParameter("flightNumber")!=null&&request.getParameter("time")!=null&&request.getParameter("area")!=null&&request.getParameter("type")!=null)
@@ -372,7 +357,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
           <%
           if(request.getParameter("flightNumber")!=null&&request.getParameter("time")!=null&&request.getParameter("area")!=null&&request.getParameter("type")!=null)
           {
-        	  /* System.out.println(request.getParameter("time")); */
+        	  
         	  String[] t1 = request.getParameter("time").split(":");
         	  String time = t1[0]+":"+t1[1];
         	  User user = new User();
@@ -381,15 +366,15 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
         	  if(request.getParameter("type").equals("departure"))
         	  {
         		  departureFlightModifyInfo = user.searchDepartureFlightInfo("", request.getParameter("flightNumber"), "", time);
-        	      /* System.out.println(departureFlightModifyInfo[0].getFlightCourse().getAirline()); */
+        	      
         	  }
         	  if(request.getParameter("type").equals("arrival"))
         	  {
         		  arrivalFlightModifyInfo = user.searchArrivalFlightInfo("", request.getParameter("flightNumber"), "", time);
-        		  /* System.out.println(arrivalFlightModifyInfo[0].getFlightCourse().getAirline()); */
+        		  
         	  }
         		  
-        	  /* System.out.println(t1[0]+":"+t1[1]); */
+        	  
           %>
           <form action="<%
             		if(request.getParameter("type").equals("departure"))
@@ -454,7 +439,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             		  out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getFrom()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getFrom()+"</option>");
             		  if(request.getParameter("area").equals("local"))
                       {
-                		  /* String[] result = user.returnAllLocalFrom(); */
+                		  
                 		  for(String output:localFrom)
                 		  {
                 			  if(request.getParameter("type").equals("departure"))
@@ -489,9 +474,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             		  
             	  
                   %>
-                  <!-- <option value=""></option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option> -->
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -548,9 +530,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	  	  }
             	  }
                   %>
-                  <!-- <option></option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option> -->
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors"></div>
@@ -567,7 +546,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             		  out.println("<option value='"+departureFlightModifyInfo[0].getFlightCourse().getTo()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getTo()+"</option>");
             		  if(request.getParameter("area").equals("local"))
                       {
-                		  /* String[] result = user.returnAllLocalFrom(); */
+                		  
                 		  for(String output:localTo)
                 		  {
                 			  if(request.getParameter("type").equals("departure"))
@@ -600,9 +579,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                 	  }
             	  }
                   %>
-                  <!-- <option></option>
-                  <option>机场地勤人员</option>
-                  <option>信息技术员</option> -->
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -656,11 +632,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	  }
                       
                   %>
-                  <!-- <option value="航司1">
-                  <option value="航司2">
-                  <option value="航司3">
-                  <option value="航司4">
-                  <option value="航司5"> -->
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -682,12 +653,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             				out.println("<option value='"+output.getName()+"'>"+output.getName()+"</option>");
             		}
                   %>
-                  <!-- <option value=""></option>
-                  <option value="转盘1">转盘1</option>
-                  <option value="转盘2">转盘2</option>
-                  <option value="转盘3">转盘3</option>
-                  <option value="转盘4">转盘4</option>
-                  <option value="转盘5">转盘5</option> -->
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -705,11 +670,11 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	int count=0;
             	for(String checkincounteroutput:departureFlightModifyInfo[0].getCheckinCounter())
             	{
-            		/* System.out.println(checkincounteroutput); */
+            		
             		if(checkincounteroutput!=null)
             		{
             			
-            			/* String t3[] = checkincounteroutput.split("台"); */
+            			
             			if(flag==1)
             			{
             				checkincounters = checkincounters + checkincounteroutput;
@@ -732,7 +697,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             			j++;
             		}
             	}
-            	/* System.out.println(checkincounters); */
+            	
             %>
             <div class="form-group">
               <label for="flight-counter" class="col-sm-2 control-label">值机柜台：</label>
@@ -740,12 +705,10 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                 <input type="text" class="form-control no-height" name="flight-counter" id="inp-flight-counter-mirror" data-required-error='请选择值机柜台*' required>
                 <input type="text" class="form-control" id="inp-flight-counter">
               </div>
-
-
               <!-- 放置值机柜台信息 -->
               <%
               	AirportResource[] checkinCounter = user.searchAirportResource("", "值机柜台");
-                /* int count = checkinCounter.length; */
+                
             	int i=0;
                 String[] checkinCounterName = new String[checkinCounter.length];
             	for(AirportResource output:checkinCounter)
@@ -757,14 +720,9 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	JSONArray jsonArray = JSON.parseArray(json_arr_String);
             	String selectedCounterListTemp = JSON.toJSONString(selectedCounters,true);
             	JSONArray selectedCounterListJson = JSON.parseArray(selectedCounterListTemp);
-            	/* System.out.println(selectedCounterListJson); */
-            	/* System.out.println(jsonArray); */
-            	/* System.out.println(checkinCounterName[5]); */
-            	/* JSONArray jsonarray = JSONArray.fromObject(checkinCounterName); */
-            	/* System.out.println(jsonarray); */
               %>
               <script>
-                /* var counterList = ['值机柜台01', '值机柜台02', '值机柜台03', '值机柜台04', '值机柜台05', '值机柜台06', '值机柜台08', '值机柜台09', '值机柜台10']; */
+                
                 var counterList = <%=jsonArray %>;
                 var selectedCounterList = <%=selectedCounterListJson %>;
               </script>
@@ -784,12 +742,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             				out.println("<option value='"+output.getName()+"'>"+output.getName()+"</option>");
             		}
                   %>
-                  <!-- <option value="登机门1"></option>
-                  <option value="登机门1">登机门1</option>
-                  <option value="登机门2">登机门2</option>
-                  <option value="登机门3">登机门3</option>
-                  <option value="登机门4">登机门4</option>
-                  <option value="登机门5">登机门5</option> -->
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -829,7 +781,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             <div class="form-group">
               <label for="flight-no" class="col-sm-2 control-label">航班号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="flight-id" pattern="([A-z]{2}[0-9]{3,4}|[A-z][0-9]{4,5}|[0-9][A-z]{1}[0-9]{3,4})" data-required-error='请填写航班号*' data-pattern-error='请填写正确的航班号*'  data-checkcode="checkcode" data-validate="true" required>
+                <input type="text" class="form-control" name="flight-id" pattern="([A-z]{2}[0-9]{3,4}|[A-z][0-9]{4,5}|[0-9][A-z]{1}[0-9]{3,4})" data-required-error='请填写航班号*' data-pattern-error='请填写正确的航班号*'  data-checkcode="checkcode" data-validate="true" data-checkonly="<%
+                		if(request.getParameter("type").equals("departure"))
+                        	out.println(basePath+"AddDepartureFlightInfo");
+                        if(request.getParameter("type").equals("arrival"))
+                        	out.println(basePath+"AddArrivalFlightInfo");
+                %>" required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -840,7 +797,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             <div class="form-group">
               <label for="flight-dep-time" class="col-sm-2 control-label">离港时间：</label>
               <div class="col-sm-6">
-                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-dep-time" data-required-error='请填写离港时间*' required>
+                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-dep-time" data-required-error='请填写离港时间*'  data-validate="true" data-checkonly="<%
+                    if(request.getParameter("type").equals("departure"))
+                          out.println(basePath+"AddDepartureFlightInfo");
+                        if(request.getParameter("type").equals("arrival"))
+                          out.println(basePath+"AddArrivalFlightInfo");
+                %>" required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -854,7 +816,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             <div class="form-group">
               <label for="flight-arr-time" class="col-sm-2 control-label">到港时间：</label>
               <div class="col-sm-6">
-                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-arr-time" data-required-error='请填写到港时间*' required>
+                <input type="datetime" format="yyyy-mm-dd hh:ii" startview="0" minview="0" maxview="4" class="form-control" name="flight-arr-time" data-required-error='请填写到港时间*' data-validate="true" data-checkonly="<%
+                    if(request.getParameter("type").equals("departure"))
+                          out.println(basePath+"AddDepartureFlightInfo");
+                        if(request.getParameter("type").equals("arrival"))
+                          out.println(basePath+"AddArrivalFlightInfo");
+                %>"  required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -875,7 +842,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             		  out.println("<option value=''></option>");
             		  if(request.getParameter("area").equals("local"))
                       {
-                		  /* String[] result = user.returnAllLocalFrom(); */
+                		  
                 		  for(String output:localFrom)
                 		  {
                 			  out.println("<option value='"+output+"'>"+output+"</option>");
@@ -918,8 +885,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	  	  }
             	  }
                   %>
-                  <!-- <option>机场地勤人员</option>
-                  <option>信息技术员</option> -->
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors"></div>
@@ -936,7 +901,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                 	  out.println("<option value=''></option>");
                 	  if(request.getParameter("area").equals("local"))
                       {
-                		  /* String[] result = user.returnAllLocalFrom(); */
+                		  
                 		  for(String output:localTo)
                 		  {
                 			  out.println("<option value='"+output+"'>"+output+"</option>");
@@ -953,8 +918,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                   if(request.getParameter("type").equals("arrival"))
                 	  out.println("<option value='长沙'>长沙</option>");
                   %>
-                  <!-- <option>机场地勤人员</option>
-                  <option>信息技术员</option> -->
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -982,11 +945,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             		  }
             	  }
                   %>
-                  <!-- <option>航司1</option>
-                  <option>航司2</option>
-                  <option>航司3</option>
-                  <option>航司4</option>
-                  <option>航司5</option> -->
                 </select>
                 <!-- jQuery UI Autocomplete -->
               </div>
@@ -1007,11 +965,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             		for(AirportResource output:luggageCarousel)
             			out.println("<option value='"+output.getName()+"'>"+output.getName()+"</option>");
                   %>
-                  <!-- <option>转盘1</option>
-                  <option>转盘2</option>
-                  <option>转盘3</option>
-                  <option>转盘4</option>
-                  <option>转盘5</option> -->
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -1039,7 +992,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
               <%
               	User user = new User();
               	AirportResource[] checkinCounter = user.searchAirportResource("", "值机柜台");
-                /* int count = checkinCounter.length; */
+                
             	int i=0;
                 String[] checkinCounterName = new String[checkinCounter.length];
             	for(AirportResource output:checkinCounter)
@@ -1050,11 +1003,11 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	String json_arr_String = JSON.toJSONString(checkinCounterName,true); 
             	JSONArray jsonArray = JSON.parseArray(json_arr_String);
             	
-            	/* System.out.println(selectedCounterListJson); */
-            	/* System.out.println(jsonArray); */
-            	/* System.out.println(checkinCounterName[5]); */
-            	/* JSONArray jsonarray = JSONArray.fromObject(checkinCounterName); */
-            	/* System.out.println(jsonarray); */
+            	
+            	
+            	
+            	
+            	
               %>
               <script>
               	var counterList = <%=jsonArray %>;
@@ -1071,10 +1024,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             		for(AirportResource output:boardingGate)
             			out.println("<option value='"+output.getName()+"'>"+output.getName()+"</option>");
                   %>
-                  <!-- <option>登机门2</option>
-                  <option>登机门3</option>
-                  <option>登机门4</option>
-                  <option>登机门5</option> -->
                 </select>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -1082,17 +1031,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             <%
             }
             %>
-            
-            <!-- <div class="form-group">
-              <label for="flight-gate" class="col-sm-2 control-label">登机门：</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" id="inp-flight-gate1" name="flight-gate" data-required-error='请选择登机门*' required>
-                <div>
-                  <input type="text" class="form-control" id="inp-flight-gate1-org">
-                </div>
-              </div>
-              <div class="col-sm-2 help-block with-errors">*</div>
-            </div> -->
             <div class="col-sm-6 btn-modify">
               <div class="btn-group btn-group-justified">      
                 <a id="btn-save" class="btn btn-success">新增</a>
@@ -1232,11 +1170,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组
+      <p class="text-center">©2016 软件1401班第三组
       </p>
     </footer>
     <!-- 尾部结束 -->

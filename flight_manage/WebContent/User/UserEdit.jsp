@@ -146,10 +146,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">用户与角色管理</a>
+              <a>用户与角色管理</a>
             </li>
             <li>
-              <a href="<%=basePath%>User/UserEdit.jsp">用户管理</a>
+              <a href="<%=basePath%>User/UserAdmin.jsp">用户管理</a>
             </li>
             <li class="active">
             <%
@@ -162,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <%
-          	if(request.getParameter("empno")!=null){
+          	if(request.getParameter("empno")!=null&&admin.searchAdmin(request.getParameter("empno"), "", -1, "", "")!=null){
           		
           		Admin[] adminModify = admin.searchAdmin(request.getParameter("empno"), "", -1, "", "");
           	
@@ -172,9 +172,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-              <%-- <%
-              	out.println("<input type='text' class='form-control' name='user-id' pattern='\\d{4}' data-error='请填写4位员工号*' value='"+adminModify[0].getEmpno()+"' required disabled>");
-              %> --%>
                  <input type="text" class="form-control" name="user-id" pattern='\\d{4}' data-error="请填写4位员工号*" value="<%=adminModify[0].getEmpno() %>" required readonly> 
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
@@ -323,14 +320,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-phone" class="col-sm-2 control-label">电话：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-phone" value="<%=adminModify[0].getPhone() %>">
+                <input type="text" pattern="\d*" data-pattern-error="请输入正确的电话" class="form-control" name="user-phone" value="<%=adminModify[0].getPhone() %>">
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>
             <div class="form-group">
               <label for="user-tel" class="col-sm-2 control-label">手机号：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="user-tel"  value="<%=adminModify[0].getMobile() %>">
+                <input type="text" pattern="\d*" data-pattern-error="请输入正确的手机号" class="form-control" name="user-tel"  value="<%=adminModify[0].getMobile() %>">
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>
@@ -370,10 +367,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-              <%-- <%
-              	out.println("<input type='text' class='form-control' name='user-id' pattern='\\d{4}' data-error='请填写4位员工号*' value='"+adminModify[0].getEmpno()+"' required disabled>");
-              %> --%>
-                 <input type="text" class="form-control" name="user-id" pattern="\d{4}" data-pattern-error="请填写4位员工号*" data-required-error="请填写4位员工号*" data-remote="<%=basePath%>/CheckEmpno" data-remote-error="该员工号已被占用*" required> 
+                 <input type="text" class="form-control" name="user-id" pattern="\d{4}" data-pattern-error="请填写4位员工号*" data-required-error="请填写4位员工号*" data-remote="<%=basePath%>AddAdmin" data-remote-error="该员工号已被占用*" required> 
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -456,14 +450,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-phone" class="col-sm-2 control-label">电话：</label>
               <div class="col-sm-6">
-                <input type="text" pattern="\d*" class="form-control" name="user-phone" >
+                <input type="text" pattern="\d*" data-pattern-error="请输入正确的电话" class="form-control" name="user-phone" >
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>
             <div class="form-group">
               <label for="user-tel" class="col-sm-2 control-label">手机号：</label>
               <div class="col-sm-6">
-                <input type="text" pattern="\d*" class="form-control" name="user-tel" >
+                <input type="text" pattern="\d*" data-pattern-error="请输入正确的手机号" class="form-control" name="user-tel" >
               </div>
               <div class="col-sm-2 help-block with-errors"> </div>
             </div>
@@ -592,11 +586,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      <p class="text-center">©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
     <!--[if lt IE 9]>

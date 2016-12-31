@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.entity.Admin;
+import com.entity.ArrivalFlightInfo;
 import com.entity.DepartureFlightInfo;
 import com.entity.FlightCourse;
+import com.entity.User;
 
 /**
  * Servlet implementation class AddDepartureFlightInfo
@@ -31,7 +33,14 @@ public class AddDepartureFlightInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		User user = new User();
+		DepartureFlightInfo[] departureFlightInfos = user.searchDepartureFlightInfo("", request.getParameter("flight-id"), "", request.getParameter("flight-dep-time"));
+		if(departureFlightInfos.length == 0)
+			response.setStatus(200);
+		else 
+			response.setStatus(400);
 	}
 
 	/**

@@ -233,6 +233,12 @@ nav .text-info:hover {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+.breadcrumb > li:first-child a:hover{
+    color: #428bca;
+    text-decoration: none;
+    cursor: context-menu;
+}
+
 @media (max-width: 992px) {
     #content {
         border-radius: 9px 9px 9px 9px;

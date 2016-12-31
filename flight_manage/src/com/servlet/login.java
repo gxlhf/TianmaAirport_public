@@ -1,19 +1,14 @@
 package com.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.OverlayLayout;
 import javax.servlet.http.*;
 
 import com.entity.Admin;
-import com.entity.Role;
-import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 import com.dao.*;
 import com.servlet.Regex;
 
@@ -133,7 +128,7 @@ public class login extends HttpServlet {
 			}*/
 			
 		}else{
-			result ="登陆失败，请重新登陆";
+			result ="员工号或密码不正确";
 			request.setAttribute("result", result);
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			//response.sendRedirect("login.jsp");

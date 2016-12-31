@@ -43,7 +43,7 @@ else
   	Integer addResult=(Integer)request.getAttribute("addResult");
   	if(addResult!=null){
   		if(addResult.equals(0)){
-			out.println("<script>alert('新增失败')</script>");
+			out.println("<script>alert('新增失败\\n若新增成功后刷新页面，也会出现此弹框。')</script>");
   		}else if(addResult.equals(1)){
 	  		out.println("<script>alert('新增成功')</script>");
   		}
@@ -52,7 +52,7 @@ else
   	Integer deleteResult=(Integer)request.getAttribute("deleteResult");
   	if(deleteResult!=null){
   		if(deleteResult.equals(0)){
-			out.println("<script>alert('删除失败')</script>");
+			out.println("<script>alert('删除失败\\n若该机场资源正被航班信息占用，则会导致删除失败。\\n或是删除成功后刷新页面，也会出现此弹框。')</script>");
   		}else if(deleteResult.equals(1)){
 	  		out.println("<script>alert('删除成功')</script>");
   		}
@@ -145,7 +145,7 @@ else
                 </li>
                 <%
                 	if(session.getAttribute("priv2")!=null)
-                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp'>发布新闻</a></li>");
+                		out.println("<li><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
                 %>
                 
               </ul>
@@ -181,7 +181,6 @@ else
                   else
                 	  out.println("<a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a>");
                   %>
-                  <!-- <a href="#">机场资源</a> -->
                 </li>
                 <li role="presentation">
                   <a href="<%=basePath%>Public/Facility/Facility.jsp">物业设施</a>
@@ -193,7 +192,7 @@ else
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">机场设施管理</a>
+              <a>机场设施管理</a>
             </li>
             <li class="active">机场资源</li>
           </ol>
@@ -245,41 +244,27 @@ else
         	  
         	  //int i=1;
         	  AirportResource[] resourceInfos = (AirportResource[])request.getAttribute("resourceInfo");
-        	  if(resourceInfos.length==0)
- 		          response.sendRedirect(basePath+"Public/Facility/Resource.jsp");
-        	  else
+        	  
+ 		      if(resourceInfos.length!=0)
         	  {
         		  if(resourceInfos.length%10==0)
                   {
                       if(Integer.parseInt(p)>resourceInfos.length/10)
                           response.sendRedirect(basePath+ul_path+Integer.toString(resourceInfos.length/10)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                   }
                   else
                   {
                       if(Integer.parseInt(p)>resourceInfos.length/10 + 1)
                           response.sendRedirect(basePath+ul_path+Integer.toString(resourceInfos.length/10 + 1)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                   }
         	  }
         	  
-        	  /* for (AirportResource output:resourceInfos) {
-                  out.println("<tr data-id='rname="+ output.getName() + "'>");
-                  if(session.getAttribute("priv0")!=null){
-                      out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                    }else{
-                      out.println("<td></td>");
-                    }
-                    //out.println("<td>"+ i +"</td>");
-                    out.println("<td>" + output.getName() + "</td>");
-                    out.println("<td>" + output.getLocation() + "</td>");
-                    out.println("<td>" + output.getRemark() + "</td></tr>");
-                    //i++;
-              }
-        	  out.println("</tbody></table>"); */
+        	  
         	  for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
         	  {
-        		  if(i>=resourceInfos.length)
+        		  if(i>=resourceInfos.length||resourceInfos.length==0)
       		          break;
         		  out.println("<tr data-id='rname="+ resourceInfos[i].getName() + "'>");
         		  if(session.getAttribute("priv0")!=null){
@@ -295,18 +280,22 @@ else
         	  }
         	  out.println("</tbody></table>");
         	  out.println("<div><ul class='pager'>");
-      		  if(!p.equals("1"))
-              	  out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-      		  if(resourceInfos.length%10==0)
-              {
-              	  if(Integer.parseInt(p)!=resourceInfos.length/10)
-          			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-              }
-              else
-              {
-              	  if(Integer.parseInt(p)!=resourceInfos.length/10 + 1)
-          			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-              }
+        	  if(resourceInfos.length!=0)
+        	  {
+        		  if(!p.equals("1"))
+                  	  out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+          		  if(resourceInfos.length%10==0)
+                  {
+                  	  if(Integer.parseInt(p)!=resourceInfos.length/10)
+              			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                  }
+                  else
+                  {
+                  	  if(Integer.parseInt(p)!=resourceInfos.length/10 + 1)
+              			  out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                  }
+        	  }
+      		  
               out.println("</ul></div>");
           }
           
@@ -322,28 +311,27 @@ else
         	  
         	  User user = new User();
         	  AirportResource[] resourceInfos = user.returnAllAirportResource();
-        	  /* int i=1; */
-        	  if(resourceInfos.length==0)
- 		          response.sendRedirect(basePath+"Public/Facility/Resource.jsp");
-        	  else
+        	  
+        	  
+ 		      if(resourceInfos.length!=0)
         	  {
         		  if(resourceInfos.length%10==0)
                   {
                       if(Integer.parseInt(p)>resourceInfos.length/10)
                           response.sendRedirect(basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(resourceInfos.length/10)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                   }
                   else
                   {
                       if(Integer.parseInt(p)>resourceInfos.length/10 + 1)
                           response.sendRedirect(basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(resourceInfos.length/10 + 1)); 
-                    			/* response.sendRedirect(basePath+"error.jsp"); */
+                    			
                   }
         	  }
         	  
         	  for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
         	  {
-        		  if(i>=resourceInfos.length)
+        		  if(i>=resourceInfos.length||resourceInfos.length==0)
       		          break;
         		  out.println("<tr data-id='rname="+ resourceInfos[i].getName() + "'>");
         		  if(session.getAttribute("priv0")!=null){
@@ -359,33 +347,24 @@ else
         	  }
         	  out.println("</tbody></table>");
         	  out.println("<div><ul class='pager'>");
-      		if(!p.equals("1"))
-              	out.println("<li class='previous'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-      		if(resourceInfos.length%10==0)
-              {
-              	if(Integer.parseInt(p)!=resourceInfos.length/10)
-          			out.println("<li class='next'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-              }
-              else
-              {
-              	if(Integer.parseInt(p)!=resourceInfos.length/10 + 1)
-          			out.println("<li class='next'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-              }
-              out.println("</ul></div>");
-        	  /* for (AirportResource output:resourceInfos) 
+        	  if(resourceInfos.length!=0)
         	  {
-                  out.println("<tr data-id='rname="+ output.getName() + "'>");
-                  if(session.getAttribute("priv0")!=null){
-                      out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                    }else{
-                      out.println("<td></td>");
-                    }
-                    //out.println("<td>"+ i +"</td>");
-                    out.println("<td>" + output.getName() + "</td>");
-                    out.println("<td>" + output.getLocation() + "</td>");
-                    out.println("<td>" + output.getRemark() + "</td></tr>");
-                    //i++;
-              } */
+        		  if(!p.equals("1"))
+                  	  out.println("<li class='previous'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+          		  if(resourceInfos.length%10==0)
+                  {
+                  	  if(Integer.parseInt(p)!=resourceInfos.length/10)
+              			  out.println("<li class='next'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                  }
+                  else
+                  {
+                  	  if(Integer.parseInt(p)!=resourceInfos.length/10 + 1)
+              			  out.println("<li class='next'><a href='"+basePath+"Public/Facility/Resource.jsp?page="+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                  }
+        	  }
+      		  
+              out.println("</ul></div>");
+        	  
         	 
          }
              
@@ -473,11 +452,7 @@ else
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      <p class="text-center">©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
     <!--[if lt IE 9]>

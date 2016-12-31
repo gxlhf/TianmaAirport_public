@@ -180,7 +180,7 @@ if(news[a].getTitle()!=null)
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="<%=basePath %>Public/News/Intro.jsp">新闻中心</a>
+              <a>新闻中心</a>
             </li>
             <li>
               <a href="<%=basePath %>Public/News/NewsList.jsp?type=<%=type %>">
@@ -214,11 +214,6 @@ if(news[a].getTitle()!=null)
         	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"News/NewsEdit.jsp?type="+type+"&&news-id="+id+"'>修改</a></div></div>");
           }
           %>
-          <%-- <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="<%=basePath%>News/NewsEdit.jsp">修改</a>
-            </div>
-          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
@@ -228,11 +223,7 @@ if(news[a].getTitle()!=null)
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      <p class="text-center">©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
     <!--[if lt IE 9]>

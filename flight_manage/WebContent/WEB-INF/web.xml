@@ -217,14 +217,6 @@
     <url-pattern>/DeleteAdmin</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>CheckEmpno</servlet-name>
-    <servlet-class>com.servlet.user.CheckEmpno</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CheckEmpno</servlet-name>
-    <url-pattern>/CheckEmpno</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>SearchRole</servlet-name>
     <servlet-class>com.servlet.role.SearchRole</servlet-class>
   </servlet>

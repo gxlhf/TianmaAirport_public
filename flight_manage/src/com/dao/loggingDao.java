@@ -2,7 +2,6 @@ package com.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
 public class loggingDao {
 	static String sql = null;
@@ -12,31 +11,32 @@ public class loggingDao {
     	sql = "INSERT INTO logging(ip,action,userId,time) VALUES (?,?,?,?)";
     	db1= new db_connection(sql);//创建db_connection对象  
         try {  
-        	 db1.conn.setAutoCommit(false);
+        	// db1.conn.setAutoCommit(false);
              db1.pst.setString(1, ip);
              db1.pst.setString(2, action);
              db1.pst.setString(3, userId);
              db1.pst.setString(4, time);
              db1.pst.executeUpdate();//执行语句
-             db1.conn.commit();
+           //  db1.conn.commit();
         	
         } catch (SQLException e) {  
-         	try{
-    			db1.conn.rollback();
-    		}catch(SQLException e1){
-    			e1.printStackTrace();
-    			return false;
-    		}
+//         	try{
+//    			db1.conn.rollback();
+//    		}catch(SQLException e1){
+//    			e1.printStackTrace();
+//    			return false;
+//    		}
     		e.printStackTrace();
     		return false;
        }finally
        {   
-    	  try{
-   			  db1.conn.setAutoCommit(true);
-   			  db1.close();//关闭连接
-   	    	}catch(SQLException e){
-   			   e.printStackTrace();
-   		    }
+    	   db1.close();//关闭连接
+//    	  try{
+//   			//  db1.conn.setAutoCommit(true);
+//   			  
+//   	    	}catch(SQLException e){
+//   			   e.printStackTrace();
+//   		    }
        }
           return true;   	
     }

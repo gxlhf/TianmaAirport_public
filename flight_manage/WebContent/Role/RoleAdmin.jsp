@@ -42,7 +42,7 @@ else
   	Integer addResult=(Integer)request.getAttribute("addResult");
   	if(addResult!=null){
   		if(addResult.equals(0)){
-			out.println("<script>alert('新增失败')</script>");
+			out.println("<script>alert('新增失败\\n若新增成功后刷新页面，也会出现此弹框。')</script>");
   		}else if(addResult.equals(1)){
 	  		out.println("<script>alert('新增成功')</script>");
   		}
@@ -51,7 +51,7 @@ else
   	Integer deleteResult=(Integer)request.getAttribute("deleteResult");
   	if(deleteResult!=null){
   		if(deleteResult.equals(0)){
-			out.println("<script>alert('删除失败')</script>");
+			out.println("<script>alert('删除失败\\n若该角色正被用户占用，则会导致删除失败。\\n或是删除成功后刷新页面，也会出现此弹框。')</script>");
   		}else if(deleteResult.equals(1)){
 	  		out.println("<script>alert('删除成功')</script>");
   		}
@@ -177,7 +177,7 @@ else
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">用户与角色管理</a>
+              <a>用户与角色管理</a>
             </li>
             <li class="active">角色管理</li>
           </ol>
@@ -222,35 +222,7 @@ else
             		out.println("新闻管理 ");
             	out.println("</td>");
             	out.println("</tr>");
-                /* for(ArrivalFlightInfo output:arrivalFlightInfos)
-                {
-                	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
-                	if(session.getAttribute("priv1")!=null){
-                    	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                    }else{
-                  	  out.println("<td></td>");
-                    }
-                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
-        				out.println("</tr>");
-                	}
-                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
-        				out.println("</tr>");
-                	}         
-                } */
+                
                 out.println("</tbody></table>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' id='btn-modify' href='"+basePath+"Role/RoleEdit.jsp'>修改</a><a class='btn btn-danger' id='btn-delete' href='"+basePath+"DeleteRole'>删除</a><a class='btn btn-success' href='"+basePath+"Role/RoleEdit.jsp'>新增</a></div></div>");
             }
@@ -262,28 +234,27 @@ else
             	//ArrivalFlightInfo[] arrivalFlightInfos = (ArrivalFlightInfo[])request.getAttribute("arrivalFlightInfos");
             	Role[] roleInfos = admin.returnAllRole();
             	String ul_path = "Role/Role.jsp?page=";
-   			    if(roleInfos.length==0)
-   			    	response.sendRedirect(basePath+"Role/Role.jsp"); 
-   			    else
+   			     
+   			    if(roleInfos.length!=0)
    			    {
    			    	if(roleInfos.length%10==0)
    	                {
    	                  	if(Integer.parseInt(p)>roleInfos.length/10)
    	                  		response.sendRedirect(basePath+ul_path+Integer.toString(roleInfos.length/10)); 
-   	                  			/* response.sendRedirect(basePath+"error.jsp"); */
+   	                  			
    	                }
    	                else
    	                {
    	                  	if(Integer.parseInt(p)>roleInfos.length/10 + 1)
    	                  		response.sendRedirect(basePath+ul_path+Integer.toString(roleInfos.length/10 + 1)); 
-   	                  			/* response.sendRedirect(basePath+"error.jsp"); */
+   	                  			
    	                }
    			    }
             	
             	int count=1;
             	for(int i = (Integer.parseInt(p)-1)*10; i < Integer.parseInt(p)*10; i++)
             	{
-            		if(i>=roleInfos.length)
+            		if(i>=roleInfos.length||roleInfos.length==0)
         		         break;
             		out.println("<tr data-id='roleName="+roleInfos[i].getName()+"'>");
                 	out.println("<td><span class='glyphicon'></span></td>");
@@ -305,65 +276,30 @@ else
                 	out.println("</tr>");
                 	count++;
             	}
-            	/* out.println("<tr data-id='"+roleInfo.getName()+"'>");
-            	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-            	out.println("<td>"+"1"+"</td>");
-            	out.println("<td>"+roleInfo.getName()+"</td>");
-            	out.println("<td>"+roleInfo.getDescription()+"</td>"); */
-                /* for(ArrivalFlightInfo output:arrivalFlightInfos)
-                {
-                	out.println("<tr data-id='"+output.getFlightCourse().getFlightNumber()+"'>");
-                	if(session.getAttribute("priv1")!=null){
-                    	out.println("<td><span class='glyphicon glyphicon'></span></td>");
-                    }else{
-                  	  out.println("<td></td>");
-                    }
-                	if(area.equals("local")&&output.getFlightCourse().isInternationalOrLocal()==false){
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
-        				out.println("</tr>");
-                	}
-                	if(area.equals("international")&&output.getFlightCourse().isInternationalOrLocal()==true){
-                		out.println("<td>"+output.getFlightCourse().getAirline()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFlightNumber()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getFrom()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getStop()+"</td>");
-                    	out.println("<td>"+output.getFlightCourse().getTo()+"</td>");
-                    	out.println("<td>"+output.getTime()+"</td>");
-                    	out.println("<td>"+output.getLuggageCarousel()+"</td>");
-        				out.println("</tr>");
-                	}         
-                } */
+            	
+                
                 out.println("</tbody></table>");
                 out.println("<div><ul class='pager'>");
-       		    if(!p.equals("1"))
-               	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
-       		    if(roleInfos.length%10==0)
+                if(roleInfos.length!=0)
                 {
-               	    if(Integer.parseInt(p)!=roleInfos.length/10)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                	if(!p.equals("1"))
+                   	    out.println("<li class='previous'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)-1)+"'>← 上一页</a></li>");
+           		    if(roleInfos.length%10==0)
+                    {
+                   	    if(Integer.parseInt(p)!=roleInfos.length/10)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
+                    else
+                    {
+                   	    if(Integer.parseInt(p)!=roleInfos.length/10 + 1)
+               			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
+                    }
                 }
-                else
-                {
-               	    if(Integer.parseInt(p)!=roleInfos.length/10 + 1)
-           			    out.println("<li class='next'><a href='"+basePath+ul_path+Integer.toString(Integer.parseInt(p)+1)+"'>下一页 →</a></li>");
-                }
+       		    
                 out.println("</ul></div>");
             	out.println("<input class='hide' name='selected-option'><div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' id='btn-modify' href='"+basePath+"Role/RoleEdit.jsp'>修改</a><a class='btn btn-danger' id='btn-delete' href='"+basePath+"DeleteRole'>删除</a><a class='btn btn-success' href='"+basePath+"Role/RoleEdit.jsp'>新增</a></div></div>");
             }
             %>
-          <%-- <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="<%=basePath%>Role/RoleEdit.jsp">修改</a>
-              <a class="btn btn-danger" href="">删除</a>
-              <a class="btn btn-success" href="">新增</a>
-            </div>
-          </div> --%>
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">
@@ -438,11 +374,7 @@ else
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      <p class="text-center">©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
     <!--[if lt IE 9]>

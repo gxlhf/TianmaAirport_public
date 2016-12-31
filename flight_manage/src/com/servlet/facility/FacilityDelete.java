@@ -35,7 +35,7 @@ public class FacilityDelete extends HttpServlet {
 		
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		User user = new User();
-		PropertyFacility[] facilityModifyInfo = user.searchPropertyFacility(name);
+		PropertyFacility[] facilityModifyInfo = user.searchPropertyFacility(name,"",1);
 		int result = admin.deletePropertyFacility(facilityModifyInfo[0]);
 		
 		if(result==-1){

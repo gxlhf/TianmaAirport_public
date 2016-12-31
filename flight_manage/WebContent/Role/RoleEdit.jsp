@@ -142,10 +142,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">用户与角色管理</a>
+              <a>用户与角色管理</a>
             </li>
             <li>
-              <a href="#">角色管理</a>
+              <a href="<%=basePath%>Role/RoleAdmin.jsp">角色管理</a>
             </li>
             <li class="active">
             <%
@@ -157,9 +157,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
           </ol>
           <%
-          	if(request.getParameter("roleName")!=null)
+          	if(request.getParameter("roleName")!=null&&admin.searchRole(request.getParameter("roleName"))!=null)
           	{
           		Role roleModify = admin.searchRole(request.getParameter("roleName"));
+          		
           %>
           <form action="<%=basePath%>ModifyRole" method="post" class="form-horizontal" role="form" data-toggle="validator">
             <div class="form-group">
@@ -395,61 +396,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   	count--;
                   	}
                   %>
-                    <%-- <tr>
-                      <td>
-                        <span class="glyphicon"></span>
-                      </td>
-                      <td>
-                      <%
-                      	if(roleModify.getAuthorityMap().get("用户管理")!=null)
-                      		out.println("用户管理");
-                      %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="glyphicon"></span>
-                      </td>
-                      <td>
-                      <%
-                      	if(roleModify.getAuthorityMap().get("角色管理")!=null)
-                      		out.println("角色管理");
-                      %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="glyphicon"></span>
-                      </td>
-                      <td>
-                      <%
-                      	if(roleModify.getAuthorityMap().get("航班信息管理")!=null)
-                      		out.println("航班信息管理");
-                      %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="glyphicon"></span>
-                      </td>
-                      <td>
-                      <%
-                      	if(roleModify.getAuthorityMap().get("机场设施管理")!=null)
-                      		out.println("机场设施管理");
-                      %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="glyphicon"></span>
-                      </td>
-                      <td>
-                      <%
-                      	if(roleModify.getAuthorityMap().get("新闻管理")!=null)
-                      		out.println("新闻管理");
-                      %>
-                      </td>
-                    </tr> --%>
                     <tr>
                       <td>
                       </td>
@@ -489,7 +435,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="rolename" class="col-sm-2 control-label">角色名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="roleName" value="" data-error="请填写角色名称*" required>
+                <input type="text" class="form-control" name="roleName" value="" data-error="请填写角色名称*" data-remote="<%=basePath%>AddRole" data-remote-error="该角色名称已被占用*" required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -684,11 +630,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 内容结束 -->
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center">
-        <a href="#">About Us</a>·
-        <a href="#">Site Map</a>·
-        <a href="#">Privacy Policy</a>·
-        <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      <p class="text-center">©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
     <!--[if lt IE 9]>

@@ -31,7 +31,13 @@ public class AddAdmin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		Admin admin=(Admin)request.getSession().getAttribute("admin");
+		Admin[] result = admin.searchAdmin(request.getParameter("user-id"), "", -1, "", "");
+		if(result.length == 0)
+			response.setStatus(200);
+		else 
+			response.setStatus(400);
 	}
 
 	/**

@@ -61,5 +61,8 @@ public class UserdaoTest {
 	     };
 	     System.out.println(map.get("QQ"));*/
 //	     System.out.println(GetMD5.getMd5(""));
+	     AdminDao adminDao=new AdminDao();
+	     Role role = adminDao.searchRole("test+test");
+	     System.out.println(role.getDescription());
 	}
 }

@@ -31,7 +31,7 @@ public class User {
 		UserDao userDao = new UserDao();
 		return userDao.returnAllInternationalArrivalFlightInfo();
 	}
-	//离港航班信息查询函数，输入三个参数依次为目的地、航班号、航空公司，返回一个DepartureFlightInfo对象数组
+	//离港航班信息查询函数，输入三个参数依次为目的地、航班号、航空公司、时间，返回一个DepartureFlightInfo对象数组
 	public DepartureFlightInfo[] searchDepartureFlightInfo(String city, String flightNumber, String airline, String time)
 	{
 		DepartureFlightInfo[] departureFlightInfo = null;
@@ -85,7 +85,7 @@ public class User {
 		}
 		return departureFlightInfo;
 	}
-	//到港航班信息查询函数，输入三个参数依次为出发地、航班号、航空公司，返回一个ArrivalFlightInfo对象数组
+	//到港航班信息查询函数，输入三个参数依次为出发地、航班号、航空公司、时间，返回一个ArrivalFlightInfo对象数组
 	public ArrivalFlightInfo[] searchArrivalFlightInfo(String city, String flightNumber, String airline, String time)
 	{
 		ArrivalFlightInfo[] arrivalFlightInfo = null;
@@ -156,7 +156,7 @@ public class User {
 	}
 	
 	//物业设施查询函数，输入参数为物业设施名称，返回一个PropertyFacility对象数组
-	public PropertyFacility[] searchPropertyFacility(String name)
+	public PropertyFacility[] searchPropertyFacility(String name,String type,int mode)
 	{
 		UserDao userDao = new UserDao();
 		PropertyFacility[] propertyFacility = null;
@@ -165,7 +165,7 @@ public class User {
 		 * 数据库操作：查询物业设施名称为该name的物业设施信息
 		 * 形参为物业设施名称，返回类型为PropertyFacility对象数组
 		 */
-		propertyFacility=userDao.searchPropertyFacility(name);
+		propertyFacility=userDao.searchPropertyFacility(name,type,mode);
 		return propertyFacility;
 	}
 	
@@ -309,5 +309,16 @@ public class User {
     	 */
 		UserDao userDao=new UserDao();
     	return userDao.returnFlightnumberAirlineMap(); 	
+    }
+    public String[] returnAllPropertyFacilityType()
+    {
+		
+    	/*
+         * String[] returnAllPropertyFacilityType();
+         * 数据库操作：返回所有物业设施类别
+         * 返回类型为String对象数组
+         */
+    	UserDao userDao=new UserDao();
+    	return userDao.returnAllPropertyFacilityType();
     }
 }

@@ -148,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">机场设施管理</a>
+              <a>机场设施管理</a>
             </li>
             <li>
               <a href="<%=basePath%>Public/Facility/Resource.jsp">机场资源</a>
@@ -167,10 +167,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <%
 
             String name = request.getParameter("rname");
-
-            if(name!=null){
+          User user = new User();
+            if(name!=null&&user.searchAirportResource(name, "").length!=0){
                 
-               User user = new User();
+               
                AirportResource[] resourceModify = user.searchAirportResource(name, ""); 
             
                 
@@ -182,37 +182,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <label for="resource-type" class="col-sm-2 control-label">资源分类：</label>
               <div class="col-sm-6">
               	<input type="text" class="form-control" name="resource-type" data-error="请填写分类*"  value="<%=resourceModify[0].getType() %>"required readonly>
-                <%-- <select class="form-control" name="resource-type" data-error="请选择资源分类*"  required>
-                  <option value="<%=resourceModify[0].getType() %>" ><%=resourceModify[0].getType() %></option>  
-				
-                
-                  <%
-                    if(!resourceModify[0].getType().equals("登机门"))
-                    {
-                  %> 
-                  <option value = "登机门">登机门</option>
-                <%
-                    }
-                %>
-                <%
-                    if(!resourceModify[0].getType().equals("值机柜台"))
-                    {
-                  %> 
-                  <option value = "值机柜台">值机柜台</option>
-                <%
-                    }
-                %>
-                <%
-                    if(!resourceModify[0].getType().equals("行李转盘"))
-                    {
-                  %> 
-                  <option value = "行李转盘">行李转盘</option>
-                <%
-                    }
-                %>
-                  
-                  
-                </select> --%>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -274,7 +243,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="resource-name" class="col-sm-2 control-label">资源名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="resource-name"  data-required-error="请填写资源名称*" data-checkname="checkname" data-validate="true" required>
+                <input type="text" class="form-control" name="resource-name"  data-required-error="请填写资源名称*" data-checkname="checkname" data-validate="true" data-remote="<%=basePath%>AddResource" data-remote-error="该机场资源名称已被占用" required>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -372,11 +341,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!-- 内容结束 -->
       <!-- 尾部开始 -->
       <footer class="container-fluid">
-        <p class="text-center">
-          <a href="#">About Us</a>·
-          <a href="#">Site Map</a>·
-          <a href="#">Privacy Policy</a>·
-          <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      	<p class="text-center">©2016 软件1401班第三组</p>
       </footer>
       <!-- 尾部结束 -->
       <!--[if lt IE 9]>

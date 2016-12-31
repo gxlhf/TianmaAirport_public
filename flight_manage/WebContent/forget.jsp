@@ -190,7 +190,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 尾部开始 -->
     <footer class="container-fluid">
-      <p class="text-center"> <a href="#">About Us</a> · <a href="#">Site Map</a> · <a href="#">Privacy Policy</a> · <a href="#">Contact Us</a> · &copy;2016 软件1401班第三组 </p>
+      <p class="text-center">©2016 软件1401班第三组</p>
     </footer>
     <!-- 尾部结束 -->
 
