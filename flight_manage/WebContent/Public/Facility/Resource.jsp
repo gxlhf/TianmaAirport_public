@@ -181,7 +181,6 @@ else
                   else
                 	  out.println("<a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a>");
                   %>
-                  <!-- <a href="#">机场资源</a> -->
                 </li>
                 <li role="presentation">
                   <a href="<%=basePath%>Public/Facility/Facility.jsp">物业设施</a>
@@ -193,7 +192,7 @@ else
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">机场设施管理</a>
+              <a>机场设施管理</a>
             </li>
             <li class="active">机场资源</li>
           </ol>

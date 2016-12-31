@@ -148,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">机场设施管理</a>
+              <a>机场设施管理</a>
             </li>
             <li>
               <a href="<%=basePath%>Public/Facility/Resource.jsp">机场资源</a>
@@ -372,11 +372,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!-- 内容结束 -->
       <!-- 尾部开始 -->
       <footer class="container-fluid">
-        <p class="text-center">
-          <a href="#">About Us</a>·
-          <a href="#">Site Map</a>·
-          <a href="#">Privacy Policy</a>·
-          <a href="#">Contact Us</a>· ©2016 软件1401班第三组</p>
+      	<p class="text-center">©2016 软件1401班第三组</p>
       </footer>
       <!-- 尾部结束 -->
       <!--[if lt IE 9]>

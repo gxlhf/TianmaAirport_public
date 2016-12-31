@@ -146,10 +146,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">用户与角色管理</a>
+              <a>用户与角色管理</a>
             </li>
             <li>
-              <a href="<%=basePath%>User/UserEdit.jsp">用户管理</a>
+              <a href="<%=basePath%>User/UserAdmin.jsp">用户管理</a>
             </li>
             <li class="active">
             <%

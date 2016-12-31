@@ -183,7 +183,6 @@ else
                 	out.println("<a href='"+basePath+"Public/PassengerGuide.jsp'>乘机指引</a>");
                 }
                 %>
-                  <!-- <a href="#">机场资源</a> -->
                 </li>
                 <li role="presentation" class="second-menu-cur">
                   <a href="<%=basePath%>Public/Facility/Facility.jsp">物业设施</a>
@@ -195,7 +194,12 @@ else
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">机场设施管理</a>
+              <a><%
+              if(session.getAttribute("priv0")!=null)
+            	  out.println("机场设施管理");
+              else
+            	  out.println("乘机指南");
+              %></a>
             </li>
             <li class="active">物业设施</li>
           </ol>

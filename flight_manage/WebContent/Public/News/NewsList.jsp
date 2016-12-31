@@ -227,7 +227,7 @@ else
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="<%=basePath %>Public/News/Intro.jsp">新闻中心</a>
+              <a>新闻中心</a>
             </li>
             <li class="active"><%
             if(type.equals("flightInformation"))

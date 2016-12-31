@@ -180,7 +180,7 @@ if(news[a].getTitle()!=null)
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="<%=basePath %>Public/News/Intro.jsp">新闻中心</a>
+              <a>新闻中心</a>
             </li>
             <li>
               <a href="<%=basePath %>Public/News/NewsList.jsp?type=<%=type %>">

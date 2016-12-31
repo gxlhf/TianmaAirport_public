@@ -166,7 +166,7 @@ else
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">乘机指南</a>
+              <a>乘机指南</a>
             </li>
             <li class="active">乘机指引</li>
           </ol>
@@ -591,75 +591,16 @@ else
             <%
             }
             %>
-            <%-- <li>
-              <div class="header-box">
-                <img src="img/airlineLogo/ca.png">
-                <p>中国国际航空公司 <strong>CA1111</strong></p>
-              </div>
-              <div class="detail-box depature">
-                <div>
-                  <p>长沙 <span class="iconfont icon-plane"></span> 上海</p>
-                </div>
-                <div>
-                  <p>起飞时间</p>
-                  <h6>09:50</h6>
-                </div>
-                <div>
-                  <p>值机柜台</p>
-                  <h6>1, 3, 5</h6>
-                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>值机柜台1</strong> 出发大厅东侧<br><strong>值机柜台3</strong> 出发大厅东侧<br><strong>值机柜台5</strong> 出发大厅东侧">查看位置</span>
-                </div>
-                <div>
-                  <p>登机口</p>
-                  <h6>2</h6>
-                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>登机口1</strong> 候机大厅北端">查看位置</span>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="header-box">
-                <img src="img/airlineLogo/ca.png">
-                <p>中国国际航空公司 <strong>CA1111</strong></p>
-              </div>
-              <div class="detail-box arrival">
-                <div>
-                  <p>上海 <span class="iconfont icon-plane"></span> 长沙</p>
-                </div>
-                <div>
-                  <p>降落时间</p>
-                  <h6>09:50</h6>
-                </div>
-                <div>
-                  <p>行李转盘</p>
-                  <h6>1</h6>
-                  <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="<strong>行李转盘1</strong> 到达大厅东侧">查看位置</span>
-                </div>
-              </div>
-            </li> --%>
+            
           </ul>
 
-          <!-- <div>
-            <ul class="pager">
-              <li class="previous">
-                <a href="#">← 上一页</a>
-              </li>
-              <li class="next">
-                <a href="#">下一页 →</a>
-              </li>
-            </ul>
-          </div> -->
+          
           <%
           if(session.getAttribute("priv0")!=null){
         	  out.println("<div class='col-sm-6 btn-modify'><div class='btn-group btn-group-justified'><a class='btn btn-primary' href='"+basePath+"Facility/FacilityEdit.jsp'>修改</a><a class='btn btn-danger' href=''>删除</a><a class='btn btn-success' href=''>新增</a></div></div>");
           }
           %>
-          <%-- <div class="col-sm-6 btn-modify">
-            <div class="btn-group btn-group-justified">
-              <a class="btn btn-primary" href="<%=basePath%>Facility/FacilityEdit.jsp">修改</a>
-              <a class="btn btn-danger" href="">删除</a>
-              <a class="btn btn-success" href="">新增</a>
-            </div>
-          </div> --%>
+          
         </div>
       </div>
       <div id="backToTop-btn" onclick="scroll(0,0)">

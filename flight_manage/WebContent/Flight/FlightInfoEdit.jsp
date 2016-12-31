@@ -321,7 +321,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
         <div class="col-md-10" id="content">
           <ol class="breadcrumb">
             <li>
-              <a href="#">航班信息</a>
+              <a>航班信息</a>
             </li>
             <li>
             <%
@@ -356,9 +356,6 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	}
             }
             %>
-            <!-- <li>
-              <a href="#">国内到港</a>
-            </li> -->
             </li>
             <%
             if(request.getParameter("flightNumber")!=null&&request.getParameter("time")!=null&&request.getParameter("area")!=null&&request.getParameter("type")!=null)
