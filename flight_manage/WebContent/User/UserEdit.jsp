@@ -162,9 +162,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </ol>
           <!-- <h2 class="page-header">用户管理</h2> -->
           <%
-          	if(request.getParameter("empno")!=null&&admin.searchAdmin(request.getParameter("empno"), "", -1, "", "")!=null){
-          		
-          		Admin[] adminModify = admin.searchAdmin(request.getParameter("empno"), "", -1, "", "");
+          	if(request.getParameter("empno")!=null)
+          	{
+          		if(admin.searchAdmin(request.getParameter("empno"), "", -1, "", "")!=null&&admin.searchAdmin(request.getParameter("empno"), "", -1, "", "").length!=0)
+          		{
+          			Admin[] adminModify = admin.searchAdmin(request.getParameter("empno"), "", -1, "", "");
           	
           		
           %>
@@ -172,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-                 <input type="text" class="form-control" name="user-id" pattern='\\d{4}' data-error="请填写4位员工号*" value="<%=adminModify[0].getEmpno() %>" required readonly> 
+                 <input type="text" class="form-control" name="user-id" pattern='\\d{4}' data-error="请填写4位纯数字员工号*" value="<%=adminModify[0].getEmpno() %>" required readonly> 
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -339,7 +341,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
-              <label for="user-password" class="col-sm-2 control-label">登录密码：</label>
+              <label for="user-password" class="col-sm-2 control-label">修改密码：</label>
               <div class="col-sm-6">
                 <input type="password" class="form-control" name="user-password" data-minlength="6" data-required-error="请填写密码*" data-minlength-error="密码长度至少为6位*">
               </div>
@@ -360,6 +362,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
           </form>
           <%
+          		}
           	}
           	else{
           %>
@@ -367,7 +370,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="form-group">
               <label for="user-id" class="col-sm-2 control-label">员工号：</label>
               <div class="col-sm-6">
-                 <input type="text" class="form-control" name="user-id" pattern="\d{4}" data-pattern-error="请填写4位员工号*" data-required-error="请填写4位员工号*" data-remote="<%=basePath%>AddAdmin" data-remote-error="该员工号已被占用*" required> 
+                 <input type="text" class="form-control" name="user-id" pattern="\d{4}" data-pattern-error="请填写4位纯数字员工号*" data-required-error="请填写4位员工号*" data-remote="<%=basePath%>AddAdmin" data-remote-error="该员工号已被占用*" required> 
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>

@@ -373,7 +373,8 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
         		  arrivalFlightModifyInfo = user.searchArrivalFlightInfo("", request.getParameter("flightNumber"), "", time);
         		  
         	  }
-        		  
+        	  if(departureFlightModifyInfo!=null&&departureFlightModifyInfo.length!=0||arrivalFlightModifyInfo!=null&&arrivalFlightModifyInfo.length!=0)
+        	  {
         	  
           %>
           <form action="<%
@@ -492,8 +493,10 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                   }
             	  if(request.getParameter("type").equals("arrival"))
             	  {
-            		  if(arrivalFlightModifyInfo[0].getFlightCourse().getStop()!=null&&arrivalFlightModifyInfo[0].getFlightCourse().getStop()!="")
-            		      out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getStop()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getStop()+"</option>");
+            		  if(arrivalFlightModifyInfo[0].getFlightCourse().getStop()!=null&&arrivalFlightModifyInfo[0].getFlightCourse().getStop()!=""){
+            			  out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getStop()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getStop()+"</option>");
+            			  out.println("<option value=''></option>");
+            		  }          		      
             		  else
             			  out.println("<option value=''></option>");
             	  }
@@ -503,12 +506,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	  	  {
             	  	      if(request.getParameter("type").equals("departure"))
           			      {
-          				      if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getFrom()))
+          				      if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getStop()))
           					      out.println("<option value='"+output+"'>"+output+"</option>");
           			      }
           			      if(request.getParameter("type").equals("arrival"))
           			      {
-          				      if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getFrom()))
+          				      if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getStop()))
           					      out.println("<option value='"+output+"'>"+output+"</option>");
           			      }
             	  	  }
@@ -519,12 +522,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             	  	  {
             	  	      if(request.getParameter("type").equals("departure"))
           			      {
-          				      if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getFrom()))
+          				      if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getStop()))
           					      out.println("<option value='"+output+"'>"+output+"</option>");
           			      }
           			      if(request.getParameter("type").equals("arrival"))
           			      {
-          				      if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getFrom()))
+          				      if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getStop()))
           					      out.println("<option value='"+output+"'>"+output+"</option>");
           			      }
             	  	  }
@@ -551,12 +554,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                 		  {
                 			  if(request.getParameter("type").equals("departure"))
                 			  {
-                				  if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getFrom()))
+                				  if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getTo()))
                 					  out.println("<option value='"+output+"'>"+output+"</option>");
                 			  }
                 			  if(request.getParameter("type").equals("arrival"))
                 			  {
-                				  if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getFrom()))
+                				  if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getTo()))
                 					  out.println("<option value='"+output+"'>"+output+"</option>");
                 			  }
                 		  }
@@ -567,12 +570,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                 	  	  {
                 	  	      if(request.getParameter("type").equals("departure"))
               			      {
-              				      if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getFrom()))
+              				      if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getTo()))
               					      out.println("<option value='"+output+"'>"+output+"</option>");
               			      }
               			      if(request.getParameter("type").equals("arrival"))
               			      {
-              				      if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getFrom()))
+              				      if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getTo()))
               					      out.println("<option value='"+output+"'>"+output+"</option>");
               			      }
                 	  	  }
@@ -762,6 +765,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             </div>
           </form>
           <%
+        	  }
           }
           else
           {

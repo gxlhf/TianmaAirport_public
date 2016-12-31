@@ -169,12 +169,10 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
 
             String name = request.getParameter("fname");
             User user = new User();
-            if(name!=null&&user.searchPropertyFacility(name,"",1).length!=0){
-                
-               
-             PropertyFacility[] facilityModify = user.searchPropertyFacility(name,"",1);   
-            
-                
+            if(name!=null){
+            	if(user.searchPropertyFacility(name,"",1).length!=0)
+            	{
+            		PropertyFacility[] facilityModify = user.searchPropertyFacility(name,"",1);     
           %>
           <!--修改设施-->
           <form class="form-horizontal" role="form" action = "<%=basePath%>ModifyFacility" method = "post" data-toggle = "validator">
@@ -256,6 +254,7 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
           </form>
 
           <%
+            	}
             }
             else{
           %>
