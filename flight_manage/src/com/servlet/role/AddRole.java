@@ -54,7 +54,7 @@ public class AddRole extends HttpServlet {
 		String roleDesc = request.getParameter("roleDesc");
 		String rolePriv = request.getParameter("rolePriv");
 		String[] rolePrivInfo = rolePriv.split(",");
-		Map<String, Boolean> authorityMap = new HashMap();
+		Map<String, Boolean> authorityMap = new HashMap<String, Boolean>();
 		for(String Privoutput:rolePrivInfo)
 		{
 			authorityMap.put(Privoutput, true);

@@ -1527,7 +1527,7 @@ public class UserDao {
     	 * 取航空公司的二字代码和航空公司名字的对应关系
     	 * 返回Map
     	 */
-    	Map<String,String> allFlightnumberAirlineMap = new HashMap();
+    	Map<String,String> allFlightnumberAirlineMap = new HashMap<String, String>();
     	    
          sql = "SELECT SUBSTR(Flight_No,1,2) sub,Airline A FROM `flight_arrival` GROUP BY Airline" +
          		" UNION SELECT SUBSTR(Flight_No2,1,2) sub,Airline A FROM `flight_off` GROUP BY Airline";//SQL语句  

@@ -15,6 +15,10 @@ import java.io.Serializable;
 import com.dao.*;
 
 public class Admin extends User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String empno;
 	String name;
 	int sex;

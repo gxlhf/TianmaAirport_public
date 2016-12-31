@@ -28,7 +28,7 @@ public class RoleDao {
         return description;
 	}
 	public Map<String,Boolean> roleAuthorityMapSearch(String name){
-		Map<String, Boolean> authorityMap = new HashMap();
+		Map<String, Boolean> authorityMap = new HashMap<String, Boolean>();
 		sql = "SELECT * FROM actor_privilege WHERE actor_privilege.A_name=?";//SQL语句  
         db1= new db_connection(sql);//创建db_connection对象  
         try {  
