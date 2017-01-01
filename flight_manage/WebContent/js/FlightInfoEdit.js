@@ -89,6 +89,31 @@ $(function () {
                     removeError(id_elem, "已存在重复航班信息*");
                     removeError(time_elem, "已存在重复航班信息*");
                 }
+            },
+            //检查登机门是否被占用
+            checkgate: function ($el) {
+                var url_in = $el.data("checkgate");
+                var gate_in = $el.val();
+                var time_in = $('[name="flight-dep-time"]').length ? $('[name="flight-dep-time"]').val() : $('[name="flight-arr-time"]').val();
+                var resp;
+                var valid = -1; //1:不通过  0:通过  -1:未验证
+
+                if(time_in != '' && gate_in != ''){
+                    resp = $.ajax({
+                        url: url_in,
+                        type: 'GET',
+                        processData: true,
+                        data: "gate=" + gate_in + "&time=" + time_in,
+                        async: false,
+                        success: function (e) {
+                            valid = e - 0;
+                        }
+                    });
+                }
+
+                if(valid > 0){  //验证不通过
+                    return '登机门已被占用*';
+                }
             }
         }
     });
