@@ -84,7 +84,7 @@ $(function () {
 
 
 	// 未保存离开当前页提示
-	if((window.location.href).search("Edit.jsp") != -1){
+	if((window.location.href).search("Edit.jsp") != -1 || (window.location.href).search("EditMyInfo.jsp") != -1){
 		window.onbeforeunload = function(e){
 			var srcElem = document.activeElement;
 			var shallAlert = ($(srcElem).parents("#ensureBox").length == 0);
