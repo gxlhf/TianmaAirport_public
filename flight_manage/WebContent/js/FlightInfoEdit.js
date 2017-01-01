@@ -46,7 +46,7 @@ $(function () {
                 var to = $('[name="flight-to"]').val();
                 var via = $el.val();
                 if(start == via || to == via)
-                    return "经停地不能与始发地相同";
+                    return "经停地不能与始发地或目的地相同";
             },
             //检查航空公司代码
             checkcode: function ($el) {
