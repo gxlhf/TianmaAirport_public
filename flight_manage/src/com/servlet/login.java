@@ -68,71 +68,29 @@ public class login extends HttpServlet {
 		Regex regex=new Regex();
 		if(!regex.isValid(username)){
 			System.out.println("username not valid");
-//			response.sendRedirect("error.jsp");
 			response.sendRedirect("error.jsp");
 		}
 		else if(!regex.isValid(password)){
 			System.out.println("password not valid");
-//			response.sendRedirect("error.jsp");
 			response.sendRedirect("error.jsp");
 		}else{
-		HttpSession session = request.getSession();
-		LoginDao loginDao = new LoginDao();
-		Admin admin = loginDao.loginCheck(username, password);
-		/*if(username.equals("aaa") && password.equals("123")){
-		//	request.setAttribute("admin", admin);
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
-			if(admin.getRole().getAuthorityMap().get("用户管理")){
-				request.getRequestDispatcher("/User/UserAdmin.jsp").forward(request, response);
-			}else if(admin.getRole().getAuthorityMap().get("角色管理")){
-				request.getRequestDispatcher("/Role/RoleAdmin.jsp").forward(request,response );
-			}else if(admin.getRole().getAuthorityMap().get("航班信息管理")){
-				request.getRequestDispatcher("/Flight/FlightInfoCheck.jsp").forward(request, response);
-			}else if(admin.getRole().getAuthorityMap().get("机场设施管理")){
-				request.getRequestDispatcher("/Facility/Resouce.jsp").forward(request, response);
-			}else if(admin.getRole().getAuthorityMap().get("新闻管理")){
-				request.getRequestDispatcher("/News/Intro.jsp").forward(request, response);
-			}else {
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
+			HttpSession session = request.getSession();
+			LoginDao loginDao = new LoginDao();
+			Admin admin = loginDao.loginCheck(username, password);
+			if(admin!=null){
+				session.setAttribute("admin", admin);
+				session.setAttribute("empno", admin.getEmpno());
+				session.setAttribute("priv0", admin.getRole().getAuthorityMap().get("机场设施管理"));
+				session.setAttribute("priv1", admin.getRole().getAuthorityMap().get("航班信息管理"));
+				session.setAttribute("priv2", admin.getRole().getAuthorityMap().get("新闻管理"));
+				session.setAttribute("priv3", admin.getRole().getAuthorityMap().get("角色管理"));
+				session.setAttribute("priv4", admin.getRole().getAuthorityMap().get("用户管理"));
+				request.getRequestDispatcher("index.jsp").forward(request, response);		
+			}else{
+				result ="员工号或密码不正确";
+				request.setAttribute("result", result);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
-		}else{
-			result ="登陆失败，请重新登陆";
-			request.setAttribute("result", result);
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
-			//response.sendRedirect("login.jsp");
-		}*/
-		if(admin!=null){
-//			request.setAttribute("admin", admin);
-//			System.out.println(admin.getRole().getAuthorityMap());
-			session.setAttribute("admin", admin);
-			session.setAttribute("empno", admin.getEmpno());
-			session.setAttribute("priv0", admin.getRole().getAuthorityMap().get("机场设施管理"));
-			session.setAttribute("priv1", admin.getRole().getAuthorityMap().get("航班信息管理"));
-			session.setAttribute("priv2", admin.getRole().getAuthorityMap().get("新闻管理"));
-			session.setAttribute("priv3", admin.getRole().getAuthorityMap().get("角色管理"));
-			session.setAttribute("priv4", admin.getRole().getAuthorityMap().get("用户管理"));
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-//			System.out.println(admin.getRole().getName());
-			/*if(admin.getRole().getAuthorityMap().get("用户管理")!=null&&admin.getRole().getAuthorityMap().get("用户管理") == true){
-				request.getRequestDispatcher("User/UserAdmin.jsp").forward(request, response);
-			}else if(admin.getRole().getAuthorityMap().get("角色管理")!=null&&admin.getRole().getAuthorityMap().get("角色管理") == true){
-				request.getRequestDispatcher("Role/RoleAdmin.jsp").forward(request,response );
-			}else if(admin.getRole().getAuthorityMap().get("航班信息管理")!=null&&admin.getRole().getAuthorityMap().get("航班信息管理") == true){
-				request.getRequestDispatcher("Flight/FlightInfoCheck.jsp").forward(request, response);
-			}else if(admin.getRole().getAuthorityMap().get("机场设施管理")!=null&&admin.getRole().getAuthorityMap().get("机场设施管理") == true){
-				request.getRequestDispatcher("Facility/Resource.jsp").forward(request, response);
-			}else if(admin.getRole().getAuthorityMap().get("新闻管理")!=null&&admin.getRole().getAuthorityMap().get("新闻管理") == true){
-				request.getRequestDispatcher("News/Intro.jsp").forward(request, response);
-			}else {
-				request.getRequestDispatcher("index.jsp").forward(request, response);
-			}*/
-			
-		}else{
-			result ="员工号或密码不正确";
-			request.setAttribute("result", result);
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-			//response.sendRedirect("login.jsp");
-		}
 		}
 		
 	}

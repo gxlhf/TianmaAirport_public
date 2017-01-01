@@ -36,11 +36,11 @@ public class AddDepartureFlightInfo extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
 		User user = new User();
-		DepartureFlightInfo[] departureFlightInfos = user.searchDepartureFlightInfo("", request.getParameter("flight-id"), "", request.getParameter("flight-dep-time"));
-		if(departureFlightInfos.length == 0)
-			response.setStatus(200);
-		else 
-			response.setStatus(400);
+		DepartureFlightInfo[] departureFlightInfos = user.searchDepartureFlightInfo("", request.getParameter("id"), "", request.getParameter("time"));
+		
+		response.getWriter().print(departureFlightInfos.length);
+		response.getWriter().flush();
+		response.getWriter().close();
 	}
 
 	/**

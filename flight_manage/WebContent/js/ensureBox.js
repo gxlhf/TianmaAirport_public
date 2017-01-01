@@ -19,17 +19,11 @@ function n2html() {
 }
 
 $(function () {
+
 	html2n();
 
 	//信息编辑页面-点击保存时弹框
 	$('#btn-save').click(function (e) {
-		console.log('click1');
-
-		//if($('#inp-flight-counter-mirror').length != 0){
-			// $('#inp-flight-counter-mirror').focus();
-   //      	$('#inp-flight-counter-mirror').blur();
-		//}
-
 		$(this).parents('form').validator('validate');
 		var validator_passed = !($('.has-error').length);
 
@@ -53,7 +47,6 @@ $(function () {
 		}
 	});
     $('#btn-save').click(function (e) {
-        console.log('click2');
         $('#inp-flight-counter-mirror').focus();
         $('#inp-flight-counter-mirror').blur();
     });
@@ -76,8 +69,6 @@ $(function () {
 		}
 
 		for (var i = 1; i < deletingElem.length; i++) {
-			console.log($('.modal-body').find('label:contains("' + $(thElem[i]).text() + '：")').next().find('p'));
-			//console.log($('.modal-body').find('label'));
 			$('.modal-body').find('label:contains("' + $(thElem[i]).text() + '：")').next().find('p').html($(deletingElem[i]).text());
 		}
 		$('#ensureBox').modal('show');
@@ -92,15 +83,19 @@ $(function () {
 
 
 	// 未保存离开当前页提示
-	if((window.location.href).search("Edit.jsp") != -1){
+	if((window.location.href).search("Edit.jsp") != -1 || (window.location.href).search("EditMyInfo.jsp") != -1){
 		window.onbeforeunload = function(e){
-			console.log(e.originalTarget);
 			var srcElem = document.activeElement;
-			if($(srcElem).parents("#ensureBox").length != 0)
-				return;
-			else
+			var shallAlert = ($(srcElem).parents("#ensureBox").length == 0);
+			var isSafari = (getBrowser() == "Safari");
+			if(shallAlert && !isSafari)
 				return "当前页面信息尚未保存，确认离开？";
+			else if(shallAlert && isSafari)
+				return  confirm("当前页面信息尚未保存，确认离开？"); 
+			else
+				return;
 		}
+
 	}
 
 });

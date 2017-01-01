@@ -3,12 +3,9 @@ var linkWord = '?';
 
 $('.select-table tbody > tr').click(function (e) {
 	opValue = $(this).attr('data-id');
-	console.log(opValue);
 	$(this).parent().find('.glyphicon').removeClass('glyphicon-check');
 	$(this).find('.glyphicon').addClass('glyphicon-check');
-	console.log($(this).parent().find('[name="select-table-result"]'));
 	
-	console.log(opValue[0]);
 	if (opValue[0] == '&')
 		linkWord = '';
 });
@@ -26,6 +23,7 @@ function getBrowser(){
     var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
     var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
     var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+    var isChrome = userAgent.indexOf("Chrome") > -1;//判断是否为Chrome
     var isSafari = userAgent.indexOf("Safari") > -1; //判断是否Safari浏览器
     if (isIE) {
         var IE5 = IE55 = IE6 = IE7 = IE8 = false;
@@ -45,12 +43,14 @@ function getBrowser(){
             return "IE10";
         }
     }//isIE end
-    if (isFF) {
+    if (isFF) 
         return "FF";
-    }
-    if (isOpera) {
+    if (isOpera) 
         return "Opera";
-    }
+    if(isChrome)
+    	return "Chrome";
+    if(isSafari && !isChrome)
+    	return "Safari";
 }
 
 $(function () {
@@ -83,8 +83,6 @@ $(function () {
 		        minuteStep: 1
 		    };
 
-		    console.log(min, max, start, date_config);
-
 			$(this).datetimepicker(date_config);
 		})
 	};
@@ -96,7 +94,6 @@ $(function () {
 		dataType: "json",
 		success: function (resp) {
 			var weather = resp.HeWeather5[0];
-			console.log(resp);
 			var pageElem = $('#weather');
 			pageElem.html(weather.basic.city + " " + "<img src = 'http://files.heweather.com/cond_icon/" + weather.now.cond.code + ".png'> " +  weather.now.cond.txt + " " + weather.now.tmp + "℃");
 		}
@@ -117,7 +114,29 @@ $(function () {
 		trigger : 'hover'
 	});
 
+	// $("form").submit(function (e) {
+	// 	var inputElem = $(e.currentTarget).find('input,textarea');
+	// 	var temp;
+	// 	for (var i = 0; i < inputElem.length; i++) {
+	// 		temp = inputElem.val().replace(/\+/g,"＋");
+	// 		temp = inputElem.val().replace(/\&/g,"＆");
+	// 		temp = inputElem.val().replace(/\#/g,"＃");
+	// 		inputElem.val(temp);
+	// 		temp = '';
+	// 	}
+	// });
 	
+	var inputElem = $('form').find('input,textarea');
+	for (var i = 0; i < inputElem.length; i++) {
+		$(inputElem[i]).blur(function (e) {
+			var temp;
+			temp = $(this).val().replace(/\+/g,"＋");
+			temp = temp.replace(/\&/g,"＆");
+			temp = temp.replace(/\#/g,"＃");
+			$(this).val(temp);
+			temp = '';
+		});
+	}
 
 });
 
