@@ -36,8 +36,6 @@ public class AddArrivalFlightInfo extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		User user = new User();
 		ArrivalFlightInfo[] arrivalFlightInfos = user.searchArrivalFlightInfo("", request.getParameter("id"), "", request.getParameter("time"));
-		System.out.println(request.getParameter("id"));
-		System.out.println(request.getParameter("time"));
 
 		response.getWriter().print(arrivalFlightInfos.length);
 		response.getWriter().flush();
