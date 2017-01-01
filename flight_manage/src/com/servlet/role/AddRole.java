@@ -61,7 +61,11 @@ public class AddRole extends HttpServlet {
 		}
 		Role roleAddInfo = new Role(roleName, roleDesc, authorityMap);
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		int result = admin.addRole(roleAddInfo);
+		int result;
+		if(admin.searchRole(roleName)!=null)
+			result = 0;
+		else
+			result = admin.addRole(roleAddInfo);
 		/*System.out.println(roleName);
 		System.out.println(roleDesc);
 		System.out.println(rolePriv);*/

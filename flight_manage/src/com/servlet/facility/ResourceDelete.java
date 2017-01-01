@@ -41,8 +41,11 @@ public class ResourceDelete extends HttpServlet {
 	    AirportResource[] resourceModifyInfo = user.searchAirportResource(name, "");
 	   
 	    Admin admin=(Admin)request.getSession().getAttribute("admin");
-	    int result = admin.deleteAirportResource(resourceModifyInfo[0]);
-		
+	    int result;
+		if(resourceModifyInfo!=null&&resourceModifyInfo.length!=0)
+			result = admin.deleteAirportResource(resourceModifyInfo[0]);
+		else
+			result = 0;
 		if(result==-1){
 			response.sendRedirect("error.jsp");
 			return;

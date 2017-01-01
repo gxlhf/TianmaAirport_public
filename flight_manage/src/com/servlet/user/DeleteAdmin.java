@@ -37,7 +37,11 @@ public class DeleteAdmin extends HttpServlet {
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		Admin[] adminModifyInfo = admin.searchAdmin(request.getParameter("empno"), "", -1, "", "");
 //		System.out.println(adminModifyInfo[0].getEmail());
-		int result = admin.deleteAdmin(adminModifyInfo[0]);
+		int result;
+		if(adminModifyInfo!=null&&adminModifyInfo.length!=0)
+			result = admin.deleteAdmin(adminModifyInfo[0]);
+		else
+			result = 0;
 //		System.out.println(result);
 		if(result==-1){
 			response.sendRedirect("error.jsp");

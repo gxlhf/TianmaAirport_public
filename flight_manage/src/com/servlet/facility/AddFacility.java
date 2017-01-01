@@ -52,8 +52,13 @@ public class AddFacility extends HttpServlet {
 		
 		PropertyFacility facilityAddInfo = new PropertyFacility(name, site, extra, type, phone);
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		
-		int result = admin.addPropertyFacility(facilityAddInfo);
+		int result;
+		User user = new User();
+		PropertyFacility[] facilityValidateInfo = user.searchPropertyFacility(name,"",1);
+		if(facilityValidateInfo!=null&&facilityValidateInfo.length!=0)
+			result = 0;
+		else
+			result = admin.addPropertyFacility(facilityAddInfo);
 		if(result==-1){
 			response.sendRedirect("error.jsp");
 			return;
