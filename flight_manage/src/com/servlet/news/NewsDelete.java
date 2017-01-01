@@ -56,20 +56,29 @@ public class NewsDelete extends HttpServlet {
 		HttpSession session=request.getSession();
 		Admin admin=(Admin)session.getAttribute("admin");
 		News[] news=(News[])session.getAttribute("news");
+		if(news==null){
+			request.getRequestDispatcher("/error.jsp").forward(request, response);
+			return;
+		}
 		int a=0;
 		for(int i=0;i<news.length;i++){
 			if(news[i].getNewsId().equals(id))
 				a=i;
 		}
 		if(!news[a].getNewsId().equals(id)){
-			request.setAttribute("result", "0");
+			request.setAttribute("result", 0);
 			request.setAttribute("forward", "delete");
 			request.getRequestDispatcher("/Public/News/NewsList.jsp").forward(request,response);
 		}else{
-			int re=admin.deleteNews(news[a]);
+			News[] news2=admin.returnAllNews();
+			int re=0;
+			for(int i=0;i<news2.length;i++){
+				if(news2[i].getNewsId().equals(news[a].getNewsId())&&news2[i].getTime().equals(news[a].getTime())&&news2[i].getTitle().equals(news[a].getTitle()))
+					re=admin.deleteNews(news[a]);
+			}
 			String classified = news[a].getKind();
 			if(re==-1){
-				response.sendRedirect("error.jsp");
+				request.getRequestDispatcher("/error.jsp").forward(request, response);
 				return;
 			}else {
 				request.setAttribute("result", re);
