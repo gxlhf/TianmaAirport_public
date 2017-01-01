@@ -1,6 +1,5 @@
 $(function () {
     function addError(sel, msg){  //sel:input元素选择器  msg:要显示的信息
-        //2016-12-31 13:01
         var elem = $(sel);
         var helpblock = elem.parent().next();
         var formgroup = elem.parents(".form-group");
@@ -145,5 +144,11 @@ $(function () {
             $('#inp-flight-counter-mirror').blur();
         });
     }
+
+
+    //选择航空公司后重新验证航班号
+    $("[name='flight-airline']").blur(function (e) {
+        $('[name="flight-id"]').blur();
+    });
 
 });

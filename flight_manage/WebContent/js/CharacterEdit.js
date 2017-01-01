@@ -59,8 +59,6 @@ $(function () {
 		        minuteStep: 1
 		    };
 
-		    console.log(min, max, start, date_config);
-
 			$(this).datetimepicker(date_config);
 		}
 		)
@@ -73,7 +71,6 @@ $(function () {
 		dataType: "json",
 		success: function (resp) {
 			var weather = resp.HeWeather5[0];
-			console.log(resp);
 			var pageElem = $('#weather');
 			pageElem.html(weather.basic.city + " " + "<img src = 'http://files.heweather.com/cond_icon/" + weather.now.cond.code + ".png'> " +  weather.now.cond.txt + " " + weather.now.tmp + "℃");
 		}
