@@ -3,12 +3,9 @@ var linkWord = '?';
 
 $('.select-table tbody > tr').click(function (e) {
 	opValue = $(this).attr('data-id');
-	console.log(opValue);
 	$(this).parent().find('.glyphicon').removeClass('glyphicon-check');
 	$(this).find('.glyphicon').addClass('glyphicon-check');
-	console.log($(this).parent().find('[name="select-table-result"]'));
 	
-	console.log(opValue[0]);
 	if (opValue[0] == '&')
 		linkWord = '';
 });
@@ -97,7 +94,6 @@ $(function () {
 		dataType: "json",
 		success: function (resp) {
 			var weather = resp.HeWeather5[0];
-			console.log(resp);
 			var pageElem = $('#weather');
 			pageElem.html(weather.basic.city + " " + "<img src = 'http://files.heweather.com/cond_icon/" + weather.now.cond.code + ".png'> " +  weather.now.cond.txt + " " + weather.now.tmp + "℃");
 		}

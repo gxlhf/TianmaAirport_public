@@ -47,7 +47,6 @@ $(function () {
 		}
 	});
     $('#btn-save').click(function (e) {
-        console.log('click2');
         $('#inp-flight-counter-mirror').focus();
         $('#inp-flight-counter-mirror').blur();
     });
