@@ -22,17 +22,11 @@
 			sb.append(s);
 		}
 		String xml = sb.toString();	//接收到微信端发送过来的xml数据
-		//System.out.println(xml);
 		
 		String toName = xml.split("<ToUserName>")[1].split("CDATA")[1].split("]></ToUserName>")[0];//[0]
 		String fromName = xml.split("<FromUserName>")[1].split("CDATA")[1].split("]></FromUserName>")[0];//[0]
 		String content = xml.split("<Content>")[1].split("CDATA")[1].split("></Content>")[0].split("\\[")[1].split("\\]")[0];//[0]
 		String time = xml.split("<CreateTime>")[1].split("</CreateTime>")[0];//[0]
-
-		/* System.out.println(toName);
-		System.out.println(fromName);
-		System.out.println(content);
-		System.out.println(time); */
 
 		if(content.matches("[a-zA-Z]{2}[0-9]{4}|[a-zA-Z][0-9]{5}|[0-9][a-zA-Z][0-9]{4}")){
 			respTitle = "航班信息查询";
@@ -41,7 +35,6 @@
 
 			ArrivalFlightInfo[] arrResult = port.searchArrivalFlightInfo("", content, "", "");	
 			if(arrResult.length != 0){
-				// System.out.println("arr");
 				respDesc = content + " " + arrResult[0].getFlightCourse().getAirline() + "\n" + 
 							arrResult[0].getFlightCourse().getFrom() + " -> " + arrResult[0].getFlightCourse().getTo() + "\n" +
 							"降落时间：" + arrResult[0].getTime() + "\n" +
@@ -50,7 +43,6 @@
 
 			DepartureFlightInfo[] depResult = port.searchDepartureFlightInfo("", content, "", "");
 			if(depResult.length != 0){
-				// System.out.println("dep");
 				String[] counterList = depResult[0].getCheckinCounter();
 				String counterStr = new String();
 				counterStr = counterList[0];
@@ -128,7 +120,6 @@
 			respStr = "<xml><ToUserName><![CDATA" + fromName + "]></ToUserName><FromUserName><![CDATA" + toName + "]></FromUserName><CreateTime>" + time +"</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[好像没有你想要的东西[尴尬]\n请检查你要搜索的关键字再问问小天哦~]]></Content></xml>";
 		}
 		
-		//System.out.println(respStr);
 	}
 	
 	response.getWriter().print(respStr);
