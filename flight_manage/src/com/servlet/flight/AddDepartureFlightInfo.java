@@ -99,7 +99,7 @@ public class AddDepartureFlightInfo extends HttpServlet {
 		DepartureFlightInfo departureFlightAddInfo = new DepartureFlightInfo(departureFlightCourse, checkinCounterArray, boardingGate, time);
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		User user = new User();
-  	  	DepartureFlightInfo[] departureFlightValidateInfo = user.searchDepartureFlightInfo("", request.getParameter("flightNumber"), "", time);
+  	  	DepartureFlightInfo[] departureFlightValidateInfo = user.searchDepartureFlightInfo("", flightNumber, "", time);
   	  	int result;
   	  	if(departureFlightValidateInfo!=null&&departureFlightValidateInfo.length!=0)
   	  		result = 0;

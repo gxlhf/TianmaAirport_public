@@ -49,10 +49,12 @@ public class DeleteDepartureFlightInfo extends HttpServlet {
 			return;
 		}else {
 			request.setAttribute("deleteResult", result);
-			if(departureFlightDeleteInfo[0].getFlightCourse().isInternationalOrLocal()==true)	
+			if(departureFlightDeleteInfo!=null&&departureFlightDeleteInfo.length!=0&&departureFlightDeleteInfo[0].getFlightCourse().isInternationalOrLocal()==true)	
 				request.getRequestDispatcher("/Public/Flight/DepartureFlightInfoCheck.jsp?area=international").forward(request,response);
-			if(departureFlightDeleteInfo[0].getFlightCourse().isInternationalOrLocal()==false)
+			if(departureFlightDeleteInfo!=null&&departureFlightDeleteInfo.length!=0&&departureFlightDeleteInfo[0].getFlightCourse().isInternationalOrLocal()==false)
 				request.getRequestDispatcher("/Public/Flight/DepartureFlightInfoCheck.jsp?area=local").forward(request,response);
+			else
+				request.getRequestDispatcher("/Public/Flight/DepartureFlightInfoCheck.jsp").forward(request,response);
 		}
 	}
 

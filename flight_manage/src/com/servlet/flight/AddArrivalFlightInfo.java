@@ -68,7 +68,7 @@ public class AddArrivalFlightInfo extends HttpServlet {
 		ArrivalFlightInfo arrivalFlightAddInfo = new ArrivalFlightInfo(arrivalFlightCourse, luggageCarousel, time);
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
 		User user = new User();
-  	  	ArrivalFlightInfo[] arrivalFlightValidateInfo = user.searchArrivalFlightInfo("", request.getParameter("flightNumber"), "", time);
+  	  	ArrivalFlightInfo[] arrivalFlightValidateInfo = user.searchArrivalFlightInfo("", flightNumber, "", time);
   	  	int result;
   	  	if(arrivalFlightValidateInfo!=null&&arrivalFlightValidateInfo.length!=0)
   	  		result = 0;
