@@ -114,10 +114,13 @@ $(function () {
                         },
                         error: function (e) {
                             alert('尝试验证输入时发生网络错误');
-                            valid = 1;
+                            valid = -10;
                         }
                     });
                 }
+
+                if(valid == -10)
+                    return '验证时出现网络错误*';
 
                 if(valid > 0){  //验证不通过
                     return '登机门已被占用*';

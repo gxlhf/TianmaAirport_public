@@ -38,7 +38,6 @@ public class AddDepartureFlightInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
 		User user = new User();
 		DepartureFlightInfo[] departureFlightInfos = null;
@@ -48,37 +47,21 @@ public class AddDepartureFlightInfo extends HttpServlet {
 			ret = departureFlightInfos.length;
 		}
 		else{  //当get传入参数无id时，查询同一时间同一登机门是否被占用，登机门以参数gate传入
-//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//			Date itDate = null;
-//			Date inDate = null;
-//			long ms;
-//			long tenMin = 1000 * 60 * 5;//使用同一个登机门的两个航班之间至少间隔5分钟
-//			departureFlightInfos = user.searchDepartureFlightInfo("", "", "", request.getParameter("time"));
-//			ret = 0;
-//			for (DepartureFlightInfo it : departureFlightInfos) {
-//				try {
-//					itDate = format.parse(it.getTime());
-//					inDate = format2.parse(request.getParameter("time"));
-//					ms = itDate.getTime() - inDate.getTime();
-//					if(-tenMin < ms && ms < tenMin){
-//						ret = 1;
-//					}
-//				} catch (ParseException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//					ret = 1;
-//				}
-//			}
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			long oneMin = 1000 * 60 * 1;
 			ret = 0;
+			int temp;
 			try {
 				Date inDate = format.parse(request.getParameter("time"));
 				inDate.setTime(inDate.getTime() - 6 * oneMin);
 				for(int i = 0; i < 11; i++){  //使用同一个登机门的两个航班之间至少间隔5分钟
 					inDate.setTime(inDate.getTime() + oneMin);
-					ret += user.searchDepartureFlightInfo(request.getParameter("gate"), format.format(inDate));
+					temp = user.searchDepartureFlightInfo(request.getParameter("gate"), format.format(inDate));
+					if(temp == -1){
+						ret = -10;
+						break;
+					}
+					ret += temp;
 				}
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -97,7 +80,6 @@ public class AddDepartureFlightInfo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
 		request.setCharacterEncoding("UTF-8");
 		boolean area = false;
 		if(request.getParameter("flight-area").equals("true"))
