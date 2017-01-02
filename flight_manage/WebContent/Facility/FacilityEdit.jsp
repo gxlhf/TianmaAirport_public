@@ -179,7 +179,7 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
             <div class="form-group">
               <label for="facility-name" class="col-sm-2 control-label">设施名称：</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="facility-name"data-error="请填写设施名称*" value="<%=facilityModify[0].getName() %>" required readonly>
+                <input type="text" class="form-control" name="facility-name" data-error="请填写设施名称*" value="<%=facilityModify[0].getName() %>" required readonly>
               </div>
               <div class="col-sm-2 help-block with-errors">*</div>
             </div>
@@ -357,6 +357,12 @@ String[] facilityType = {"座椅","公用电话","饮水机","手推车","盲道
                   <label class="col-xs-3 control-label">设施名称：</label>
                   <div class="col-xs-9">
                     <p id="facility-name-ensure" class="form-control-static"> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-3 control-label">设施分类：</label>
+                  <div class="col-xs-9">
+                    <p id="facility-type-ensure" class="form-control-static"> </p>
                   </div>
                 </div>
                 <div class="form-group">
