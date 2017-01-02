@@ -740,7 +740,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                           out.println(basePath+"AddDepartureFlightInfo");
                         if(request.getParameter("type").equals("arrival"))
                           out.println(basePath+"AddArrivalFlightInfo");
-                %>" required>
+                %>" required data-old="<%=departureFlightModifyInfo[0].getBoardingGate()%>">
                   <%
                   	out.println("<option value='"+departureFlightModifyInfo[0].getBoardingGate()+"'>"+departureFlightModifyInfo[0].getBoardingGate()+"</option>");
                     AirportResource[] boardingGate = user.searchAirportResource("", "登机门");
