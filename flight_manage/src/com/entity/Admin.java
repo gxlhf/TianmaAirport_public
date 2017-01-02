@@ -112,23 +112,51 @@ public class Admin extends User implements Serializable{
 			case "searchRole":
 			case "addRole":
 			case "modifyRole":
-			case "deleteRole":result = role.getAuthorityMap().get("角色管理");break;
+			case "deleteRole":
+			{
+				if(role.getAuthorityMap().get("角色管理")==null)
+					result = false;
+				else
+					result = true;
+				break;
+			}/*result = role.getAuthorityMap().get("角色管理");break;*/
 			case "searchAdmin":
 			case "addAdmin":
 			case "modifyAdmin":
-			case "deleteAdmin":result = role.getAuthorityMap().get("用户管理");break;
+			case "deleteAdmin":
+			{
+				if(role.getAuthorityMap().get("用户管理")==null)
+					result = false;
+				else
+					result = true;
+				break;
+			}/*result = role.getAuthorityMap().get("用户管理");break;*/
 			case "addAirportResource":
 			case "modifyAirportResource":
 			case "deleteAirportResource":
 			case "addPropertyFacility":
 			case "modifyPropertyFacility":
-			case "deletePropertyFacility":result = role.getAuthorityMap().get("机场设施管理");break;
+			case "deletePropertyFacility":
+			{
+				if(role.getAuthorityMap().get("机场设施管理")==null)
+					result = false;
+				else
+					result = true;
+				break;
+			}/*result = role.getAuthorityMap().get("机场设施管理");break;*/
 			case "addDepartureFlightInfo":
 			case "modifyDepartureFlightInfo":
 			case "deleteDepartureFlightInfo":
 			case "addArrivalFlightInfo":
 			case "modifyArrivalFlightInfo":
-			case "deleteArrivalFlightInfo":result = role.getAuthorityMap().get("航班信息管理");break;
+			case "deleteArrivalFlightInfo":
+			{
+				if(role.getAuthorityMap().get("航班信息管理")==null)
+					result = false;
+				else
+					result = true;
+				break;
+			}/*result = role.getAuthorityMap().get("航班信息管理");break;*/
 			case "addNews":
 			case "modifyNews":
 			case "deleteNews":result = role.getAuthorityMap().get("新闻管理");break;
