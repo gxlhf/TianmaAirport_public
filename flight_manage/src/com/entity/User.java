@@ -85,6 +85,13 @@ public class User {
 		}
 		return departureFlightInfo;
 	}
+	//离港航班信息查询函数，输入两个参数依次为登机门名称、时间，返回符合该条件的航班信息条目数
+	public int searchDepartureFlightInfo(String boardingGate, String time)
+	{
+		UserDao userDao = new UserDao();
+		int ret = userDao.searchDepartureFlightInfo5(boardingGate, time);
+		return ret;
+	}
 	//到港航班信息查询函数，输入三个参数依次为出发地、航班号、航空公司、时间，返回一个ArrivalFlightInfo对象数组
 	public ArrivalFlightInfo[] searchArrivalFlightInfo(String city, String flightNumber, String airline, String time)
 	{

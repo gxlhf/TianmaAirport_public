@@ -70,6 +70,10 @@ $(function () {
                         async: false,
                         success: function (e) {
                             valid = e - 0;
+                        },
+                        error: function (e) {
+                            alert('尝试验证输入时发生网络错误');
+                            valid = 1;
                         }
                     });
                 }
@@ -107,6 +111,10 @@ $(function () {
                         async: false,
                         success: function (e) {
                             valid = e - 0;
+                        },
+                        error: function (e) {
+                            alert('尝试验证输入时发生网络错误');
+                            valid = 1;
                         }
                     });
                 }
@@ -116,6 +124,16 @@ $(function () {
                 }
             }
         }
+    });
+
+    var time_elem = $('[name="flight-dep-time"]').length ? $('[name="flight-dep-time"]') : $('[name="flight-arr-time"]');
+    time_elem.blur(function (e) {
+        if($('[name="flight-gate"]').val() != '')
+            $('[name="flight-gate"]').blur();
+    });
+    time_elem.datetimepicker().on('changeDate',function (e) {
+        if($('[name="flight-gate"]').val() != '')
+            $('[name="flight-gate"]').blur();
     });
     
     //值机柜台tokenfield
