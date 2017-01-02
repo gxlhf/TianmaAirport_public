@@ -191,10 +191,6 @@ if(news[a].getTitle()!=null)
                 	if(session.getAttribute("priv2")!=null)
                 		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
                 %>
-                <%
-                	if(session.getAttribute("priv2")!=null)
-                		out.println("<li role='presentation'><a href='"+basePath+"News/NewsEdit.jsp?todo=add'>发布新闻</a></li>");
-                %>
               </ul>
             </li>
           </ul>
