@@ -398,7 +398,7 @@ else
             <div class="modal-body">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
               <h4>以下是即将删除的信息，请确认。<br></h4>
-              <strong class="text-danger">提交后将无法撤销！</strong>
+              <strong class="text-danger">删除后将无法撤销！</strong>
 
               <hr>
 
