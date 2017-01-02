@@ -35,7 +35,11 @@ public class DeleteRole extends HttpServlet {
 		String roleName = request.getParameter("roleName");
 		Role roleDeleteInfo = new Role(roleName);
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		int result = admin.deleteRole(roleDeleteInfo);
+		int result;
+		if(admin.searchRole(roleName)!=null)
+			result = admin.deleteRole(roleDeleteInfo);
+		else
+			result = 0;
 		if(result==-1){
 			response.sendRedirect("error.jsp");
 			return;

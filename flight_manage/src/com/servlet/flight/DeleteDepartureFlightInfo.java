@@ -39,7 +39,11 @@ public class DeleteDepartureFlightInfo extends HttpServlet {
   	  	User user = new User();
   	  	DepartureFlightInfo[] departureFlightDeleteInfo = user.searchDepartureFlightInfo("", request.getParameter("flightNumber"), "", time);
   	  	Admin admin=(Admin)request.getSession().getAttribute("admin");
-	  	int result = admin.deleteDepartureFlightInfo(departureFlightDeleteInfo[0]);
+	  	int result;
+	  	if(departureFlightDeleteInfo!=null&&departureFlightDeleteInfo.length!=0)
+	  		result = admin.deleteDepartureFlightInfo(departureFlightDeleteInfo[0]);
+	  	else
+	  		result = 0;
 	  	if(result==-1){
 			response.sendRedirect("error.jsp");
 			return;

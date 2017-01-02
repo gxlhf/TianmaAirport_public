@@ -569,6 +569,30 @@ public class UserDao {
 		return departureFlightInfo;
     	
     }
+    /*
+     * 传入登机门名称boardingGate和时间time，查询符合该条件的航班分配条目数量
+     * 返回条目数量，当返回-1时表示查询失败
+     */
+    public int searchDepartureFlightInfo5(String boardingGate,String time)//
+    {
+                int result = -1;
+                sql = "SELECT COUNT(*) count FROM bc_allocation WHERE Bname = ? AND Time = ?";//SQL语句  
+		        db1 = new db_connection(sql);//创建db_connection对象  
+		        try { 
+		        	db1.pst.setString(1, boardingGate);
+		        	db1.pst.setString(2, time);
+		            ret = db1.pst.executeQuery();//执行语句，得到结果集  
+		            ret.beforeFirst();
+		            ret.next();
+		            result = ret.getInt("count");
+		            ret.close();  		           
+		        } catch (SQLException e) {  
+		            e.printStackTrace();  
+		        } finally{
+		        	 db1.close();//关闭连接  
+		        }
+		return result;
+    }
     public  ArrivalFlightInfo[] searchArrivalFlightInfo0(String flightnumber)
     {
     	ArrivalFlightInfo[] arrivalFlightInfo = null;

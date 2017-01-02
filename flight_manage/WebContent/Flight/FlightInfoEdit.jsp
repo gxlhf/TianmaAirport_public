@@ -735,7 +735,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             <div class="form-group">
               <label for="flight-gate" class="col-sm-2 control-label">登机门：</label>
               <div class="col-sm-6">
-                <select type="text" class="form-control" id="inp-flight-gate" list="list-gate" name="flight-gate" data-required-error='请选择登机门*' required>
+                <select type="text" class="form-control" id="inp-flight-gate" list="list-gate" name="flight-gate" data-required-error='请选择登机门*' data-checkgate="<%
+                    if(request.getParameter("type").equals("departure"))
+                          out.println(basePath+"AddDepartureFlightInfo");
+                        if(request.getParameter("type").equals("arrival"))
+                          out.println(basePath+"AddArrivalFlightInfo");
+                %>" required>
                   <%
                   	out.println("<option value='"+departureFlightModifyInfo[0].getBoardingGate()+"'>"+departureFlightModifyInfo[0].getBoardingGate()+"</option>");
                     AirportResource[] boardingGate = user.searchAirportResource("", "登机门");
@@ -1021,7 +1026,12 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
             <div class="form-group">
               <label for="flight-gate" class="col-sm-2 control-label">登机门：</label>
               <div class="col-sm-6">
-                <select type="text" class="form-control" id="inp-flight-gate" list="list-gate" name="flight-gate" data-required-error='请选择登机门*' required>
+                <select type="text" class="form-control" id="inp-flight-gate" list="list-gate" name="flight-gate" data-required-error='请选择登机门*' data-checkgate="<%
+                    if(request.getParameter("type").equals("departure"))
+                          out.println(basePath+"AddDepartureFlightInfo");
+                        if(request.getParameter("type").equals("arrival"))
+                          out.println(basePath+"AddArrivalFlightInfo");
+                %>" required>
                   <option value=""></option>
                   <%
                     AirportResource[] boardingGate = user.searchAirportResource("", "登机门");

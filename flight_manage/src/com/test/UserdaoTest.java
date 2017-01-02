@@ -63,6 +63,9 @@ public class UserdaoTest {
 //	     System.out.println(GetMD5.getMd5(""));
 	     AdminDao adminDao=new AdminDao();
 	     Role role = adminDao.searchRole("test+test");
-	     System.out.println(role.getDescription());
+	     //System.out.println(role.getDescription());
+	     
+	     int searchDepartureFlightInfo5 = userDao.searchDepartureFlightInfo5("登机门24", "2017-01-01 06:51");
+	     System.out.println("searchDepartureFlightInfo5:" + searchDepartureFlightInfo5);
 	}
 }

@@ -73,7 +73,12 @@ public class AddAdmin extends HttpServlet {
 		System.out.println(email);
 		System.out.println(password);*/
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		int result = admin.addAdmin(adminAddInfo);
+		Admin[] adminValidateInfo = admin.searchAdmin(empno, "", -1, "", "");
+		int result;
+		if(adminValidateInfo!=null&&adminValidateInfo.length!=0)
+			result = 0;
+		else
+			result = admin.addAdmin(adminAddInfo);
 		if(result==-1){
 			response.sendRedirect("error.jsp");
 			return;

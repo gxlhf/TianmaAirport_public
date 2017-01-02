@@ -36,8 +36,6 @@ public class AddArrivalFlightInfo extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		User user = new User();
 		ArrivalFlightInfo[] arrivalFlightInfos = user.searchArrivalFlightInfo("", request.getParameter("id"), "", request.getParameter("time"));
-		System.out.println(request.getParameter("id"));
-		System.out.println(request.getParameter("time"));
 
 		response.getWriter().print(arrivalFlightInfos.length);
 		response.getWriter().flush();
@@ -69,7 +67,13 @@ public class AddArrivalFlightInfo extends HttpServlet {
 		FlightCourse arrivalFlightCourse = new FlightCourse(area, true, flightNumber, airline, from, to, stop);
 		ArrivalFlightInfo arrivalFlightAddInfo = new ArrivalFlightInfo(arrivalFlightCourse, luggageCarousel, time);
 		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		int result = admin.addArrivalFlightInfo(arrivalFlightAddInfo);
+		User user = new User();
+  	  	ArrivalFlightInfo[] arrivalFlightValidateInfo = user.searchArrivalFlightInfo("", request.getParameter("flightNumber"), "", time);
+  	  	int result;
+  	  	if(arrivalFlightValidateInfo!=null&&arrivalFlightValidateInfo.length!=0)
+  	  		result = 0;
+  	  	else
+  	  		result = admin.addArrivalFlightInfo(arrivalFlightAddInfo);
 		if(result==-1){
 			response.sendRedirect("error.jsp");
 			return;

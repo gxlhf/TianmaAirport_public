@@ -50,19 +50,24 @@ public class AddResource extends HttpServlet {
 		String extra = request.getParameter("resource-extra");
 		
 		AirportResource resourceAddInfo = new AirportResource(name, site, extra, type);
-		 Admin admin=(Admin)request.getSession().getAttribute("admin");
-		    int result = admin.addAirportResource(resourceAddInfo);
-			
-			if(result==-1){
-				response.sendRedirect("error.jsp");
-				return;
-			}else if(result==1){
-				request.setAttribute("addResult", result);
-				request.getRequestDispatcher("Public/Facility/Resource.jsp").forward(request, response);
-			}else {
-				request.setAttribute("addResult", result);
-				request.getRequestDispatcher("Public/Facility/Resource.jsp").forward(request,response);
-			}
+		Admin admin=(Admin)request.getSession().getAttribute("admin");
+		User user = new User();
+	    AirportResource[] resourceValidateInfo = user.searchAirportResource(name, "");
+	    int result;
+	    if(resourceValidateInfo!=null&&resourceValidateInfo.length!=0)
+	    	result = 0;
+	    else
+	    	result = admin.addAirportResource(resourceAddInfo);
+		if(result==-1){
+			response.sendRedirect("error.jsp");
+			return;
+		}else if(result==1){
+			request.setAttribute("addResult", result);
+			request.getRequestDispatcher("Public/Facility/Resource.jsp").forward(request, response);
+		}else {
+			request.setAttribute("addResult", result);
+			request.getRequestDispatcher("Public/Facility/Resource.jsp").forward(request,response);
+		}
 		
 	}
 
