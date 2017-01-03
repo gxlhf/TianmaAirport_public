@@ -4,7 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title><%
+	String type=(String)request.getAttribute("type");
+    if(type.equals("flightInformation"))
+    	out.println("新闻中心-航班信息- 天马机场");
+    if(type.equals("airportResource"))
+    	out.println("新闻中心-机场资源- 天马机场");
+    else
+    	out.println("新闻中心-物业资源- 天马机场");
+    %></title>
 </head>
 <body>
 
@@ -36,7 +44,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 }
 	 
 	
-	String type=(String)request.getAttribute("type");
 	if(type!=null)
 	{
 %>
