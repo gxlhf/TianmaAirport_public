@@ -63,11 +63,12 @@ public class Newsadd extends HttpServlet {
 			request.setAttribute("result", re);
 			request.setAttribute("forward", "add");
 			if(classified.equals("航班信息"))
-				request.getRequestDispatcher("/Public/News/NewsList.jsp?type=flightInformation").forward(request,response);
+				request.setAttribute("type", "flightInformation");
 			if(classified.equals("机场资源"))
-				request.getRequestDispatcher("/Public/News/NewsList.jsp?type=airportResource").forward(request,response);
+				request.setAttribute("type","airportResource");
 			if(classified.equals("物业资源"))
-				request.getRequestDispatcher("/Public/News/NewsList.jsp?type=facilityResource").forward(request,response);
+				request.setAttribute("type","facilityResource");
+			request.getRequestDispatcher("/Public/News/result.jsp").forward(request,response);
 		}
 	}
 
