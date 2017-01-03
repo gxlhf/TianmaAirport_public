@@ -27,7 +27,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
    	 put("昆明航空公司", "KY");
 	 put("中国南方航空公司", "CZ");
 	 put("首都航空公司", "JD");
-	 put("河北航空公司", "4889983");
+	 put("河北航空公司", "NS");
 	 put("胜安航空(新加坡)", "MI");
 	 put("上海航空公司", "FM");
 	 put("成都航空公司", "EU");
@@ -595,7 +595,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                   if(request.getParameter("type").equals("departure"))
                   {
                 	  out.println("<option airline-code='"+airlineCode.get(departureFlightModifyInfo[0].getFlightCourse().getAirline())+"' value='"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+departureFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
-                  	  if(request.getParameter("area").equals("local"))
+                  	  /* if(request.getParameter("area").equals("local"))
                   	  {
                   		  for(String output:localAirline)
                   		  {
@@ -610,13 +610,13 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                 			  if(!output.equals(departureFlightModifyInfo[0].getFlightCourse().getAirline()))
                 			      out.println("<option airline-code='"+airlineCode.get(output)+"' value='"+output+"'>"+output+"</option>");
                 		  }
-                	  }
+                	  } */
                   }
                 	  
             	  if(request.getParameter("type").equals("arrival"))
             	  {
             		  out.println("<option value='"+arrivalFlightModifyInfo[0].getFlightCourse().getAirline()+"'>"+arrivalFlightModifyInfo[0].getFlightCourse().getAirline()+"</option>");
-            		  if(request.getParameter("area").equals("local"))
+            		  /* if(request.getParameter("area").equals("local"))
                   	  {
                   		  for(String output:localAirline)
                   		  {
@@ -631,7 +631,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                 			  if(!output.equals(arrivalFlightModifyInfo[0].getFlightCourse().getAirline()))
                 			      out.println("<option value='"+output+"'>"+output+"</option>");
                 		  }
-                	  }
+                	  } */
             	  }
                       
                   %>
@@ -740,7 +740,7 @@ HashMap<String, String> airlineCode = new HashMap<String, String>() {
                           out.println(basePath+"AddDepartureFlightInfo");
                         if(request.getParameter("type").equals("arrival"))
                           out.println(basePath+"AddArrivalFlightInfo");
-                %>" required>
+                %>" required data-old="<%=departureFlightModifyInfo[0].getBoardingGate()%>">
                   <%
                   	out.println("<option value='"+departureFlightModifyInfo[0].getBoardingGate()+"'>"+departureFlightModifyInfo[0].getBoardingGate()+"</option>");
                     AirportResource[] boardingGate = user.searchAirportResource("", "登机门");

@@ -271,7 +271,7 @@ String id=request.getParameter("news-id");
               
                 <input type="text" class="form-control" name="news-title" data-error="请填写标题*" value="<%=title%>" required>
               </div>
-              <div class="help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
          <%  
          if(type==null){
@@ -287,7 +287,7 @@ String id=request.getParameter("news-id");
               +"  <label class='btn btn-default col-xs-4'>"
               +" <input type='radio' name='type' value='物业资源' data-error='请选择类别*' autocomplete='off' required>物业资源"
               +"</label>"
-              +"</div> <div class='help-block with-errors'>*</div>"
+              +"</div> <div class='col-sm-2 help-block with-errors'>*</div>"
               +"</div>");
          	}else{
          	    if(type.equals("flightInformation"))
@@ -304,7 +304,7 @@ String id=request.getParameter("news-id");
               <div class="col-sm-6">
                 <textarea rows="20" class="form-control" name="news-context" data-error="请填写正文*"  required><%=content %></textarea>
               </div>
-              <div class="help-block with-errors">*</div>
+              <div class="col-sm-2 help-block with-errors">*</div>
             </div>
             <div class="form-group">
               <div class="col-sm-2"></div>
