@@ -1049,7 +1049,7 @@ public class AdminDao {
        */
    	 News[] news =null;
    	 int i=0;
-     	sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No";//SQL语句
+     	sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No ORDER BY newscenter.Edit_time DESC";//SQL语句
    	 db1= new db_connection(sql);//创建db_connection对象 
    	 String newsId;
    	 String content;
@@ -1059,7 +1059,7 @@ public class AdminDao {
    	 try {  
    		 if((!title.equals("")&&title!=null)&&(!time.equals("")&&time!=null)&&(publisher!=null&&!publisher.equals("")))
    		 {
-   			 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ? AND newscenter.Edit_time=? AND user_info.Name = ?";//SQL语句   			  
+   			 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ? AND newscenter.Edit_time=? AND user_info.Name = ? ORDER BY newscenter.Edit_time DESC";//SQL语句   			  
    			 db1.pst=db1.conn.prepareStatement(sql);
    			 db1.pst.setString(1, "%"+title+"%");
    			 db1.pst.setString(2, time);
@@ -1067,46 +1067,46 @@ public class AdminDao {
    		 }
    	   	 else if((!title.equals("")&&title!=null)&&(time.equals("")||time==null)&&(publisher==null||publisher.equals("")))
    	   	 {
-   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ?";//SQL语句
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ? ORDER BY newscenter.Edit_time DESC";//SQL语句
    	       	 db1.pst=db1.conn.prepareStatement(sql);
 			 db1.pst.setString(1, "%"+title+"%");
    	   	 }
    	   	 else if((title.equals("")||title==null)&&(!time.equals("")&&time!=null)&&(publisher==null||publisher.equals("")))
    	   	 {
-   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time=?";//SQL语句
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time=? ORDER BY newscenter.Edit_time DESC";//SQL语句
    	   	db1.pst=db1.conn.prepareStatement(sql);
 			 db1.pst.setString(1, time);
    	   	 }
    	   	 else if((title.equals("")||title==null)&&(time.equals("")||time==null)&&(publisher!=null&&!publisher.equals("")))
    	   	 {
-   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE user_info.Name = ?";//SQL语句
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE user_info.Name = ? ORDER BY newscenter.Edit_time DESC";//SQL语句
    	     	db1.pst=db1.conn.prepareStatement(sql);
 			 db1.pst.setString(1, publisher);
    	   	 }
    	   	 else if((!title.equals("")&&title!=null)&&(!time.equals("")&&time!=null)&&(publisher==null||publisher.equals("")))
    	   	 {
-   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ? AND newscenter.Edit_time=?";//SQL语句
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ? AND newscenter.Edit_time=? ORDER BY newscenter.Edit_time DESC";//SQL语句
    	    	db1.pst=db1.conn.prepareStatement(sql);
 			 db1.pst.setString(1, "%"+title+"%");
 			 db1.pst.setString(2, time);
    	   	 }
    	   	 else if((!title.equals("")&&title!=null)&&(time.equals("")||time==null)&&(publisher!=null&&!publisher.equals("")))
    	   	 {
-   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ? AND user_info.Name = ?";//SQL语句
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.title like ? AND user_info.Name = ? ORDER BY newscenter.Edit_time DESC";//SQL语句
    	    	db1.pst=db1.conn.prepareStatement(sql);
 			 db1.pst.setString(1, "%"+title+"%");
 			 db1.pst.setString(2, publisher);
    	   	 }
    	   	 else  if((title.equals("")||title==null)&&(!time.equals("")&&time!=null)&&(publisher!=null&&!publisher.equals("")))
    	   	 {
-   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time=? AND user_info.Name = ?";//SQL语句
+   	   		 sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No WHERE newscenter.Edit_time=? AND user_info.Name = ? ORDER BY newscenter.Edit_time DESC";//SQL语句
    	    	db1.pst=db1.conn.prepareStatement(sql);
 			 db1.pst.setString(1, time);
 			 db1.pst.setString(2, publisher);
    	   	 }
    	   	 else 
    	   		 {
-   	   		     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No";//SQL语句
+   	   		     sql = "SELECT * FROM newscenter INNER JOIN user_info ON newscenter.Em_No = user_info.Em_No ORDER BY newscenter.Edit_time DESC";//SQL语句
    	   		 }
 
    		 	ret = db1.pst.executeQuery();
